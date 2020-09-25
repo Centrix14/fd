@@ -1,19 +1,22 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 
-gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);
-gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data);
-gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);
+#include "callbacks.h"
+#include "data/list.h"
 
-cairo_surface_t *surface;
+list *figure_list = NULL;
 
 int main() {
 	GtkWidget *window;
-	GtkWidget *main_box;
+	GtkWidget *main_box, *right_box;
 	GtkWidget *scrolled_window, *draw_area;
+	GtkWidget *point_bttn, *line_bttn;
+
+	figure_list = list_init_node(NULL);
 
 	gtk_init(NULL, NULL);
 
+	// init window
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), "fd");
 	gtk_window_set_default_size(GTK_WINDOW(window), 1000, 800);
@@ -34,41 +37,26 @@ int main() {
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_ALWAYS, GTK_POLICY_AUTOMATIC);
 	gtk_container_add(GTK_CONTAINER(scrolled_window), draw_area);
 
+	// init buttons
+	point_bttn = gtk_button_new_with_label("Point");
+	line_bttn = gtk_button_new_with_label("Line");
+
+	// init right box
+	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	gtk_box_pack_start(GTK_BOX(right_box), point_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(right_box), line_bttn, TRUE, TRUE, 5);
+
 	// init main_box
-	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 	gtk_box_pack_start(GTK_BOX(main_box), scrolled_window, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(main_box), right_box, FALSE, FALSE, 0);
 
 	gtk_container_add(GTK_CONTAINER(window), main_box);
 	gtk_widget_show_all(window);
 
 	gtk_main();
+
+	list_free_list(figure_list);
+
 	return 0;
-}
-
-gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
-	cairo_set_source_rgb(cr, 0, 0, 0);
-	cairo_paint(cr);
-	puts("draw");
-
-	return TRUE;
-}
-
-gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data) {
-	GdkEventMotion *em = (GdkEventMotion*)event;
-
-	if (event->type == GDK_MOTION_NOTIFY) {
-		printf("Move x = %u, y = %u\n", (guint)em->x, (guint)em->y);
-	}
-
-	return TRUE;
-}
-
-gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
-	GdkEventButton *eb = (GdkEventButton*)event;
-
-	if (event->type == GDK_BUTTON_PRESS) {
-		printf("Click x = %u, y = %u\n", (guint)eb->x, (guint)eb->y);
-	}
-
-	return TRUE;
 }
