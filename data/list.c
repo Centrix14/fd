@@ -20,11 +20,8 @@ list *list_init_node(list *parent) {
 }
 
 void list_free_node(list *node) {
-	if (node) {
-		if (node->data)
-			free(node->data);
+	if (node)
 		free(node);
-	}
 }
 
 void list_add_node(list *parent) {
