@@ -1,5 +1,14 @@
+ct = gcc
+
+dbg_flags = -Wall -O0 -g -o
+flags = -o
+
+res = fd
+files = main.c data/list.c callbacks.c figure.c click_handle.c draw.c binding.c
+gtk = `pkg-config --static --libs --cflags "gtk+-3.0"`
+
 all:
-	gcc -Wall -O0 -g -o fd main.c data/list.c callbacks.c figure.c click_handle.c draw.c `pkg-config --static --libs --cflags "gtk+-3.0"`
+	$(ct) $(dbg_flags) $(res) $(files) $(gtk)
 
 rel:
-	gcc -o fd main.c data/list.c callbacks.c figure.c click_handle.c draw.c `pkg-config --static --libs --cflags "gtk+-3.0"`
+	$(ct) $(flags) $(fd) $(files) $(gtk)
