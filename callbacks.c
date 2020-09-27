@@ -4,6 +4,7 @@
 #include "figure.h"
 #include "click_handle.h"
 #include "draw.h"
+#include "binding.h"
 
 extern list *figure_list;
 int curs_x = 0, curs_y = 0,
@@ -13,12 +14,14 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	cairo_set_source_rgb(cr, 0, 0, 0);
 	cairo_paint(cr);
 
+	dl_set_cairo_context(cr);
+	list_crawl(figure_list, dl_draw_figure_list);
+
+	bl_get_bind_from_coords(figure_list, &curs_x, &curs_y);
+
 	cairo_set_source_rgb(cr, 200, 200, 200);
 	cairo_arc(cr, curs_x, curs_y, 3, 0, 2 * G_PI);
 	cairo_fill(cr);
-
-	dl_set_cairo_context(cr);
-	list_crawl(figure_list, dl_draw_figure_list);
 
 	return TRUE;
 }
@@ -45,6 +48,8 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 		click_x = (int)eb->x;
 		click_y = (int)eb->y;
+
+		bl_get_bind_from_coords(figure_list, &click_x, &click_y);
 
 		ch_click_handler(widget, figure_list, click_x, click_y);
 	}
