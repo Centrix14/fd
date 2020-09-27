@@ -20,6 +20,12 @@ enum FG_TYPES {
 	FG_TYPE_LINE_PP
 };
 
+enum VISIBLE_MODES {
+	VM_HIDE = 0,
+	VM_SHOW,
+	VM_PREVIEW
+};
+
 figure *figure_new(int type, int x, int y, int a1, int a2);
 figure *figure_new_point(int x, int y);
 figure *figure_new_line_pp(int x1, int y1, int x2, int y2);
