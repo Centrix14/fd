@@ -66,3 +66,9 @@ void list_crawl(list *root, void (*func)(list*)) {
 		list_crawl(root->next, func);
 	(*func)(root);
 }
+
+void *list_get_data(list *lptr) {
+	if (lptr && lptr->data)
+		return lptr->data;
+	return NULL;
+}
