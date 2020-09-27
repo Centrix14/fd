@@ -48,7 +48,7 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 
 		last = list_get_last(lptr);
 		line = figure_new_line_pp(x, y, 0, 0);
-		line->visible = 0;
+		line->visible = VM_PREVIEW;
 
 		list_set_data(last, line);
 
@@ -60,9 +60,10 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 
 		line->a1 = x;
 		line->a2 = y;
-		line->visible = 1;
+		line->visible = VM_SHOW;
 
-		gtk_widget_queue_draw(draw_area);
 		state = 0;
 	}
+	
+	gtk_widget_queue_draw(draw_area);
 }
