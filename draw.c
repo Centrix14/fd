@@ -5,13 +5,19 @@
 #include "figure.h"
 
 static cairo_t *context;
+static int preview_x = 0, preview_y = 0;
 
 void dl_set_cairo_context(cairo_t *cr) {
 	context = cr;
 }
 
+void dl_set_preview_coords(int px, int py) {
+	preview_x = px;
+	preview_y = py;
+}
+
 void dl_draw_figure(figure *fptr) {
-	if (!fptr || !fptr->visible)
+	if (!fptr || fptr->visible == VM_HIDE)
 		return ;
 
 	switch (fptr->type) {
@@ -37,10 +43,33 @@ void dl_draw_point(figure *fptr) {
 }
 
 void dl_draw_line_pp(figure *fptr) {
-	cairo_set_source_rgb(context, 0, 200, 200);
+	int x1, y1, x2, y2;
+	int r, g, b;
 
-	cairo_move_to(context, fptr->x, fptr->y);
-	cairo_line_to(context, fptr->a1, fptr->a2);
+	x1 = fptr->x;
+	y1 = fptr->y;
+
+	if (fptr->visible == VM_PREVIEW) {
+		x2 = preview_x;
+		y2 = preview_y;
+
+		r = 255;
+		g = 100;
+		b = 0;
+	}
+	else {
+		x2 = fptr->a1;
+		y2 = fptr->a2;
+
+		r = 0;
+		g = 200;
+		b = 200;
+	}
+
+	cairo_set_source_rgb(context, r, g, b);
+
+	cairo_move_to(context, x1, y1);
+	cairo_line_to(context, x2, y2);
 
 	cairo_stroke(context);
 }
