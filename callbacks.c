@@ -14,11 +14,11 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	cairo_set_source_rgb(cr, 0, 0, 0);
 	cairo_paint(cr);
 
+	// draw figures
 	dl_set_cairo_context(cr);
 	list_crawl(figure_list, dl_draw_figure_list);
 
-	bl_get_bind_from_coords(figure_list, &curs_x, &curs_y);
-
+	// draw cursor preview
 	cairo_set_source_rgb(cr, 200, 200, 200);
 	cairo_arc(cr, curs_x, curs_y, 3, 0, 2 * G_PI);
 	cairo_fill(cr);
@@ -34,6 +34,9 @@ gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 		curs_x = (int)em->x;
 		curs_y = (int)em->y;
+
+		bl_get_bind_from_coords(figure_list, &curs_x, &curs_y);
+		dl_set_preview_coords(curs_x, curs_y);
 
 		gtk_widget_queue_draw(widget);
 	}
