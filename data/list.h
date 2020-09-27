@@ -15,5 +15,6 @@ void list_set_data(list *node, void *new_data);
 void list_show(list *root);
 list *list_get_last(list *root);
 void list_crawl(list *root, void (*func)(list*));
+void *list_get_data(list *lptr);
 
 #endif
