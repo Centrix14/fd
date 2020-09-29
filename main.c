@@ -11,7 +11,7 @@ int main() {
 	GtkWidget *window;
 	GtkWidget *main_box, *right_box;
 	GtkWidget *scrolled_window, *draw_area;
-	GtkWidget *point_bttn, *line_bttn;
+	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn;
 
 	figure_list = list_init_node(NULL);
 
@@ -40,15 +40,19 @@ int main() {
 
 	// init buttons
 	point_bttn = gtk_button_new_with_label("Point");
-	line_bttn = gtk_button_new_with_label("Line");
+	line_pp_bttn = gtk_button_new_with_label("Line (PP)");
+	line_la_bttn = gtk_button_new_with_label("Line (LA)");
+	rect_pp_bttn = gtk_button_new_with_label("Rect (PP)");
 
 	g_signal_connect(G_OBJECT(point_bttn), "clicked", G_CALLBACK(point_bttn_click), NULL);
-	g_signal_connect(G_OBJECT(line_bttn), "clicked", G_CALLBACK(line_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(line_pp_bttn), "clicked", G_CALLBACK(line_bttn_click), NULL);
 
 	// init right box
 	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), point_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), line_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), line_pp_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), line_la_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), rect_pp_bttn, TRUE, TRUE, 0);
 
 	// init main_box
 	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
