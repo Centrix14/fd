@@ -20,6 +20,9 @@ void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
 		case FG_TYPE_LINE_PP:
 			ch_add_line_pp(draw_area, lptr, x, y);
 		break;
+
+		case FG_TYPE_LINE_LA:
+		break;
 	}
 }
 

@@ -78,6 +78,14 @@ void gel_calculate_intersection(figure *line1, figure *line2, figure *p) {
 
 	p->x = x;
 	p->y = y;
+}
 
-	puts("here");
+void gel_calculate_point(figure *point, double lenght, double angle) {
+	double lx, ly;
+
+	ly = sin(angle) * lenght;
+	lx = sqrt(pow(lenght, 2) - pow(ly, 2));
+
+	point->a1 = lx + point->x;
+	point->a2 = ly + point->y;
 }

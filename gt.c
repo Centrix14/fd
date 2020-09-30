@@ -4,16 +4,13 @@
 #include "geometry.h"
 
 int main() {
-	figure *l1, *l2, *p;
+	figure *l1;
 
-	l1 = figure_new_line_pp(0, 0, 0, 5);
-	l2 = figure_new_line_pp(1, 1, 1, 6);
+	l1 = figure_new_line_pp(5, 5, 0, 0);
 
-	p = figure_new_point(0, 0);
+	gel_calculate_point(l1, 5, 45);
 
-	gel_calculate_intersection(l1, l2, p);
-
-	printf("%d\n", gel_lf_is_parallel(l1, l2));
+	printf("%f %f\n", l1->a1, l1->a2);
 
 	return 0;
 }

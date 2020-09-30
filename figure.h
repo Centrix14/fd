@@ -17,7 +17,8 @@ typedef struct {
 
 enum FG_TYPES {
 	FG_TYPE_POINT = 0,
-	FG_TYPE_LINE_PP
+	FG_TYPE_LINE_PP,
+	FG_TYPE_LINE_LA
 };
 
 enum VISIBLE_MODES {
