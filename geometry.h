@@ -11,4 +11,6 @@ double gel_lf_calculate_k(figure *line);
 double gel_lf_calculate_b(figure *line);
 int gel_lf_is_parallel(figure *line1, figure *line2);
 
+void gel_calculate_point(figure *point, double lenght, double angle);
+
 #endif

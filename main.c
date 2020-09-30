@@ -46,6 +46,7 @@ int main() {
 
 	g_signal_connect(G_OBJECT(point_bttn), "clicked", G_CALLBACK(point_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(line_pp_bttn), "clicked", G_CALLBACK(line_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(line_la_bttn), "clicked", G_CALLBACK(line_la_bttn_click), window);
 
 	// init right box
 	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);

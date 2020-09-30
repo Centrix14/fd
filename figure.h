@@ -4,11 +4,11 @@
 #include "data/list.h"
 
 typedef struct {
-	int x;
-	int y;
+	double x;
+	double y;
 
-	int a1;
-	int a2;
+	double a1;
+	double a2;
 
 	int type;
 
@@ -17,7 +17,8 @@ typedef struct {
 
 enum FG_TYPES {
 	FG_TYPE_POINT = 0,
-	FG_TYPE_LINE_PP
+	FG_TYPE_LINE_PP,
+	FG_TYPE_LINE_LA
 };
 
 enum VISIBLE_MODES {

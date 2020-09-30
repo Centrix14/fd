@@ -7,5 +7,6 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);
 
 void point_bttn_click(GtkWidget *bttn, gpointer data);
 void line_bttn_click(GtkWidget *bttn, gpointer data);
+void line_la_bttn_click(GtkWidget *bttn, GtkWidget *window);
 
 #endif
