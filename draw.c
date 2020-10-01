@@ -28,6 +28,10 @@ void dl_draw_figure(figure *fptr) {
 		case FG_TYPE_LINE_PP:
 			dl_draw_line_pp(fptr);
 		break;
+
+		case FG_TYPE_RECT_PP:
+			dl_draw_rect_pp(fptr);
+		break;
 	}
 }
 
@@ -70,6 +74,37 @@ void dl_draw_line_pp(figure *fptr) {
 
 	cairo_move_to(context, x1, y1);
 	cairo_line_to(context, x2, y2);
+
+	cairo_stroke(context);
+}
+
+void dl_draw_rect_pp(figure *fptr) {
+	int x, y, w, h;
+	int r, g, b;
+
+	x = fptr->x;
+	y = fptr->y;
+
+	if (fptr->visible == VM_PREVIEW) {
+		w = preview_x - x;
+		h = preview_y - y;
+
+		r = 255;
+		g = 100;
+		b = 0;
+	}
+	else {
+		w = fptr->a1 - x;
+		h = fptr->a2 - y;
+
+		r = 0;
+		g = 200;
+		b = 200;
+	}
+
+	cairo_set_source_rgb(context, r, g, b);
+
+	cairo_rectangle(context, x, y, w, h);
 
 	cairo_stroke(context);
 }
