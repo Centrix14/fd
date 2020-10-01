@@ -4,6 +4,10 @@
 the program is still under development, but the following features are already available:
 + Drawing points
 + Drawing lines at 2 points
++ Drawing lines by point, length, and angle
++ Drawing a rectangle by 2 points
+
+the program also supports bindings
 
 ## building
 To compile and run the program successfully, you will need:
@@ -11,6 +15,7 @@ To compile and run the program successfully, you will need:
 + gtk library
 + cairo library
 + pkg-config
++ make
 
 To compile, type:
 ```
