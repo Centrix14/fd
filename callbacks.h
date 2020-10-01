@@ -9,4 +9,6 @@ void point_bttn_click(GtkWidget *bttn, gpointer data);
 void line_bttn_click(GtkWidget *bttn, gpointer data);
 void line_la_bttn_click(GtkWidget *bttn, GtkWidget *window);
 
+void ok_bttn_click(GtkWidget *bttn, gpointer data);
+
 #endif
