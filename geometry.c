@@ -80,12 +80,16 @@ void gel_calculate_intersection(figure *line1, figure *line2, figure *p) {
 	p->y = y;
 }
 
-void gel_calculate_point(figure *point, double lenght, double angle) {
+void gel_calculate_line_la(figure *point, double lenght, double angle) {
 	double lx, ly;
 
-	ly = sin(angle) * lenght;
+	ly = sin(gel_convert_grades_to_rads(angle)) * lenght;
 	lx = sqrt(pow(lenght, 2) - pow(ly, 2));
 
 	point->a1 = lx + point->x;
 	point->a2 = ly + point->y;
+}
+
+double gel_convert_grades_to_rads(double grades) {
+	return grades * (PI / 180);
 }
