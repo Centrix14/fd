@@ -30,6 +30,10 @@ void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
 		case FG_TYPE_LINE_LA:
 			ch_add_line_la(draw_area, lptr, x, y);
 		break;
+
+		case FG_TYPE_RECT_PP:
+			ch_add_rect_pp(draw_area, lptr, x, y);
+		break;
 	}
 }
 
@@ -61,8 +65,6 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 		line->visible = VM_PREVIEW;
 
 		list_set_data(last, line);
-
-		state = 1;
 	}
 	else {
 		last = list_get_last(lptr);
@@ -71,10 +73,9 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 		line->a1 = x;
 		line->a2 = y;
 		line->visible = VM_SHOW;
-
-		state = 0;
 	}
 	
+	state = !state;
 	gtk_widget_queue_draw(draw_area);
 }
 
@@ -92,5 +93,33 @@ void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y) {
 
 	list_set_data(last, line);
 
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
+	static int state = 0;
+
+	list *last;
+	figure *rect;
+
+	if (!state) {
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+		rect = figure_new_rect_pp(x, y, 0, 0);
+		rect->visible = VM_PREVIEW;
+
+		list_set_data(last, rect);
+	}
+	else {
+		last = list_get_last(lptr);
+		rect = (figure*)last->data;
+
+		rect->a1 = x;
+		rect->a2 = y;
+		rect->visible = VM_SHOW;
+	}
+
+	state = !state;
 	gtk_widget_queue_draw(draw_area);
 }
