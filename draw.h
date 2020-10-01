@@ -9,6 +9,7 @@ void dl_draw_figure_list(list *lptr);
 
 void dl_draw_point(figure *fptr);
 void dl_draw_line_pp(figure *fptr);
+void dl_draw_rect_pp(figure *fptr);
 
 void dl_set_cairo_context(cairo_t *cr);
 void dl_set_preview_coords(int px, int py);
