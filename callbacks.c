@@ -1,10 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <gtk/gtk.h>
 
 #include "figure.h"
 #include "click_handle.h"
 #include "draw.h"
 #include "binding.h"
+#include "callbacks.h"
 
 extern list *figure_list;
 int curs_x = 0, curs_y = 0,
@@ -66,17 +68,17 @@ void line_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_LINE_PP);
 }
 
+GtkWidget *lenght_entry, *angle_entry, *dialog;
+
 void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
-	GtkWidget *dialog, *dialog_content;
+	GtkWidget *dialog_content;
 	GtkWidget *lenght_label, *angle_label,
-			  *lenght_entry, *angle_entry,
 			  *ok_bttn, *apply_bttn;
 	GtkWidget *lenght_box, *angle_box, *bttn_box, *main_box;
 
-	figure *line;
-
 	dialog = gtk_dialog_new_with_buttons("customization", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
 	// init labels
 	lenght_label = gtk_label_new("Lenght");
@@ -88,7 +90,9 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// init buttons
 	ok_bttn = gtk_button_new_with_label("OK");
-	apply_bttn = gtk_button_new_with_label("Apply");
+	apply_bttn = gtk_button_new_with_label("Help");
+
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(ok_bttn_click), NULL);
 
 	// init lenght- angle- boxes
 	lenght_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -118,4 +122,16 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
 	gtk_widget_show_all(dialog);
+}
+
+figure line_data;
+
+void ok_bttn_click(GtkWidget *bttn, gpointer data) {
+	line_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(lenght_entry)));
+	line_data.a2 = -atof(gtk_entry_get_text(GTK_ENTRY(angle_entry)));
+
+	ch_set_external_figure(&line_data);
+	ch_set_draw_mode(FG_TYPE_LINE_LA);
+
+	gtk_widget_destroy(dialog);
 }
