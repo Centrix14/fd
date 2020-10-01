@@ -91,8 +91,8 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	apply_bttn = gtk_button_new_with_label("Apply");
 
 	// init lenght- angle- boxes
-	lenght_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
-	angle_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	lenght_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	angle_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	// pack boxes
 	gtk_box_pack_start(GTK_BOX(lenght_box), lenght_label, TRUE, TRUE, 5);
@@ -109,7 +109,7 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(bttn_box), apply_bttn, TRUE, TRUE, 5);
 
 	// init main box
-	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
 	// pack box
 	gtk_box_pack_start(GTK_BOX(main_box), lenght_box, TRUE, TRUE, 5);
