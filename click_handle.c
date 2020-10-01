@@ -4,11 +4,17 @@
 #include "data/list.h"
 #include "figure.h"
 #include "click_handle.h"
+#include "geometry.h"
 
 static int draw_mode = FG_TYPE_POINT;
+static figure *ext_figure;
 
 void ch_set_draw_mode(int new_mode) {
 	draw_mode = new_mode;
+}
+
+void ch_set_external_figure(figure *fptr) {
+	ext_figure = fptr;
 }
 
 void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
@@ -22,6 +28,7 @@ void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
 		break;
 
 		case FG_TYPE_LINE_LA:
+			ch_add_line_la(draw_area, lptr, x, y);
 		break;
 	}
 }
@@ -68,5 +75,22 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 		state = 0;
 	}
 	
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y) {
+	list *last;
+	figure *line;
+
+	list_add_node(lptr);
+
+	last = list_get_last(lptr);
+	line = figure_new_line_pp(x, y, 0, 0);
+	line->visible = VM_SHOW;
+
+	gel_calculate_line_la(line, ext_figure->a1, ext_figure->a2);
+
+	list_set_data(last, line);
+
 	gtk_widget_queue_draw(draw_area);
 }
