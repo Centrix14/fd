@@ -39,3 +39,36 @@ figure *figure_new_point(int x, int y) {
 figure *figure_new_line_pp(int x1, int y1, int x2, int y2) {
 	return figure_new(FG_TYPE_LINE_PP, x1, y1, x2, y2);
 }
+
+figure *figure_new_rect_pp(int x, int y, int w, int h) {
+	return figure_new(FG_TYPE_RECT_PP, x, y, w, h);
+}
+
+void figure_fill(figure *fptr, int x, int y, int a1, int a2, int type) {
+	fptr->x = x;
+	fptr->y = y;
+	fptr->a1 = a1;
+	fptr->a2 = a2;
+
+	fptr->type = type;
+	fptr->visible = VM_HIDE;
+}
+
+figure *figure_rect_decompose(figure *rect) {
+	static figure elms[4];
+	int x1, y1, x2, y2;
+
+	// get coords
+	x1 = rect->x;
+	y1 = rect->y;
+	x2 = rect->a1;
+	y2 = rect->a2;
+
+	// get lines
+	figure_fill(&elms[0], x1, y1, x2, y1, FG_TYPE_LINE_PP);
+	figure_fill(&elms[1], x1, y1, x1, y2, FG_TYPE_LINE_PP);
+	figure_fill(&elms[2], x1, y2, x2, y2, FG_TYPE_LINE_PP);
+	figure_fill(&elms[3], x2, y1, x2, y2, FG_TYPE_LINE_PP);
+
+	return elms;
+}
