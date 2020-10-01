@@ -12,9 +12,11 @@ int bl_get_coords_dif(int c1, int c2);
 
 int bl_get_binding_possibility_point(figure *point, int x, int y);
 int bl_get_binding_possibility_line(figure *line, int x, int y);
+int bl_get_binding_possibility_rect(figure *rect, int x, int y);
 
 void bl_make_binding(figure *fptr, int *x, int *y);
 void bl_make_binding_point(figure *point, int *x, int *y);
 void bl_make_binding_line(figure *line, int *x, int *y);
+void bl_make_binding_rect(figure *rect, int *x, int *y);
 
 #endif
