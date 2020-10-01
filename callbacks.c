@@ -135,3 +135,7 @@ void ok_bttn_click(GtkWidget *bttn, gpointer data) {
 
 	gtk_widget_destroy(dialog);
 }
+
+void rect_pp_bttn_click(GtkWidget *bttn, gpointer data) {
+	ch_set_draw_mode(FG_TYPE_RECT_PP);
+}
