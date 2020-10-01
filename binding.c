@@ -33,6 +33,10 @@ int bl_is_create_binding(figure *target, int x, int y) {
 		case FG_TYPE_LINE_PP:
 			return bl_get_binding_possibility_line(target, x, y);
 		break;
+
+		case FG_TYPE_RECT_PP:
+			return bl_get_binding_possibility_rect(target, x, y);
+		break;
 	}
 
 	return 0;
@@ -56,6 +60,20 @@ int bl_get_binding_possibility_line(figure *line, int x, int y) {
 	return 0;
 }
 
+int bl_get_binding_possibility_rect(figure *rect, int x, int y) {
+	figure *lines = figure_rect_decompose(rect);
+	int res = 0;
+
+	for (int i = 0; i < 4; i++) {
+		res = bl_get_binding_possibility_line(&lines[i], x, y);
+
+		if (res)
+			return res;
+	}
+
+	return 0;
+}
+
 void bl_make_binding(figure *fptr, int *x, int *y) {
 	switch (fptr->type) {
 		case FG_TYPE_POINT:
@@ -64,6 +82,10 @@ void bl_make_binding(figure *fptr, int *x, int *y) {
 
 		case FG_TYPE_LINE_PP:
 			bl_make_binding_line(fptr, x, y);
+		break;
+
+		case FG_TYPE_RECT_PP:
+			bl_make_binding_rect(fptr, x, y);
 		break;
 	}
 }
@@ -81,5 +103,14 @@ void bl_make_binding_line(figure *line, int *x, int *y) {
 	else if (bl_get_coords_dif(line->a1, *x) < BINDING_AREA && bl_get_coords_dif(line->a2, *y) < BINDING_AREA) {
 		*x = line->a1;
 		*y = line->a2;
+	}
+}
+
+void bl_make_binding_rect(figure *rect, int *x, int *y) {
+	figure *lines = figure_rect_decompose(rect);
+
+	for (int i = 0; i < 4; i++) {
+		if (bl_is_create_binding(&lines[i], *x, *y))
+			bl_make_binding(&lines[i], x, y);
 	}
 }
