@@ -3,9 +3,11 @@
 
 #include "draw.h"
 #include "figure.h"
+#include "color.h"
 
 static cairo_t *context;
-static int preview_x = 0, preview_y = 0;
+static int preview_x = 0, preview_y = 0,
+		   all_lays = 0;
 
 void dl_set_cairo_context(cairo_t *cr) {
 	context = cr;
@@ -16,8 +18,12 @@ void dl_set_preview_coords(int px, int py) {
 	preview_y = py;
 }
 
+void dl_switch_display_all_lays() {
+	all_lays = !all_lays;
+}
+
 void dl_draw_figure(figure *fptr) {
-	if (!fptr || fptr->visible == VM_HIDE)
+	if (!dl_is_need_draw(fptr))
 		return ;
 
 	switch (fptr->type) {
@@ -48,7 +54,6 @@ void dl_draw_point(figure *fptr) {
 
 void dl_draw_line_pp(figure *fptr) {
 	int x1, y1, x2, y2;
-	int r, g, b;
 
 	x1 = fptr->x;
 	y1 = fptr->y;
@@ -57,20 +62,14 @@ void dl_draw_line_pp(figure *fptr) {
 		x2 = preview_x;
 		y2 = preview_y;
 
-		r = 255;
-		g = 100;
-		b = 0;
+		cl_set_color(context, CL_DEF_PREVIEW_COLOR);
 	}
 	else {
 		x2 = fptr->a1;
 		y2 = fptr->a2;
 
-		r = 0;
-		g = 200;
-		b = 200;
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
 	}
-
-	cairo_set_source_rgb(context, r, g, b);
 
 	cairo_move_to(context, x1, y1);
 	cairo_line_to(context, x2, y2);
@@ -80,7 +79,6 @@ void dl_draw_line_pp(figure *fptr) {
 
 void dl_draw_rect_pp(figure *fptr) {
 	int x, y, w, h;
-	int r, g, b;
 
 	x = fptr->x;
 	y = fptr->y;
@@ -89,22 +87,22 @@ void dl_draw_rect_pp(figure *fptr) {
 		w = preview_x - x;
 		h = preview_y - y;
 
-		r = 255;
-		g = 100;
-		b = 0;
+		cl_set_color(context, CL_DEF_PREVIEW_COLOR);
 	}
 	else {
 		w = fptr->a1 - x;
 		h = fptr->a2 - y;
 
-		r = 0;
-		g = 200;
-		b = 200;
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
 	}
-
-	cairo_set_source_rgb(context, r, g, b);
 
 	cairo_rectangle(context, x, y, w, h);
 
 	cairo_stroke(context);
+}
+
+int dl_is_need_draw(figure *fptr) {
+	if (!fptr || fptr->visible == VM_HIDE || (fptr->lay != figure_get_current_lay() && !all_lays))
+		return 0;
+	return 1;
 }
