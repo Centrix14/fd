@@ -13,6 +13,8 @@ typedef struct {
 	int type;
 
 	int visible;
+
+	int lay;
 } figure;
 
 enum FG_TYPES {
@@ -37,5 +39,10 @@ void figure_free(figure *fptr);
 void figure_free_list(list *lptr);
 
 figure *figure_rect_decompose(figure *rect);
+
+void figure_fill(figure *fptr, double x, double y, double a1, double a2, double type);
+
+void figure_set_current_lay(int new_lay);
+int figure_get_current_lay();
 
 #endif

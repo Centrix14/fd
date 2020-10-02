@@ -4,6 +4,7 @@
 void ch_set_draw_mode(int new_mode);
 void ch_set_parent_window(GtkWidget *window);
 void ch_set_external_figure(figure *fptr);
+void ch_set_state(int new_state);
 
 void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y);
 

@@ -4,6 +4,7 @@
 #include "binding.h"
 #include "data/list.h"
 #include "figure.h"
+#include "geometry.h"
 
 void bl_get_bind_from_coords(list *lptr, int *x, int *y) {
 	list *node = lptr;
@@ -57,6 +58,8 @@ int bl_get_binding_possibility_line(figure *line, int x, int y) {
 		return 1;
 	else if (bl_get_coords_dif(line->a1, x) < BINDING_AREA && bl_get_coords_dif(line->a2, y) < BINDING_AREA)
 		return 1;
+	else if (gel_is_middle_point_area(line, x, y, BINDING_AREA))
+		return 1;
 	return 0;
 }
 
@@ -96,6 +99,8 @@ void bl_make_binding_point(figure *point, int *x, int *y) {
 }
 
 void bl_make_binding_line(figure *line, int *x, int *y) {
+	figure *point;
+
 	if (bl_get_coords_dif(line->x, *x) < BINDING_AREA && bl_get_coords_dif(line->y, *y) < BINDING_AREA) {
 		*x = line->x;
 		*y = line->y;
@@ -103,6 +108,12 @@ void bl_make_binding_line(figure *line, int *x, int *y) {
 	else if (bl_get_coords_dif(line->a1, *x) < BINDING_AREA && bl_get_coords_dif(line->a2, *y) < BINDING_AREA) {
 		*x = line->a1;
 		*y = line->a2;
+	}
+	else if (gel_is_middle_point_area(line, *x, *y, BINDING_AREA)) {
+		point = gel_get_middle_point(line);
+
+		*x = point->x;
+		*y = point->y;
 	}
 }
 

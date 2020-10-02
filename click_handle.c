@@ -6,7 +6,7 @@
 #include "click_handle.h"
 #include "geometry.h"
 
-static int draw_mode = FG_TYPE_POINT;
+static int draw_mode = FG_TYPE_POINT, state = 0;
 static figure *ext_figure;
 
 void ch_set_draw_mode(int new_mode) {
@@ -15,6 +15,10 @@ void ch_set_draw_mode(int new_mode) {
 
 void ch_set_external_figure(figure *fptr) {
 	ext_figure = fptr;
+}
+
+void ch_set_state(int new_state) {
+	state = new_state;
 }
 
 void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
@@ -52,8 +56,6 @@ void ch_add_point(GtkWidget *draw_area, list *lptr, int x, int y) {
 }
 
 void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
-	static int state = 0;	
-
 	list *last;
 	figure *line;
 
@@ -97,8 +99,6 @@ void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y) {
 }
 
 void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
-	static int state = 0;
-
 	list *last;
 	figure *rect;
 

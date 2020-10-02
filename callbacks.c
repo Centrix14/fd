@@ -7,6 +7,7 @@
 #include "draw.h"
 #include "binding.h"
 #include "callbacks.h"
+#include "color.h"
 
 extern list *figure_list;
 int curs_x = 0, curs_y = 0,
@@ -21,7 +22,7 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	list_crawl(figure_list, dl_draw_figure_list);
 
 	// draw cursor preview
-	cairo_set_source_rgb(cr, 200, 200, 200);
+	cl_set_color(cr, CL_DEF_CURS_COLOR);
 	cairo_arc(cr, curs_x, curs_y, 3, 0, 2 * G_PI);
 	cairo_fill(cr);
 
@@ -76,7 +77,7 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *ok_bttn, *apply_bttn;
 	GtkWidget *lenght_box, *angle_box, *bttn_box, *main_box;
 
-	dialog = gtk_dialog_new_with_buttons("customization", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Line (LA)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -138,4 +139,40 @@ void ok_bttn_click(GtkWidget *bttn, gpointer data) {
 
 void rect_pp_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_RECT_PP);
+}
+
+void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
+	int new_lay = atoi(gtk_entry_get_text(GTK_ENTRY(entry)));
+
+	figure_set_current_lay(new_lay);
+}
+
+void all_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
+	dl_switch_display_all_lays();
+
+	gtk_entry_set_text(GTK_ENTRY(entry), "all");
+} 
+
+gboolean key_press(GtkWidget *widget, GdkEventKey *event, gpointer data) {
+	figure *fptr;
+	list *last, *prev;
+
+	switch (event->keyval) {
+		case GDK_KEY_Escape:
+			ch_set_draw_mode(FG_TYPE_POINT);
+
+			last = list_get_last(figure_list);
+			fptr = (figure*)last->data;
+
+			if (fptr->visible == VM_PREVIEW) {
+				figure_free(fptr);
+				last->data = NULL;
+
+				ch_set_state(0);
+			}
+
+		break;
+	}
+
+	return TRUE;
 }
