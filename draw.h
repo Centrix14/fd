@@ -14,4 +14,8 @@ void dl_draw_rect_pp(figure *fptr);
 void dl_set_cairo_context(cairo_t *cr);
 void dl_set_preview_coords(int px, int py);
 
+int dl_is_need_draw(figure *fptr);
+
+void dl_switch_display_all_lays();
+
 #endif
