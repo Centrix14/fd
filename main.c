@@ -9,9 +9,10 @@ list *figure_list = NULL;
 
 int main() {
 	GtkWidget *window;
-	GtkWidget *main_box, *right_box;
+	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box;
 	GtkWidget *scrolled_window, *draw_area;
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn;
+	GtkWidget *lay_entry, *set_bttn, *all_bttn;
 
 	figure_list = list_init_node(NULL);
 
@@ -21,7 +22,10 @@ int main() {
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), "FlatDraw");
 	gtk_window_set_default_size(GTK_WINDOW(window), 1000, 800);
+
+	gtk_widget_set_events(window, gtk_widget_get_events(window) | GDK_KEY_PRESS_MASK);
 	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	g_signal_connect(G_OBJECT(window), "key_press_event", G_CALLBACK(key_press), NULL);
 
 	// init drawing area
 	draw_area = gtk_drawing_area_new();
@@ -31,7 +35,7 @@ int main() {
 	g_signal_connect(G_OBJECT(draw_area), "motion-notify-event", G_CALLBACK(mouse_move), NULL);
 	g_signal_connect(G_OBJECT(draw_area), "button-press-event", G_CALLBACK(mouse_click), NULL);
 
-	gtk_widget_set_events(draw_area, gtk_widget_get_events(draw_area) | GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
+	gtk_widget_set_events(draw_area, gtk_widget_get_events(draw_area) | GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK);
 
 	// init scrolled window
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
@@ -49,6 +53,14 @@ int main() {
 	g_signal_connect(G_OBJECT(line_la_bttn), "clicked", G_CALLBACK(line_la_bttn_click), window);
 	g_signal_connect(G_OBJECT(rect_pp_bttn), "clicked", G_CALLBACK(rect_pp_bttn_click), NULL);
 
+	// init down tool panel widgets
+	lay_entry = gtk_entry_new();
+	set_bttn = gtk_button_new_with_label("Set");
+	all_bttn = gtk_button_new_with_label("All");
+
+	g_signal_connect(G_OBJECT(set_bttn), "clicked", G_CALLBACK(set_lay_bttn_click), lay_entry);
+	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), lay_entry);
+
 	// init right box
 	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), point_bttn, TRUE, TRUE, 0);
@@ -56,10 +68,21 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(right_box), line_la_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), rect_pp_bttn, TRUE, TRUE, 0);
 
+	// init draw box
+	draw_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	gtk_box_pack_start(GTK_BOX(draw_box), scrolled_window, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(draw_box), right_box, FALSE, FALSE, 0);
+
+	// init down tool box
+	down_tool_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), lay_entry, TRUE, TRUE, 3);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), set_bttn, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
+
 	// init main_box
-	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	gtk_box_pack_start(GTK_BOX(main_box), scrolled_window, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(main_box), right_box, FALSE, FALSE, 0);
+	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+	gtk_box_pack_start(GTK_BOX(main_box), draw_box, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(main_box), down_tool_box, FALSE, FALSE, 0);
 
 	gtk_container_add(GTK_CONTAINER(window), main_box);
 	gtk_widget_show_all(window);
