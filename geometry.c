@@ -93,3 +93,28 @@ void gel_calculate_line_la(figure *point, double lenght, double angle) {
 double gel_convert_grades_to_rads(double grades) {
 	return grades * (PI / 180);
 }
+
+figure *gel_get_middle_point(figure *line) {
+	static figure p;
+	double dx, dy, px, py;
+
+	dx = line->a1 - line->x;
+	dy = line->a2 - line->y;
+
+	px = dx / 2 + line->x;
+	py = dy / 2 + line->y;
+
+	figure_fill(&p, px, py, 0, 0, FG_TYPE_POINT);
+
+	return &p;
+}
+
+int gel_is_middle_point_area(figure *line, double x, double y, int area) {
+	figure *point;
+
+	point = gel_get_middle_point(line);
+
+	if (fabs(point->x - x) <= area && fabs(point->y - y) <= area)
+		return 1;
+	return 0;
+}
