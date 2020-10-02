@@ -4,6 +4,8 @@
 #include "figure.h"
 #include "data/list.h"
 
+int curr_lay = 0;
+
 figure *figure_new(int type, int x, int y, int a1, int a2) {
 	figure *fptr = malloc(sizeof(figure));
 
@@ -19,6 +21,7 @@ figure *figure_new(int type, int x, int y, int a1, int a2) {
 	fptr->a2 = a2;
 
 	fptr->visible = 1;
+	fptr->lay = curr_lay;
 
 	return fptr;
 }
@@ -44,7 +47,7 @@ figure *figure_new_rect_pp(int x, int y, int w, int h) {
 	return figure_new(FG_TYPE_RECT_PP, x, y, w, h);
 }
 
-void figure_fill(figure *fptr, int x, int y, int a1, int a2, int type) {
+void figure_fill(figure *fptr, double x, double y, double a1, double a2, double type) {
 	fptr->x = x;
 	fptr->y = y;
 	fptr->a1 = a1;
@@ -71,4 +74,12 @@ figure *figure_rect_decompose(figure *rect) {
 	figure_fill(&elms[3], x2, y1, x2, y2, FG_TYPE_LINE_PP);
 
 	return elms;
+}
+
+void figure_set_current_lay(int new_lay) {
+	curr_lay = new_lay;
+}
+
+int figure_get_current_lay() {
+	return curr_lay;
 }
