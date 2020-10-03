@@ -50,8 +50,6 @@ gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 	GdkEventButton *eb = (GdkEventButton*)event;
-	figure *fptr;
-	list *last;
 
 	if (event->type == GDK_BUTTON_PRESS) {
 		switch (eb->button) {
