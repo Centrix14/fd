@@ -6,6 +6,8 @@ the program is still under development, but the following features are already a
 + Drawing lines at 2 points
 + Drawing lines by point, length, and angle
 + Drawing a rectangle by 2 points
++ Layers
++ Save / Open
 
 the program also supports bindings
 
