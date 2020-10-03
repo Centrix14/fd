@@ -13,6 +13,8 @@ extern list *figure_list;
 int curs_x = 0, curs_y = 0,
 	click_x = 0, click_y = 0;
 
+static GtkWidget *target_window;
+
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	cairo_set_source_rgb(cr, 0, 0, 0);
 	cairo_paint(cr);
@@ -20,6 +22,7 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	// draw figures
 	dl_set_cairo_context(cr);
 	list_crawl(figure_list, dl_draw_figure_list);
+	dl_draw_preview();
 
 	// draw cursor preview
 	cl_set_color(cr, CL_DEF_CURS_COLOR);
@@ -47,15 +50,28 @@ gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 	GdkEventButton *eb = (GdkEventButton*)event;
+	figure *fptr;
+	list *last;
 
 	if (event->type == GDK_BUTTON_PRESS) {
+		switch (eb->button) {
+			case MB_LEFT:	
+				click_x = (int)eb->x;
+				click_y = (int)eb->y;
 
-		click_x = (int)eb->x;
-		click_y = (int)eb->y;
+				bl_get_bind_from_coords(figure_list, &click_x, &click_y);
 
-		bl_get_bind_from_coords(figure_list, &click_x, &click_y);
+				ch_click_handler(widget, figure_list, click_x, click_y);
+			break;
 
-		ch_click_handler(widget, figure_list, click_x, click_y);
+			case MB_RIGHT:
+				ch_set_draw_mode(FG_TYPE_POINT);
+				ch_set_state(0);
+
+				dl_switch_show_preview();
+				gtk_widget_queue_draw(widget);
+			break;
+		}
 	}
 
 	return TRUE;
@@ -153,26 +169,6 @@ void all_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 	gtk_entry_set_text(GTK_ENTRY(entry), "all");
 } 
 
-gboolean key_press(GtkWidget *widget, GdkEventKey *event, gpointer data) {
-	figure *fptr;
-	list *last, *prev;
-
-	switch (event->keyval) {
-		case GDK_KEY_Escape:
-			ch_set_draw_mode(FG_TYPE_POINT);
-
-			last = list_get_last(figure_list);
-			fptr = (figure*)last->data;
-
-			if (fptr->visible == VM_PREVIEW) {
-				figure_free(fptr);
-				last->data = NULL;
-
-				ch_set_state(0);
-			}
-
-		break;
-	}
-
-	return TRUE;
+void set_window(GtkWidget *new_window) {
+	target_window = new_window;
 }
