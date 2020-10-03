@@ -9,10 +9,13 @@ list *figure_list = NULL;
 
 int main() {
 	GtkWidget *window;
+
 	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box;
+
 	GtkWidget *scrolled_window, *draw_area;
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn;
 	GtkWidget *lay_entry, *set_bttn, *all_bttn;
+	GtkWidget *save_bttn, *open_bttn, *ver_sep;
 
 	figure_list = list_init_node(NULL);
 
@@ -60,6 +63,14 @@ int main() {
 	g_signal_connect(G_OBJECT(set_bttn), "clicked", G_CALLBACK(set_lay_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), lay_entry);
 
+	// file operations widgets
+	save_bttn = gtk_button_new_with_label("Save");
+	open_bttn = gtk_button_new_with_label("Open");
+	ver_sep = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
+
+	g_signal_connect(G_OBJECT(save_bttn), "clicked", G_CALLBACK(save_bttn_click), window);
+	g_signal_connect(G_OBJECT(open_bttn), "clicked", G_CALLBACK(open_bttn_click), window);
+
 	// init right box
 	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), point_bttn, TRUE, TRUE, 0);
@@ -77,6 +88,11 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(down_tool_box), lay_entry, TRUE, TRUE, 3);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), set_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
+
+	// file widgets
+	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), save_bttn, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), open_bttn, FALSE, FALSE, 0);
 
 	// init main_box
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
