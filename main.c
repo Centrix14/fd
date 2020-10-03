@@ -90,7 +90,7 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
 
 	// file widgets
-	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), save_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), open_bttn, FALSE, FALSE, 0);
 
