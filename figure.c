@@ -55,6 +55,7 @@ void figure_fill(figure *fptr, double x, double y, double a1, double a2, double 
 
 	fptr->type = type;
 	fptr->visible = VM_HIDE;
+	fptr->lay = curr_lay;
 }
 
 figure *figure_rect_decompose(figure *rect) {
