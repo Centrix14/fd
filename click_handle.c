@@ -5,9 +5,11 @@
 #include "figure.h"
 #include "click_handle.h"
 #include "geometry.h"
+#include "draw.h"
 
 static int draw_mode = FG_TYPE_POINT, state = 0;
-static figure *ext_figure;
+static figure *ext_figure,
+			  tmp_figure;
 
 void ch_set_draw_mode(int new_mode) {
 	draw_mode = new_mode;
@@ -60,24 +62,29 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 	figure *line;
 
 	if (!state) {
+		figure_fill(&tmp_figure, x, y, 0, 0, FG_TYPE_LINE_PP);
+		tmp_figure.visible = VM_PREVIEW;
+
+		dl_send_preview_figure(&tmp_figure);
+	}
+	else {
 		list_add_node(lptr);
 
 		last = list_get_last(lptr);
-		line = figure_new_line_pp(x, y, 0, 0);
-		line->visible = VM_PREVIEW;
+		line = figure_new_line_pp(0, 0, 0, 0);
 
-		list_set_data(last, line);
-	}
-	else {
-		last = list_get_last(lptr);
-		line = (figure*)last->data;
+		figure_copy(line, &tmp_figure);
 
 		line->a1 = x;
 		line->a2 = y;
+
 		line->visible = VM_SHOW;
+
+		list_set_data(last, line);
 	}
 	
 	state = !state;
+	dl_switch_show_preview();
 	gtk_widget_queue_draw(draw_area);
 }
 
@@ -103,23 +110,28 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 	figure *rect;
 
 	if (!state) {
+		figure_fill(&tmp_figure, x, y, 0, 0, FG_TYPE_RECT_PP);
+		tmp_figure.visible = VM_PREVIEW;
+
+		dl_send_preview_figure(&tmp_figure);	
+	}
+	else {
 		list_add_node(lptr);
 
 		last = list_get_last(lptr);
-		rect = figure_new_rect_pp(x, y, 0, 0);
-		rect->visible = VM_PREVIEW;
+		rect = figure_new_rect_pp(0, 0, 0, 0);
 
-		list_set_data(last, rect);
-	}
-	else {
-		last = list_get_last(lptr);
-		rect = (figure*)last->data;
+		figure_copy(rect, &tmp_figure);
 
 		rect->a1 = x;
 		rect->a2 = y;
+
 		rect->visible = VM_SHOW;
+
+		list_set_data(last, rect);
 	}
 
 	state = !state;
+	dl_switch_show_preview();
 	gtk_widget_queue_draw(draw_area);
 }
