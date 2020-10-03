@@ -8,6 +8,7 @@
 #include "binding.h"
 #include "callbacks.h"
 #include "color.h"
+#include "fd_format.h"
 
 extern list *figure_list;
 int curs_x = 0, curs_y = 0,
@@ -169,4 +170,68 @@ void all_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 
 void set_window(GtkWidget *new_window) {
 	target_window = new_window;
+}
+
+void save_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	GtkWidget *dialog, *dialog_content;
+	GtkWidget *main_box;
+
+	GtkWidget *file_name_entry, *ok_bttn;
+
+	dialog = gtk_dialog_new_with_buttons("Save", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	// init widgets
+	file_name_entry = gtk_entry_new();
+	ok_bttn = gtk_button_new_with_label("OK");
+
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(save_dialog_ok_bttn_click), file_name_entry);
+
+	// init main_box
+	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), file_name_entry, TRUE, TRUE, 3);
+	gtk_box_pack_start(GTK_BOX(main_box), ok_bttn, FALSE, FALSE, 3);
+
+	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+	gtk_widget_show_all(dialog);
+}
+
+void save_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
+	const char *name = gtk_entry_get_text(GTK_ENTRY(entry));
+
+	fdl_target_file((char*)name);
+	fdl_write_from_list(figure_list);
+}
+
+void open_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	GtkWidget *dialog, *dialog_content;
+	GtkWidget *main_box;
+
+	GtkWidget *file_name_entry, *ok_bttn;
+
+	dialog = gtk_dialog_new_with_buttons("Open", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	// init widgets
+	file_name_entry = gtk_entry_new();
+	ok_bttn = gtk_button_new_with_label("OK");
+
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(open_dialog_ok_bttn_click), file_name_entry);
+
+	// init main_box
+	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), file_name_entry, TRUE, TRUE, 3);
+	gtk_box_pack_start(GTK_BOX(main_box), ok_bttn, FALSE, FALSE, 3);
+
+	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+	gtk_widget_show_all(dialog);
+}
+
+void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
+	const char *name = gtk_entry_get_text(GTK_ENTRY(entry));
+
+	fdl_target_file((char*)name);
+	fdl_read_file(figure_list);
 }
