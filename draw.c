@@ -7,7 +7,8 @@
 
 static cairo_t *context;
 static int preview_x = 0, preview_y = 0,
-		   all_lays = 0;
+		   all_lays = 0, show_preview = 0;
+static figure *preview;
 
 void dl_set_cairo_context(cairo_t *cr) {
 	context = cr;
@@ -105,4 +106,17 @@ int dl_is_need_draw(figure *fptr) {
 	if (!fptr || fptr->visible == VM_HIDE || (fptr->lay != figure_get_current_lay() && !all_lays))
 		return 0;
 	return 1;
+}
+
+void dl_send_preview_figure(figure *fptr) {
+	preview = fptr;
+}
+
+void dl_draw_preview() {
+	if (show_preview)
+		dl_draw_figure(preview);
+}
+
+void dl_switch_show_preview() {
+	show_preview = !show_preview;
 }
