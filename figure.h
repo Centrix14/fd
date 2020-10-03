@@ -45,4 +45,6 @@ void figure_fill(figure *fptr, double x, double y, double a1, double a2, double 
 void figure_set_current_lay(int new_lay);
 int figure_get_current_lay();
 
+void figure_copy(figure *dst, figure *src);
+
 #endif
