@@ -83,3 +83,14 @@ void figure_set_current_lay(int new_lay) {
 int figure_get_current_lay() {
 	return curr_lay;
 }
+
+void figure_copy(figure *dst, figure *src) {
+	dst->type = src->type;
+	dst->visible = src->visible;
+	dst->lay = src->lay;
+
+	dst->x = src->x;
+	dst->y = src->y;
+	dst->a1 = src->a1;
+	dst->a2 = src->a2;
+}
