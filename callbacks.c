@@ -13,8 +13,9 @@
 extern list *figure_list;
 int curs_x = 0, curs_y = 0,
 	click_x = 0, click_y = 0;
+int direction_val = 1;
 
-static GtkWidget *target_window;
+static GtkWidget *target_window, *dialog;
 
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	cairo_set_source_rgb(cr, 0, 0, 0);
@@ -84,13 +85,13 @@ void line_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_LINE_PP);
 }
 
-GtkWidget *lenght_entry, *angle_entry, *dialog;
+GtkWidget *lenght_entry, *angle_entry;
 
 void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
-	GtkWidget *lenght_label, *angle_label,
-			  *ok_bttn, *apply_bttn;
-	GtkWidget *lenght_box, *angle_box, *bttn_box, *main_box;
+	GtkWidget *lenght_label, *angle_label, *direction_label,
+			  *ok_bttn, *apply_bttn, *direction_bttn;
+	GtkWidget *lenght_box, *angle_box, *bttn_box, *direction_box, *main_box;
 
 	dialog = gtk_dialog_new_with_buttons("Line (LA)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -104,11 +105,17 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	lenght_entry = gtk_entry_new();
 	angle_entry = gtk_entry_new();
 
+	// init direction widgets
+	direction_label = gtk_label_new("Direction");
+	direction_bttn = gtk_button_new_with_label("↑");
+
+	g_signal_connect(G_OBJECT(direction_bttn), "clicked", G_CALLBACK(direction_bttn_click), NULL);
+
 	// init buttons
 	ok_bttn = gtk_button_new_with_label("OK");
 	apply_bttn = gtk_button_new_with_label("Help");
 
-	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(ok_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(line_la_dialog_ok_bttn_click), NULL);
 
 	// init lenght- angle- boxes
 	lenght_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -120,6 +127,13 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	gtk_box_pack_start(GTK_BOX(angle_box), angle_label, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(angle_box), angle_entry, FALSE, FALSE, 5);
+
+	// init direction box
+	direction_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	// pack direction box
+	gtk_box_pack_start(GTK_BOX(direction_box), direction_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(direction_box), direction_bttn, FALSE, FALSE, 5);
 
 	// init button box
 	bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -134,6 +148,7 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// pack box
 	gtk_box_pack_start(GTK_BOX(main_box), lenght_box, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(main_box), angle_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), direction_box, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(main_box), bttn_box, TRUE, TRUE, 5);
 
 	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
@@ -142,9 +157,9 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 figure line_data;
 
-void ok_bttn_click(GtkWidget *bttn, gpointer data) {
+void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	line_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(lenght_entry)));
-	line_data.a2 = -atof(gtk_entry_get_text(GTK_ENTRY(angle_entry)));
+	line_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(angle_entry))) * direction_val;
 
 	ch_set_external_figure(&line_data);
 	ch_set_draw_mode(FG_TYPE_LINE_LA);
@@ -234,4 +249,100 @@ void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 
 	fdl_target_file((char*)name);
 	fdl_read_file(figure_list);
+}
+
+GtkWidget *width_entry, *height_entry, *direction_bttn;
+
+void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	GtkWidget *dialog_content;
+	GtkWidget *width_label, *height_label, *direction_label,
+			  *ok_bttn, *apply_bttn;
+	GtkWidget *width_box, *height_box, *direction_box, *bttn_box, *main_box;
+
+	dialog = gtk_dialog_new_with_buttons("Rect (WH)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	// init labels
+	width_label = gtk_label_new("Width");
+	height_label = gtk_label_new("Height");
+
+	// init entrys
+	width_entry = gtk_entry_new();
+	height_entry = gtk_entry_new();
+
+	// init direction widgets
+	direction_label = gtk_label_new("Direction");
+	direction_bttn = gtk_button_new_with_label("↑");
+
+	g_signal_connect(G_OBJECT(direction_bttn), "clicked", G_CALLBACK(direction_bttn_click), NULL);
+
+	// init buttons
+	ok_bttn = gtk_button_new_with_label("OK");
+	apply_bttn = gtk_button_new_with_label("Help");
+
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(rect_wh_dialog_ok_bttn_click), NULL);
+
+	// init lenght- angle- boxes
+	width_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	height_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	// pack boxes
+	gtk_box_pack_start(GTK_BOX(width_box), width_label, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(width_box), width_entry, FALSE, FALSE, 5);
+
+	gtk_box_pack_start(GTK_BOX(height_box), height_label, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(height_box), height_entry, FALSE, FALSE, 5);
+
+	// init direction box
+	direction_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	// pack direction box
+	gtk_box_pack_start(GTK_BOX(direction_box), direction_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(direction_box), direction_bttn, FALSE, FALSE, 5);
+
+	// init button box
+	bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	// pack button box
+	gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(bttn_box), apply_bttn, TRUE, TRUE, 5);
+
+	// init main box
+	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	// pack box
+	gtk_box_pack_start(GTK_BOX(main_box), width_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), height_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), direction_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), bttn_box, TRUE, TRUE, 5);
+
+	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+	gtk_widget_show_all(dialog);
+}
+
+void direction_bttn_click(GtkWidget *bttn, gpointer data) {
+	const char *text = NULL;
+
+	text = gtk_button_get_label(GTK_BUTTON(bttn));
+	if (!strcmp(text, "↑")) {
+		gtk_button_set_label(GTK_BUTTON(bttn), "↓");
+		direction_val = -1;
+	}
+	else {
+		gtk_button_set_label(GTK_BUTTON(bttn), "↑");
+		direction_val = 1;
+	}
+}
+
+figure rect_data;
+
+void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
+	rect_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(width_entry)));
+	rect_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(height_entry))) * direction_val;
+
+	ch_set_external_figure(&rect_data);
+	ch_set_draw_mode(FG_TYPE_RECT_WH);
+
+	gtk_widget_destroy(dialog);
 }
