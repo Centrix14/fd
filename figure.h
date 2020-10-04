@@ -48,4 +48,6 @@ int figure_get_current_lay();
 
 void figure_copy(figure *dst, figure *src);
 
+int figure_is_line(figure *fptr);
+
 #endif
