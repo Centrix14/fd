@@ -95,3 +95,12 @@ void figure_copy(figure *dst, figure *src) {
 	dst->a1 = src->a1;
 	dst->a2 = src->a2;
 }
+
+int figure_is_line(figure *fptr) {
+	if (!fptr)
+		return 0;
+
+	if (fptr->type == FG_TYPE_LINE_PP || fptr->type == FG_TYPE_LINE_LA)
+		return 1;
+	return 0;
+}
