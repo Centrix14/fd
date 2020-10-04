@@ -6,15 +6,15 @@
 #include "color.h"
 
 static cairo_t *context;
-static int preview_x = 0, preview_y = 0,
-		   all_lays = 0, show_preview = 0;
+static double preview_x = 0, preview_y = 0;
+static int all_lays = 0, show_preview = 0;
 static figure *preview;
 
 void dl_set_cairo_context(cairo_t *cr) {
 	context = cr;
 }
 
-void dl_set_preview_coords(int px, int py) {
+void dl_set_preview_coords(double px, double py) {
 	preview_x = px;
 	preview_y = py;
 }
@@ -54,7 +54,7 @@ void dl_draw_point(figure *fptr) {
 }
 
 void dl_draw_line_pp(figure *fptr) {
-	int x1, y1, x2, y2;
+	double x1, y1, x2, y2;
 
 	x1 = fptr->x;
 	y1 = fptr->y;
@@ -79,7 +79,7 @@ void dl_draw_line_pp(figure *fptr) {
 }
 
 void dl_draw_rect_pp(figure *fptr) {
-	int x, y, w, h;
+	double x, y, w, h;
 
 	x = fptr->x;
 	y = fptr->y;
