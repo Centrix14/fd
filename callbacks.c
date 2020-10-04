@@ -11,7 +11,7 @@
 #include "fd_format.h"
 
 extern list *figure_list;
-int curs_x = 0, curs_y = 0,
+double curs_x = 0, curs_y = 0,
 	click_x = 0, click_y = 0;
 int direction_val = 1;
 
@@ -38,10 +38,10 @@ gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data) {
 	GdkEventMotion *em = (GdkEventMotion*)event;
 
 	if (event->type == GDK_MOTION_NOTIFY) {
-		curs_x = (int)em->x;
-		curs_y = (int)em->y;
+		curs_x = (double)em->x;
+		curs_y = (double)em->y;
 
-		bl_get_bind_from_coords(figure_list, &curs_x, &curs_y);
+		bl_bind(figure_list, &curs_x, &curs_y);
 		dl_set_preview_coords(curs_x, curs_y);
 
 		gtk_widget_queue_draw(widget);
@@ -56,11 +56,10 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 	if (event->type == GDK_BUTTON_PRESS) {
 		switch (eb->button) {
 			case MB_LEFT:	
-				click_x = (int)eb->x;
-				click_y = (int)eb->y;
+				click_x = (double)eb->x;
+				click_y = (double)eb->y;
 
-				bl_get_bind_from_coords(figure_list, &click_x, &click_y);
-
+				bl_bind(figure_list, &click_x, &click_y);
 				ch_click_handler(widget, figure_list, click_x, click_y);
 			break;
 
