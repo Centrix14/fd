@@ -9,7 +9,9 @@ the program is still under development, but the following features are already a
 + Layers
 + Save / Open
 
-the program also supports bindings
+the program also supports bindings:
++ To points
++ To lines (in the end, the middle of the intersection)
 
 ## building
 To compile and run the program successfully, you will need:
