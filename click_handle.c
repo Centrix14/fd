@@ -40,6 +40,10 @@ void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
 		case FG_TYPE_RECT_PP:
 			ch_add_rect_pp(draw_area, lptr, x, y);
 		break;
+
+		case FG_TYPE_RECT_WH:
+			ch_add_rect_wh(draw_area, lptr, x, y);
+		break;
 	}
 }
 
@@ -133,5 +137,23 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 
 	state = !state;
 	dl_switch_show_preview();
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y) {
+	list *last;
+	figure *rect;
+
+	list_add_node(lptr);
+
+	last = list_get_last(lptr);
+	rect = figure_new_rect_pp(x, y, 0, 0);
+	rect->visible = VM_SHOW;
+
+	rect->a1 = rect->x + ext_figure->a1;
+	rect->a2 = rect->y + ext_figure->a2;
+
+	list_set_data(last, rect);
+
 	gtk_widget_queue_draw(draw_area);
 }
