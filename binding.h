@@ -6,17 +6,21 @@
 
 #define BINDING_AREA 20
 
-void bl_get_bind_from_coords(list *lptr, int *x, int *y);
-int bl_is_create_binding(figure *target, int x, int y);
-int bl_get_coords_dif(int c1, int c2);
+void bl_bind(list *lptr, double *x, double *y);
 
-int bl_get_binding_possibility_point(figure *point, int x, int y);
-int bl_get_binding_possibility_line(figure *line, int x, int y);
-int bl_get_binding_possibility_rect(figure *rect, int x, int y);
+char *bl_get_bind_from_coords(list *lptr, double *x, double *y);
+char *bl_try_make_intersection_binding(list *lptr, double *x, double *y);
 
-void bl_make_binding(figure *fptr, int *x, int *y);
-void bl_make_binding_point(figure *point, int *x, int *y);
-void bl_make_binding_line(figure *line, int *x, int *y);
-void bl_make_binding_rect(figure *rect, int *x, int *y);
+int bl_is_create_binding(figure *target, double x, double y);
+double bl_get_coords_dif(double c1, double c2);
+
+int bl_get_binding_possibility_point(figure *point, double x, double y);
+int bl_get_binding_possibility_line(figure *line, double x, double y);
+int bl_get_binding_possibility_rect(figure *rect, double x, double y);
+
+void bl_make_binding(figure *fptr, double *x, double *y);
+void bl_make_binding_point(figure *point, double *x, double *y);
+void bl_make_binding_line(figure *line, double *x, double *y);
+void bl_make_binding_rect(figure *rect, double *x, double *y);
 
 #endif
