@@ -54,18 +54,23 @@ int gel_lf_is_parallel(figure *line1, figure *line2) {
 	return 0;
 }
 
-void gel_calculate_intersection(figure *line1, figure *line2, figure *p) {
+char *gel_calculate_intersection(figure *line1, figure *line2, figure *p) {
 	double k1, k2, b1, b2;	
 	double x = 0, y = 0;
 	int is_parallel = 0;
+	figure *equal_point;
+
+	equal_point = gel_get_equal_point(line1, line2);
+	if (equal_point) {
+		p->x = equal_point->x;
+		p->y = equal_point->y;
+
+		return "";
+	}
 
 	is_parallel = gel_lf_is_parallel(line1, line2);
-	if (is_parallel) {
-		p->x = -1;
-		p->y = -1;
-
-		return ;
-	}
+	if (is_parallel)
+		return NULL;
 
 	k1 = gel_lf_calculate_k(line1);
 	k2 = gel_lf_calculate_k(line2);
@@ -76,8 +81,13 @@ void gel_calculate_intersection(figure *line1, figure *line2, figure *p) {
 	x = (b2 - b1) / (k1 - k2);
 	y = k1 * x + b1;
 
+	if (isnan(x) || isnan(y))
+		return NULL;
+
 	p->x = x;
 	p->y = y;
+
+	return "";
 }
 
 void gel_calculate_line_la(figure *point, double lenght, double angle) {
@@ -117,4 +127,23 @@ int gel_is_middle_point_area(figure *line, double x, double y, int area) {
 	if (fabs(point->x - x) <= area && fabs(point->y - y) <= area)
 		return 1;
 	return 0;
+}
+
+figure *gel_get_equal_point(figure *line1, figure *line2) {
+	static figure point;
+
+	if (line1->x == line2->x && line1->y == line2->y) {
+		point.x = line1->x;
+		point.y = line2->y;
+
+		return &point;
+	}
+	else if (line1->a1 == line2->a1 && line1->a2 == line2->a2) {
+		point.x = line1->a1;
+		point.y = line1->a2;
+
+		return &point;
+	}
+
+	return NULL;
 }
