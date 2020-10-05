@@ -6,7 +6,7 @@
 #include "figure.h"
 #include "geometry.h"
 
-char *bl_get_bind_from_coords(list *lptr, double *x, double *y) {
+char *bl_try_make_object_bind(list *lptr, double *x, double *y) {
 	list *node = lptr;
 	figure *fptr = NULL;
 
@@ -174,8 +174,58 @@ char *bl_try_make_intersection_binding(list *lptr, double *x, double *y) {
 void bl_bind(list *lptr, double *x, double *y) {
 	char *is_correct;
 
-	is_correct = bl_get_bind_from_coords(lptr, x, y);
+	is_correct = bl_try_make_object_bind(lptr, x, y);
 
 	if (!is_correct)
-		bl_try_make_intersection_binding(lptr, x, y);
+		is_correct = bl_try_make_intersection_binding(lptr, x, y);
+	if (!is_correct)
+		bl_try_make_vertical_binding(lptr, x, y);
+}
+
+char *bl_try_make_vertical_binding(list *lptr, double *x, double *y) {
+	char *is_correct;
+	list *node;
+
+	node = lptr;
+	while (node) {
+		is_correct = bl_make_vertical_bind_if_possible(node, x, y);
+		if (is_correct)
+			return "";
+
+		node = node->next;
+	}
+
+	return NULL;
+}
+
+char *bl_make_vertical_bind_if_possible(list *node, double *x, double *y) {
+	figure *fptr;
+
+	fptr = (figure*)node->data;
+	if (!fptr)
+		return NULL;
+
+	if (bl_get_coords_dif(fptr->x, *x) <= BINDING_AREA) {
+		*x = fptr->x;
+
+		return "";
+	}
+	if (bl_get_coords_dif(fptr->a1, *x) <= BINDING_AREA) {
+		*x = fptr->a1;
+
+		return "";
+	}
+
+	if (bl_get_coords_dif(fptr->y, *y) <= BINDING_AREA) {
+		*y = fptr->y;
+
+		return "";
+	}
+	if (bl_get_coords_dif(fptr->a2, *y) <= BINDING_AREA) {
+		*y = fptr->a2;
+
+		return "";
+	}
+
+	return NULL;
 }
