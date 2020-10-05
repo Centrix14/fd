@@ -14,7 +14,7 @@ int main() {
 
 	GtkWidget *scrolled_window, *draw_area;
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn;
-	GtkWidget *lay_entry, *set_bttn, *all_bttn;
+	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
 
 	figure_list = list_init_node(NULL);
@@ -61,6 +61,7 @@ int main() {
 	lay_entry = gtk_entry_new();
 	set_bttn = gtk_button_new_with_label("Set");
 	all_bttn = gtk_button_new_with_label("All");
+	add_projection_lay_bttn = gtk_button_new_with_label("+ / -");
 
 	g_signal_connect(G_OBJECT(set_bttn), "clicked", G_CALLBACK(set_lay_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), lay_entry);
@@ -91,6 +92,7 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(down_tool_box), lay_entry, TRUE, TRUE, 3);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), set_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), add_projection_lay_bttn, FALSE, FALSE, 0);
 
 	// file widgets
 	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 5);

@@ -345,3 +345,18 @@ void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 
 	gtk_widget_destroy(dialog);
 }
+
+void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
+	char *text = (char*)gtk_entry_get_text(GTK_ENTRY(entry));
+	int is_prj_lay = 0, entry_lay = 0;
+
+	entry_lay = atoi(text);
+
+	is_prj_lay = figure_is_projection_lay_list(figure_list);
+	if (is_prj_lay) {
+		figure_set_visible_by_lay_list(figure_list, entry_lay, VM_HIDE);
+	}
+	else {
+		figure_set_visible_by_lay_list(figure_list, entry_lay, VM_PROJECTION);
+	}
+}

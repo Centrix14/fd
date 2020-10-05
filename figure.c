@@ -104,3 +104,45 @@ int figure_is_line(figure *fptr) {
 		return 1;
 	return 0;
 }
+
+int figure_is_projection_lay_list(list *lptr, int lay) {
+	figure *fptr;
+	list *node;
+
+	node = lptr;
+	while (node) {
+		fptr = (figure*)node->data;
+		if (!fptr) {
+			node = node->next;
+
+			continue;
+		}
+
+		if (fptr->lay == lay && fptr->visible == VM_PROJECTION)
+			return 1;
+
+		node = node->next;
+	}
+
+	return 0;
+}
+
+void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode) {
+	figure *fptr;
+	list *node;
+
+	node = lptr;
+	while (node) {
+		fptr = (figure*)node->data;
+		if (!fptr) {
+			node = node->next;
+
+			continue;
+		}
+
+		if (fptr->lay == lay)
+			fptr->visible = vm_mode;
+
+		node = node->next;
+	}
+}

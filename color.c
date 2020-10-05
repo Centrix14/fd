@@ -15,5 +15,9 @@ void cl_set_color(cairo_t *cr, int color_set) {
 		case CL_DEF_PREVIEW_COLOR:
 			cairo_set_source_rgb(cr, 255, 100, 0);
 		break;
+
+		case CL_DEF_PROJECTION_COLOR:
+			cairo_set_source_rgb(cr, 50, 50, 50);
+		break;
 	}
 }

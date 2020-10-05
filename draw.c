@@ -47,7 +47,11 @@ void dl_draw_figure_list(list *lptr) {
 }
 
 void dl_draw_point(figure *fptr) {
-	cairo_set_source_rgb(context, 0, 200, 200);	
+	if (fptr->visible == VM_PROJECTION)
+		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	else
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
+
 	cairo_arc(context, fptr->x, fptr->y, 3, 0, 2 * G_PI);
 
 	cairo_fill(context);
@@ -65,6 +69,8 @@ void dl_draw_line_pp(figure *fptr) {
 
 		cl_set_color(context, CL_DEF_PREVIEW_COLOR);
 	}
+	else if (fptr->visible == VM_PROJECTION)
+		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
 	else {
 		x2 = fptr->a1;
 		y2 = fptr->a2;

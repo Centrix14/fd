@@ -28,7 +28,8 @@ enum FG_TYPES {
 enum VISIBLE_MODES {
 	VM_HIDE = 0,
 	VM_SHOW,
-	VM_PREVIEW
+	VM_PREVIEW,
+	VM_PROJECTION
 };
 
 figure *figure_new(int type, int x, int y, int a1, int a2);
@@ -49,5 +50,8 @@ int figure_get_current_lay();
 void figure_copy(figure *dst, figure *src);
 
 int figure_is_line(figure *fptr);
+int figure_is_projection_lay_list(list *lptr, int lay);
+
+void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode);
 
 #endif
