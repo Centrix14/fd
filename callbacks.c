@@ -12,7 +12,7 @@
 
 extern list *figure_list;
 double curs_x = 0, curs_y = 0,
-	click_x = 0, click_y = 0;
+	   click_x = 0, click_y = 0;
 int direction_val = 1;
 
 static GtkWidget *target_window, *dialog;
