@@ -352,11 +352,34 @@ void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 
 	entry_lay = atoi(text);
 
-	is_prj_lay = figure_is_projection_lay_list(figure_list);
-	if (is_prj_lay) {
+	is_prj_lay = figure_is_projection_lay_list(figure_list, entry_lay);
+	if (is_prj_lay)
 		figure_set_visible_by_lay_list(figure_list, entry_lay, VM_HIDE);
-	}
-	else {
+	else
 		figure_set_visible_by_lay_list(figure_list, entry_lay, VM_PROJECTION);
-	}
+}
+
+void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	GtkWidget *help_dialog, *dialog_content;
+	GtkWidget *main_box;
+	GtkWidget *help_label, *scrolled_window;
+
+	help_dialog = gtk_dialog_new_with_buttons("Rect (WH)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(help_dialog));
+	g_signal_connect_swapped(help_dialog, "response", G_CALLBACK(gtk_widget_destroy), help_dialog);
+
+	// init help label
+	help_label = gtk_label_new("here will be help");
+
+	// init scrolled window
+	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+	gtk_container_add(GTK_CONTAINER(scrolled_window), help_label);
+
+	// init main box
+	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	gtk_box_pack_start(GTK_BOX(main_box), scrolled_window, TRUE, TRUE, 0);
+
+	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+	gtk_widget_show_all(help_dialog);
 }
