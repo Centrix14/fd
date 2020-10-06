@@ -1,3 +1,10 @@
+/*
+ * main.c -- main fd file, contains gui
+ * v0.1
+ * 06.10.2020
+ * by Centrix
+ */
+
 #include <stdio.h>
 #include <gtk/gtk.h>
 
@@ -13,7 +20,7 @@ int main() {
 	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box;
 
 	GtkWidget *scrolled_window, *draw_area;
-	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn;
+	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn;
 	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
 
@@ -50,12 +57,16 @@ int main() {
 	line_la_bttn = gtk_button_new_with_label("Line (LA)");
 	rect_pp_bttn = gtk_button_new_with_label("Rect (PP)");
 	rect_wh_bttn = gtk_button_new_with_label("Rect (WH)");
+	arc_tp_bttn = gtk_button_new_with_label("Arc (3P)");
+	circle_rc_bttn = gtk_button_new_with_label("Circle (RC)");
+	help_bttn = gtk_button_new_with_label("Help");
 
 	g_signal_connect(G_OBJECT(point_bttn), "clicked", G_CALLBACK(point_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(line_pp_bttn), "clicked", G_CALLBACK(line_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(line_la_bttn), "clicked", G_CALLBACK(line_la_bttn_click), window);
 	g_signal_connect(G_OBJECT(rect_pp_bttn), "clicked", G_CALLBACK(rect_pp_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(rect_wh_bttn), "clicked", G_CALLBACK(rect_wh_bttn_click), window);
+	g_signal_connect(G_OBJECT(help_bttn), "clicked", G_CALLBACK(help_bttn_click), window);
 
 	// init down tool panel widgets
 	lay_entry = gtk_entry_new();
@@ -65,6 +76,7 @@ int main() {
 
 	g_signal_connect(G_OBJECT(set_bttn), "clicked", G_CALLBACK(set_lay_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), lay_entry);
+	g_signal_connect(G_OBJECT(add_projection_lay_bttn), "clicked", G_CALLBACK(add_projection_lay_bttn_click), lay_entry);
 
 	// file operations widgets
 	save_bttn = gtk_button_new_with_label("Save");
@@ -81,6 +93,9 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(right_box), line_la_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), rect_pp_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), rect_wh_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), arc_tp_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), circle_rc_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), help_bttn, TRUE, TRUE, 0);
 
 	// init draw box
 	draw_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
