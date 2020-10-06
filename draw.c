@@ -47,7 +47,7 @@ void dl_draw_figure_list(list *lptr) {
 }
 
 void dl_draw_point(figure *fptr) {
-	if (fptr->visible == VM_PROJECTION)
+	if (fptr->visible == VM_PROJECTION && !all_lays)
 		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
 	else
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
@@ -62,6 +62,9 @@ void dl_draw_line_pp(figure *fptr) {
 
 	x1 = fptr->x;
 	y1 = fptr->y;
+	
+	x2 = fptr->a1;
+	y2 = fptr->a2;
 
 	if (fptr->visible == VM_PREVIEW) {
 		x2 = preview_x;
@@ -69,14 +72,10 @@ void dl_draw_line_pp(figure *fptr) {
 
 		cl_set_color(context, CL_DEF_PREVIEW_COLOR);
 	}
-	else if (fptr->visible == VM_PROJECTION)
+	else if (fptr->visible == VM_PROJECTION && !all_lays)
 		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
-	else {
-		x2 = fptr->a1;
-		y2 = fptr->a2;
-
+	else
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
-	}
 
 	cairo_move_to(context, x1, y1);
 	cairo_line_to(context, x2, y2);
@@ -89,6 +88,9 @@ void dl_draw_rect_pp(figure *fptr) {
 
 	x = fptr->x;
 	y = fptr->y;
+	
+	w = fptr->a1 - x;
+	h = fptr->a2 - y;
 
 	if (fptr->visible == VM_PREVIEW) {
 		w = preview_x - x;
@@ -96,12 +98,10 @@ void dl_draw_rect_pp(figure *fptr) {
 
 		cl_set_color(context, CL_DEF_PREVIEW_COLOR);
 	}
-	else {
-		w = fptr->a1 - x;
-		h = fptr->a2 - y;
-
+	else if (fptr->visible == VM_PROJECTION && !all_lays)
+		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	else
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
-	}
 
 	cairo_rectangle(context, x, y, w, h);
 
@@ -109,7 +109,7 @@ void dl_draw_rect_pp(figure *fptr) {
 }
 
 int dl_is_need_draw(figure *fptr) {
-	if (!fptr || fptr->visible == VM_HIDE || (fptr->lay != figure_get_current_lay() && !all_lays))
+	if (!fptr || fptr->visible == VM_HIDE || (fptr->lay != figure_get_current_lay() && !all_lays && fptr->visible != VM_PROJECTION))
 		return 0;
 	return 1;
 }
