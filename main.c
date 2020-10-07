@@ -66,6 +66,9 @@ int main() {
 	g_signal_connect(G_OBJECT(line_la_bttn), "clicked", G_CALLBACK(line_la_bttn_click), window);
 	g_signal_connect(G_OBJECT(rect_pp_bttn), "clicked", G_CALLBACK(rect_pp_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(rect_wh_bttn), "clicked", G_CALLBACK(rect_wh_bttn_click), window);
+	g_signal_connect(G_OBJECT(circle_rc_bttn), "clicked", G_CALLBACK(circle_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(arc_tp_bttn), "clicked", G_CALLBACK(arc_bttn_click), NULL);
+
 	g_signal_connect(G_OBJECT(help_bttn), "clicked", G_CALLBACK(help_bttn_click), window);
 
 	// init down tool panel widgets
