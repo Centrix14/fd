@@ -4,6 +4,7 @@
 #include "draw.h"
 #include "figure.h"
 #include "color.h"
+#include "geometry.h"
 
 static cairo_t *context;
 static double preview_x = 0, preview_y = 0;
@@ -38,6 +39,14 @@ void dl_draw_figure(figure *fptr) {
 
 		case FG_TYPE_RECT_PP:
 			dl_draw_rect_pp(fptr);
+		break;
+
+		case FG_TYPE_CIRCLE:
+			dl_draw_circle(fptr);
+		break;
+
+		case FG_TYPE_ARC:
+			dl_draw_arc(fptr);
 		break;
 	}
 }
@@ -104,6 +113,48 @@ void dl_draw_rect_pp(figure *fptr) {
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
 	cairo_rectangle(context, x, y, w, h);
+
+	cairo_stroke(context);
+}
+
+void dl_draw_circle(figure *fptr) {
+	figure *rad_line;
+	double x, y, r;
+
+	x = fptr->x;
+	y = fptr->y;
+	r = fptr->a1;
+
+	if (fptr->visible == VM_PREVIEW) {
+		rad_line = figure_new_line_pp(x, y, preview_x, preview_y);
+		r = gel_calculate_lenght(rad_line);
+
+		cl_set_color(context, CL_DEF_PREVIEW_COLOR);
+	}
+	else if (fptr->visible == VM_PROJECTION && !all_lays)
+		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	else
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
+
+	cairo_arc(context, x, y, r, 0, 2 * G_PI);
+
+	cairo_stroke(context);
+}
+
+void dl_draw_arc(figure *fptr) {
+	double x, y, r, a;
+
+	x = fptr->x;
+	y = fptr->y;
+	r = fptr->a1;
+	a = fptr->a2;
+
+	if (fptr->visible == VM_PROJECTION && !all_lays)
+		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	else
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
+
+	cairo_arc(context, x, y, r, 0, gel_convert_grades_to_rads(a));
 
 	cairo_stroke(context);
 }
