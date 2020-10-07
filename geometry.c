@@ -147,3 +147,11 @@ figure *gel_get_equal_point(figure *line1, figure *line2) {
 
 	return NULL;
 }
+
+double gel_calculate_arc_lenght_g(double L, double l) {
+	return 2 * l + (2 * l - L) / 3;
+}
+
+double gel_calculate_arc_angle_g(double lenght, double R) {
+	return (180 * lenght) / (M_PI * R);
+}
