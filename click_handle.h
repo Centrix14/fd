@@ -13,5 +13,7 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y);
 void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y);
 void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y);
 void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y);
+void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y);
+void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y);
 
 #endif
