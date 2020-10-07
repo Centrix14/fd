@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include <gtk/gtk.h>
 
 #include "data/list.h"
@@ -43,6 +44,14 @@ void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
 
 		case FG_TYPE_RECT_WH:
 			ch_add_rect_wh(draw_area, lptr, x, y);
+		break;
+
+		case FG_TYPE_CIRCLE:
+			ch_add_circle(draw_area, lptr, x, y);
+		break;
+
+		case FG_TYPE_ARC:
+			ch_add_arc(draw_area, lptr, x, y);
 		break;
 	}
 }
@@ -156,4 +165,103 @@ void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y) {
 	list_set_data(last, rect);
 
 	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
+	figure *circle, *rad, *center_point;
+	list *last;
+	double radii;
+
+	if (!state) {
+		figure_fill(&tmp_figure, x, y, 50, 0, FG_TYPE_CIRCLE);
+		tmp_figure.visible = VM_PREVIEW;
+
+		dl_send_preview_figure(&tmp_figure);
+	}
+	else {
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+		circle = figure_new_circle(0, 0, 0);
+
+		// get readius
+		rad = figure_new_line_pp(tmp_figure.x, tmp_figure.y, x, y);
+		radii = gel_calculate_lenght(rad);
+
+		figure_copy(circle, &tmp_figure);
+
+		//set radii
+		circle->a1 = radii;
+		circle->visible = VM_SHOW;
+
+		list_set_data(last, circle);
+
+		// add center point
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+		center_point = figure_new_point(tmp_figure.x, tmp_figure.y);
+
+		list_set_data(last, center_point);
+	}
+
+	state = !state;
+	dl_switch_show_preview();
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
+	static double L, l, r, xc, yc;
+	double arc_angle, arc_lenght;
+	figure *middle_point, *rad_line, *arc, p;
+	list *last;
+
+	puts("work");
+	if (!state) {
+		figure_fill(&tmp_figure, x, y, 0, 0, FG_TYPE_ARC);
+		tmp_figure.visible = VM_PREVIEW;
+
+		state = 1;
+	}
+	else if (state == 1) {
+		tmp_figure.a1 = x;
+		tmp_figure.a2 = y;
+
+		// get lenght between arc points
+		L = gel_calculate_lenght(&tmp_figure);
+
+		middle_point = gel_get_middle_point(&tmp_figure);
+
+		// arc center
+		xc = middle_point->x;
+		yc = middle_point->y;
+
+		// arc radii
+		rad_line = figure_new_line_pp(xc, yc, x, y);
+		r = gel_calculate_lenght(rad_line);
+
+		state = 2;
+	}
+	else if (state == 2) {
+		tmp_figure.a1 = x;
+		tmp_figure.a2 = y;
+
+		l = gel_calculate_lenght(&tmp_figure);
+
+		// get arc lenght & angle
+		arc_lenght = gel_calculate_arc_lenght_g(L, l);
+		arc_angle = gel_calculate_arc_angle_g(arc_lenght, r);
+		printf("l = %f a = %f\n", arc_lenght, arc_angle);
+
+		// create arc
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+		arc = figure_new_arc(xc, yc, r, arc_angle);
+
+		list_set_data(last, arc);
+
+		state = 0;
+		gtk_widget_queue_draw(draw_area);
+	}
 }
