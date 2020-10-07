@@ -22,7 +22,9 @@ enum FG_TYPES {
 	FG_TYPE_LINE_PP,
 	FG_TYPE_LINE_LA,
 	FG_TYPE_RECT_PP,
-	FG_TYPE_RECT_WH
+	FG_TYPE_RECT_WH,
+	FG_TYPE_CIRCLE,
+	FG_TYPE_ARC
 };
 
 enum VISIBLE_MODES {
@@ -36,6 +38,8 @@ figure *figure_new(int type, int x, int y, int a1, int a2);
 figure *figure_new_point(int x, int y);
 figure *figure_new_line_pp(int x1, int y1, int x2, int y2);
 figure *figure_new_rect_pp(int x, int y, int w, int h);
+figure *figure_new_circle(int x, int y, int r);
+figure *figure_new_arc(double xc, double yc, double r, double angle);
 
 void figure_free(figure *fptr);
 void figure_free_list(list *lptr);
