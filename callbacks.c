@@ -364,7 +364,7 @@ void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *main_box;
 	GtkWidget *help_label, *scrolled_window;
 
-	help_dialog = gtk_dialog_new_with_buttons("Rect (WH)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	help_dialog = gtk_dialog_new_with_buttons("Help", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(help_dialog));
 	g_signal_connect_swapped(help_dialog, "response", G_CALLBACK(gtk_widget_destroy), help_dialog);
 
@@ -382,4 +382,12 @@ void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
 	gtk_widget_show_all(help_dialog);
+}
+
+void circle_bttn_click(GtkWidget *bttn, gpointer data) {
+	ch_set_draw_mode(FG_TYPE_CIRCLE);
+}
+
+void arc_bttn_click(GtkWidget *bttn, gpointer data) {
+	ch_set_draw_mode(FG_TYPE_ARC);
 }
