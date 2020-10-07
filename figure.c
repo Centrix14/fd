@@ -20,7 +20,7 @@ figure *figure_new(int type, int x, int y, int a1, int a2) {
 	fptr->a1 = a1;
 	fptr->a2 = a2;
 
-	fptr->visible = 1;
+	fptr->visible = VM_SHOW;
 	fptr->lay = curr_lay;
 
 	return fptr;
@@ -45,6 +45,14 @@ figure *figure_new_line_pp(int x1, int y1, int x2, int y2) {
 
 figure *figure_new_rect_pp(int x, int y, int w, int h) {
 	return figure_new(FG_TYPE_RECT_PP, x, y, w, h);
+}
+
+figure *figure_new_circle(int x, int y, int r) {
+	return figure_new(FG_TYPE_CIRCLE, x, y, r, 0);
+}
+
+figure *figure_new_arc(double xc, double yc, double r, double angle) {
+	return figure_new(FG_TYPE_ARC, xc, yc, r, angle);
 }
 
 void figure_fill(figure *fptr, double x, double y, double a1, double a2, double type) {
