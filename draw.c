@@ -142,19 +142,20 @@ void dl_draw_circle(figure *fptr) {
 }
 
 void dl_draw_arc(figure *fptr) {
-	double x, y, r, a;
+	double x, y, r, a1, a2;
 
 	x = fptr->x;
 	y = fptr->y;
-	r = fptr->a1;
-	a = fptr->a2;
+	a1 = fptr->a1;
+	a2 = fptr->a2;
+	r = fptr->a3;
 
 	if (fptr->visible == VM_PROJECTION && !all_lays)
 		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
 	else
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
-	cairo_arc(context, x, y, r, 0, gel_convert_grades_to_rads(a));
+	cairo_arc(context, x, y, r, gel_convert_grades_to_rads(a1), gel_convert_grades_to_rads(a2));
 
 	cairo_stroke(context);
 }
