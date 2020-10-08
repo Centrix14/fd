@@ -6,7 +6,7 @@
 
 int curr_lay = 0;
 
-figure *figure_new(int type, int x, int y, int a1, int a2) {
+figure *figure_new(int type, int x, int y, int a1, int a2, double a3) {
 	figure *fptr = malloc(sizeof(figure));
 
 	if (!fptr) {
@@ -19,6 +19,7 @@ figure *figure_new(int type, int x, int y, int a1, int a2) {
 	fptr->y = y;
 	fptr->a1 = a1;
 	fptr->a2 = a2;
+	fptr->a3 = a3;
 
 	fptr->visible = VM_SHOW;
 	fptr->lay = curr_lay;
@@ -36,23 +37,23 @@ void figure_free_list(list *lptr) {
 }
 
 figure *figure_new_point(int x, int y) {
-	return figure_new(FG_TYPE_POINT, x, y, 0, 0);
+	return figure_new(FG_TYPE_POINT, x, y, 0, 0, 0);
 }
 
 figure *figure_new_line_pp(int x1, int y1, int x2, int y2) {
-	return figure_new(FG_TYPE_LINE_PP, x1, y1, x2, y2);
+	return figure_new(FG_TYPE_LINE_PP, x1, y1, x2, y2, 0);
 }
 
 figure *figure_new_rect_pp(int x, int y, int w, int h) {
-	return figure_new(FG_TYPE_RECT_PP, x, y, w, h);
+	return figure_new(FG_TYPE_RECT_PP, x, y, w, h, 0);
 }
 
 figure *figure_new_circle(int x, int y, int r) {
-	return figure_new(FG_TYPE_CIRCLE, x, y, r, 0);
+	return figure_new(FG_TYPE_CIRCLE, x, y, r, 0, 0);
 }
 
-figure *figure_new_arc(double xc, double yc, double r, double angle) {
-	return figure_new(FG_TYPE_ARC, xc, yc, r, angle);
+figure *figure_new_arc(double xc, double yc, double r, double angle1, double angle2) {
+	return figure_new(FG_TYPE_ARC, xc, yc, r, angle1, angle2);
 }
 
 void figure_fill(figure *fptr, double x, double y, double a1, double a2, double type) {
