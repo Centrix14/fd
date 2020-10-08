@@ -388,6 +388,64 @@ void circle_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_CIRCLE);
 }
 
-void arc_bttn_click(GtkWidget *bttn, gpointer data) {
+GtkWidget *angle1_entry, *angle2_entry, *radii_entry;
+
+void arc_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	GtkWidget *dialog_content;
+	GtkWidget *angle1_label, *angle2_label, *radii_label,
+			  *ok_bttn, *help_bttn;
+	GtkWidget *main_box, *angle1_box, *angle2_box, *radii_box;
+
+	dialog = gtk_dialog_new_with_buttons("Arc (3P)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	// init angle 1 widgets
+	angle1_label = gtk_label_new("Angle from OX (A1)");
+	angle1_entry = gtk_entry_new();
+
+	// init angle 2 widgets
+	angle2_label = gtk_label_new("Angle from A1 (A2)");
+	angle2_entry = gtk_entry_new();
+
+	// init radii widgets
+	radii_label = gtk_label_new("Radius");
+	radii_entry = gtk_entry_new();
+
+	// init boxes
+	angle1_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	angle2_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	radii_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(angle1_box), angle1_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(angle1_box), angle1_entry, FALSE, FALSE, 5);
+
+	gtk_box_pack_start(GTK_BOX(angle2_box), angle2_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(angle2_box), angle2_entry, FALSE, FALSE, 5);
+
+	gtk_box_pack_start(GTK_BOX(radii_box), radii_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(radii_box), radii_entry, FALSE, FALSE, 5);
+
+	// init main box
+	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(main_box), angle1_box, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), angle2_box, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), radii_box, FALSE, FALSE, 5);
+
+	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+	gtk_widget_show_all(dialog);
+}
+
+figure arc_data;
+
+void arc_3p_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
+	arc_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(angle1_entry)));
+	arc_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(angle2_entry))) + arc_data.a1;
+	arc_data.a3 = atof(gtk_entry_get_text(GTK_ENTRY(radii_entry)));
+
+	ch_set_external_figure(&arc_data);
 	ch_set_draw_mode(FG_TYPE_ARC);
+
+	gtk_widget_destroy(dialog);
 }
