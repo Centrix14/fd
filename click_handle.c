@@ -211,57 +211,16 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
 }
 
 void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
-	static double L, l, r, xc, yc;
-	double arc_angle, arc_lenght;
-	figure *middle_point, *rad_line, *arc, p;
+	figure *arc;
 	list *last;
 
-	puts("work");
-	if (!state) {
-		figure_fill(&tmp_figure, x, y, 0, 0, FG_TYPE_ARC);
-		tmp_figure.visible = VM_PREVIEW;
+	list_add_node(lptr);	
 
-		state = 1;
-	}
-	else if (state == 1) {
-		tmp_figure.a1 = x;
-		tmp_figure.a2 = y;
+	last = list_get_last(lptr);
+	arc = figure_new_arc(x, y, ext_figure->a1, ext_figure->a2, ext_figure->a3);
+	arc->visible = VM_SHOW;
 
-		// get lenght between arc points
-		L = gel_calculate_lenght(&tmp_figure);
+	list_set_data(last, arc);
 
-		middle_point = gel_get_middle_point(&tmp_figure);
-
-		// arc center
-		xc = middle_point->x;
-		yc = middle_point->y;
-
-		// arc radii
-		rad_line = figure_new_line_pp(xc, yc, x, y);
-		r = gel_calculate_lenght(rad_line);
-
-		state = 2;
-	}
-	else if (state == 2) {
-		tmp_figure.a1 = x;
-		tmp_figure.a2 = y;
-
-		l = gel_calculate_lenght(&tmp_figure);
-
-		// get arc lenght & angle
-		arc_lenght = gel_calculate_arc_lenght_g(L, l);
-		arc_angle = gel_calculate_arc_angle_g(arc_lenght, r);
-		printf("l = %f a = %f\n", arc_lenght, arc_angle);
-
-		// create arc
-		list_add_node(lptr);
-
-		last = list_get_last(lptr);
-		arc = figure_new_arc(xc, yc, r, arc_angle);
-
-		list_set_data(last, arc);
-
-		state = 0;
-		gtk_widget_queue_draw(draw_area);
-	}
+	gtk_widget_queue_draw(draw_area);
 }
