@@ -8,8 +8,6 @@
 double gel_calculate_lenght(figure *line);
 char *gel_calculate_intersection(figure *line1, figure *line2, figure *p);
 void gel_calculate_line_la(figure *point, double lenght, double angle);
-double gel_calculate_arc_lenght_g(double L, double l);
-double gel_calculate_arc_angle_g(double lenght, double R);
 
 double gel_lf_calculate_k(figure *line);
 double gel_lf_calculate_b(figure *line);
