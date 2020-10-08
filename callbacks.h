@@ -12,10 +12,11 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *window);
 void rect_pp_bttn_click(GtkWidget *bttn, gpointer data);
 void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void circle_bttn_click(GtkWidget *bttn, gpointer data);
-void arc_bttn_click(GtkWidget *bttn, gpointer data);
+void arc_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 
 void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
+void arc_3p_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
