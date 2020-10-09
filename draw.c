@@ -8,7 +8,7 @@
 
 static cairo_t *context;
 static double preview_x = 0, preview_y = 0;
-static int all_lays = 0, show_preview = 0;
+static int all_lays = 0, show_preview = 0, arc_type = 0;
 static figure *preview;
 
 void dl_set_cairo_context(cairo_t *cr) {
@@ -155,7 +155,10 @@ void dl_draw_arc(figure *fptr) {
 	else
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
-	cairo_arc(context, x, y, r, gel_convert_grades_to_rads(a1), gel_convert_grades_to_rads(a2));
+	if (!arc_type)
+		cairo_arc(context, x, y, r, gel_convert_grades_to_rads(a1), gel_convert_grades_to_rads(a2));
+	else
+		cairo_arc(context, x, y, r, gel_convert_grades_to_rads(a2), gel_convert_grades_to_rads(a1));
 
 	cairo_stroke(context);
 }
@@ -177,4 +180,8 @@ void dl_draw_preview() {
 
 void dl_switch_show_preview() {
 	show_preview = !show_preview;
+}
+
+void dl_set_arc_type(int t) {
+	arc_type = t;
 }
