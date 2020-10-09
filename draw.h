@@ -25,4 +25,6 @@ void dl_send_preview_figure(figure *fptr);
 
 void dl_draw_preview();
 
+void dl_set_arc_type(int t);
+
 #endif
