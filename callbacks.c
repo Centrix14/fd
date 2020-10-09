@@ -34,8 +34,9 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	return TRUE;
 }
 
-gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data) {
+gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label) {
 	GdkEventMotion *em = (GdkEventMotion*)event;
+	char crd[256];
 
 	if (event->type == GDK_MOTION_NOTIFY) {
 		curs_x = (double)em->x;
@@ -43,6 +44,9 @@ gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 		bl_bind(figure_list, &curs_x, &curs_y);
 		dl_set_preview_coords(curs_x, curs_y);
+
+		sprintf(crd, "(%g;%g)", curs_x, curs_y);
+		gtk_label_set_text(GTK_LABEL(crd_label), crd);
 
 		gtk_widget_queue_draw(widget);
 	}

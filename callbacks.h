@@ -2,7 +2,7 @@
 #define __FLAT_DRAW_CALLBACKS_LIBRARY_HEADER_FILE__
 
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);
-gboolean mouse_move(GtkWidget *widget, GdkEvent *event, gpointer data);
+gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);
 gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);
 gboolean key_press(GtkWidget *widget, GdkEventKey *event, GtkWidget *entry);
 

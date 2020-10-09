@@ -21,7 +21,7 @@ int main() {
 
 	GtkWidget *scrolled_window, *draw_area;
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn;
-	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn;
+	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
 
 	figure_list = list_init_node(NULL);
@@ -39,12 +39,6 @@ int main() {
 	// init drawing area
 	draw_area = gtk_drawing_area_new();
 	gtk_widget_set_size_request(draw_area, 1000, 800);
-
-	g_signal_connect(G_OBJECT(draw_area), "draw", G_CALLBACK(draw_area_draw), NULL);
-	g_signal_connect(G_OBJECT(draw_area), "motion-notify-event", G_CALLBACK(mouse_move), NULL);
-	g_signal_connect(G_OBJECT(draw_area), "button-press-event", G_CALLBACK(mouse_click), NULL);
-
-	gtk_widget_add_events(draw_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
 
 	// init scrolled window
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
@@ -77,6 +71,9 @@ int main() {
 	all_bttn = gtk_button_new_with_label("All");
 	add_projection_lay_bttn = gtk_button_new_with_label("+ / -");
 
+	crd_label = gtk_label_new("(0; 0)");
+	hint_label = gtk_label_new("Select tool");
+
 	g_signal_connect(G_OBJECT(set_bttn), "clicked", G_CALLBACK(set_lay_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(add_projection_lay_bttn), "clicked", G_CALLBACK(add_projection_lay_bttn_click), lay_entry);
@@ -107,6 +104,8 @@ int main() {
 
 	// init down tool box
 	down_tool_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), crd_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), hint_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), lay_entry, TRUE, TRUE, 3);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), set_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
@@ -121,6 +120,13 @@ int main() {
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_pack_start(GTK_BOX(main_box), draw_box, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(main_box), down_tool_box, FALSE, FALSE, 0);
+
+	// add events
+	g_signal_connect(G_OBJECT(draw_area), "draw", G_CALLBACK(draw_area_draw), NULL);
+	g_signal_connect(G_OBJECT(draw_area), "motion-notify-event", G_CALLBACK(mouse_move), crd_label);
+	g_signal_connect(G_OBJECT(draw_area), "button-press-event", G_CALLBACK(mouse_click), NULL);
+
+	gtk_widget_add_events(draw_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
 
 	gtk_container_add(GTK_CONTAINER(window), main_box);
 	gtk_widget_show_all(window);
