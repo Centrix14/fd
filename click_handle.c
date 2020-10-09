@@ -211,16 +211,26 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
 }
 
 void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
-	figure *arc;
+	figure *arc, *cpoint;
 	list *last;
 
-	list_add_node(lptr);	
+	// add arc
+	list_add_node(lptr);
 
 	last = list_get_last(lptr);
 	arc = figure_new_arc(x, y, ext_figure->a1, ext_figure->a2, ext_figure->a3);
 	arc->visible = VM_SHOW;
 
 	list_set_data(last, arc);
+
+	// add center point
+	list_add_node(lptr);
+
+	last = list_get_last(lptr);
+	cpoint = figure_new_point(x, y);
+	cpoint->visible = VM_SHOW;
+
+	list_set_data(last, cpoint);
 
 	gtk_widget_queue_draw(draw_area);
 }
