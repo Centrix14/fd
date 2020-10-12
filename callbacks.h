@@ -32,6 +32,7 @@ void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void direction_bttn_click(GtkWidget *bttn, gpointer data);
 
 void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void curs_bttn_click(GtkWidget *bttn, gpointer data);
 
 enum MOUSE_BUTTONS {
 	MB_LEFT = 1, 
