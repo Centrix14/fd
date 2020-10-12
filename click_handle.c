@@ -16,6 +16,10 @@ void ch_set_draw_mode(int new_mode) {
 	draw_mode = new_mode;
 }
 
+int ch_get_draw_mode() {
+	return draw_mode;
+}
+
 void ch_set_external_figure(figure *fptr) {
 	ext_figure = fptr;
 }
@@ -52,6 +56,10 @@ void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
 
 		case FG_TYPE_ARC:
 			ch_add_arc(draw_area, lptr, x, y);
+		break;
+
+		case FG_TYPE_NONE:
+			ch_click_cursor(draw_area, lptr, x, y);
 		break;
 	}
 }
@@ -231,6 +239,64 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 	cpoint->visible = VM_SHOW;
 
 	list_set_data(last, cpoint);
+
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
+	figure *fptr, *curs;
+	list *node;
+
+	curs = figure_new_point(x, y);
+
+	node = lptr;
+	while (node) {
+		fptr = (figure*)node->data;
+
+		if (!fptr) {
+			node = node->next;
+
+			continue;
+		}
+
+		switch (fptr->type) {
+			case FG_TYPE_POINT:
+				if (gel_is_point_in_point(fptr, curs)) {
+					fptr->visible = VM_SELECTED;
+
+					break;
+				}
+			break;
+
+			case FG_TYPE_LINE_PP:
+				if (gel_is_point_in_line(fptr, curs)) {
+					fptr->visible = VM_SELECTED;
+
+					break;
+				}
+			break;
+
+			case FG_TYPE_RECT_PP:
+				if (gel_is_point_in_rect(fptr, curs)) {
+					fptr->visible = VM_SELECTED;
+
+					break;
+				}
+			break;
+
+			case FG_TYPE_CIRCLE:
+				if (gel_is_point_in_circle(fptr, curs)) {
+					fptr->visible = VM_SELECTED;
+
+					break;
+				}
+			break;
+		}
+
+		node = node->next;
+	}
+
+	figure_free(curs);
 
 	gtk_widget_queue_draw(draw_area);
 }
