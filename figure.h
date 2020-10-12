@@ -35,11 +35,11 @@ enum VISIBLE_MODES {
 	VM_PROJECTION
 };
 
-figure *figure_new(int type, int x, int y, int a1, int a2, double a3);
-figure *figure_new_point(int x, int y);
-figure *figure_new_line_pp(int x1, int y1, int x2, int y2);
-figure *figure_new_rect_pp(int x, int y, int w, int h);
-figure *figure_new_circle(int x, int y, int r);
+figure *figure_new(double type, double x, double y, double a1, double a2, double a3);
+figure *figure_new_point(double x, double y);
+figure *figure_new_line_pp(double x1, double y1, double x2, double y2);
+figure *figure_new_rect_pp(double x, double y, double w, double h);
+figure *figure_new_circle(double x, double y, double r);
 figure *figure_new_arc(double xc, double yc, double r, double angle1, double angle2);
 
 void figure_free(figure *fptr);
