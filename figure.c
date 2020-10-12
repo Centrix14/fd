@@ -6,7 +6,7 @@
 
 int curr_lay = 0;
 
-figure *figure_new(int type, int x, int y, int a1, int a2, double a3) {
+figure *figure_new(double type, double x, double y, double a1, double a2, double a3) {
 	figure *fptr = malloc(sizeof(figure));
 
 	if (!fptr) {
@@ -36,19 +36,19 @@ void figure_free_list(list *lptr) {
 	figure_free((figure*)lptr->data);
 }
 
-figure *figure_new_point(int x, int y) {
+figure *figure_new_point(double x, double y) {
 	return figure_new(FG_TYPE_POINT, x, y, 0, 0, 0);
 }
 
-figure *figure_new_line_pp(int x1, int y1, int x2, int y2) {
+figure *figure_new_line_pp(double x1, double y1, double x2, double y2) {
 	return figure_new(FG_TYPE_LINE_PP, x1, y1, x2, y2, 0);
 }
 
-figure *figure_new_rect_pp(int x, int y, int w, int h) {
+figure *figure_new_rect_pp(double x, double y, double w, double h) {
 	return figure_new(FG_TYPE_RECT_PP, x, y, w, h, 0);
 }
 
-figure *figure_new_circle(int x, int y, int r) {
+figure *figure_new_circle(double x, double y, double r) {
 	return figure_new(FG_TYPE_CIRCLE, x, y, r, 0, 0);
 }
 
@@ -69,7 +69,7 @@ void figure_fill(figure *fptr, double x, double y, double a1, double a2, double 
 
 figure *figure_rect_decompose(figure *rect) {
 	static figure elms[4];
-	int x1, y1, x2, y2;
+	double x1, y1, x2, y2;
 
 	// get coords
 	x1 = rect->x;
