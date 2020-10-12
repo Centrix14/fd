@@ -20,7 +20,7 @@ int main() {
 	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box;
 
 	GtkWidget *scrolled_window, *draw_area;
-	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn;
+	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn;
 	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
 
@@ -54,6 +54,7 @@ int main() {
 	arc_tp_bttn = gtk_button_new_with_label("Arc (3P)");
 	circle_rc_bttn = gtk_button_new_with_label("Circle (RC)");
 	help_bttn = gtk_button_new_with_label("Help");
+	curs_bttn = gtk_button_new_with_label("Cursor");
 
 	g_signal_connect(G_OBJECT(point_bttn), "clicked", G_CALLBACK(point_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(line_pp_bttn), "clicked", G_CALLBACK(line_bttn_click), NULL);
@@ -64,6 +65,8 @@ int main() {
 	g_signal_connect(G_OBJECT(arc_tp_bttn), "clicked", G_CALLBACK(arc_bttn_click), window);
 
 	g_signal_connect(G_OBJECT(help_bttn), "clicked", G_CALLBACK(help_bttn_click), window);
+
+	g_signal_connect(G_OBJECT(curs_bttn), "clicked", G_CALLBACK(curs_bttn_click), NULL);
 
 	// init down tool panel widgets
 	lay_entry = gtk_entry_new();
@@ -88,6 +91,8 @@ int main() {
 
 	// init right box
 	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+	
+	gtk_box_pack_start(GTK_BOX(right_box), curs_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), point_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), line_pp_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), line_la_bttn, TRUE, TRUE, 0);
