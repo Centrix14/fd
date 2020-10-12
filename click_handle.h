@@ -6,6 +6,8 @@ void ch_set_parent_window(GtkWidget *window);
 void ch_set_external_figure(figure *fptr);
 void ch_set_state(int new_state);
 
+int ch_get_draw_mode();
+
 void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y);
 
 void ch_add_point(GtkWidget *draw_area, list *lptr, int x, int y);
@@ -15,5 +17,7 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y);
 void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y);
 void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y);
 void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y);
+
+void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y);
 
 #endif
