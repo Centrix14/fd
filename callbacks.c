@@ -27,9 +27,11 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	dl_draw_preview();
 
 	// draw cursor preview
-	cl_set_color(cr, CL_DEF_CURS_COLOR);
-	cairo_arc(cr, curs_x, curs_y, 3, 0, 2 * G_PI);
-	cairo_fill(cr);
+	if (ch_get_draw_mode() != FG_TYPE_NONE) {
+		cl_set_color(cr, CL_DEF_CURS_COLOR);
+		cairo_arc(cr, curs_x, curs_y, 3, 0, 2 * G_PI);
+		cairo_fill(cr);
+	}
 
 	return TRUE;
 }
@@ -489,4 +491,8 @@ void arc_prm_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_ARC);
 
 	gtk_widget_destroy(dialog);
+}
+
+void curs_bttn_click(GtkWidget *bttn, gpointer data) {
+	ch_set_draw_mode(FG_TYPE_NONE);
 }
