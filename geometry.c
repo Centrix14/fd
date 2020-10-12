@@ -3,6 +3,7 @@
 
 #include "geometry.h"
 #include "figure.h"
+#include "binding.h"
 
 double gel_calculate_lenght(figure *line) {
 	int lx, ly; // lenght-x, lenght-y
@@ -146,4 +147,46 @@ figure *gel_get_equal_point(figure *line1, figure *line2) {
 	}
 
 	return NULL;
+}
+
+int gel_is_point_in_line(figure *l, figure *p) {
+	double dx1, dy1, dx, dy, S;
+
+	dx1 = l->a1 - l->x;
+	dy1 = l->a2 - l->y;
+
+	dx = p->x - l->x;
+	dy = p->y - l->y;
+
+	S = dx1 * dy - dx * dy1;
+
+	return !S;
+}
+
+int gel_is_point_in_rect(figure *r, figure *p) {
+	if (p->x >= r->x || p->y >= r->y)
+		if (p->x >= r->a1 || p->y >= r->a2)
+			return 1;
+	return 0;
+}
+
+int gel_is_point_in_circle(figure *c, figure *p) {
+	double x, y, xo, yo, R;
+
+	x = p->x;
+	y = p->y;
+
+	xo = c->x;
+	yo = c->y;
+	R = c->a1;
+
+	if (pow(x - xo, 2) + pow(y - yo, 2) - pow(R, 2) <= BINDING_AREA)
+		return 1;
+	return 0;
+}
+
+int gel_is_point_in_point(figure *p1, figure *p2) {
+	if (p1->x - p2->x <= BINDING_AREA && p1->y - p2->y <= BINDING_AREA)
+		return 1;
+	return 0;
 }
