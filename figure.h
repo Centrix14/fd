@@ -25,14 +25,16 @@ enum FG_TYPES {
 	FG_TYPE_RECT_PP,
 	FG_TYPE_RECT_WH,
 	FG_TYPE_CIRCLE,
-	FG_TYPE_ARC
+	FG_TYPE_ARC,
+	FG_TYPE_NONE
 };
 
 enum VISIBLE_MODES {
 	VM_HIDE = 0,
 	VM_SHOW,
 	VM_PREVIEW,
-	VM_PROJECTION
+	VM_PROJECTION,
+	VM_SELECTED
 };
 
 figure *figure_new(double type, double x, double y, double a1, double a2, double a3);
