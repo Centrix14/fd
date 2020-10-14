@@ -160,12 +160,12 @@ int gel_is_point_in_line(figure *l, figure *p) {
 
 	S = dx1 * dy - dx * dy1;
 
-	return !S;
+	return S <= BINDING_AREA;
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
 	if (p->x >= r->x || p->y >= r->y)
-		if (p->x >= r->a1 || p->y >= r->a2)
+		if (p->x <= r->a1 || p->y <= r->a2)
 			return 1;
 	return 0;
 }
