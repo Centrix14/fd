@@ -1,10 +1,12 @@
 #ifndef __FLAT_DRAW_CALLBACKS_LIBRARY_HEADER_FILE__
 #define __FLAT_DRAW_CALLBACKS_LIBRARY_HEADER_FILE__
 
+#include "data/list.h"
+
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);
 gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);
 gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);
-gboolean key_press(GtkWidget *widget, GdkEventKey *event, GtkWidget *entry);
+gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data);
 
 void point_bttn_click(GtkWidget *bttn, gpointer data);
 void line_bttn_click(GtkWidget *bttn, gpointer data);
@@ -22,6 +24,7 @@ void arc_prm_dialog_type_bttn_click(GtkWidget *bttn, gpointer data);
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
+void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 
 void save_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void open_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
@@ -33,6 +36,8 @@ void direction_bttn_click(GtkWidget *bttn, gpointer data);
 
 void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void curs_bttn_click(GtkWidget *bttn, gpointer data);
+
+void unselect(list *node);
 
 enum MOUSE_BUTTONS {
 	MB_LEFT = 1, 
