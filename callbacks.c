@@ -61,22 +61,35 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 	if (event->type == GDK_BUTTON_PRESS) {
 		switch (eb->button) {
-			case MB_LEFT:	
+			case GDK_BUTTON_PRIMARY:
 				click_x = (double)eb->x;
 				click_y = (double)eb->y;
 
 				bl_bind(figure_list, &click_x, &click_y);
 				ch_click_handler(widget, figure_list, click_x, click_y);
 			break;
+		}
+	}
 
-			case MB_RIGHT:
+	return TRUE;
+}
+
+gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data) {
+	GdkEventKey *ek = (GdkEventKey*)event;
+
+	switch (ek->keyval) {
+		case GDK_KEY_Escape:
+			if (ch_get_draw_mode() == FG_TYPE_NONE)
+				list_crawl(figure_list, unselect);
+			else {
 				ch_set_draw_mode(FG_TYPE_POINT);
 				ch_set_state(0);
 
 				dl_switch_show_preview();
-				gtk_widget_queue_draw(widget);
-			break;
-		}
+			}
+			
+			gtk_widget_queue_draw(widget);
+		break;
 	}
 
 	return TRUE;
@@ -495,4 +508,26 @@ void arc_prm_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 
 void curs_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_NONE);
+}
+
+void unselect(list *node) {
+	figure *fptr = (figure*)node->data;
+
+	if (fptr && fptr->visible == VM_SELECTED)
+		fptr->visible = VM_SHOW;
+}
+
+void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	GtkWidget *dialog_content;
+	GtkWidget *dialog_box;
+
+	dialog = gtk_dialog_new_with_buttons("Options", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	// init main box
+	dialog_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_container_add(GTK_CONTAINER(dialog_content), dialog_box);
+	gtk_widget_show_all(dialog);
 }
