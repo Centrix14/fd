@@ -1,7 +1,7 @@
 /*
  * main.c -- main fd file, contains gui
- * v0.1
- * 06.10.2020
+ * v0.5
+ * 14.10.2020
  * by Centrix
  */
 
@@ -21,7 +21,7 @@ int main() {
 
 	GtkWidget *scrolled_window, *draw_area;
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn;
-	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label;
+	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label, *option_bttn;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
 
 	figure_list = list_init_node(NULL);
@@ -73,6 +73,7 @@ int main() {
 	set_bttn = gtk_button_new_with_label("Set");
 	all_bttn = gtk_button_new_with_label("All");
 	add_projection_lay_bttn = gtk_button_new_with_label("+ / -");
+	option_bttn = gtk_button_new_with_label("Options");
 
 	crd_label = gtk_label_new("(0; 0)");
 	hint_label = gtk_label_new("Select tool");
@@ -80,6 +81,7 @@ int main() {
 	g_signal_connect(G_OBJECT(set_bttn), "clicked", G_CALLBACK(set_lay_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(add_projection_lay_bttn), "clicked", G_CALLBACK(add_projection_lay_bttn_click), lay_entry);
+	g_signal_connect(G_OBJECT(option_bttn), "clicked", G_CALLBACK(options_bttn_click), window);
 
 	// file operations widgets
 	save_bttn = gtk_button_new_with_label("Save");
@@ -115,6 +117,7 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(down_tool_box), set_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), add_projection_lay_bttn, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), option_bttn, FALSE, FALSE, 0);
 
 	// file widgets
 	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 5);
@@ -130,8 +133,10 @@ int main() {
 	g_signal_connect(G_OBJECT(draw_area), "draw", G_CALLBACK(draw_area_draw), NULL);
 	g_signal_connect(G_OBJECT(draw_area), "motion-notify-event", G_CALLBACK(mouse_move), crd_label);
 	g_signal_connect(G_OBJECT(draw_area), "button-press-event", G_CALLBACK(mouse_click), NULL);
+	g_signal_connect(G_OBJECT(draw_area), "key_press_event", G_CALLBACK(key_press), NULL);
 
-	gtk_widget_add_events(draw_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
+	gtk_widget_add_events(draw_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK);
+	gtk_widget_set_can_focus(draw_area, TRUE);
 
 	gtk_container_add(GTK_CONTAINER(window), main_box);
 	gtk_widget_show_all(window);
