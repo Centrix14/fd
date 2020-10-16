@@ -58,8 +58,8 @@ void dl_draw_figure_list(list *lptr) {
 void dl_draw_point(figure *fptr) {
 	cl_set_color_fg(context, fptr->visible);
 
-	if (fptr->visible == VM_PROJECTION && !all_lays)
-		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	if (fptr->visible == VM_PROJECTION && all_lays)
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
 	cairo_arc(context, fptr->x, fptr->y, 3, 0, 2 * G_PI);
 
@@ -81,8 +81,8 @@ void dl_draw_line_pp(figure *fptr) {
 		x2 = preview_x;
 		y2 = preview_y;
 	}
-	else if (fptr->visible == VM_PROJECTION && !all_lays)
-		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	else if (fptr->visible == VM_PROJECTION && all_lays)
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
 	cairo_move_to(context, x1, y1);
 	cairo_line_to(context, x2, y2);
@@ -105,8 +105,8 @@ void dl_draw_rect_pp(figure *fptr) {
 		w = preview_x - x;
 		h = preview_y - y;
 	}
-	else if (fptr->visible == VM_PROJECTION && !all_lays)
-		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	else if (fptr->visible == VM_PROJECTION && all_lays)
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
 	cairo_rectangle(context, x, y, w, h);
 
@@ -127,8 +127,8 @@ void dl_draw_circle(figure *fptr) {
 		rad_line = figure_new_line_pp(x, y, preview_x, preview_y);
 		r = gel_calculate_lenght(rad_line);
 	}
-	else if (fptr->visible == VM_PROJECTION && !all_lays)
-		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	else if (fptr->visible == VM_PROJECTION && all_lays)
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
 	cairo_arc(context, x, y, r, 0, 2 * G_PI);
 
@@ -146,8 +146,8 @@ void dl_draw_arc(figure *fptr) {
 
 	cl_set_color_fg(context, fptr->visible);
 
-	if (fptr->visible == VM_PROJECTION && !all_lays)
-		cl_set_color(context, CL_DEF_PROJECTION_COLOR);
+	if (fptr->visible == VM_PROJECTION && all_lays)
+		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
 	if (!arc_type)
 		cairo_arc(context, x, y, r, gel_convert_grades_to_rads(a1), gel_convert_grades_to_rads(a2));
