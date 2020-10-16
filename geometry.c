@@ -160,7 +160,7 @@ int gel_is_point_in_line(figure *l, figure *p) {
 
 	S = dx1 * dy - dx * dy1;
 
-	return S <= BINDING_AREA;
+	return fabs(S - BINDING_AREA);
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
@@ -189,4 +189,15 @@ int gel_is_point_in_point(figure *p1, figure *p2) {
 	if (p1->x - p2->x <= BINDING_AREA && p1->y - p2->y <= BINDING_AREA)
 		return 1;
 	return 0;
+}
+
+double gel_get_line_angle(figure *l) {
+	double dx, R,
+		   cos_a;
+
+	dx = l->a1 - l->x;
+	R = gel_calculate_lenght(l);
+
+	cos_a = dx / R;
+	return gel_convert_grades_to_rads(acos(cos_a));
 }
