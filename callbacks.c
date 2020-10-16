@@ -68,6 +68,19 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 				bl_bind(figure_list, &click_x, &click_y);
 				ch_click_handler(widget, figure_list, click_x, click_y);
 			break;
+
+			case GDK_BUTTON_SECONDARY:
+				if (ch_get_draw_mode() == FG_TYPE_NONE)
+					list_crawl(figure_list, unselect);
+				else {
+					ch_set_draw_mode(FG_TYPE_POINT);
+					ch_set_state(0);
+
+					dl_switch_show_preview();
+				}
+			
+				gtk_widget_queue_draw(widget);
+			break;
 		}
 	}
 
@@ -79,16 +92,7 @@ gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 	switch (ek->keyval) {
 		case GDK_KEY_Escape:
-			if (ch_get_draw_mode() == FG_TYPE_NONE)
-				list_crawl(figure_list, unselect);
-			else {
-				ch_set_draw_mode(FG_TYPE_POINT);
-				ch_set_state(0);
-
-				dl_switch_show_preview();
-			}
 			
-			gtk_widget_queue_draw(widget);
 		break;
 	}
 
