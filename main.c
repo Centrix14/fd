@@ -133,7 +133,7 @@ int main() {
 	g_signal_connect(G_OBJECT(draw_area), "draw", G_CALLBACK(draw_area_draw), NULL);
 	g_signal_connect(G_OBJECT(draw_area), "motion-notify-event", G_CALLBACK(mouse_move), crd_label);
 	g_signal_connect(G_OBJECT(draw_area), "button-press-event", G_CALLBACK(mouse_click), NULL);
-	g_signal_connect(G_OBJECT(draw_area), "key_press_event", G_CALLBACK(key_press), NULL);
+	//g_signal_connect(G_OBJECT(draw_area), "key_press_event", G_CALLBACK(key_press), NULL);
 
 	gtk_widget_add_events(draw_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK);
 	gtk_widget_set_can_focus(draw_area, TRUE);
