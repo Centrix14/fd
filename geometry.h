@@ -16,6 +16,7 @@ int gel_lf_is_parallel(figure *line1, figure *line2);
 double gel_convert_grades_to_rads(double grades);
 
 figure *gel_get_middle_point(figure *line);
+double gel_get_line_angle(figure *l);
 
 int gel_is_middle_point_area(figure *line, double x, double y, int area);
 int gel_is_point_in_line(figure *l, figure *p);
