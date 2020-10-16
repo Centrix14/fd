@@ -17,12 +17,13 @@ list *figure_list = NULL;
 int main() {
 	GtkWidget *window;
 
-	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box;
+	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box, *left_box;
 
 	GtkWidget *scrolled_window, *draw_area;
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn;
 	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label, *option_bttn;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
+	GtkWidget *del_bttn, *copy_bttn, *paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 
 	figure_list = list_init_node(NULL);
 
@@ -104,8 +105,27 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(right_box), circle_rc_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), help_bttn, TRUE, TRUE, 0);
 
+	// init tools widgets
+	del_bttn = gtk_button_new_with_label("Delete");
+	copy_bttn = gtk_button_new_with_label("Copy");
+	paste_bttn = gtk_button_new_with_label("Paste");
+	move_bttn = gtk_button_new_with_label("Move");
+	rot_bttn = gtk_button_new_with_label("Rotate");
+	decouple_bttn = gtk_button_new_with_label("Decouple");
+
+	// init left box
+	left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+
+	gtk_box_pack_start(GTK_BOX(left_box), del_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(left_box), copy_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(left_box), paste_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(left_box), move_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(left_box), rot_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(left_box), decouple_bttn, TRUE, TRUE, 0);
+
 	// init draw box
 	draw_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	gtk_box_pack_start(GTK_BOX(draw_box), left_box, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(draw_box), scrolled_window, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(draw_box), right_box, FALSE, FALSE, 0);
 
@@ -133,9 +153,8 @@ int main() {
 	g_signal_connect(G_OBJECT(draw_area), "draw", G_CALLBACK(draw_area_draw), NULL);
 	g_signal_connect(G_OBJECT(draw_area), "motion-notify-event", G_CALLBACK(mouse_move), crd_label);
 	g_signal_connect(G_OBJECT(draw_area), "button-press-event", G_CALLBACK(mouse_click), NULL);
-	//g_signal_connect(G_OBJECT(draw_area), "key_press_event", G_CALLBACK(key_press), NULL);
 
-	gtk_widget_add_events(draw_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK);
+	gtk_widget_add_events(draw_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
 	gtk_widget_set_can_focus(draw_area, TRUE);
 
 	gtk_container_add(GTK_CONTAINER(window), main_box);
