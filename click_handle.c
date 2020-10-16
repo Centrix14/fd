@@ -246,7 +246,7 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 	figure *fptr, *curs;
 	list *node;
-	int end = 0;
+	int end = 0, res1 = 0, res2 = 0;
 
 	curs = figure_new_point(x, y);
 
