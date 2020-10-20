@@ -535,3 +535,37 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_container_add(GTK_CONTAINER(dialog_content), dialog_box);
 	gtk_widget_show_all(dialog);
 }
+
+void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
+	list *node, *node_next, *node_prev;
+	figure *fptr;
+
+	node = figure_list;
+	while (node) {
+		fptr = (figure*)node->data;
+		if (!fptr) {
+			node = node->next;
+
+			continue;
+		}
+
+		if (fptr->visible == VM_SELECTED) {
+			node_next = node->next;
+			node_prev = node->prev;
+
+			node_prev->next = node_next;
+
+			figure_free(fptr);
+			list_free_node(node);
+
+			node->data = NULL;
+			node = node_next;
+
+			continue;
+		}
+
+		node = node->next;
+	}
+
+	gtk_widget_queue_draw(da);
+}
