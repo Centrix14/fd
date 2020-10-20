@@ -149,10 +149,7 @@ void dl_draw_arc(figure *fptr) {
 	if (fptr->visible == VM_PROJECTION && all_lays)
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
-	if (!arc_type)
-		cairo_arc(context, x, y, r, gel_convert_grades_to_rads(a1), gel_convert_grades_to_rads(a2));
-	else
-		cairo_arc(context, x, y, r, gel_convert_grades_to_rads(a2), gel_convert_grades_to_rads(a1));
+	cairo_arc(context, x, y, r, gel_convert_grades_to_rads(a1), gel_convert_grades_to_rads(a2));
 
 	cairo_stroke(context);
 }
