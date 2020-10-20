@@ -105,6 +105,10 @@ double gel_convert_grades_to_rads(double grades) {
 	return grades * (PI / 180);
 }
 
+double gel_convert_rads_to_grades(double rads) {
+	return rads * (180 / PI);
+}
+
 figure *gel_get_middle_point(figure *line) {
 	static figure p;
 	double dx, dy, px, py;
@@ -200,4 +204,41 @@ int gel_is_point_in_point(figure *p1, figure *p2) {
 	if (p1->x - p2->x <= BINDING_AREA && p1->y - p2->y <= BINDING_AREA)
 		return 1;
 	return 0;
+}
+
+double gel_calculate_line_angle(figure *l) {
+	double L, dx, angle;
+
+	L = gel_calculate_lenght(l);
+	dx = fabs(l->a1 - l->x);
+	angle = dx / L;
+
+	return gel_convert_rads_to_grades(acos(angle));
+}
+
+double gel_calculate_heron_formula(double a, double b, double c) {
+	double S, p;
+
+	p = (a + b + c) / 2;
+	S = sqrt(p * (p - a)*(p - b)*(p - b));
+
+	return S;
+}
+
+figure *gel_get_center_point_by_hr(double xh, double yh, double R) {
+	static figure cp;	
+
+	if (xh - R > 0)
+		cp.x = xh - R;
+	else
+		cp.x = xh + R;
+
+	if (yh - R > 0)
+		cp.y = yh - R;
+	else
+		cp.y = yh + R;
+
+	cp.a1 = cp.a2 = 0;
+
+	return &cp;
 }
