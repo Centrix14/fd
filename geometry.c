@@ -150,23 +150,34 @@ figure *gel_get_equal_point(figure *line1, figure *line2) {
 }
 
 int gel_is_point_in_line(figure *l, figure *p) {
-	double dx1, dy1, dx, dy, S;
+	double a = 0, b = 0, c = 0, S = 0, hp = 0, h = 0;
+	figure b_line, c_line;
 
-	dx1 = l->a1 - l->x;
-	dy1 = l->a2 - l->y;
+	figure_fill(&b_line, p->x, p->y, l->a1, l->a2, FG_TYPE_LINE_PP);
+	figure_fill(&c_line, p->x, p->y, l->x, l->y, FG_TYPE_LINE_PP);
 
-	dx = p->x - l->x;
-	dy = p->y - l->y;
+	// sides of triangle
+	a = gel_calculate_lenght(l);
+	b = gel_calculate_lenght(&b_line);
+	c = gel_calculate_lenght(&c_line);
 
-	S = dx1 * dy - dx * dy1;
+	// helfperometr
+	hp = (a + b + c) / 2;
 
-	return S <= BINDING_AREA;
+	// square
+	S = sqrt(hp * (hp - a)*(hp - b)*(hp - c));
+
+	// height
+	h = (2 * S) / a;
+
+	return h <= BINDING_AREA;
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
-	if (p->x >= r->x || p->y >= r->y)
-		if (p->x <= r->a1 || p->y <= r->a2)
+	if (p->x >= r->x && p->y >= r->y) {
+		if (p->x <= r->a1 && p->y <= r->a2)
 			return 1;
+	}
 	return 0;
 }
 
