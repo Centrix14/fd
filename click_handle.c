@@ -246,11 +246,12 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 	figure *fptr, *curs;
 	list *node;
+	int end = 0;
 
 	curs = figure_new_point(x, y);
 
 	node = lptr;
-	while (node) {
+	while (node && !end) {
 		fptr = (figure*)node->data;
 
 		if (!fptr) {
@@ -264,6 +265,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 				if (gel_is_point_in_point(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
 
+					end = 1;
 					break;
 				}
 			break;
@@ -272,6 +274,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 				if (gel_is_point_in_line(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
 
+					end = 1;
 					break;
 				}
 			break;
@@ -280,6 +283,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 				if (gel_is_point_in_rect(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
 
+					end = 1;
 					break;
 				}
 			break;
@@ -288,6 +292,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 				if (gel_is_point_in_circle(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
 
+					end = 1;
 					break;
 				}
 			break;
