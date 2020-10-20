@@ -219,28 +219,81 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
 }
 
 void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
-	figure *arc, *cpoint;
+	static double x1, y1, x2, y2, xh, yh, a_side, b_side, c_side, ang1, ang2;
+	static int state = 0;
+	figure l, cpoint, *arc, *arc_c;
 	list *last;
+	double R, S;
 
-	// add arc
-	list_add_node(lptr);
+	if (!state) {
+		x1 = x;
+		y1 = y;
 
-	last = list_get_last(lptr);
-	arc = figure_new_arc(x, y, ext_figure->a1, ext_figure->a2, ext_figure->a3);
-	arc->visible = VM_SHOW;
+		state = 1;
+	}
+	else if (state == 1) {
+		x2 = x;
+		y2 = y;
 
-	list_set_data(last, arc);
+		figure_fill(&l, x1, y1, x2, y2, FG_TYPE_LINE_PP);
 
-	// add center point
-	list_add_node(lptr);
+		// get base of arc, and middle point of base
+		a_side = gel_calculate_lenght(&l);
+		printf("Arc: a = %g\n", a_side);
 
-	last = list_get_last(lptr);
-	cpoint = figure_new_point(x, y);
-	cpoint->visible = VM_SHOW;
+		state = 2;
+	}
+	else {
+		xh = x;
+		yh = y;
+		printf("Arc: xh = %g, yh = %g\n", xh, yh);
 
-	list_set_data(last, cpoint);
+		// calculate the c side of triange, anf b side
+		figure_fill(&l, x1, y1, xh, yh, FG_TYPE_LINE_PP);
+		b_side = gel_calculate_lenght(&l);
 
-	gtk_widget_queue_draw(draw_area);
+		figure_fill(&l, x2, y2, xh, yh, FG_TYPE_LINE_PP);
+		c_side = gel_calculate_lenght(&l);
+
+		// calculate square, and radii
+		S = gel_calculate_heron_formula(a_side, b_side, c_side);
+		R = (a_side * b_side * c_side) / (4 * S);
+		printf("Arc: S = %g\n", S);
+
+		// get center point
+		cpoint = *gel_get_center_point_by_hr(xh, yh, R);
+
+		// get ange of first point
+		figure_fill(&l, cpoint.x, cpoint.y, x1, y1, FG_TYPE_LINE_PP);
+		ang1 = gel_calculate_line_angle(&l);
+
+		// get ange of second point
+		figure_fill(&l, cpoint.x, cpoint.y, x2, y2, FG_TYPE_LINE_PP);
+		ang2 = gel_calculate_line_angle(&l);
+
+		printf("Arc: C(%g; %g), a1 = %g, a2 = %g, R = %g\n", cpoint.x, cpoint.y, ang1, ang2, R);
+
+		// make arc
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+		arc = figure_new_arc(cpoint.x, cpoint.y, R, ang1, ang2);
+
+		list_set_data(last, arc);
+
+		state = 0;
+
+		// make center point
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+		arc_c = figure_new_point(cpoint.x, cpoint.y);
+
+		list_set_data(last, arc_c);
+		
+
+		gtk_widget_queue_draw(draw_area);
+	}
 }
 
 void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
