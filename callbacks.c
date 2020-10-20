@@ -455,8 +455,8 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 		}
 
 		if (fptr->visible == VM_SELECTED) {
-			node_next = node->next;
 			node_prev = node->prev;
+			node_next = node->next;
 
 			node_prev->next = node_next;
 
