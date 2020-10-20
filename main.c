@@ -113,6 +113,8 @@ int main() {
 	rot_bttn = gtk_button_new_with_label("Rotate");
 	decouple_bttn = gtk_button_new_with_label("Decouple");
 
+	g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
+
 	// init left box
 	left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
