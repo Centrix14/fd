@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "figure.h"
 #include "data/list.h"
 
-int curr_lay = 0;
+int curr_lay = 0, fg_num = 0;
 
 figure *figure_new(double type, double x, double y, double a1, double a2, double a3) {
 	figure *fptr = malloc(sizeof(figure));
@@ -23,6 +24,10 @@ figure *figure_new(double type, double x, double y, double a1, double a2, double
 
 	fptr->visible = VM_SHOW;
 	fptr->lay = curr_lay;
+
+	sprintf(fptr->id, "%s%d", figure_get_type(fptr->type), fg_num);
+	printf("fg_num = %d\n", fg_num);
+	fg_num++;
 
 	return fptr;
 }
@@ -154,4 +159,10 @@ void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode) {
 
 		node = node->next;
 	}
+}
+
+char *figure_get_type(int type) {
+	char *types[] = {"point", "line", "line", "rect", "rect", "circle", "arc"};
+
+	return types[type];
 }
