@@ -66,7 +66,7 @@ char *gel_calculate_intersection(figure *line1, figure *line2, figure *p) {
 		p->x = equal_point->x;
 		p->y = equal_point->y;
 
-		return "";
+		return "good";
 	}
 
 	is_parallel = gel_lf_is_parallel(line1, line2);
@@ -88,7 +88,7 @@ char *gel_calculate_intersection(figure *line1, figure *line2, figure *p) {
 	p->x = x;
 	p->y = y;
 
-	return "";
+	return "good";
 }
 
 void gel_calculate_line_la(figure *point, double lenght, double angle) {
@@ -239,6 +239,95 @@ figure *gel_get_center_point_by_hr(double xh, double yh, double R) {
 		cp.y = yh + R;
 
 	cp.a1 = cp.a2 = 0;
+
+	return &cp;
+}
+
+double gel_get_max_lenght(figure *a, figure *b, figure *c) {
+	double al, bl, cl;
+
+	al = gel_calculate_lenght(a);
+	bl = gel_calculate_lenght(b);
+	cl = gel_calculate_lenght(c);
+
+	if (al > bl && al > cl)
+		return al;
+	else if (bl > al && bl > cl)
+		return bl;
+	else if (cl > al && cl > bl)
+		return cl;
+	return al;
+}
+
+figure gel_get_triangle_center(figure *a, figure *b, figure *c) {
+	figure b_cpoint, c_cpoint, b_per, c_per, center;
+	double b_ang, c_ang, len;
+	char *res;
+
+	// get b & c middle points
+	b_cpoint = *gel_get_middle_point(b);
+	c_cpoint = *gel_get_middle_point(c);
+
+	printf("Per1: c(%g; %g)\n", b_cpoint.x, b_cpoint.y);
+	printf("Per1: c(%g; %g)\n", c_cpoint.x, c_cpoint.y);
+
+	// get b & c angles
+	b_ang = gel_calculate_line_angle(b);
+	c_ang = gel_calculate_line_angle(c);
+
+	// get perpendiculars
+	b_ang -= 90;
+	c_ang += 90;
+
+	printf("Per1: a = %g\n", b_ang);
+	printf("Per2: a = %g\n", c_ang);
+
+	// get max len
+	len = gel_get_max_lenght(a, b, c);
+
+	figure_fill(b, b_cpoint.x, b_cpoint.y, 0, 0, FG_TYPE_LINE_LA);
+	figure_fill(c, c_cpoint.x, c_cpoint.y, 0, 0, FG_TYPE_LINE_LA);
+
+	// make perpendiculars
+	gel_calculate_line_la(&b_per, len, b_ang);
+	gel_calculate_line_la(&c_per, len, c_ang);
+
+	printf("Per1: x1 = %g y1 = %g x2 = %g y2 = %g\n", b_per.x, b_per.y, b_per.a1, b_per.a2);
+	printf("Per1: x1 = %g y1 = %g x2 = %g y2 = %g\n", c_per.x, c_per.y, c_per.a1, c_per.a2);
+
+	// get perpendicular intersection
+	res = gel_calculate_intersection(&b_per, &c_per, &center);
+
+	printf("C(%g; %g) res = %s\n", center.x, center.y, res);
+}
+
+// x1, y1, x2, y2 -- l1
+
+figure *gel_get_arc_center(figure *l1, figure *l2) {
+	double ma = 0, mb = 0, xc, yc;
+	double x1, x2, x3, y1, y2, y3;
+	static figure cp;
+
+	x1 = l1->x;
+	x2 = l1->a1;
+	x3 = l2->a1;
+
+	y1 = l1->y;
+	y2 = l1->a2;
+	y3 = l2->a2;
+
+	ma = (y2 - y1) / (x2 - x1);
+	mb = (y3 - y2) / (x3 - x2);
+
+	printf("mb expr %g\nmb expr %g\n", (y3 - y2), (x3 - x2));
+
+	xc = (ma * mb * (y1 - y3) + mb * (x1 + x2) - ma * (x2 + x3)) / (2 * (mb - ma));
+	yc = -(1 / ma) * (xc - ((x1 + x2) / 2)) + ((y1 + y2 ) / 2);
+
+	printf("C(%g %g)\n", xc, yc);
+	printf("ma = %g\nmb = %g\n", ma, mb);
+
+	figure_fill(&cp, xc, yc, 0, 0, FG_TYPE_POINT);
 
 	return &cp;
 }
