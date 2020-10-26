@@ -74,6 +74,7 @@ void ch_add_point(GtkWidget *draw_area, list *lptr, int x, int y) {
 	point = figure_new_point(x, y);
 
 	list_set_data(last, point);
+	printf("Create: %s\n", point->id);
 
 	gtk_widget_queue_draw(draw_area);
 }
@@ -102,6 +103,7 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 		line->visible = VM_SHOW;
 
 		list_set_data(last, line);
+		printf("Create: %s\n", line->id);
 	}
 	
 	state = !state;
@@ -122,6 +124,7 @@ void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y) {
 	gel_calculate_line_la(line, ext_figure->a1, ext_figure->a2);
 
 	list_set_data(last, line);
+	printf("Create: %s\n", line->id);
 
 	gtk_widget_queue_draw(draw_area);
 }
@@ -150,6 +153,7 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 		rect->visible = VM_SHOW;
 
 		list_set_data(last, rect);
+		printf("Create: %s\n", rect->id);
 	}
 
 	state = !state;
@@ -171,6 +175,7 @@ void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y) {
 	rect->a2 = rect->y + ext_figure->a2;
 
 	list_set_data(last, rect);
+	printf("Create: %s\n", rect->id);
 
 	gtk_widget_queue_draw(draw_area);
 }
@@ -203,6 +208,7 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
 		circle->visible = VM_SHOW;
 
 		list_set_data(last, circle);
+		printf("Create: %s\n", circle->id);
 
 		// add center point
 		list_add_node(lptr);
@@ -221,7 +227,7 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
 void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 	static double x1, y1, x2, y2, xh, yh, a_side, b_side, c_side, ang1, ang2;
 	static int state = 0;
-	figure l, cpoint, *arc, *arc_c;
+	figure l, cpoint, *arc, *arc_c, b_side_line, c_side_line;
 	list *last;
 	double R, S;
 
@@ -249,11 +255,11 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 		printf("Arc: xh = %g, yh = %g\n", xh, yh);
 
 		// calculate the c side of triange, anf b side
-		figure_fill(&l, x1, y1, xh, yh, FG_TYPE_LINE_PP);
-		b_side = gel_calculate_lenght(&l);
+		figure_fill(&b_side_line, x1, y1, xh, yh, FG_TYPE_LINE_PP);
+		b_side = gel_calculate_lenght(&b_side_line);
 
-		figure_fill(&l, x2, y2, xh, yh, FG_TYPE_LINE_PP);
-		c_side = gel_calculate_lenght(&l);
+		figure_fill(&c_side_line, xh, yh, x2, y2, FG_TYPE_LINE_PP);
+		c_side = gel_calculate_lenght(&c_side_line);
 
 		// calculate square, and radii
 		S = gel_calculate_heron_formula(a_side, b_side, c_side);
@@ -261,13 +267,13 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 		printf("Arc: S = %g\n", S);
 
 		// get center point
-		cpoint = *gel_get_center_point_by_hr(xh, yh, R);
+		cpoint = *gel_get_arc_center(&b_side_line, &c_side_line);
 
-		// get ange of first point
+		// get angel of first point
 		figure_fill(&l, cpoint.x, cpoint.y, x1, y1, FG_TYPE_LINE_PP);
 		ang1 = gel_calculate_line_angle(&l);
 
-		// get ange of second point
+		// get angel of second point
 		figure_fill(&l, cpoint.x, cpoint.y, x2, y2, FG_TYPE_LINE_PP);
 		ang2 = gel_calculate_line_angle(&l);
 
@@ -317,6 +323,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 			case FG_TYPE_POINT:
 				if (gel_is_point_in_point(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
+					printf("Select: %s\n", fptr->id);
 
 					end = 1;
 					break;
@@ -326,6 +333,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 			case FG_TYPE_LINE_PP:
 				if (gel_is_point_in_line(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
+					printf("Select: %s\n", fptr->id);
 
 					end = 1;
 					break;
@@ -335,6 +343,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 			case FG_TYPE_RECT_PP:
 				if (gel_is_point_in_rect(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
+					printf("Select: %s\n", fptr->id);
 
 					end = 1;
 					break;
@@ -344,6 +353,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 			case FG_TYPE_CIRCLE:
 				if (gel_is_point_in_circle(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
+					printf("Select: %s\n", fptr->id);
 
 					end = 1;
 					break;
