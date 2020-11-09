@@ -1,0 +1,6 @@
+#ifndef __DBG_SPEC_HAEDER_FILE_FOR_FLAT_DRAW_CAD__
+#define __DBG_SPEC_HAEDER_FILE_FOR_FLAT_DRAW_CAD__
+
+#define DBG
+
+#endif
