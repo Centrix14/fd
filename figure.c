@@ -26,7 +26,6 @@ figure *figure_new(double type, double x, double y, double a1, double a2, double
 	fptr->lay = curr_lay;
 
 	sprintf(fptr->id, "%s%d", figure_get_type(fptr->type), fg_num);
-	printf("fg_num = %d\n", fg_num);
 	fg_num++;
 
 	return fptr;
@@ -165,4 +164,30 @@ char *figure_get_type(int type) {
 	char *types[] = {"point", "line", "line", "rect", "rect", "circle", "arc"};
 
 	return types[type];
+}
+
+figure *figure_get_smallest_point(figure *point_arr, int len) {
+	figure *target = point_arr;
+
+	for (int i = 1; i < len; i++) {
+		if (point_arr[i].x < target->x)
+			return &point_arr[i];
+		else if (point_arr[i].y < target->y)
+			return &point_arr[i];
+	}
+
+	return target;
+}
+
+figure *figure_get_maximal_point(figure *point_arr, int len) {
+	figure *target = point_arr;
+
+	for (int i = 1; i < len; i++) {
+		if (point_arr[i].x > target->x)
+			return &point_arr[i];
+		else if (point_arr[i].y > target->y)
+			return &point_arr[i];
+	}
+
+	return target;
 }
