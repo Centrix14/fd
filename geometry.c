@@ -178,10 +178,16 @@ int gel_is_point_in_line(figure *l, figure *p) {
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
-	if (p->x >= r->x && p->y >= r->y) {
-		if (p->x <= r->a1 && p->y <= r->a2)
-			return 1;
-	}
+	double r_lenght = 0, r_height = 0, r_sqr = 0, p_sqr = 0;
+
+	r_lenght = fabs(r->a1 - r->x);
+	r_height = fabs(r->a2 - r->y);
+
+	r_sqr = r_lenght * r_height;
+	p_sqr = p->x * p->y;
+
+	if (r_sqr > p_sqr)
+		return 1;
 	return 0;
 }
 
@@ -267,48 +273,6 @@ double gel_get_max_lenght(figure *a, figure *b, figure *c) {
 	else if (cl > al && cl > bl)
 		return cl;
 	return al;
-}
-
-figure gel_get_triangle_center(figure *a, figure *b, figure *c) {
-	figure b_cpoint, c_cpoint, b_per, c_per, center;
-	double b_ang, c_ang, len;
-	char *res;
-
-	// get b & c middle points
-	b_cpoint = *gel_get_middle_point(b);
-	c_cpoint = *gel_get_middle_point(c);
-
-	printf("Per1: c(%g; %g)\n", b_cpoint.x, b_cpoint.y);
-	printf("Per1: c(%g; %g)\n", c_cpoint.x, c_cpoint.y);
-
-	// get b & c angles
-	b_ang = gel_calculate_line_angle(b);
-	c_ang = gel_calculate_line_angle(c);
-
-	// get perpendiculars
-	b_ang -= 90;
-	c_ang += 90;
-
-	printf("Per1: a = %g\n", b_ang);
-	printf("Per2: a = %g\n", c_ang);
-
-	// get max len
-	len = gel_get_max_lenght(a, b, c);
-
-	figure_fill(b, b_cpoint.x, b_cpoint.y, 0, 0, FG_TYPE_LINE_LA);
-	figure_fill(c, c_cpoint.x, c_cpoint.y, 0, 0, FG_TYPE_LINE_LA);
-
-	// make perpendiculars
-	gel_calculate_line_la(&b_per, len, b_ang);
-	gel_calculate_line_la(&c_per, len, c_ang);
-
-	printf("Per1: x1 = %g y1 = %g x2 = %g y2 = %g\n", b_per.x, b_per.y, b_per.a1, b_per.a2);
-	printf("Per1: x1 = %g y1 = %g x2 = %g y2 = %g\n", c_per.x, c_per.y, c_per.a1, c_per.a2);
-
-	// get perpendicular intersection
-	res = gel_calculate_intersection(&b_per, &c_per, &center);
-
-	printf("C(%g; %g) res = %s\n", center.x, center.y, res);
 }
 
 // x1, y1, x2, y2 -- l1

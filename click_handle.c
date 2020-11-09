@@ -8,6 +8,8 @@
 #include "geometry.h"
 #include "draw.h"
 
+#include "dbg.h"
+
 static int draw_mode = FG_TYPE_POINT, state = 0;
 static figure *ext_figure,
 			  tmp_figure;
@@ -74,7 +76,6 @@ void ch_add_point(GtkWidget *draw_area, list *lptr, int x, int y) {
 	point = figure_new_point(x, y);
 
 	list_set_data(last, point);
-	printf("Create: %s\n", point->id);
 
 	gtk_widget_queue_draw(draw_area);
 }
@@ -103,7 +104,6 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 		line->visible = VM_SHOW;
 
 		list_set_data(last, line);
-		printf("Create: %s\n", line->id);
 	}
 	
 	state = !state;
@@ -124,7 +124,6 @@ void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y) {
 	gel_calculate_line_la(line, ext_figure->a1, ext_figure->a2);
 
 	list_set_data(last, line);
-	printf("Create: %s\n", line->id);
 
 	gtk_widget_queue_draw(draw_area);
 }
@@ -153,7 +152,6 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 		rect->visible = VM_SHOW;
 
 		list_set_data(last, rect);
-		printf("Create: %s\n", rect->id);
 	}
 
 	state = !state;
@@ -175,7 +173,6 @@ void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y) {
 	rect->a2 = rect->y + ext_figure->a2;
 
 	list_set_data(last, rect);
-	printf("Create: %s\n", rect->id);
 
 	gtk_widget_queue_draw(draw_area);
 }
@@ -208,7 +205,6 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
 		circle->visible = VM_SHOW;
 
 		list_set_data(last, circle);
-		printf("Create: %s\n", circle->id);
 
 		// add center point
 		list_add_node(lptr);
@@ -314,7 +310,7 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 
 	node = lptr;
 	while (node && !end) {
-		fptr = (figure*)node->data;
+		fptr = list_get_data(node);
 
 		if (!fptr) {
 			node = node->next;
@@ -326,7 +322,6 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 			case FG_TYPE_POINT:
 				if (gel_is_point_in_point(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
-					printf("Select: %s\n", fptr->id);
 
 					end = 1;
 					break;
@@ -336,7 +331,6 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 			case FG_TYPE_LINE_PP:
 				if (gel_is_point_in_line(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
-					printf("Select: %s\n", fptr->id);
 
 					end = 1;
 					break;
@@ -346,7 +340,6 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 			case FG_TYPE_RECT_PP:
 				if (gel_is_point_in_rect(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
-					printf("Select: %s\n", fptr->id);
 
 					end = 1;
 					break;
@@ -356,7 +349,6 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 			case FG_TYPE_CIRCLE:
 				if (gel_is_point_in_circle(fptr, curs)) {
 					fptr->visible = VM_SELECTED;
-					printf("Select: %s\n", fptr->id);
 
 					end = 1;
 					break;
@@ -366,6 +358,11 @@ void ch_click_cursor(GtkWidget *draw_area, list *lptr, double x, double y) {
 
 		node = node->next;
 	}
+
+#ifdef DBG
+	list_crawl(lptr, list_dump_node);
+	putc('\n', stdout);
+#endif
 
 	figure_free(curs);
 

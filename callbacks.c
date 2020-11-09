@@ -9,6 +9,7 @@
 #include "callbacks.h"
 #include "color.h"
 #include "fd_format.h"
+#include "dbg.h"
 
 extern list *figure_list;
 double curs_x = 0, curs_y = 0,
@@ -455,17 +456,17 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 		}
 
 		if (fptr->visible == VM_SELECTED) {
-			printf("Delete: %s\n", fptr->id);
-
 			node_prev = node->prev;
 			node_next = node->next;
 
-			node_prev->next = node_next;
+			if (node_prev)
+				node_prev->next = node_next;
+			if (node_next)
+				node_next->prev = node_prev;
 
 			figure_free(fptr);
 			list_free_node(node);
 
-			node->data = NULL;
 			node = node_next;
 
 			continue;
@@ -473,6 +474,11 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 
 		node = node->next;
 	}
+
+#ifdef DBG
+	list_crawl(figure_list, list_dump_node);
+	putc('\n', stdout);
+#endif
 
 	gtk_widget_queue_draw(da);
 }
