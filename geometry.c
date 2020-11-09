@@ -184,7 +184,7 @@ int gel_is_point_in_rect(figure *r, figure *p) {
 	r_height = fabs(r->a2 - r->y);
 
 	r_sqr = r_lenght * r_height;
-	p_sqr = p->x * p->y;
+	p_sqr = fabs(r->x - p->x) * fabs(r->y - p->y);
 
 	if (r_sqr > p_sqr)
 		return 1;
