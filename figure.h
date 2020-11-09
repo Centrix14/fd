@@ -45,6 +45,8 @@ figure *figure_new_line_pp(double x1, double y1, double x2, double y2);
 figure *figure_new_rect_pp(double x, double y, double w, double h);
 figure *figure_new_circle(double x, double y, double r);
 figure *figure_new_arc(double xc, double yc, double r, double angle1, double angle2);
+figure *figure_get_smallest_point(figure *point_arr, int len);
+figure *figure_get_maximal_point(figure *point_arr, int len);
 
 void figure_free(figure *fptr);
 void figure_free_list(list *lptr);
