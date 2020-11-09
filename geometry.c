@@ -207,13 +207,23 @@ int gel_is_point_in_point(figure *p1, figure *p2) {
 }
 
 double gel_calculate_line_angle(figure *l) {
-	double L, dx, angle;
+	double dx, dy, k;
 
-	L = gel_calculate_lenght(l);
-	dx = fabs(l->a1 - l->x);
-	angle = dx / L;
+	dx = l->a1 - l->x;
+	dy = l->a2 - l->y;
 
-	return gel_convert_rads_to_grades(acos(angle));
+	if (!dx) {
+		return (dy > 0) ? (90) : (-90);	
+	}
+	if (!dy && dx < 0) {
+		return 180;	
+	}
+
+	k = dy / dx;
+
+	printf("\tang = %g\n", atan(k));
+
+	return gel_convert_rads_to_grades(atan(k));
 }
 
 double gel_calculate_heron_formula(double a, double b, double c) {
