@@ -227,7 +227,7 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
 void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 	static double x1, y1, x2, y2, xh, yh, a_side, b_side, c_side, ang1, ang2;
 	static int state = 0;
-	figure l, cpoint, *arc, *arc_c, b_side_line, c_side_line;
+	figure l, cpoint, *arc, *arc_c, b_side_line, c_side_line, mpoint, a_side_line;
 	list *last;
 	double R, S;
 
@@ -254,20 +254,22 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 		yh = y;
 		printf("Arc: xh = %g, yh = %g\n", xh, yh);
 
-		// calculate the c side of triange, anf b side
+		// calculate the a, b and c side of triangle
 		figure_fill(&b_side_line, x1, y1, xh, yh, FG_TYPE_LINE_PP);
 		b_side = gel_calculate_lenght(&b_side_line);
 
 		figure_fill(&c_side_line, xh, yh, x2, y2, FG_TYPE_LINE_PP);
 		c_side = gel_calculate_lenght(&c_side_line);
 
-		// calculate square, and radii
-		S = gel_calculate_heron_formula(a_side, b_side, c_side);
-		R = (a_side * b_side * c_side) / (4 * S);
-		printf("Arc: S = %g\n", S);
+		figure_fill(&a_side_line, x1, y1, x2, y2, FG_TYPE_LINE_PP);
 
 		// get center point
 		cpoint = *gel_get_arc_center(&b_side_line, &c_side_line);
+		mpoint = *gel_get_middle_point(&a_side_line);
+
+		// calculate R
+		figure_fill(&l, cpoint.x, cpoint.y, xh, yh, FG_TYPE_LINE_PP);
+		R = gel_calculate_lenght(&l);
 
 		// get angel of first point
 		figure_fill(&l, cpoint.x, cpoint.y, x1, y1, FG_TYPE_LINE_PP);
@@ -284,6 +286,7 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 
 		last = list_get_last(lptr);
 		arc = figure_new_arc(cpoint.x, cpoint.y, R, ang1, ang2);
+		arc->visible = VM_SHOW;
 
 		list_set_data(last, arc);
 
