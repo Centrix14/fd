@@ -54,3 +54,33 @@ these bindings are to the x or y of another object:
 
 #### symbols
 + `BINDING_AREA` -- the distance within which the binding is created
+
+<a name="ch"></a>
+### callbacks.h
+
+<a name="chh"></a>
+### ckick_handle.h
+
+<a name="clh"></a>
+### color.h
+
+<a name="dbh"></a>
+### dbg.h
+
+<a name="dh"></a>
+### draw.h
+
+<a name="clh"></a>
+### color.h
+
+<a name="ffh"></a>
+### fd_format.h
+
+<a name="fh"></a>
+### figure.h
+
+<a name="gh"></a>
+### geometry.h
+
+<a name="lh"></a>
+### list.h
