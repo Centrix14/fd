@@ -22,7 +22,7 @@ supported formats
 
 the program also supports bindings:
 + To points
-+ To lines (in the end, the middle of the intersection)
++ Intersection bindings
 + Vertical Bindings
 
 ## building
