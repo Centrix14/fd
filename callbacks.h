@@ -43,10 +43,4 @@ void unselect(list *node);
 
 void del_bttn_click(GtkWidget *bttn, GtkWidget *da);
 
-enum MOUSE_BUTTONS {
-	MB_LEFT = 1, 
-	MB_MIDDLE,
-	MB_RIGHT
-};
-
 #endif
