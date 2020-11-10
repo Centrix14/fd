@@ -57,6 +57,13 @@ these bindings are to the x or y of another object:
 
 <a name="ch"></a>
 ### callbacks.h
+contains callback functions for the interface created in main.c
+
+#### functions
++ `gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);` -- drawing the canvas
++ `gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);` -- tracks the mouse movement
++ `gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);` -- tracks mouse clicks
++ `gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data);` -- monitors keystrokes of the keyboard. __Currently not used__
 
 <a name="chh"></a>
 ### ckick_handle.h
