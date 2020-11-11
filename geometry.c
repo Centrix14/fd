@@ -178,17 +178,14 @@ int gel_is_point_in_line(figure *l, figure *p) {
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
-	double r_lenght = 0, r_height = 0, r_sqr = 0, p_sqr = 0;
+	figure *lines;
+	int res = 0;
 
-	r_lenght = fabs(r->a1 - r->x);
-	r_height = fabs(r->a2 - r->y);
+	lines = figure_rect_decompose(r);
 
-	r_sqr = r_lenght * r_height;
-	p_sqr = fabs(r->x - p->x) * fabs(r->y - p->y);
-
-	if (r_sqr > p_sqr)
-		return 1;
-	return 0;
+	for (int i = 0; i < 4; i++)
+		res += gel_is_point_in_line(&lines[i], p);
+	return res;
 }
 
 int gel_is_point_in_circle(figure *c, figure *p) {
