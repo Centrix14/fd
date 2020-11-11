@@ -190,6 +190,7 @@ int gel_is_point_in_rect(figure *r, figure *p) {
 
 int gel_is_point_in_circle(figure *c, figure *p) {
 	double x, y, xo, yo, R;
+	int circle = 0, intern_circle = 0, ext_circle = 0;
 
 	x = p->x;
 	y = p->y;
@@ -198,13 +199,17 @@ int gel_is_point_in_circle(figure *c, figure *p) {
 	yo = c->y;
 	R = c->a1;
 
-	if (pow(x - xo, 2) + pow(y - yo, 2) - pow(R, 2) <= BINDING_AREA)
+	circle = (pow(x - xo, 2) + pow(y - yo, 2) - pow(R, 2) < BINDING_AREA);
+	intern_circle = (pow(x - xo, 2) + pow(y - yo, 2) - pow(R - BINDING_AREA, 2) > BINDING_AREA);
+	ext_circle = (pow(x - xo, 2) + pow(y - yo, 2) - pow(R + BINDING_AREA, 2) < BINDING_AREA);
+
+	if (intern_circle && ext_circle)
 		return 1;
 	return 0;
 }
 
 int gel_is_point_in_point(figure *p1, figure *p2) {
-	if (p1->x - p2->x <= BINDING_AREA && p1->y - p2->y <= BINDING_AREA)
+	if (fabs(p1->x - p2->x) <= BINDING_AREA && fabs(p1->y - p2->y <= BINDING_AREA))
 		return 1;
 	return 0;
 }
