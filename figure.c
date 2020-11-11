@@ -165,29 +165,3 @@ char *figure_get_type(int type) {
 
 	return types[type];
 }
-
-figure *figure_get_smallest_point(figure *point_arr, int len) {
-	figure *target = point_arr;
-
-	for (int i = 1; i < len; i++) {
-		if (point_arr[i].x < target->x)
-			return &point_arr[i];
-		else if (point_arr[i].y < target->y)
-			return &point_arr[i];
-	}
-
-	return target;
-}
-
-figure *figure_get_maximal_point(figure *point_arr, int len) {
-	figure *target = point_arr;
-
-	for (int i = 1; i < len; i++) {
-		if (point_arr[i].x > target->x)
-			return &point_arr[i];
-		else if (point_arr[i].y > target->y)
-			return &point_arr[i];
-	}
-
-	return target;
-}
