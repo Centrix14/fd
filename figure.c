@@ -87,6 +87,12 @@ figure *figure_rect_decompose(figure *rect) {
 	figure_fill(&elms[2], x1, y2, x2, y2, FG_TYPE_LINE_PP);
 	figure_fill(&elms[3], x2, y1, x2, y2, FG_TYPE_LINE_PP);
 
+#ifdef DBG
+	for (int i = 0; i < 4; i++)
+		printf("%d | %f\t%f\t%f\t%f\n", i, elms[i].x, elms[i].y, elms[i].a1, elms[i].a2);
+	putc('\n', stdout);
+#endif
+
 	return elms;
 }
 
