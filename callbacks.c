@@ -71,14 +71,7 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 			break;
 
 			case GDK_BUTTON_SECONDARY:
-				if (ch_get_draw_mode() == FG_TYPE_NONE)
-					list_crawl(figure_list, unselect);
-				else {
-					ch_set_draw_mode(FG_TYPE_POINT);
-					ch_set_state(0);
-
-					dl_switch_show_preview();
-				}
+				ch_unselect_last();
 			
 				gtk_widget_queue_draw(widget);
 			break;
