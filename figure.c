@@ -87,6 +87,12 @@ figure *figure_rect_decompose(figure *rect) {
 	figure_fill(&elms[2], x1, y2, x2, y2, FG_TYPE_LINE_PP);
 	figure_fill(&elms[3], x2, y1, x2, y2, FG_TYPE_LINE_PP);
 
+#ifdef DBG
+	for (int i = 0; i < 4; i++)
+		printf("%d | %f\t%f\t%f\t%f\n", i, elms[i].x, elms[i].y, elms[i].a1, elms[i].a2);
+	putc('\n', stdout);
+#endif
+
 	return elms;
 }
 
@@ -164,30 +170,4 @@ char *figure_get_type(int type) {
 	char *types[] = {"point", "line", "line", "rect", "rect", "circle", "arc"};
 
 	return types[type];
-}
-
-figure *figure_get_smallest_point(figure *point_arr, int len) {
-	figure *target = point_arr;
-
-	for (int i = 1; i < len; i++) {
-		if (point_arr[i].x < target->x)
-			return &point_arr[i];
-		else if (point_arr[i].y < target->y)
-			return &point_arr[i];
-	}
-
-	return target;
-}
-
-figure *figure_get_maximal_point(figure *point_arr, int len) {
-	figure *target = point_arr;
-
-	for (int i = 1; i < len; i++) {
-		if (point_arr[i].x > target->x)
-			return &point_arr[i];
-		else if (point_arr[i].y > target->y)
-			return &point_arr[i];
-	}
-
-	return target;
 }

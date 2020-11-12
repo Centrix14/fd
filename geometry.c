@@ -178,21 +178,19 @@ int gel_is_point_in_line(figure *l, figure *p) {
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
-	double r_lenght = 0, r_height = 0, r_sqr = 0, p_sqr = 0;
+	figure *lines;
+	int res = 0;
 
-	r_lenght = fabs(r->a1 - r->x);
-	r_height = fabs(r->a2 - r->y);
+	lines = figure_rect_decompose(r);
 
-	r_sqr = r_lenght * r_height;
-	p_sqr = fabs(r->x - p->x) * fabs(r->y - p->y);
-
-	if (r_sqr > p_sqr)
-		return 1;
-	return 0;
+	for (int i = 0; i < 4; i++)
+		res += gel_is_point_in_line(&lines[i], p);
+	return res;
 }
 
 int gel_is_point_in_circle(figure *c, figure *p) {
 	double x, y, xo, yo, R;
+	int intern_circle = 0, ext_circle = 0;
 
 	x = p->x;
 	y = p->y;
@@ -201,13 +199,16 @@ int gel_is_point_in_circle(figure *c, figure *p) {
 	yo = c->y;
 	R = c->a1;
 
-	if (pow(x - xo, 2) + pow(y - yo, 2) - pow(R, 2) <= BINDING_AREA)
+	intern_circle = (pow(x - xo, 2) + pow(y - yo, 2) - pow(R - BINDING_AREA, 2) > BINDING_AREA);
+	ext_circle = (pow(x - xo, 2) + pow(y - yo, 2) - pow(R + BINDING_AREA, 2) < BINDING_AREA);
+
+	if (intern_circle && ext_circle)
 		return 1;
 	return 0;
 }
 
 int gel_is_point_in_point(figure *p1, figure *p2) {
-	if (p1->x - p2->x <= BINDING_AREA && p1->y - p2->y <= BINDING_AREA)
+	if (fabs(p1->x - p2->x) <= BINDING_AREA && fabs(p1->y - p2->y <= BINDING_AREA))
 		return 1;
 	return 0;
 }
