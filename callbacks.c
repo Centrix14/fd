@@ -71,7 +71,12 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 			break;
 
 			case GDK_BUTTON_SECONDARY:
-				ch_unselect_last();
+				if (dl_get_preview()) {
+					dl_switch_show_preview();
+					ch_set_state(0);
+				}
+				else
+					ch_unselect_last();
 			
 				gtk_widget_queue_draw(widget);
 			break;
