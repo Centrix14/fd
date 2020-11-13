@@ -174,7 +174,7 @@ int gel_is_point_in_line(figure *l, figure *p) {
 	// height
 	h = (2 * S) / a;
 
-	return h <= BINDING_AREA;
+	return (h <= BINDING_AREA) && (gel_is_point_in_area(l, p));
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
@@ -305,4 +305,27 @@ figure *gel_get_arc_center(figure *l1, figure *l2) {
 	figure_fill(&cp, xc, yc, 0, 0, FG_TYPE_POINT);
 
 	return &cp;
+}
+
+int min(double v1, double v2) {
+	return (v1 < v2) ? v1 : v2;
+}
+
+int max(double v1, double v2) {
+	return (v1 > v2) ? v1 : v2;
+}
+
+int gel_is_point_in_area(figure *area, figure *p) {
+	double x1, y1, x2, y2;
+
+	x1 = area->x;
+	y1 = area->y;
+
+	x2 = area->a1;
+	y2 = area->a2;
+
+	if ((p->x > min(x1, x2)) && (p->a1 < max(x1, x2)))
+		if ((p->y > min(y1, y2)) && (p->a2 < max(y1, y2)))
+			return 1;
+	return 0;
 }
