@@ -8,7 +8,7 @@
 
 static cairo_t *context;
 static double preview_x = 0, preview_y = 0;
-static int all_lays = 0, show_preview = 0, arc_type = 0;
+static int all_lays = 0, show_preview = 0;
 static figure *preview;
 
 void dl_set_cairo_context(cairo_t *cr) {
@@ -22,6 +22,10 @@ void dl_set_preview_coords(double px, double py) {
 
 void dl_switch_display_all_lays() {
 	all_lays = !all_lays;
+}
+
+int dl_get_preview() {
+	return show_preview;
 }
 
 void dl_draw_figure(figure *fptr) {
@@ -173,6 +177,6 @@ void dl_switch_show_preview() {
 	show_preview = !show_preview;
 }
 
-void dl_set_arc_type(int t) {
-	arc_type = t;
+void dl_set_show_preview(int val) {
+	show_preview = val;
 }
