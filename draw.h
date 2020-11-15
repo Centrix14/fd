@@ -16,7 +16,6 @@ void dl_draw_preview();
 
 void dl_set_cairo_context(cairo_t *cr);
 void dl_set_preview_coords(double px, double py);
-void dl_set_arc_type(int t);
 void dl_set_show_preview(int val);
 
 int dl_is_need_draw(figure *fptr);
