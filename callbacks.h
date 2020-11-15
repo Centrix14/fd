@@ -18,8 +18,6 @@ void arc_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 
 void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
-void arc_prm_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
-void arc_prm_dialog_type_bttn_click(GtkWidget *bttn, gpointer data);
 
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
@@ -40,7 +38,5 @@ void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void curs_bttn_click(GtkWidget *bttn, gpointer data);
 
 void unselect(list *node);
-
-void del_bttn_click(GtkWidget *bttn, GtkWidget *da);
 
 #endif
