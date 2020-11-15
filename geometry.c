@@ -173,6 +173,7 @@ int gel_is_point_in_line(figure *l, figure *p) {
 
 	// height
 	h = (2 * S) / a;
+	printf("h = %g\tis_point_in_area = %d\n", h, gel_is_point_in_area(l, p));
 
 	return (h <= BINDING_AREA) && (gel_is_point_in_area(l, p));
 }
@@ -183,8 +184,9 @@ int gel_is_point_in_rect(figure *r, figure *p) {
 
 	lines = figure_rect_decompose(r);
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++) {
 		res += gel_is_point_in_line(&lines[i], p);
+	}
 	return res;
 }
 
@@ -324,8 +326,8 @@ int gel_is_point_in_area(figure *area, figure *p) {
 	x2 = area->a1;
 	y2 = area->a2;
 
-	if ((p->x > min(x1, x2)) && (p->a1 < max(x1, x2)))
-		if ((p->y > min(y1, y2)) && (p->a2 < max(y1, y2)))
+	if ((p->x >= min(x1, x2)) && (p->a1 <= max(x1, x2)))
+		if ((p->y >= min(y1, y2)) && (p->a2 <= max(y1, y2)))
 			return 1;
 	return 0;
 }
