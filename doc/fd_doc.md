@@ -7,7 +7,7 @@ Name                   | Short description
 [callbacks.h](#ch)     | contains callback functions
 [click_handle.h](#chh) | contains functions for handling clicks
 [color.h](#clh)        | contains color schemes
-[dbg.h](#dbh)          | special header that defines the DBG character
+[dbg.h](#dbh)          | special header that defines the DBG symbol
 [draw.h](#dh)          | contains functions for drawing
 [fd_format.h](#ffh)    | contains functions for outputting shapes to a file
 [figure.h](#fh)        | includes functions for creating and processing shapes
@@ -16,7 +16,7 @@ Name                   | Short description
 
 ## headers description
 <a name="bh"></a>
-### binding.h
+# binding.h
 this file includes functions for creating three types of bindings: object bindings, binding of intersection, and vertical bindings
 #### object bindings
 object snaps, the cursor is fixed on the object
@@ -56,7 +56,7 @@ these bindings are to the x or y of another object:
 + `BINDING_AREA` -- the distance within which the binding is created
 
 <a name="ch"></a>
-### callbacks.h
+# callbacks.h
 contains callback functions for the interface created in main.c
 
 #### functions
@@ -64,30 +64,107 @@ contains callback functions for the interface created in main.c
 + `gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);` -- tracks the mouse movement
 + `gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);` -- tracks mouse clicks
 + `gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data);` -- monitors keystrokes of the keyboard. __Currently not used__
++ `void point_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for point button
++ `void line_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for line pp button
++ `void line_la_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for line la button
++ `void rect_pp_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for rect pp button
++ `void rect_wh_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for rect wh button
++ `void circle_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for circle button
++ `void arc_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for arc button
++ `void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in line la dialog
++ `void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in the rect wh dialog
++ `void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for set lay button
++ `void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for all lays button
++ `void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for add projection lay button
++ `void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for options button
++ `void save_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for save button
++ `void open_bttn_click(GtkWidget *bttn, GtkWidget *parent_window); -- callback for open button`
++ `void save_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in save dialog
++ `void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in open dialog
++ `void del_bttn_click(GtkWidget *bttn, GtkWidget *da);` -- callback for delete button
++ `void direction_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for diarection button in line la, rect wh dialogs
++ `void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for help button
++ `void curs_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for curs button
++ `void unselect(list *node);` -- function for unselect
 
 <a name="chh"></a>
-### ckick_handle.h
+# click_handle.h
+this section contains functions that handle clicks, and here you can add and select shapes
+
+#### functions
++ `void ch_set_draw_mode(int new_mode);` -- function for selecting the drawing mode (see figure.h)
++ `void ch_set_external_figure(figure *fptr);` -- function for selecting a external figure (only for multi-step figure: line_pp, rect_pp, circle, arc)
++ `void ch_set_state(int new_state);` -- function that set creation step for multi-step figures (see ch_set_external_figure)
++ `int ch_get_draw_mode();` -- function that returns draw mode
++ `void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y);` -- common function for click handling, that call rest handle functions
++ `void ch_add_point(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new point by x, y in figure list lptr, and draw it in draw_area
++ `void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new line_pp by x, y in figure list lptr, and draw it in draw_area
++ `void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new line_la by x, y in figure list lptr, and draw it in draw_area
++ `void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new rect_pp by x, y in figure list lptr, and draw it in draw_area
++ `void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new rect_wh by x, y in figure list lptr, and draw it in draw_area
++ `void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new circle by x, y in figure list lptr, and draw it in draw_area
++ `void ch_add_arc(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new arc by x, y in figure list lptr, and draw it in draw_area
++ `void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y);` -- handle a click, when select Cursor mode
++ `void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, double y);` -- unselect all selected
++ `void ch_unselect_last();` -- function that unselect last selected
 
 <a name="clh"></a>
-### color.h
+# color.h
+thats header contain enum and functions for colorisation
+
+#### enums
++ `DEF_COLORS` -- thats enum contain color set for FlatDraw
+```c
+enum DEF_COLORS {
+	CL_DEF_CURS_COLOR = 0,
+	CL_DEF_DRAW_COLOR,
+	CL_DEF_PREVIEW_COLOR,
+	CL_DEF_PROJECTION_COLOR,
+	CL_DEF_SELECTED_COLOR
+};
+```
+
+#### functions
++ `void cl_set_color(cairo_t *cr, int color_set);` -- set drawing color for cairo context cr, form color_set (see `DEF_COLORS`)
++ `void cl_set_color_fg(cairo_t *cr, int fg_color_set);` -- set drawing color for cairo context cr, from VM colorset (see figure.h)
 
 <a name="dbh"></a>
-### dbg.h
+# dbg.h
+defines cpecial symbol DBG, thats applied for debagging on / off
+
+#### symbols
++ `DBG` -- defines the debug mode (on / off)
 
 <a name="dh"></a>
-### draw.h
+# draw.h
+that header defines drawing functions
 
-<a name="clh"></a>
-### color.h
+#### functions
++ `void dl_draw_figure(figure *fptr);` -- common function for drawing figure thats call rest functions
++ `void dl_draw_figure_list(list *lptr);` -- similar to `dl_draw_figure`, but takes a list of figures
++ `void dl_draw_point(figure *fptr);` -- draw point
++ `void dl_draw_line_pp(figure *fptr);` -- draw line_pp
++ `void dl_draw_rect_pp(figure *fptr);` -- draw rect_pp
++ `void dl_draw_circle(figure *fptr);` -- draw circle
++ `void dl_draw_arc(figure *fptr);` -- draw arc
++ `void dl_draw_preview(figure *fptr);` -- draw preview figure (is a milti-step figure, thats not finished, see click_handle.h)
++ `void dl_set_cairo_context(cairo_t *cr);` -- set a cairo context
++ `void dl_set_preview_coords(double px, double py);` -- set a curcor position, for drawing a preview figure
++ `void dl_set_show_preview(int val);` -- enable or disable drawing preview figure
++ `int dl_is_need_draw(figure *fptr);` -- returns 1 if need draw, 0 otherwise
++ `void dl_switch_display_all_lays();` -- switch displaying all lays
++ `void dl_switch_show_preview();` -- switch showing preview figure
++ `void dl_send_preview_figure(figure *fptr);` -- send to draw system a preview figure
++ `int dl_get_preview();` -- returns whether or not a thumbnail is shown
 
 <a name="ffh"></a>
-### fd_format.h
+# fd_format.h
 
 <a name="fh"></a>
-### figure.h
+# figure.h
 
 <a name="gh"></a>
-### geometry.h
+# geometry.h
 
 <a name="lh"></a>
-### list.h
+# list.h
