@@ -12,6 +12,7 @@
 #include "dbg.h"
 
 extern list *figure_list;
+extern GtkWidget *window;
 double curs_x = 0, curs_y = 0,
 	   click_x = 0, click_y = 0;
 int direction_val = 1, type_val = 1;
@@ -479,4 +480,30 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 #endif
 
 	gtk_widget_queue_draw(da);
+}
+
+void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]) {
+	static int mode = 0;
+
+	if (!mode)
+		gtk_button_set_label(GTK_BUTTON(bttn), "prm");
+	else
+		gtk_button_set_label(GTK_BUTTON(bttn), "free");
+
+	for (int i = 0; i < DRAW_BUTTONS; i++) {
+		if (!mode) {
+			if (strstr((char*)gtk_button_get_label(GTK_BUTTON(elms[i])), "free"))
+				gtk_widget_hide(elms[i]);
+			else
+				gtk_widget_show(elms[i]);
+		}
+		else {
+			if (strstr((char*)gtk_button_get_label(GTK_BUTTON(elms[i])), "prm"))
+				gtk_widget_hide(elms[i]);
+			else
+				gtk_widget_show(elms[i]);
+		}
+	}
+
+	mode = !mode;
 }
