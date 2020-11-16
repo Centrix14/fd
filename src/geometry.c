@@ -173,7 +173,6 @@ int gel_is_point_in_line(figure *l, figure *p) {
 
 	// height
 	h = (2 * S) / a;
-	printf("h = %g\tis_point_in_area = %d\n", h, gel_is_point_in_area(l, p));
 
 	return (h <= BINDING_AREA) && (gel_is_point_in_area(l, p));
 }
