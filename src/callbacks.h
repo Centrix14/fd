@@ -3,6 +3,8 @@
 
 #include "data/list.h"
 
+#define DRAW_BUTTONS 5
+
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);
 gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);
 gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);
@@ -38,5 +40,7 @@ void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void curs_bttn_click(GtkWidget *bttn, gpointer data);
 
 void unselect(list *node);
+
+void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]);
 
 #endif
