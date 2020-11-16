@@ -13,10 +13,9 @@
 #include "figure.h"
 
 list *figure_list = NULL;
+GtkWidget *window;
 
 int main() {
-	GtkWidget *window;
-
 	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box, *left_box;
 
 	GtkWidget *scrolled_window, *draw_area;
@@ -24,6 +23,8 @@ int main() {
 	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label, *option_bttn;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
 	GtkWidget *del_bttn, *copy_bttn, *paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
+	GtkWidget *draw_mode_bttn;
+	GtkWidget *draw_bttns[DRAW_BUTTONS];
 
 	figure_list = list_init_node(NULL);
 
@@ -48,12 +49,12 @@ int main() {
 
 	// init buttons
 	point_bttn = gtk_button_new_with_label("Point");
-	line_pp_bttn = gtk_button_new_with_label("Line (PP)");
-	line_la_bttn = gtk_button_new_with_label("Line (LA)");
-	rect_pp_bttn = gtk_button_new_with_label("Rect (PP)");
-	rect_wh_bttn = gtk_button_new_with_label("Rect (WH)");
-	arc_tp_bttn = gtk_button_new_with_label("Arc (3P)");
-	circle_rc_bttn = gtk_button_new_with_label("Circle (RC)");
+	line_pp_bttn = gtk_button_new_with_label("Line (free)");
+	line_la_bttn = gtk_button_new_with_label("Line (prm)");
+	rect_pp_bttn = gtk_button_new_with_label("Rect (free)");
+	rect_wh_bttn = gtk_button_new_with_label("Rect (prm)");
+	arc_tp_bttn = gtk_button_new_with_label("Arc (free)");
+	circle_rc_bttn = gtk_button_new_with_label("Circle (free)");
 	help_bttn = gtk_button_new_with_label("Help");
 	curs_bttn = gtk_button_new_with_label("Cursor");
 
@@ -75,14 +76,23 @@ int main() {
 	all_bttn = gtk_button_new_with_label("All");
 	add_projection_lay_bttn = gtk_button_new_with_label("+ / -");
 	option_bttn = gtk_button_new_with_label("Options");
+	draw_mode_bttn = gtk_button_new_with_label("free");
 
 	crd_label = gtk_label_new("(0; 0)");
 	hint_label = gtk_label_new("Select tool");
+
+	// fills draw bttns
+	draw_bttns[0] = point_bttn;
+	draw_bttns[1] = line_pp_bttn;
+	draw_bttns[2] = line_la_bttn;
+	draw_bttns[3] = rect_pp_bttn;
+	draw_bttns[4] = rect_wh_bttn;
 
 	g_signal_connect(G_OBJECT(set_bttn), "clicked", G_CALLBACK(set_lay_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(add_projection_lay_bttn), "clicked", G_CALLBACK(add_projection_lay_bttn_click), lay_entry);
 	g_signal_connect(G_OBJECT(option_bttn), "clicked", G_CALLBACK(options_bttn_click), window);
+	g_signal_connect(G_OBJECT(draw_mode_bttn), "clicked", G_CALLBACK(prm_bttn_click), draw_bttns);
 
 	// file operations widgets
 	save_bttn = gtk_button_new_with_label("Save");
@@ -140,6 +150,7 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), add_projection_lay_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), option_bttn, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), draw_mode_bttn, FALSE, FALSE, 0);
 
 	// file widgets
 	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 5);
@@ -161,6 +172,9 @@ int main() {
 
 	gtk_container_add(GTK_CONTAINER(window), main_box);
 	gtk_widget_show_all(window);
+	
+	gtk_widget_hide(line_la_bttn);
+	gtk_widget_hide(rect_wh_bttn);
 
 	gtk_main();
 
