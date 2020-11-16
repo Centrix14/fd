@@ -59,6 +59,9 @@ these bindings are to the x or y of another object:
 # callbacks.h
 contains callback functions for the interface created in main.c
 
+#### symbols
++ `DRAW_BUTTONS` -- specifies the number of buttons responsible for drawing
+
 #### functions
 + `gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);` -- drawing the canvas
 + `gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);` -- tracks the mouse movement
@@ -86,6 +89,7 @@ contains callback functions for the interface created in main.c
 + `void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for help button
 + `void curs_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for curs button
 + `void unselect(list *node);` -- function for unselect
++ `void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[])` -- callback for prm / free button, its change free / prm drawing mode
 
 <a name="chh"></a>
 # click_handle.h
