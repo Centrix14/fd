@@ -25,6 +25,7 @@ int main() {
 	GtkWidget *del_bttn, *copy_bttn, *paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
+	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2;
 
 	figure_list = list_init_node(NULL);
 
@@ -50,9 +51,9 @@ int main() {
 	// init buttons
 	point_bttn = gtk_button_new_with_label("Point");
 	line_pp_bttn = gtk_button_new_with_label("Line (free)");
-	line_la_bttn = gtk_button_new_with_label("Line (prm)");
+	line_la_bttn = gtk_button_new_with_label("Line (prmt)");
 	rect_pp_bttn = gtk_button_new_with_label("Rect (free)");
-	rect_wh_bttn = gtk_button_new_with_label("Rect (prm)");
+	rect_wh_bttn = gtk_button_new_with_label("Rect (prmt)");
 	arc_tp_bttn = gtk_button_new_with_label("Arc (free)");
 	circle_rc_bttn = gtk_button_new_with_label("Circle (free)");
 	help_bttn = gtk_button_new_with_label("Help");
@@ -69,6 +70,57 @@ int main() {
 	g_signal_connect(G_OBJECT(help_bttn), "clicked", G_CALLBACK(help_bttn_click), window);
 
 	g_signal_connect(G_OBJECT(curs_bttn), "clicked", G_CALLBACK(curs_bttn_click), NULL);
+
+	// create icon for buttons
+	line_icon1 = gtk_image_new_from_file("res/line.png");
+	rect_icon1 = gtk_image_new_from_file("res/rectangle.png");
+	line_icon2 = gtk_image_new_from_file("res/line.png");
+	rect_icon2 = gtk_image_new_from_file("res/rectangle.png");
+	arc_icon = gtk_image_new_from_file("res/arc.png");
+	circle_icon = gtk_image_new_from_file("res/ellipse.png");
+	point_icon = gtk_image_new_from_file("res/pointer.png");
+	cursor_icon = gtk_image_new_from_file("res/cursor.png");
+
+	// set icons
+	// line_pp
+	gtk_button_set_image(GTK_BUTTON(line_pp_bttn), line_icon1);
+	gtk_button_set_always_show_image(GTK_BUTTON(line_pp_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(line_pp_bttn), GTK_POS_TOP);
+
+	// line_la
+	gtk_button_set_image(GTK_BUTTON(line_la_bttn), line_icon2);
+	gtk_button_set_always_show_image(GTK_BUTTON(line_la_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(line_la_bttn), GTK_POS_TOP);
+
+	// rect_pp
+	gtk_button_set_image(GTK_BUTTON(rect_pp_bttn), rect_icon1);
+	gtk_button_set_always_show_image(GTK_BUTTON(rect_pp_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(rect_pp_bttn), GTK_POS_TOP);
+
+	// rect_wh
+	gtk_button_set_image(GTK_BUTTON(rect_wh_bttn), rect_icon2);
+	gtk_button_set_always_show_image(GTK_BUTTON(rect_wh_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(rect_wh_bttn), GTK_POS_TOP);
+
+	// arc
+	gtk_button_set_image(GTK_BUTTON(arc_tp_bttn), arc_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(arc_tp_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(arc_tp_bttn), GTK_POS_TOP);
+
+	// circle
+	gtk_button_set_image(GTK_BUTTON(circle_rc_bttn), circle_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(circle_rc_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(circle_rc_bttn), GTK_POS_TOP);
+
+	// cursor
+	gtk_button_set_image(GTK_BUTTON(curs_bttn), cursor_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(curs_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(curs_bttn), GTK_POS_TOP);
+
+	// point
+	gtk_button_set_image(GTK_BUTTON(point_bttn), point_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(point_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(point_bttn), GTK_POS_TOP);
 
 	// init down tool panel widgets
 	lay_entry = gtk_entry_new();
