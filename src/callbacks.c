@@ -486,7 +486,7 @@ void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]) {
 	static int mode = 0;
 
 	if (!mode)
-		gtk_button_set_label(GTK_BUTTON(bttn), "prm");
+		gtk_button_set_label(GTK_BUTTON(bttn), "prmt");
 	else
 		gtk_button_set_label(GTK_BUTTON(bttn), "free");
 
@@ -498,7 +498,7 @@ void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]) {
 				gtk_widget_show(elms[i]);
 		}
 		else {
-			if (strstr((char*)gtk_button_get_label(GTK_BUTTON(elms[i])), "prm"))
+			if (strstr((char*)gtk_button_get_label(GTK_BUTTON(elms[i])), "prmt"))
 				gtk_widget_hide(elms[i]);
 			else
 				gtk_widget_show(elms[i]);
