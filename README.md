@@ -42,3 +42,6 @@ make rel
 ![](screenshots/scr1.png)
 ![](screenshots/scr2.png)
 ![](screenshots/scr3.png)
+
+## icons
+the icons were borrowed from [this](https://www.flaticon.com/packs/vector-editing-tools-15?k=1605709294421) site
