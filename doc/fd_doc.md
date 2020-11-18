@@ -177,6 +177,74 @@ this header defines functions for working with .fd files
 
 <a name="fh"></a>
 # figure.h
+this header contains functions for working with figures
+
+#### structs
++ `figure` -- this struct defines a base figure
+```c
+typedef struct {
+	double x; // base x coord
+	double y; // base y coord
+
+	// additionals
+	double a1;
+	double a2;
+	double a3;
+
+	int type; // figure type (see FG_TYPES)
+
+	int visible; // figure visible mode (see VISIBLE_MODES)
+
+	int lay; // layer of the figure
+
+	char id[16]; // id
+} figure;
+```
+
+#### enums
++ `FG_TYPES` -- this enum defines figure types
+```c
+enum FG_TYPES {
+	FG_TYPE_POINT = 0,
+	FG_TYPE_LINE_PP,
+	FG_TYPE_LINE_LA,
+	FG_TYPE_RECT_PP,
+	FG_TYPE_RECT_WH,
+	FG_TYPE_CIRCLE,
+	FG_TYPE_ARC,
+	FG_TYPE_NONE // cursor
+};
+```
+
++ `VISIBLE_MODES` -- this enum defines visible modes of figure
+```c
+enum VISIBLE_MODES {
+	VM_HIDE = 0,
+	VM_SHOW,
+	VM_PREVIEW,
+	VM_PROJECTION,
+	VM_SELECTED
+};
+```
+
+#### functions
++ `figure *figure_new(double type, double x, double y, double a1, double a2, double a3);` -- this function creates a new figure by given parametrs, default visibility - VM_SHOW
++ `figure *figure_new_point(double x, double y);` -- creates new point by x, y
++ `figure *figure_new_line_pp(double x1, double y1, double x2, double y2);` -- creates new line_pp by x1, y1 and x2, y2
++ `figure *figure_new_rect_pp(double x, double y, double w, double h);` -- creates new rect_pp by x1, y1, and x2, y2
++ `figure *figure_new_circle(double x, double y, double r);` -- creates new circle by x, y with R radii
++ `figure *figure_new_arc(double xc, double yc, double r, double angle1, double angle2);` -- creates new arc by xc, yc, starts in angle1 and end in angle2
++ `void figure_free(figure *fptr);` -- free allocated figure
++ `void figure_free_list(list *lptr);` -- free allocated figure from list
++ `figure *figure_rect_decompose(figure *rect);` -- decomposes rect to 4 lines
++ `void figure_fill(figure *fptr, double x, double y, double a1, double a2, double type);` -- fill allocated figure given parametrs
++ `int figure_get_current_lay();` -- returns current working layer
++ `char *figure_get_type(int type);` -- returns string that stores type of figure
++ `void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode);` -- set visible mode for figures on given layer
++ `void figure_set_current_lay(int new_lay);` -- set currunt working layer
++ `void figure_copy(figure *dst, figure *src);` -- copy dst parametrs to src
++ `int figure_is_line(figure *fptr);` -- returns 1 if it is line, 0 otherwise
++ `int figure_is_projection_lay_list(list *lptr, int lay);` -- returns 1 if lay is a projection lay, 0 otherwise
 
 <a name="gh"></a>
 # geometry.h
