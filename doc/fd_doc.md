@@ -163,6 +163,17 @@ that header defines drawing functions
 
 <a name="ffh"></a>
 # fd_format.h
+this header defines functions for working with .fd files
+
+#### symbols
++ `FD_FORMAT_DELIM ` -- defines a delimetrs in .fd files (currently is `" \n"`)
+
+#### functions
++ `void fdl_target_file(char *name);` -- specifies the name of the target file
++ `void fdl_write_figure_stream(FILE *stream, figure *fptr);` -- writes fptr to stream
++ `void fdl_write_from_list(list *lptr);` -- writes figures from list to target file
++ `void fdl_read_string(figure *fptr, char *str);` -- reads string from .fd file
++ `void fdl_read_file(list *lptr);` -- read figures from target file to list
 
 <a name="fh"></a>
 # figure.h
