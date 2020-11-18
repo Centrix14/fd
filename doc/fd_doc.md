@@ -248,6 +248,13 @@ enum VISIBLE_MODES {
 
 <a name="gh"></a>
 # geometry.h
+this header contains geometry processing functions
+
+#### symbols
++ `PI` -- it is pi
+
+#### functions
+
 
 <a name="lh"></a>
 # list.h
