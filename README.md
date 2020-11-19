@@ -12,6 +12,7 @@ the program is still under development, but the following features are already a
 + Save / Open
 + Selecting
 + Deleting
++ Free / parametric mode
 
 in development:
 + arcs
