@@ -34,4 +34,6 @@ int gel_is_point_in_circle(figure *c, figure *p);
 int gel_is_point_in_point(figure *p1, figure *p2);
 int gel_is_point_in_area(figure *area, figure *p);
 
+double gel_decompose_angle(figure *l);
+
 #endif
