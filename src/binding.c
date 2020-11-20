@@ -41,6 +41,10 @@ int bl_is_create_binding(figure *target, double x, double y) {
 		case FG_TYPE_RECT_PP:
 			return bl_get_binding_possibility_rect(target, x, y);
 		break;
+
+		case FG_TYPE_CIRCLE:
+			return bl_get_binding_possibility_circle(target, x, y);
+		break;
 	}
 
 	return 0;
@@ -99,6 +103,10 @@ void bl_make_binding(figure *fptr, double *x, double *y) {
 		case FG_TYPE_RECT_PP:
 			bl_make_binding_rect(fptr, x, y);
 		break;
+
+		case FG_TYPE_CIRCLE:
+			bl_make_binding_circle(fptr, x, y);
+		return;
 	}
 }
 
@@ -228,4 +236,29 @@ char *bl_make_vertical_bind_if_possible(list *node, double *x, double *y) {
 	}
 
 	return NULL;
+}
+
+int bl_get_binding_possibility_circle(figure *circle, double x, double y) {
+	figure p;
+
+	p.x = x;
+	p.y = y;
+
+	return gel_is_point_in_circle(circle, &p);
+}
+
+void bl_make_binding_circle(figure *circle, double *x, double *y) {
+	double angle;
+	figure l;
+
+	l.x = circle->x;
+	l.y = circle->y;
+	l.a1 = *x;
+	l.a2 = *y;
+
+	angle = gel_convert_grades_to_rads(gel_calculate_line_angle(&l));
+	*x = circle->a1 * cos(angle) + circle->x;
+	*y = circle->a1 * sin(angle) + circle->y;
+
+	//printf("x = %g\ty = %g\n", *x, *y);
 }
