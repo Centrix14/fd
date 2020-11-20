@@ -215,23 +215,15 @@ int gel_is_point_in_point(figure *p1, figure *p2) {
 }
 
 double gel_calculate_line_angle(figure *l) {
-	double dx, dy, k;
+	double dy, R, A;
 
-	dx = l->a1 - l->x;
 	dy = l->a2 - l->y;
+	R = gel_calculate_lenght(l);
 
-	if (!dx) {
-		return (dy > 0) ? (90) : (-90);	
-	}
-	if (!dy && dx < 0) {
-		return 180;	
-	}
+	A = asin(dy / R);
+	printf("A = %g\n", gel_convert_rads_to_grades(A));
 
-	k = dy / dx;
-
-	printf("\tang = %g\n", atan(k));
-
-	return gel_convert_rads_to_grades(atan(k));
+	return gel_convert_rads_to_grades(A);
 }
 
 double gel_calculate_heron_formula(double a, double b, double c) {
@@ -329,4 +321,20 @@ int gel_is_point_in_area(figure *area, figure *p) {
 		if ((p->y >= min(y1, y2)) && (p->a2 <= max(y1, y2)))
 			return 1;
 	return 0;
+}
+
+double gel_decompose_angle(figure *l) {
+	double xc, yc, x, y;
+
+	xc = l->x;
+	yc = l->y;
+	x = l->a1;
+	y = l->a2;
+
+	if (y > yc && x < xc)
+		return -90;
+	else if (y < yc && x < xc)
+		return 90;
+	else
+		return 0;
 }
