@@ -18,11 +18,13 @@ double bl_get_coords_dif(double c1, double c2);
 int bl_get_binding_possibility_point(figure *point, double x, double y);
 int bl_get_binding_possibility_line(figure *line, double x, double y);
 int bl_get_binding_possibility_rect(figure *rect, double x, double y);
+int bl_get_binding_possibility_circle(figure *circle, double x, double y);
 
 void bl_make_binding(figure *fptr, double *x, double *y);
 void bl_make_binding_point(figure *point, double *x, double *y);
 void bl_make_binding_line(figure *line, double *x, double *y);
 void bl_make_binding_rect(figure *rect, double *x, double *y);
+void bl_make_binding_circle(figure *circle, double *x, double *y);
 
 char *bl_make_vertical_bind_if_possible(list *node, double *x, double *y);
 
