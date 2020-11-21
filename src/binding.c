@@ -248,7 +248,7 @@ int bl_get_binding_possibility_circle(figure *circle, double x, double y) {
 }
 
 void bl_make_binding_circle(figure *circle, double *x, double *y) {
-	double angle;
+	double angle, res_x, res_y;
 	figure l;
 
 	l.x = circle->x;
@@ -257,8 +257,13 @@ void bl_make_binding_circle(figure *circle, double *x, double *y) {
 	l.a2 = *y;
 
 	angle = gel_convert_grades_to_rads(gel_calculate_line_angle(&l));
-	*x = circle->a1 * cos(angle) + circle->x;
+	res_x = circle->a1 * cos(angle);
 	*y = circle->a1 * sin(angle) + circle->y;
+
+	if (*x < circle->x)
+		*x = fabs(res_x - circle->x);
+	else
+		*x = res_x + circle->x;
 
 	//printf("x = %g\ty = %g\n", *x, *y);
 }
