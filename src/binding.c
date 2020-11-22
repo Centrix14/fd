@@ -248,7 +248,7 @@ int bl_get_binding_possibility_circle(figure *circle, double x, double y) {
 }
 
 void bl_make_binding_circle(figure *circle, double *x, double *y) {
-	double angle, res_x, res_y;
+	double angle, res_x;
 	figure l;
 
 	l.x = circle->x;
