@@ -235,24 +235,6 @@ double gel_calculate_heron_formula(double a, double b, double c) {
 	return S;
 }
 
-figure *gel_get_center_point_by_hr(double xh, double yh, double R) {
-	static figure cp;	
-
-	if (xh - R > 0)
-		cp.x = xh - R;
-	else
-		cp.x = xh + R;
-
-	if (yh - R > 0)
-		cp.y = yh - R;
-	else
-		cp.y = yh + R;
-
-	cp.a1 = cp.a2 = 0;
-
-	return &cp;
-}
-
 double gel_get_max_lenght(figure *a, figure *b, figure *c) {
 	double al, bl, cl;
 
