@@ -221,7 +221,6 @@ double gel_calculate_line_angle(figure *l) {
 	R = gel_calculate_lenght(l);
 
 	A = asin(dy / R);
-	printf("A = %g\n", gel_convert_rads_to_grades(A));
 
 	return gel_convert_rads_to_grades(A);
 }
