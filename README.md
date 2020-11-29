@@ -13,10 +13,12 @@ the program is still under development, but the following features are already a
 + Selecting
 + Deleting
 + Free / parametric mode
++ Moving
++ Copy / paste
 
 in development:
 + arcs
-+ additional funcs (rotate, move, copy / past, decouple)
++ additional funcs (rotate, decouple)
 
 supported formats
 + fd -- internal format of the FlatDraw
@@ -45,4 +47,4 @@ make rel
 ![](screenshots/scr3.png)
 
 ## icons
-the icons were borrowed from [this](https://www.flaticon.com/packs/vector-editing-tools-15?k=1605709294421) site
+the icons were borrowed from [this](https://www.flaticon.com/packs/vector-editing-tools-15?k=1605709294421) and [this](https://www.flaticon.com/packs/text-edition) sites
