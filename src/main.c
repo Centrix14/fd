@@ -176,6 +176,7 @@ int main() {
 
 	g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(copy_paste_bttn), "clicked", G_CALLBACK(cp_bttn_click), NULL);
 
 	// init left box
 	left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
