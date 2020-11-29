@@ -507,3 +507,11 @@ void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]) {
 
 	mode = !mode;
 }
+
+void move_bttn_click(GtkWidget *bttn, gpointer data) {
+	ch_set_draw_mode(WM_MOVE);
+}
+
+void cp_bttn_click(GtkWidget *bttn, gpointer data) {
+	ch_set_draw_mode(WM_CP);
+}
