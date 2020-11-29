@@ -11,6 +11,9 @@
 
 #include "dbg.h"
 
+#define ch_handler void (*)(GtkWidget*, list*, double, double)
+#define arr_len(arr, elm) sizeof(arr) / sizeof(elm)
+
 static int draw_mode = FG_TYPE_POINT, state = 0;
 static figure *ext_figure,
 			  tmp_figure;
@@ -32,43 +35,16 @@ void ch_set_state(int new_state) {
 	state = new_state;
 }
 
-void ch_click_handler(GtkWidget *draw_area, list *lptr, int x, int y) {
-	switch (draw_mode) {
-		case FG_TYPE_POINT:
-			ch_add_point(draw_area, lptr, x, y);
-		break;
+void ch_click_handler(GtkWidget *draw_area, list *lptr, double x, double y) {
+	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_click_cursor_select, ch_move};
+	int len = 0;
 
-		case FG_TYPE_LINE_PP:
-			ch_add_line_pp(draw_area, lptr, x, y);
-		break;
-
-		case FG_TYPE_LINE_LA:
-			ch_add_line_la(draw_area, lptr, x, y);
-		break;
-
-		case FG_TYPE_RECT_PP:
-			ch_add_rect_pp(draw_area, lptr, x, y);
-		break;
-
-		case FG_TYPE_RECT_WH:
-			ch_add_rect_wh(draw_area, lptr, x, y);
-		break;
-
-		case FG_TYPE_CIRCLE:
-			ch_add_circle(draw_area, lptr, x, y);
-		break;
-
-		case FG_TYPE_ARC:
-			ch_add_arc(draw_area, lptr, x, y);
-		break;
-
-		case FG_TYPE_NONE:
-			ch_click_cursor_select(draw_area, lptr, x, y);
-		break;
-	}
+	len = arr_len(handlers, ch_handler);
+	if (draw_mode < len)
+		(*handlers[draw_mode])(draw_area, lptr, x, y);	
 }
 
-void ch_add_point(GtkWidget *draw_area, list *lptr, int x, int y) {
+void ch_add_point(GtkWidget *draw_area, list *lptr, double x, double y) {
 	list *last;
 	figure *point;
 
@@ -82,7 +58,7 @@ void ch_add_point(GtkWidget *draw_area, list *lptr, int x, int y) {
 	gtk_widget_queue_draw(draw_area);
 }
 
-void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
+void ch_add_line_pp(GtkWidget *draw_area, list *lptr, double x, double y) {
 	list *last;
 	figure *line;
 
@@ -113,7 +89,7 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 	gtk_widget_queue_draw(draw_area);
 }
 
-void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y) {
+void ch_add_line_la(GtkWidget *draw_area, list *lptr, double x, double y) {
 	list *last;
 	figure *line;
 
@@ -130,7 +106,7 @@ void ch_add_line_la(GtkWidget *draw_area, list *lptr, int x, int y) {
 	gtk_widget_queue_draw(draw_area);
 }
 
-void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
+void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, double x, double y) {
 	list *last;
 	figure *rect;
 
@@ -161,7 +137,7 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, int x, int y) {
 	gtk_widget_queue_draw(draw_area);
 }
 
-void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y) {
+void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, double x, double y) {
 	list *last;
 	figure *rect;
 
@@ -179,7 +155,7 @@ void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y) {
 	gtk_widget_queue_draw(draw_area);
 }
 
-void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y) {
+void ch_add_circle(GtkWidget *draw_area, list *lptr, double x, double y) {
 	figure *circle, *rad, *center_point;
 	list *last;
 	double radii;
@@ -368,4 +344,43 @@ void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, do
 
 void ch_unselect_last() {
 	last_selected_figure->visible = VM_SHOW;
+}
+
+double offset_x = 0, offset_y = 0;
+
+void ch_move(GtkWidget *draw_area, list *lptr, double x, double y) {
+	static double base_x = 0, base_y = 0;
+
+	if (!state) {
+		base_x = x;
+		base_y = y;	
+	}
+	else {
+		offset_x = x - base_x;	
+		offset_y = y - base_y;
+
+		list_crawl(lptr, ch_fugure_move);
+	}
+
+	state = !state;
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_fugure_move(list *lptr) {
+	figure *fptr;
+
+	fptr = (figure*)list_get_data(lptr);
+	if (!fptr)
+		return;
+
+	if (fptr->visible == VM_SELECTED) {
+		fptr->x += offset_x;
+		fptr->y += offset_y;		
+		fptr->a1 += offset_x;
+		fptr->a2 += offset_y;
+	}
+}
+
+void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y) {
+
 }
