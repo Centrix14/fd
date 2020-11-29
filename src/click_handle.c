@@ -36,7 +36,7 @@ void ch_set_state(int new_state) {
 }
 
 void ch_click_handler(GtkWidget *draw_area, list *lptr, double x, double y) {
-	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_click_cursor_select, ch_move};
+	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_click_cursor_select, ch_move, ch_cp};
 	int len = 0;
 
 	len = arr_len(handlers, ch_handler);
@@ -382,5 +382,40 @@ void ch_fugure_move(list *lptr) {
 }
 
 void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y) {
+	static double base_x = 0, base_y = 0;
 
+	if (!state) {
+		base_x = x;
+		base_y = y;	
+	}
+	else {
+		offset_x = x - base_x;
+		offset_y = y - base_y;	
+
+		list_crawl(lptr, ch_copy_offset);
+	}
+
+	state = !state;
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_copy_offset(list *lptr) {
+	figure *fptr, *new_figure;
+	list *last;
+
+	fptr = (figure*)list_get_data(lptr);
+	if (!fptr)
+		return ;
+
+	if (fptr->visible == VM_SELECTED) {
+		fptr->visible = VM_SHOW;	
+
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+		new_figure = figure_new(fptr->type, fptr->x + offset_x, fptr->y + offset_y, fptr->a1 + offset_x, fptr->a2 + offset_y, 0);
+		new_figure->visible = VM_SHOW;
+
+		list_set_data(last, new_figure);
+	}
 }
