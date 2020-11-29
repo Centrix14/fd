@@ -22,7 +22,7 @@ int main() {
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn;
 	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label, *option_bttn;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
-	GtkWidget *del_bttn, *copy_bttn, *paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
+	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
 	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2;
@@ -169,20 +169,19 @@ int main() {
 
 	// init tools widgets
 	del_bttn = gtk_button_new_with_label("Delete");
-	copy_bttn = gtk_button_new_with_label("Copy");
-	paste_bttn = gtk_button_new_with_label("Paste");
+	copy_paste_bttn = gtk_button_new_with_label("Copy / Paste");
 	move_bttn = gtk_button_new_with_label("Move");
 	rot_bttn = gtk_button_new_with_label("Rotate");
 	decouple_bttn = gtk_button_new_with_label("Decouple");
 
 	g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
+	g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
 
 	// init left box
 	left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
 	gtk_box_pack_start(GTK_BOX(left_box), del_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(left_box), copy_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(left_box), paste_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(left_box), copy_paste_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(left_box), move_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(left_box), rot_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(left_box), decouple_bttn, TRUE, TRUE, 0);
