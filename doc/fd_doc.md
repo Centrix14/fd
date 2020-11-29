@@ -99,6 +99,8 @@ contains callback functions for the interface created in main.c
 + `void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for help button
 + `void curs_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for curs button
 + `void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[])` -- callback for prm / free button, its change free / prm drawing mode
++ `void move_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for move button
++ `void cp_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for copy-paste button
 
 ##### dialog
 + `void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in line la dialog
@@ -137,7 +139,15 @@ this section contains functions that handle clicks, and here you can add and sel
 ##### click_cursor
 + `void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y);` -- handle a click, when select Cursor mode
 + `void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, double y);` -- unselect all selected
+
+##### additional
++ `void ch_move(GtkWidget *draw_area, list *lptr, double x, double y);` -- figure moving
++ `void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y);` -- figure copy-paste
+
+##### others
 + `void ch_unselect_last();` -- function that unselect last selected
++ `void ch_fugure_move(list *lptr);` -- service function for moving all selected figures
++ `void ch_copy_offset(list *lptr);` -- service function for copy-paste all selected figures with moving
 
 <a name="clh"></a>
 # color.h
@@ -339,3 +349,27 @@ this header contains geometry processing functions
 
 <a name="lh"></a>
 # list.h
+this header contains functions for working with twice-linked lists
+
+#### structs
++ `list` -- structure of 1 element of list
+```c
+typedef struct __list__ {
+	struct __list__ *prev;
+	struct __list__ *next;
+	void *data;
+} list;
+```
+
+#### functions
+##### common
++ `list *list_init_node(list *parent);` -- creates new node with parent
++ `void list_add_node(list *parent);` -- add new node to end of list
++ `void list_set_data(list *node, void *new_data);` -- set data field of the list
++ `void list_show(list *root);` -- prints list to console
++ `void list_crawl(list *root, void (*func)(list*));` -- crawls list and call func for each node
++ `void list_dump_node(list *lptr);` -- prints info about node in console
++ `void list_free_node(list *node);` -- free node
++ `void list_free_list(list *node);` -- free all list
++ `list *list_get_last(list *root);` -- returns last element of the list
++ `void *list_get_data(list *lptr);` -- returns data field of the list
