@@ -6,7 +6,7 @@ the program is still under development, but the following features are already a
 + Drawing lines at 2 points
 + Drawing lines by point, length, and angle
 + Drawing a rectangle by 2 points
-+ Drawing a rectabgles by width and height
++ Drawing a rectangles by width and height
 + Drawing circles
 + Layers
 + Save / Open
@@ -40,6 +40,10 @@ To compile, type:
 ```
 make rel
 ```
+
+## documentation
+at the moment the documentation for fd sources is written
+see doc/fd_doc.md
 
 ## screenshots
 ![](screenshots/scr1.png)
