@@ -1,6 +1,6 @@
 /*
  * main.c -- main fd file, contains gui
- * v0.5
+ * v0.11
  * 14.10.2020
  * by Centrix
  */
@@ -25,7 +25,7 @@ int main() {
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
-	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2;
+	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon, *rot_icon, *decouple_icon;
 
 	figure_list = list_init_node(NULL);
 
@@ -80,6 +80,11 @@ int main() {
 	circle_icon = gtk_image_new_from_file("res/ellipse.png");
 	point_icon = gtk_image_new_from_file("res/pointer.png");
 	cursor_icon = gtk_image_new_from_file("res/cursor.png");
+	del_icon = gtk_image_new_from_file("res/del.png");
+	cp_icon = gtk_image_new_from_file("res/cp.png");
+	move_icon = gtk_image_new_from_file("res/exclude.png");
+	rot_icon = gtk_image_new_from_file("res/rotate.png");
+	decouple_icon = gtk_image_new_from_file("res/decouple.png");
 
 	// set icons
 	// line_pp
@@ -177,6 +182,31 @@ int main() {
 	g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(copy_paste_bttn), "clicked", G_CALLBACK(cp_bttn_click), NULL);
+
+	// del
+	gtk_button_set_image(GTK_BUTTON(del_bttn), del_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(del_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(del_bttn), GTK_POS_TOP);
+
+	// cp
+	gtk_button_set_image(GTK_BUTTON(copy_paste_bttn), cp_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(copy_paste_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(copy_paste_bttn), GTK_POS_TOP);
+
+	// move
+	gtk_button_set_image(GTK_BUTTON(move_bttn), move_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(move_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(move_bttn), GTK_POS_TOP);
+
+	// rotation
+	gtk_button_set_image(GTK_BUTTON(rot_bttn), rot_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(rot_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(rot_bttn), GTK_POS_TOP);
+
+	// decouple
+	gtk_button_set_image(GTK_BUTTON(decouple_bttn), decouple_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(decouple_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(decouple_bttn), GTK_POS_TOP);
 
 	// init left box
 	left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
