@@ -33,6 +33,8 @@ void save_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 
 void del_bttn_click(GtkWidget *bttn, GtkWidget *da);
+void move_bttn_click(GtkWidget *bttn, gpointer data);
+void cp_bttn_click(GtkWidget *bttn, gpointer data);
 
 void direction_bttn_click(GtkWidget *bttn, gpointer data);
 
