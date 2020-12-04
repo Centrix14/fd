@@ -180,14 +180,9 @@ char *bl_try_make_intersection_binding(list *lptr, double *x, double *y) {
 }
 
 void bl_bind(list *lptr, double *x, double *y) {
-	char *is_correct;
-
-	is_correct = bl_try_make_object_bind(lptr, x, y);
-
-	if (!is_correct)
-		is_correct = bl_try_make_intersection_binding(lptr, x, y);
-	if (!is_correct)
-		bl_try_make_vertical_binding(lptr, x, y);
+	bl_try_make_object_bind(lptr, x, y);
+	bl_try_make_intersection_binding(lptr, x, y);
+	bl_try_make_vertical_binding(lptr, x, y);
 }
 
 char *bl_try_make_vertical_binding(list *lptr, double *x, double *y) {
