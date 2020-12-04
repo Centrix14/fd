@@ -29,7 +29,8 @@ void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y);
 
 enum CH_WORK_MODES {
 	WM_MOVE = FG_TYPE_NONE + 1,
-	WM_CP
+	WM_CP,
+	WM_DECOUPLE
 };
 
 #endif
