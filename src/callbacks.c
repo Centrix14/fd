@@ -515,3 +515,7 @@ void move_bttn_click(GtkWidget *bttn, gpointer data) {
 void cp_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(WM_CP);
 }
+
+void dc_bttn_click(GtkWidget *bttn, gpointer data) {
+	ch_set_draw_mode(WM_DECOUPLE);
+}
