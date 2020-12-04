@@ -419,3 +419,24 @@ void ch_copy_offset(list *lptr) {
 		list_set_data(last, new_figure);
 	}
 }
+
+void ch_decouple(GtkWidget *draw_area, list *lptr, double x, double y) {
+	list_crawl(lptr, ch_dc);
+}
+
+void ch_dc(lits *lptr) {
+	figure *fptr = NULL;
+
+	fptr = list_get_data(lptr);
+	if (!fptr)
+		return ;
+
+	if (fptr->visible == VM_SELECTED) {
+		if (fptr->type == FG_TYPE_RECT_PP) {
+			// decouple and removing original figure
+		}
+		else {
+			puts("error!");
+		}
+	}
+}
