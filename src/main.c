@@ -11,6 +11,7 @@
 #include "callbacks.h"
 #include "data/list.h"
 #include "figure.h"
+#include "error.h"
 
 list *figure_list = NULL;
 GtkWidget *window;
@@ -38,6 +39,7 @@ int main() {
 	gtk_window_set_default_icon_from_file("res/fd.png", NULL);
 
 	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	el_set_par_window(window);
 
 	// init drawing area
 	draw_area = gtk_drawing_area_new();
@@ -182,7 +184,7 @@ int main() {
 	g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(copy_paste_bttn), "clicked", G_CALLBACK(cp_bttn_click), NULL);
-	g_signal_connect(G_OBJECT(decouple_bttn), "clicked", G_CALLBACK(dc_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(decouple_bttn), "clicked", G_CALLBACK(dc_bttn_click), draw_area);
 
 	// del
 	gtk_button_set_image(GTK_BUTTON(del_bttn), del_icon);
