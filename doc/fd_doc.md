@@ -13,6 +13,7 @@ Name                   | Short description
 [figure.h](#fh)        | includes functions for creating and processing shapes
 [geometry.h](#gh)      | includes functions for creating and processing geometry
 [list.h](#lh)          | implements a doubly linked list of shapes
+[error.h](#eh)         | implements error handling functions
 
 ## headers description
 <a name="bh"></a>
@@ -101,6 +102,7 @@ contains callback functions for the interface created in main.c
 + `void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[])` -- callback for prm / free button, its change free / prm drawing mode
 + `void move_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for move button
 + `void cp_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for copy-paste button
++ `void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area);` -- callback for decouple button
 
 ##### dialog
 + `void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in line la dialog
@@ -110,6 +112,7 @@ contains callback functions for the interface created in main.c
 
 ##### other
 + `void unselect(list *node);` -- function for unselect
++ `void cb_dc(list *lptr);` -- function that decouple figure of given node
 
 <a name="chh"></a>
 # click_handle.h
@@ -373,3 +376,27 @@ typedef struct __list__ {
 + `void list_free_list(list *node);` -- free all list
 + `list *list_get_last(list *root);` -- returns last element of the list
 + `void *list_get_data(list *lptr);` -- returns data field of the list
+
+<a name="eh"></a>
+# error.h
+this header contains functions and symbols for error handling
+
+#### enums
++ `ERROR_TYPES` -- this enum stores errors codes
+```c
+enum ERROR_TYPES {
+	ET_WRONG_SELECTING = 0
+};
+```
+
+#### functions
+##### set
++ `void el_set_par_window(GtkWidget *window);` -- sets parent window for error dialog
+
+##### call
++ `void el_call_error(int err_type);` --  calls dialog by given code
++ `void el_call_dialog(char *msg);` -- creates dialog with given text
+
+---
+
+05.12.2020 by centrix14
