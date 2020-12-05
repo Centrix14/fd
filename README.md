@@ -15,10 +15,11 @@ the program is still under development, but the following features are already a
 + Free / parametric mode
 + Moving
 + Copy / paste
++ Decouple of rectangles
 
 in development:
 + arcs
-+ additional funcs (rotate, decouple)
++ additional funcs (rotate)
 
 supported formats
 + fd -- internal format of the FlatDraw
@@ -43,7 +44,7 @@ make rel
 
 ## documentation
 at the moment the documentation for fd sources is written
-see doc/fd_doc.md
+see [here](doc/fd_doc.md)
 
 ## screenshots
 ![](screenshots/scr1.png)
