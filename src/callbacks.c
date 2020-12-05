@@ -10,6 +10,7 @@
 #include "color.h"
 #include "fd_format.h"
 #include "dbg.h"
+#include "error.h"
 
 extern list *figure_list;
 extern GtkWidget *window;
@@ -516,6 +517,38 @@ void cp_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(WM_CP);
 }
 
-void dc_bttn_click(GtkWidget *bttn, gpointer data) {
-	ch_set_draw_mode(WM_DECOUPLE);
+void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area) {
+	list_crawl(figure_list, cb_dc);
+
+	gtk_widget_queue_draw(draw_area);
+}
+
+void cb_dc(list *lptr) {
+	figure *fptr = NULL;
+	figure *elms = NULL;
+	list *last = NULL;
+
+	fptr = list_get_data(lptr);
+	if (!fptr)
+		return ;
+
+	if (fptr->visible == VM_SELECTED) {
+		if (fptr->type == FG_TYPE_RECT_PP) {
+			elms = figure_rect_decompose(fptr);
+
+			for (int i = 0; i < 4; i++) {
+				list_add_node(lptr);
+
+				last = list_get_last(lptr);
+				elms[i].visible = VM_SHOW;
+				list_set_data(last, &elms[i]);
+			}
+
+			figure_free(fptr);
+			list_set_data(lptr, NULL);
+		}
+		else {
+			el_call_error(ET_WRONG_SELECTING);
+		}
+	}
 }
