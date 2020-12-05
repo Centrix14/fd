@@ -31,11 +31,12 @@ void open_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 
 void save_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
+void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]);
 
 void del_bttn_click(GtkWidget *bttn, GtkWidget *da);
 void move_bttn_click(GtkWidget *bttn, gpointer data);
 void cp_bttn_click(GtkWidget *bttn, gpointer data);
-void dc_bttn_click(GtkWidget *bttn, gpointer data);
+void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area);
 
 void direction_bttn_click(GtkWidget *bttn, gpointer data);
 
@@ -43,7 +44,6 @@ void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void curs_bttn_click(GtkWidget *bttn, gpointer data);
 
 void unselect(list *node);
-
-void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]);
+void cb_dc(list *lptr);
 
 #endif
