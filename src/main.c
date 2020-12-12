@@ -185,6 +185,7 @@ int main() {
 	g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(copy_paste_bttn), "clicked", G_CALLBACK(cp_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(decouple_bttn), "clicked", G_CALLBACK(dc_bttn_click), draw_area);
+	g_signal_connect(G_OBJECT(rot_bttn), "clicked", G_CALLBACK(rot_bttn_click), window);
 
 	// del
 	gtk_button_set_image(GTK_BUTTON(del_bttn), del_icon);
