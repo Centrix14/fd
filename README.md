@@ -16,10 +16,10 @@ the program is still under development, but the following features are already a
 + Moving
 + Copy / paste
 + Decouple of rectangles
++ Figure rotation
 
 in development:
 + arcs
-+ additional funcs (rotate)
 
 supported formats
 + fd -- internal format of the FlatDraw
