@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "figure.h"
 #include "data/list.h"
+#include "geometry.h"
 
 int curr_lay = 0, fg_num = 0;
 
@@ -170,4 +172,82 @@ char *figure_get_type(int type) {
 	char *types[] = {"point", "line", "line", "rect", "rect", "circle", "arc"};
 
 	return types[type];
+}
+
+void figure_rotate_point(figure *base, figure *p, double angle) {
+	double px = 0, py = 0;
+
+	px = fabs(p->x - base->x);
+	py = fabs(p->y - base->y);
+
+	gel_rotate_point(&px, &py, angle);
+
+	p->x = px + base->x;
+	p->y = py + base->y;
+}
+
+void figure_rotate_line(figure *base, figure *l, double angle) {
+	figure p1, p2;
+
+	p1.x = l->x;
+	p1.y = l->y;
+
+	p2.x = l->a1;
+	p2.y = l->a2;
+
+	figure_rotate_point(base, &p1, angle);
+	figure_rotate_point(base, &p2, angle);
+
+	l->x = p1.x;
+	l->y = p1.y;
+	l->a1 = p2.x;
+	l->a2 = p2.y;
+}
+
+void figure_rotate_rect(figure *base, figure *r, double angle, list *lptr) {
+	figure *lines = NULL, *new = NULL;
+	list *last = NULL;
+
+	lines = figure_rect_decompose(r);
+
+	for (int i = 0; i < 4; i++) {
+		figure_rotate_line(base, lines + i, angle);	
+		lines[i].visible = VM_SHOW;
+
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+
+		new = figure_new_point(0, 0);
+		figure_copy(new, lines + i);
+		new->visible = VM_SHOW;
+
+		list_set_data(last, new);
+	}
+}
+
+void figure_rotate(list *lptr, figure *base, double angle) {
+	figure *fptr = NULL;
+
+	fptr = (figure*)lptr->data;
+	if (!fptr)
+		return ;
+
+	switch (fptr->type) {
+		case FG_TYPE_CIRCLE:	
+		case FG_TYPE_POINT:
+			figure_rotate_point(base, fptr, angle);
+		break;
+
+		case FG_TYPE_LINE_PP:
+			figure_rotate_line(base, fptr, angle);
+		break;
+
+		case FG_TYPE_RECT_PP:
+			figure_rotate_rect(base, fptr, angle, lptr);
+
+			figure_free(fptr);
+			lptr->data = NULL;
+		break;
+	}
 }
