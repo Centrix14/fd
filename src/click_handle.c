@@ -36,7 +36,7 @@ void ch_set_state(int new_state) {
 }
 
 void ch_click_handler(GtkWidget *draw_area, list *lptr, double x, double y) {
-	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_click_cursor_select, ch_move, ch_cp};
+	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_click_cursor_select, ch_move, ch_cp, ch_rotate};
 	int len = 0;
 
 	len = arr_len(handlers, ch_handler);
@@ -417,5 +417,31 @@ void ch_copy_offset(list *lptr) {
 		new_figure->visible = VM_SHOW;
 
 		list_set_data(last, new_figure);
+	}
+}
+
+double angle = 0;
+figure base;
+
+void ch_rotate(GtkWidget *draw_area, list *lptr, double x, double y) {
+	angle = gel_convert_grades_to_rads(ext_figure->x);
+
+	base.x = x;
+	base.y = y;
+
+	list_crawl(lptr, ch_rot);
+
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_rot(list *lptr) {
+	figure *fptr = NULL;
+
+	fptr = (figure*)lptr->data;
+	if (!fptr)
+		return ;
+
+	if (fptr->visible == VM_SELECTED) {
+		figure_rotate(lptr, &base, angle);	
 	}
 }
