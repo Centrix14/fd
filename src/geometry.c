@@ -4,6 +4,7 @@
 #include "geometry.h"
 #include "figure.h"
 #include "binding.h"
+#include "ccVector/ccVector.h"
 
 double gel_calculate_lenght(figure *line) {
 	int lx, ly; // lenght-x, lenght-y
@@ -165,7 +166,7 @@ int gel_is_point_in_line(figure *l, figure *p) {
 	b = gel_calculate_lenght(&b_line);
 	c = gel_calculate_lenght(&c_line);
 
-	// helfperometr
+	// halfperometr
 	hp = (a + b + c) / 2;
 
 	// square
@@ -209,7 +210,7 @@ int gel_is_point_in_circle(figure *c, figure *p) {
 }
 
 int gel_is_point_in_point(figure *p1, figure *p2) {
-	if (fabs(p1->x - p2->x) <= BINDING_AREA && fabs(p1->y - p2->y <= BINDING_AREA))
+	if (fabs(p1->x - p2->x) <= BINDING_AREA && fabs(p1->y - p2->y) <= BINDING_AREA)
 		return 1;
 	return 0;
 }
@@ -304,18 +305,14 @@ int gel_is_point_in_area(figure *area, figure *p) {
 	return 0;
 }
 
-double gel_decompose_angle(figure *l) {
-	double xc, yc, x, y;
+void gel_rotate_point(double *x, double *y, double angle) {
+	vec2 point = {*x, *y}, result;
+	mat2x2 transform;
 
-	xc = l->x;
-	yc = l->y;
-	x = l->a1;
-	y = l->a2;
+	mat2x2Identity(transform);
+	mat2x2Rotate(transform, angle);
+	result = mat2x2MultiplyVector(transform, point);
 
-	if (y > yc && x < xc)
-		return -90;
-	else if (y < yc && x < xc)
-		return 90;
-	else
-		return 0;
+	*x = result.x;
+	*y = result.y;
 }
