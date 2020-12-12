@@ -63,4 +63,9 @@ void figure_copy(figure *dst, figure *src);
 int figure_is_line(figure *fptr);
 int figure_is_projection_lay_list(list *lptr, int lay);
 
+void figure_rotate_point(figure *base, figure *p, double angle);
+void figure_rotate_line(figure *base, figure *l, double angle);
+void figure_rotate_rect(figure *base, figure *r, double angle, list *lptr);
+void figure_rotate(list *lptr, figure *base, double angle);
+
 #endif
