@@ -1,7 +1,7 @@
 /*
  * main.c -- main fd file, contains gui
- * v0.11
- * 14.10.2020
+ * v0.14
+ * 12.12.2020
  * by Centrix
  */
 
