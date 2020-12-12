@@ -524,8 +524,7 @@ void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area) {
 }
 
 void cb_dc(list *lptr) {
-	figure *fptr = NULL;
-	figure *elms = NULL;
+	figure *fptr = NULL, *elms = NULL, *new = NULL;
 	list *last = NULL;
 
 	fptr = list_get_data(lptr);
@@ -540,8 +539,12 @@ void cb_dc(list *lptr) {
 				list_add_node(lptr);
 
 				last = list_get_last(lptr);
-				elms[i].visible = VM_SHOW;
-				list_set_data(last, &elms[i]);
+
+				new = figure_new_point(0, 0);
+				figure_copy(new, &elms[i]);
+				new->visible = VM_SHOW;
+
+				list_set_data(last, new);
 			}
 
 			figure_free(fptr);
@@ -551,4 +554,42 @@ void cb_dc(list *lptr) {
 			el_call_error(ET_WRONG_SELECTING);
 		}
 	}
+}
+
+void rot_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	GtkWidget *dialog_content;
+	GtkWidget *dialog_box;
+	GtkWidget *info_label, *angle_entry, *apply_bttn;
+
+	dialog = gtk_dialog_new_with_buttons("Rotate", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	// init widgets
+	info_label = gtk_label_new("Specify the angle of rotation (in degrees)");
+	angle_entry = gtk_entry_new();
+	apply_bttn = gtk_button_new_with_label("Apply");
+
+	g_signal_connect(G_OBJECT(apply_bttn), "clicked", G_CALLBACK(rot_dialog_apply_bttn), angle_entry);
+
+	// init main box
+	dialog_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(dialog_box), info_label, FALSE, FALSE, 10);
+	gtk_box_pack_start(GTK_BOX(dialog_box), angle_entry, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(dialog_box), apply_bttn, FALSE, FALSE, 5);
+
+	gtk_container_add(GTK_CONTAINER(dialog_content), dialog_box);
+	gtk_widget_show_all(dialog);
+}
+
+void rot_dialog_apply_bttn(GtkWidget *bttn, GtkWidget *entry) {
+	static figure ang_figure;
+
+	ang_figure.x = atoi(gtk_entry_get_text(GTK_ENTRY(entry)));
+	ch_set_external_figure(&ang_figure);
+
+	gtk_widget_destroy(dialog);
+
+	ch_set_draw_mode(WM_ROTATE);
 }
