@@ -1,4 +1,4 @@
-# FlatDraw -- the program is a cross between Paint and professional CAD
+# FlatDraw -- minimalistic CAD
 
 ## Features
 the program is still under development, but the following features are already available:
