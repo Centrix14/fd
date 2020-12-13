@@ -14,6 +14,7 @@ Name                   | Short description
 [geometry.h](#gh)      | includes functions for creating and processing geometry
 [list.h](#lh)          | implements a doubly linked list of shapes
 [error.h](#eh)         | implements error handling functions
+[help.h](#hh)          | implements help messages
 
 ## headers description
 <a name="bh"></a>
@@ -103,12 +104,14 @@ contains callback functions for the interface created in main.c
 + `void move_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for move button
 + `void cp_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for copy-paste button
 + `void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area);` -- callback for decouple button
++ `void rot_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for rotation button
 
 ##### dialog
 + `void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in line la dialog
 + `void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in the rect wh dialog
 + `void save_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in save dialog
 + `void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in open dialog
++ `void rot_dialog_apply_bttn(GtkWidget *bttn, GtkWidget *entry)` -- callback for apply button in rotation dialog
 
 ##### other
 + `void unselect(list *node);` -- function for unselect
@@ -117,6 +120,16 @@ contains callback functions for the interface created in main.c
 <a name="chh"></a>
 # click_handle.h
 this section contains functions that handle clicks, and here you can add and select shapes
+
+#### enums
++ `CH_WORK_MODES ` -- contain work modes of click handler
+```c
+enum CH_WORK_MODES {
+	WM_MOVE = FG_TYPE_NONE + 1,
+	WM_CP,
+	WM_ROTATE
+};
+```
 
 #### functions
 ##### main
@@ -146,11 +159,13 @@ this section contains functions that handle clicks, and here you can add and sel
 ##### additional
 + `void ch_move(GtkWidget *draw_area, list *lptr, double x, double y);` -- figure moving
 + `void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y);` -- figure copy-paste
++ `void ch_rotate(GtkWidget *draw_area, list *lptr, double x, double y);` -- figure rotation
 
 ##### others
 + `void ch_unselect_last();` -- function that unselect last selected
 + `void ch_fugure_move(list *lptr);` -- service function for moving all selected figures
 + `void ch_copy_offset(list *lptr);` -- service function for copy-paste all selected figures with moving
++ `void ch_rot(list *lptr);` -- service function for rotation all selected figuresaround base point
 
 <a name="clh"></a>
 # color.h
@@ -308,6 +323,12 @@ enum VISIBLE_MODES {
 + `int figure_is_line(figure *fptr);` -- returns 1 if it is line, 0 otherwise
 + `int figure_is_projection_lay_list(list *lptr, int lay);` -- returns 1 if lay is a projection lay, 0 otherwise
 
+##### rotate
++ `void figure_rotate(list *lptr, figure *base, double angle);` -- rotates the figure contained in the `lptr` around the `base` point by an `angle`
++ `void figure_rotate_point(figure *base, figure *p, double angle);` -- rotates point `p` around `base` by an `angle`
++ `void figure_rotate_line(figure *base, figure *l, double angle);` -- rotates line `l` around `base` by an `angle`
++ `void figure_rotate_rect(figure *base, figure *r, double angle, list *lptr);` -- rotates rectangle `r` around `base` by an `angle`
+
 ##### other
 + `figure *figure_rect_decompose(figure *rect);` -- decomposes rect to 4 lines
 + `void figure_fill(figure *fptr, double x, double y, double a1, double a2, double type);` -- fill allocated figure given parametrs
@@ -349,6 +370,9 @@ this header contains geometry processing functions
 + `int gel_is_point_in_circle(figure *c, figure *p);` -- similar to `gel_is_point_in_line`
 + `int gel_is_point_in_point(figure *p1, figure *p2);` -- similar to `gel_is_point_in_line`
 + `int gel_is_point_in_area(figure *area, figure *p);` -- similar to `gel_is_point_in_line`
+
+##### other
++ `void gel_rotate_point(double *x, double *y, double angle);` -- rotate point with `x` and `y` coordinates on `angle` around (0; 0)
 
 <a name="lh"></a>
 # list.h
@@ -397,6 +421,34 @@ enum ERROR_TYPES {
 + `void el_call_error(int err_type);` --  calls dialog by given code
 + `void el_call_dialog(char *msg);` -- creates dialog with given text
 
+<a name="hh"></a>
+# help.h
+this header contains help messages and functions for processing them 
+
+#### enums
++ `HELP_CODES ` -- this enum stores help messages codes
+```c
+enum HELP_CODES {
+	HC_MAIN = 0,
+	HC_POINT,
+	HC_START_POINT,
+	HC_END_POINT,
+	HC_CENTER_POINT,
+	HC_RADIUS_POINT,
+	HC_CUROR,
+	HC_INS_POINT,
+	HC_BASE_POINT
+};
+```
+
+#### functions
+##### get
++ `char *hl_get_help(int code);` -- returns help message by code
+
+##### set
++ `void hl_set_widget(GtkWidget *label);` -- sets label for help messages
++ `void hl_set_help(int code);` -- sets help message by code
+
 ---
 
-05.12.2020 by centrix14
+FlatDraw v0.15 13.12.2020 by Centrix14
