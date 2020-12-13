@@ -1,7 +1,7 @@
 /*
  * main.c -- main fd file, contains gui
- * v0.14
- * 12.12.2020
+ * v0.15
+ * 13.12.2020
  * by Centrix
  */
 
@@ -12,6 +12,7 @@
 #include "data/list.h"
 #include "figure.h"
 #include "error.h"
+#include "help.h"
 
 list *figure_list = NULL;
 GtkWidget *window;
@@ -26,7 +27,7 @@ int main() {
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
-	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon, *rot_icon, *decouple_icon;
+	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon, *rot_icon, *decouple_icon, *help_icon;
 
 	figure_list = list_init_node(NULL);
 
@@ -87,6 +88,7 @@ int main() {
 	move_icon = gtk_image_new_from_file("res/exclude.png");
 	rot_icon = gtk_image_new_from_file("res/rotate.png");
 	decouple_icon = gtk_image_new_from_file("res/decouple.png");
+	help_icon = gtk_image_new_from_file("res/help.png");
 
 	// set icons
 	// line_pp
@@ -129,6 +131,11 @@ int main() {
 	gtk_button_set_always_show_image(GTK_BUTTON(point_bttn), TRUE);
 	gtk_button_set_image_position(GTK_BUTTON(point_bttn), GTK_POS_TOP);
 
+	// help
+	gtk_button_set_image(GTK_BUTTON(help_bttn), help_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(help_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(help_bttn), GTK_POS_TOP);
+
 	// init down tool panel widgets
 	lay_entry = gtk_entry_new();
 	set_bttn = gtk_button_new_with_label("Set");
@@ -139,6 +146,8 @@ int main() {
 
 	crd_label = gtk_label_new("(0; 0)");
 	hint_label = gtk_label_new("Select tool");
+
+	hl_set_widget(hint_label);
 
 	// fills draw bttns
 	draw_bttns[0] = point_bttn;
