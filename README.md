@@ -30,6 +30,7 @@ the program also supports bindings:
 + Vertical Bindings
 
 ## building
+### please do not clone the repository if you are going to use the program, download the release
 To compile and run the program successfully, you will need:
 + gcc compiler
 + gtk library
