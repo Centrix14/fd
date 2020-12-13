@@ -8,6 +8,7 @@
 #include "geometry.h"
 #include "draw.h"
 #include "callbacks.h"
+#include "help.h"
 
 #include "dbg.h"
 
@@ -67,6 +68,7 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, double x, double y) {
 		tmp_figure.visible = VM_PREVIEW;
 
 		dl_send_preview_figure(&tmp_figure);
+		hl_set_help(HC_END_POINT);
 	}
 	else {
 		list_add_node(lptr);
@@ -82,6 +84,8 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, double x, double y) {
 		line->visible = VM_SHOW;
 
 		list_set_data(last, line);
+
+		hl_set_help(HC_START_POINT);
 	}
 	
 	state = !state;
@@ -115,6 +119,7 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, double x, double y) {
 		tmp_figure.visible = VM_PREVIEW;
 
 		dl_send_preview_figure(&tmp_figure);	
+		hl_set_help(HC_END_POINT);
 	}
 	else {
 		list_add_node(lptr);
@@ -130,6 +135,8 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, double x, double y) {
 		rect->visible = VM_SHOW;
 
 		list_set_data(last, rect);
+
+		hl_set_help(HC_START_POINT);
 	}
 
 	state = !state;
@@ -165,6 +172,7 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, double x, double y) {
 		tmp_figure.visible = VM_PREVIEW;
 
 		dl_send_preview_figure(&tmp_figure);
+		hl_set_help(HC_RADIUS_POINT);
 	}
 	else {
 		list_add_node(lptr);
@@ -191,6 +199,8 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, double x, double y) {
 		center_point = figure_new_point(tmp_figure.x, tmp_figure.y);
 
 		list_set_data(last, center_point);
+
+		hl_set_help(HC_CENTER_POINT);
 	}
 
 	state = !state;
@@ -354,12 +364,16 @@ void ch_move(GtkWidget *draw_area, list *lptr, double x, double y) {
 	if (!state) {
 		base_x = x;
 		base_y = y;	
+
+		hl_set_help(HC_INS_POINT);
 	}
 	else {
 		offset_x = x - base_x;	
 		offset_y = y - base_y;
 
 		list_crawl(lptr, ch_fugure_move);
+
+		hl_set_help(HC_BASE_POINT);
 	}
 
 	state = !state;
@@ -386,13 +400,17 @@ void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y) {
 
 	if (!state) {
 		base_x = x;
-		base_y = y;	
+		base_y = y;
+
+		hl_set_help(HC_INS_POINT);
 	}
 	else {
 		offset_x = x - base_x;
-		offset_y = y - base_y;	
+		offset_y = y - base_y;
 
 		list_crawl(lptr, ch_copy_offset);
+
+		hl_set_help(HC_BASE_POINT);
 	}
 
 	state = !state;
