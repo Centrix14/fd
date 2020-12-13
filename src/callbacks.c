@@ -11,6 +11,7 @@
 #include "fd_format.h"
 #include "dbg.h"
 #include "error.h"
+#include "help.h"
 
 extern list *figure_list;
 extern GtkWidget *window;
@@ -102,10 +103,12 @@ gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 void point_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_POINT);
+	hl_set_help(HC_POINT);
 }
 
 void line_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_LINE_PP);
+	hl_set_help(HC_START_POINT);
 }
 
 GtkWidget *lenght_entry, *angle_entry;
@@ -188,10 +191,13 @@ void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_LINE_LA);
 
 	gtk_widget_destroy(dialog);
+
+	hl_set_help(HC_POINT);
 }
 
 void rect_pp_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_RECT_PP);
+	hl_set_help(HC_START_POINT);
 }
 
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
@@ -368,6 +374,8 @@ void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_RECT_WH);
 
 	gtk_widget_destroy(dialog);
+
+	hl_set_help(HC_POINT);
 }
 
 void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
@@ -386,23 +394,20 @@ void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *help_dialog, *dialog_content;
 	GtkWidget *main_box;
-	GtkWidget *help_label, *scrolled_window;
+	GtkWidget *help_label;
 
 	help_dialog = gtk_dialog_new_with_buttons("Help", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(help_dialog));
 	g_signal_connect_swapped(help_dialog, "response", G_CALLBACK(gtk_widget_destroy), help_dialog);
 
 	// init help label
-	help_label = gtk_label_new("here will be help");
+	help_label = gtk_label_new(hl_get_help(HC_MAIN));
 
-	// init scrolled window
-	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
-	gtk_container_add(GTK_CONTAINER(scrolled_window), help_label);
+	gtk_label_set_selectable(GTK_LABEL(help_label), TRUE);
 
 	// init main box
-	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	gtk_box_pack_start(GTK_BOX(main_box), scrolled_window, TRUE, TRUE, 0);
+	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+	gtk_box_pack_start(GTK_BOX(main_box), help_label, TRUE, TRUE, 10);
 
 	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
 	gtk_widget_show_all(help_dialog);
@@ -410,6 +415,8 @@ void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 void circle_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_CIRCLE);
+
+	hl_set_help(HC_CENTER_POINT);
 }
 
 void arc_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
@@ -418,6 +425,7 @@ void arc_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 void curs_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_NONE);
+	hl_set_help(HC_CUROR);
 }
 
 void unselect(list *node) {
@@ -511,10 +519,12 @@ void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]) {
 
 void move_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(WM_MOVE);
+	hl_set_help(HC_BASE_POINT);
 }
 
 void cp_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(WM_CP);
+	hl_set_help(HC_BASE_POINT);
 }
 
 void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area) {
@@ -592,4 +602,6 @@ void rot_dialog_apply_bttn(GtkWidget *bttn, GtkWidget *entry) {
 	gtk_widget_destroy(dialog);
 
 	ch_set_draw_mode(WM_ROTATE);
+
+	hl_set_help(HC_BASE_POINT);
 }
