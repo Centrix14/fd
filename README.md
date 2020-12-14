@@ -47,6 +47,9 @@ make rel
 at the moment the documentation for fd sources is written
 see [here](doc/fd_doc.md)
 
+## user manual
+there is also a user manual it is [here](doc/user_manual.md)
+
 ## screenshots
 ![](screenshots/scr1.png)
 ![](screenshots/scr2.png)
