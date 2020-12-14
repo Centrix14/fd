@@ -394,19 +394,21 @@ void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *help_dialog, *dialog_content;
 	GtkWidget *main_box;
-	GtkWidget *help_label;
+	GtkWidget *help_label, *logo;
 
 	help_dialog = gtk_dialog_new_with_buttons("Help", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(help_dialog));
 	g_signal_connect_swapped(help_dialog, "response", G_CALLBACK(gtk_widget_destroy), help_dialog);
 
-	// init help label
+	// widgets label
 	help_label = gtk_label_new(hl_get_help(HC_MAIN));
+	logo = gtk_image_new_from_file("res/fd.png");
 
 	gtk_label_set_selectable(GTK_LABEL(help_label), TRUE);
 
 	// init main box
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+	gtk_box_pack_start(GTK_BOX(main_box), logo, TRUE, TRUE, 10);
 	gtk_box_pack_start(GTK_BOX(main_box), help_label, TRUE, TRUE, 10);
 
 	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
