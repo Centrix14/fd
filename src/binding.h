@@ -4,7 +4,7 @@
 #include "data/list.h"
 #include "figure.h"
 
-#define BINDING_AREA 20
+#define BINDING_AREA 10
 
 void bl_bind(list *lptr, double *x, double *y);
 
