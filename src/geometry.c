@@ -155,27 +155,20 @@ figure *gel_get_equal_point(figure *line1, figure *line2) {
 }
 
 int gel_is_point_in_line(figure *l, figure *p) {
-	double a = 0, b = 0, c = 0, S = 0, hp = 0, h = 0;
-	figure b_line, c_line;
+	double dx1, dy1, dx, dy, S, ab, h;
 
-	figure_fill(&b_line, p->x, p->y, l->a1, l->a2, FG_TYPE_LINE_PP);
-	figure_fill(&c_line, p->x, p->y, l->x, l->y, FG_TYPE_LINE_PP);
+	dx1 = l->a1 - l->x;
+	dy1 = l->a2 - l->y;
 
-	// sides of triangle
-	a = gel_calculate_lenght(l);
-	b = gel_calculate_lenght(&b_line);
-	c = gel_calculate_lenght(&c_line);
+	dx = p->x - l->x;
+	dy = p->y - l->y;
 
-	// halfperometr
-	hp = (a + b + c) / 2;
+	S = dx1 * dy - dx * dy1;
+	ab = sqrt(pow(dx1, 2) + pow(dy, 2));
 
-	// square
-	S = sqrt(hp * (hp - a)*(hp - b)*(hp - c));
+	h = S / ab;
 
-	// height
-	h = (2 * S) / a;
-
-	return (h <= BINDING_AREA) && (gel_is_point_in_area(l, p));
+	return (fabs(h) < BINDING_AREA/2);
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
@@ -222,6 +215,11 @@ double gel_calculate_line_angle(figure *l) {
 	R = gel_calculate_lenght(l);
 
 	A = asin(dy / R);
+
+	if (l->a1 < l->x)
+		A += PI / 2; // + 90
+	if (l->a2 > l->y)
+		A = -A;
 
 	return gel_convert_rads_to_grades(A);
 }
