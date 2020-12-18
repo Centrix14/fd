@@ -4,7 +4,7 @@
 #include "figure.h"
 
 int main() {
-	figure *l1, *l2;
+	figure *l1;
 
 	l1 = figure_new_line_pp(0, 0, -5, -5);
 
