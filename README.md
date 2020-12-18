@@ -20,6 +20,7 @@ the program is still under development, but the following features are already a
 
 in development:
 + arcs
++ other functions
 
 supported formats
 + fd -- internal format of the FlatDraw
