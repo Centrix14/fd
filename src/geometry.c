@@ -214,14 +214,16 @@ double gel_calculate_line_angle(figure *l) {
 	dy = l->a2 - l->y;
 	R = gel_calculate_lenght(l);
 
-	A = asin(dy / R);
+	A = asin(fabs(dy) / R);
 
 	if (l->a1 < l->x)
 		A += PI / 2; // + 90
 	if (l->a2 > l->y)
 		A = -A;
 
-	return gel_convert_rads_to_grades(A);
+	//printf("%s: %g\n", __func__, gel_convert_rads_to_grades(A));
+	//return gel_convert_rads_to_grades(A);
+	return A;
 }
 
 double gel_calculate_heron_formula(double a, double b, double c) {
@@ -280,11 +282,11 @@ figure *gel_get_arc_center(figure *l1, figure *l2) {
 	return &cp;
 }
 
-int min(double v1, double v2) {
+double gel_min(double v1, double v2) {
 	return (v1 < v2) ? v1 : v2;
 }
 
-int max(double v1, double v2) {
+double gel_max(double v1, double v2) {
 	return (v1 > v2) ? v1 : v2;
 }
 
@@ -297,8 +299,8 @@ int gel_is_point_in_area(figure *area, figure *p) {
 	x2 = area->a1;
 	y2 = area->a2;
 
-	if ((p->x >= min(x1, x2)) && (p->a1 <= max(x1, x2)))
-		if ((p->y >= min(y1, y2)) && (p->a2 <= max(y1, y2)))
+	if ((p->x >= gel_min(x1, x2)) && (p->a1 <= gel_max(x1, x2)))
+		if ((p->y >= gel_min(y1, y2)) && (p->a2 <= gel_max(y1, y2)))
 			return 1;
 	return 0;
 }
