@@ -263,13 +263,13 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 		figure_fill(&l, cpoint.x, cpoint.y, x2, y2, FG_TYPE_LINE_PP);
 		ang2 = gel_calculate_line_angle(&l);
 
-		printf("Arc: C(%g; %g), a1 = %g, a2 = %g, R = %g\n", cpoint.x, cpoint.y, ang1, ang2, R);
+		printf("Arc: C(%g; %g), a1 = %g, a2 = %g, R = %g\n", cpoint.x, cpoint.y, gel_min(ang1, ang2), gel_max(ang1, ang2), R);
 
 		// make arc
 		list_add_node(lptr);
 
 		last = list_get_last(lptr);
-		arc = figure_new_arc(cpoint.x, cpoint.y, R, ang1, ang2);
+		arc = figure_new_arc(cpoint.x, cpoint.y, R, gel_min(ang1, ang2), gel_max(ang1, ang2));
 		arc->visible = VM_SHOW;
 
 		list_set_data(last, arc);
