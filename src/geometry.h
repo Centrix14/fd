@@ -33,4 +33,7 @@ int gel_is_point_in_area(figure *area, figure *p);
 
 void gel_rotate_point(double *x, double *y, double angle);
 
+double gel_min(double v1, double v2);
+double gel_max(double v1, double v2);
+
 #endif
