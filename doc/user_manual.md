@@ -40,6 +40,10 @@ In the screenshot below, the main interface elements are highlighted and signed 
 4. Common tool.
 5. The information panel here you can see the tooltip and the cursor position.
 
+### Interaction with the workspace
+1. To create \ start, left-click on the desired area
+2. If you want to abort the action, click the right mouse button
+
 <a name="drawing"></a>
 ## Drawing
 <a name="points"></a>
