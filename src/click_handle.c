@@ -209,9 +209,9 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, double x, double y) {
 }
 
 void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
-	static double x1, y1, x2, y2, xh, yh, a_side, ang1, ang2;
+	static double x1, y1, x2, y2, xh, yh, ang1, ang2;
 	static int state = 0;
-	figure l, cpoint, *arc, *arc_c, b_side_line, c_side_line, a_side_line;
+	figure l, cpoint, *arc, *arc_c, b_side_line, c_side_line;
 	list *last;
 	double R;
 
@@ -227,10 +227,6 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 
 		figure_fill(&l, x1, y1, x2, y2, FG_TYPE_LINE_PP);
 
-		// get base of arc, and middle point of base
-		a_side = gel_calculate_lenght(&l);
-		printf("Arc: a = %g\n", a_side);
-
 		state = 2;
 	}
 	else {
@@ -240,16 +236,11 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 
 		// calculate the a, b and c side of triangle
 		figure_fill(&b_side_line, x1, y1, xh, yh, FG_TYPE_LINE_PP);
-		//b_side = gel_calculate_lenght(&b_side_line);
 
 		figure_fill(&c_side_line, xh, yh, x2, y2, FG_TYPE_LINE_PP);
-		//c_side = gel_calculate_lenght(&c_side_line);
-
-		figure_fill(&a_side_line, x1, y1, x2, y2, FG_TYPE_LINE_PP);
 
 		// get center point
 		cpoint = *gel_get_arc_center(&b_side_line, &c_side_line);
-		//mpoint = *gel_get_middle_point(&a_side_line);
 
 		// calculate R
 		figure_fill(&l, cpoint.x, cpoint.y, xh, yh, FG_TYPE_LINE_PP);
@@ -274,8 +265,6 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 
 		list_set_data(last, arc);
 
-		state = 0;
-
 		// make center point
 		list_add_node(lptr);
 
@@ -284,8 +273,9 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 
 		list_set_data(last, arc_c);
 		
-
 		gtk_widget_queue_draw(draw_area);
+		
+		state = 0;
 	}
 }
 
