@@ -98,8 +98,9 @@ void gel_calculate_line_la(figure *point, double lenght, double angle) {
 	ly = sin(gel_convert_grades_to_rads(angle)) * lenght;
 	lx = sqrt(pow(lenght, 2) - pow(ly, 2));
 
-	point->a1 = lx + point->x;
-	point->a2 = ly + point->y;
+	/*point->a1 = lx + point->x;
+	point->a2 = ly + point->y;*/
+	gel_convert_crd_by_angle(point, gel_convert_grades_to_rads(angle), lx, ly);
 }
 
 double gel_convert_grades_to_rads(double grades) {
@@ -216,14 +217,11 @@ double gel_calculate_line_angle(figure *l) {
 
 	A = asin(fabs(dy) / R);
 
-	if (l->a1 < l->x)
-		A += PI / 2; // + 90
-	if (l->a2 > l->y)
-		A = -A;
+	A = gel_convert_angle_by_crd(l, A);
 
 	//printf("%s: %g\n", __func__, gel_convert_rads_to_grades(A));
-	//return gel_convert_rads_to_grades(A);
-	return A;
+	return gel_convert_rads_to_grades(A);
+	//return A;
 }
 
 double gel_calculate_heron_formula(double a, double b, double c) {
@@ -315,4 +313,40 @@ void gel_rotate_point(double *x, double *y, double angle) {
 
 	*x = result.x;
 	*y = result.y;
+}
+
+double gel_convert_angle_by_crd(figure *l, double a) {
+	double dx = 0, dy = 0;
+
+	dx = l->a1 - l->x;
+	dy = l->a2 - l->y;
+
+	if (dx < 0) {
+		a += PI / 2;
+	}
+	if (dy < 0) {
+		a = -a;
+	}
+
+	printf("%s: %g\n", __func__, a);
+	return a;
+}
+
+void gel_convert_crd_by_angle(figure *l, double a, double lx, double ly) {
+	if (a <= (PI / 2)) {
+		l->a1 = l->x + lx;
+		l->a2 = l->y + ly;
+	}
+	else if (a <= PI) {
+		l->a1 = l->x - fabs(lx);
+		l->a2 = l->y + ly;
+	}
+	else if (a <= (3 * PI / 2)) {
+		l->a1 = l->x - fabs(lx);
+		l->a2 = l->y - fabs(ly);
+	}
+	else if (a <= (2 * PI)) {
+		l->a1 = l->x + lx;
+		l->a2 = l->y - fabs(ly);
+	}
 }
