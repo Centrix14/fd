@@ -3,7 +3,9 @@
 
 #include "figure.h"
 
-#define PI 3.14159265359
+#define PI 3.14159265358979323846
+#define GR_MIN 0.2
+#define GR_MAX 0.9
 
 double gel_calculate_lenght(figure *line);
 char *gel_calculate_intersection(figure *line1, figure *line2, figure *p);
@@ -35,5 +37,8 @@ void gel_rotate_point(double *x, double *y, double angle);
 
 double gel_min(double v1, double v2);
 double gel_max(double v1, double v2);
+
+double gel_convert_angle_by_crd(figure *l, double a);
+void gel_convert_crd_by_angle(figure *l, double a, double lx, double ly);
 
 #endif
