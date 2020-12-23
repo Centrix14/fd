@@ -1,8 +1,8 @@
 /*
  * main.c -- main fd file, contains gui
- * v0.15
- * 13.12.2020
- * by Centrix
+ * v0.16
+ * 23.12.2020
+ * by Centrix14
  */
 
 #include <stdio.h>
