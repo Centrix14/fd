@@ -665,12 +665,14 @@ void circle_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 	gtk_widget_destroy(dialog);
 }
 
+GtkWidget *ang1_entry, *ang2_entry, *radii_entry;
+
 void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *ang1_label, *ang2_label,
-			  *ang1_entry, *ang2_entry,
-			  *radii_label, *radii_entry,
+			  *radii_label,
 			  *ok_bttn;
+	GtkWidget *entrys[3];
 	GtkWidget *ang1_box, *ang2_box, *radii_box, *bttn_box, *main_box;
 
 	dialog = gtk_dialog_new_with_buttons("Arc (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
@@ -690,7 +692,10 @@ void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// init buttons
 	ok_bttn = gtk_button_new_with_label("OK");
 
-	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(circle_dialog_ok_bttn_click), NULL);
+	entrys[0] = radii_entry;
+	entrys[1] = ang1_entry;
+	entrys[2] = ang2_entry;
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(arc_dialog_ok_bttn_click), entrys);
 
 	// init lenght- angle- boxes
 	ang1_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -726,15 +731,15 @@ void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_widget_show_all(dialog);
 }
 
-void arc_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entrys[]) {
+void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	static figure arc_data;
 
 	// radius
-	arc_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(entrys[0])));
+	arc_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(radii_entry)));
 
 	// angles
-	arc_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(entrys[1])));
-	arc_data.a3 = atof(gtk_entry_get_text(GTK_ENTRY(entrys[2])));
+	arc_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(ang1_entry)));
+	arc_data.a3 = atof(gtk_entry_get_text(GTK_ENTRY(ang2_entry)));
 
 	ch_set_external_figure(&arc_data);
 	ch_set_draw_mode(FG_TYPE_ARC_PRM);
