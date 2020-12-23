@@ -119,7 +119,7 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *ok_bttn, *apply_bttn, *direction_bttn;
 	GtkWidget *lenght_box, *angle_box, *bttn_box, *direction_box, *main_box;
 
-	dialog = gtk_dialog_new_with_buttons("Line (LA)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Line (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -288,7 +288,7 @@ void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *ok_bttn, *apply_bttn;
 	GtkWidget *width_box, *height_box, *direction_box, *bttn_box, *main_box;
 
-	dialog = gtk_dialog_new_with_buttons("Rect (WH)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Rect (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
