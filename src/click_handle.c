@@ -37,7 +37,7 @@ void ch_set_state(int new_state) {
 }
 
 void ch_click_handler(GtkWidget *draw_area, list *lptr, double x, double y) {
-	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_click_cursor_select, ch_move, ch_cp, ch_rotate};
+	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_add_circle_prm, ch_click_cursor_select, ch_move, ch_cp, ch_rotate};
 	int len = 0;
 
 	len = arr_len(handlers, ch_handler);
@@ -163,7 +163,7 @@ void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, double x, double y) {
 }
 
 void ch_add_circle(GtkWidget *draw_area, list *lptr, double x, double y) {
-	figure *circle, *rad, *center_point;
+	figure *circle, *rad;
 	list *last;
 	double radii;
 
@@ -191,14 +191,6 @@ void ch_add_circle(GtkWidget *draw_area, list *lptr, double x, double y) {
 		circle->visible = VM_SHOW;
 
 		list_set_data(last, circle);
-
-		// add center point
-		list_add_node(lptr);
-
-		last = list_get_last(lptr);
-		center_point = figure_new_point(tmp_figure.x, tmp_figure.y);
-
-		list_set_data(last, center_point);
 
 		hl_set_help(HC_CENTER_POINT);
 	}
@@ -452,4 +444,20 @@ void ch_rot(list *lptr) {
 	if (fptr->visible == VM_SELECTED) {
 		figure_rotate(lptr, &base, angle);	
 	}
+}
+
+void ch_add_circle_prm(GtkWidget *draw_area, list *lptr, double x, double y) {
+	figure *circle;
+	list *last;
+
+	list_add_node(lptr);
+
+	circle = figure_new_circle(x, y, ext_figure->a1);
+	last = list_get_last(lptr);
+
+	circle->visible = VM_SHOW;
+
+	list_set_data(last, circle);
+
+	gtk_widget_queue_draw(draw_area);
 }
