@@ -7,7 +7,9 @@ the program is still under development, but the following features are already a
 + Drawing lines by point, length, and angle
 + Drawing a rectangle by 2 points
 + Drawing a rectangles by width and height
-+ Drawing circles
++ Drawing circles by center and radius (free mode)
++ Drawing circles by radius (parametric mode)
++ Drawing arcs by 2 angles and radius (parametric mode)
 + Layers
 + Save / Open
 + Selecting
