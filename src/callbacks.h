@@ -23,6 +23,7 @@ void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 void circle_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
+void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
