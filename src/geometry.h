@@ -19,6 +19,8 @@ int gel_lf_is_parallel(figure *line1, figure *line2);
 
 double gel_convert_grades_to_rads(double grades);
 double gel_convert_rads_to_grades(double rads);
+double gel_convert_angle_by_crd(figure *l, double a);
+void gel_convert_crd_by_angle(figure *l, double a, double lx, double ly);
 
 figure *gel_get_middle_point(figure *line);
 double gel_get_line_angle(figure *l);
@@ -37,8 +39,5 @@ void gel_rotate_point(double *x, double *y, double angle);
 
 double gel_min(double v1, double v2);
 double gel_max(double v1, double v2);
-
-double gel_convert_angle_by_crd(figure *l, double a);
-void gel_convert_crd_by_angle(figure *l, double a, double lx, double ly);
 
 #endif
