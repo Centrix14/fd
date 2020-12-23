@@ -12,7 +12,9 @@
 	    - [Parametric](#rprm)
 	- [Circles](#circles)
 	    - [Free](#cfree)
+	    - [Parametric](#cprm)
 	- [Arcs](#arcs)
+	    - [Parametric](#aprm)
 + [Modification](#mod)
     - [Delete](#delete)
 	- [Copy/Paste](#cp)
@@ -86,9 +88,19 @@ At the moment, we only support 1 way to draw circles: free. Click on the "Circle
 #### Free mode
 Click to start the circle, and click again to finish it, after moving the cursor to the desired location. When creating a drawing, you don't need to hold down the left mouse button.
 
+<a name="cprm"></a>
+#### Parametric mode
+Since version 0.16, parameterized arcs have been added. To start drawing, switch to parametric mode.
+After that, click on the "Circle" button. In the window that opens, fill in the fields, click "OK" and then click on the area where the center of the circle should be located.
+
 <a name="arcs"></a>
 ### Arcs
-Don't use this feature!
+Please use parametric mode only!
+
+<a name="aprm">
+#### Parametric mode
+Since version 0.16, parameterized arcs have been added. To start drawing, switch to parametric mode.
+After that, click on the "Arc" button. In the window that opens, fill in the fields, click "OK" and then click on the area where the center of the arc should be located.
 
 <a name="mod"></a>
 ## Modification
@@ -155,4 +167,4 @@ This button selects the level set in the field as current.
 In this panel, you can see the cursor position in parentheses on the left, and short hints on the right.
 
 ---
-FlatDraw v0.15 14.12.2020 by Centrix14
+FlatDraw v0.16 23.12.2020 by Centrix14
