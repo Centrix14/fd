@@ -137,6 +137,8 @@ void dl_draw_circle(figure *fptr) {
 	cairo_arc(context, x, y, r, 0, 2 * G_PI);
 
 	cairo_stroke(context);
+
+	dl_draw_point(fptr);
 }
 
 void dl_draw_arc(figure *fptr) {
