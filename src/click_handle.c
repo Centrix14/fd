@@ -37,7 +37,7 @@ void ch_set_state(int new_state) {
 }
 
 void ch_click_handler(GtkWidget *draw_area, list *lptr, double x, double y) {
-	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_add_circle_prm, ch_click_cursor_select, ch_move, ch_cp, ch_rotate};
+	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_add_circle_prm, ch_add_arc_prm, ch_click_cursor_select, ch_move, ch_cp, ch_rotate};
 	int len = 0;
 
 	len = arr_len(handlers, ch_handler);
@@ -458,6 +458,22 @@ void ch_add_circle_prm(GtkWidget *draw_area, list *lptr, double x, double y) {
 	circle->visible = VM_SHOW;
 
 	list_set_data(last, circle);
+
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_add_arc_prm(GtkWidget *draw_area, list *lptr, double x, double y) {
+	figure *arc;
+	list *last;
+
+	list_add_node(lptr);
+
+	arc = figure_new_arc(x, y, ext_figure->a1, ext_figure->a2, ext_figure->a3);
+	last = list_get_last(lptr);
+
+	arc->visible = VM_SHOW;
+
+	list_set_data(last, arc);
 
 	gtk_widget_queue_draw(draw_area);
 }
