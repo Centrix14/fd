@@ -3,7 +3,7 @@
 
 #include "data/list.h"
 
-#define DRAW_BUTTONS 5
+#define DRAW_BUTTONS 9
 
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);
 gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);
@@ -17,9 +17,12 @@ void rect_pp_bttn_click(GtkWidget *bttn, gpointer data);
 void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void circle_bttn_click(GtkWidget *bttn, gpointer data);
 void arc_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void circle_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 
 void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
+void circle_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
