@@ -17,6 +17,7 @@ void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_add_circle(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_add_circle_prm(GtkWidget *draw_area, list *lptr, double x, double y);
+void ch_add_arc_prm(GtkWidget *draw_area, list *lptr, double x, double y);
 
 void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, double y);
