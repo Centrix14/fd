@@ -97,7 +97,7 @@ After that, click on the "Circle" button. In the window that opens, fill in the 
 ### Arcs
 Please use parametric mode only!
 
-<a name="aprm">
+<a name="aprm"></a>
 #### Parametric mode
 Since version 0.16, parameterized arcs have been added. To start drawing, switch to parametric mode.
 After that, click on the "Arc" button. In the window that opens, fill in the fields, click "OK" and then click on the area where the center of the arc should be located.
