@@ -105,6 +105,8 @@ contains callback functions for the interface created in main.c
 + `void cp_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for copy-paste button
 + `void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area);` -- callback for decouple button
 + `void rot_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for rotation button
++ `void circle_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for parametric circle
++ `void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for parametric arcs
 
 ##### dialog
 + `void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in line la dialog
@@ -112,6 +114,8 @@ contains callback functions for the interface created in main.c
 + `void save_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in save dialog
 + `void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in open dialog
 + `void rot_dialog_apply_bttn(GtkWidget *bttn, GtkWidget *entry)` -- callback for apply button in rotation dialog
++ `void circle_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in parametric circle dialog
++ `void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in parametric arcs dialog
 
 ##### other
 + `void unselect(list *node);` -- function for unselect
@@ -151,6 +155,8 @@ enum CH_WORK_MODES {
 + `void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new rect_wh by x, y in figure list lptr, and draw it in draw_area
 + `void ch_add_circle(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new circle by x, y in figure list lptr, and draw it in draw_area
 + `void ch_add_arc(GtkWidget *draw_area, list *lptr, int x, int y);` -- creates new arc by x, y in figure list lptr, and draw it in draw_area
++ `void ch_add_circle_prm(GtkWidget *draw_area, list *lptr, double x, double y);` -- creates new circle by x and y, and draw it in draw_area
++ `void ch_add_arc_prm(GtkWidget *draw_area, list *lptr, double x, double y);` -- creates new arc by x and y, and draw it in draw_area
 
 ##### click_cursor
 + `void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y);` -- handle a click, when select Cursor mode
@@ -283,6 +289,8 @@ enum FG_TYPES {
 	FG_TYPE_RECT_WH,
 	FG_TYPE_CIRCLE,
 	FG_TYPE_ARC,
+	FG_TYPE_CIRCLE_PRM,
+	FG_TYPE_ARC_PRM,
 	FG_TYPE_NONE // cursor
 };
 ```
@@ -355,6 +363,8 @@ this header contains geometry processing functions
 ##### convert
 + `double gel_convert_grades_to_rads(double grades);` -- converts grades to rads
 + `double gel_convert_rads_to_grades(double rads);` -- converts rads to grades
++ `double gel_convert_angle_by_crd(figure *l, double a);` -- converts angle `a` by given coordiantes (in view of the coordinate quarter)
++ `void gel_convert_crd_by_angle(figure *l, double a, double lx, double ly);` -- convetrs given coordinates in view of angle `a`
 
 ##### get
 + `figure *gel_get_middle_point(figure *line);` -- return middle point of line
