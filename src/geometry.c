@@ -328,7 +328,9 @@ double gel_convert_angle_by_crd(figure *l, double a) {
 		a = -a;
 	}
 
+#ifdef DBG
 	printf("%s: %g\n", __func__, a);
+#endif
 	return a;
 }
 
