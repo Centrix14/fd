@@ -12,6 +12,7 @@
 #include "dbg.h"
 #include "error.h"
 #include "help.h"
+#include "text.h"
 
 extern list *figure_list;
 extern GtkWidget *window;
@@ -539,7 +540,7 @@ void cb_dc(list *lptr) {
 	figure *fptr = NULL, *elms = NULL, *new = NULL;
 	list *last = NULL;
 
-	fptr = list_get_data(lptr);
+	fptr = figure_get_from_node(lptr);
 	if (!fptr)
 		return ;
 
@@ -745,6 +746,99 @@ void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_ARC_PRM);
 
 	hl_set_help(HC_CENTER_POINT);
+
+	gtk_widget_destroy(dialog);
+}
+
+GtkWidget *text_size_entry, *text_font_entry, *text_color_entry;
+
+void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
+	GtkWidget *dialog_content;
+	GtkWidget *text_view, *ok_bttn, *help_bttn;
+	GtkWidget *text_size_label, *text_font_label;
+	GtkWidget *bttn_box, *label_size_box, *label_font_box, *label_opt_box, *main_box;
+	GtkTextBuffer *text_buffer;
+
+	dialog = gtk_dialog_new_with_buttons("Arc (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	// label options
+	text_size_label = gtk_label_new("Text size");
+	text_font_label = gtk_label_new("Font");
+
+	text_size_entry = gtk_entry_new();
+	text_font_entry = gtk_entry_new();
+
+	// create text buffer & view
+	text_buffer = gtk_text_buffer_new(NULL);
+	text_view = gtk_text_view_new_with_buffer(text_buffer);
+
+	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(text_view), GTK_WRAP_WORD_CHAR);
+
+	// buttons
+	ok_bttn = gtk_button_new_with_label("OK");
+	help_bttn = gtk_button_new_with_label("Help");
+
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(text_dialog_ok_bttn_click), text_buffer);
+
+	// pack label size box
+	label_size_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(label_size_box), text_size_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(label_size_box), text_size_entry, TRUE, TRUE, 5);
+
+	// pack label font box
+	label_font_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(label_font_box), text_font_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(label_font_box), text_font_entry, TRUE, TRUE, 5);
+
+	// pack label options box
+	label_opt_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(label_opt_box), label_size_box, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(label_opt_box), label_font_box, FALSE, FALSE, 5);
+
+	// pack button box
+	bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(bttn_box), help_bttn, TRUE, TRUE, 5);
+
+	// pack main box
+	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(main_box), label_opt_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), text_view, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), bttn_box, FALSE, FALSE, 5);
+
+	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+	gtk_widget_show_all(dialog);
+}
+
+void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
+	GtkTextIter start, end;
+	char *buf = NULL, *font = NULL;
+	int size = 0;
+	list *last;
+	text *tptr;
+
+	gtk_text_buffer_get_start_iter(tb, &start);
+	gtk_text_buffer_get_end_iter(tb, &end);
+
+	buf = gtk_text_buffer_get_text(tb, &start, &end, TRUE);
+	font = (char*)gtk_entry_get_text(GTK_ENTRY(text_font_entry));
+	size = atoi(gtk_entry_get_text(GTK_ENTRY(text_size_entry)));
+
+	list_add_node(figure_list);
+	last = list_get_last(figure_list);
+	last->dt = OT_TEXT;
+
+	tptr = tl_new(font, size, 255, 255, 255);
+	tl_add_buffer(tptr, buf);
+
+	list_set_data(last, tptr);
 
 	gtk_widget_destroy(dialog);
 }
