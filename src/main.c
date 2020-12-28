@@ -13,6 +13,7 @@
 #include "figure.h"
 #include "error.h"
 #include "help.h"
+#include "multi_obj.h"
 
 list *figure_list = NULL;
 GtkWidget *window;
@@ -21,13 +22,13 @@ int main() {
 	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box, *left_box;
 
 	GtkWidget *scrolled_window, *draw_area;
-	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn, *circle_prm_bttn, *arc_prm_bttn;
+	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn, *circle_prm_bttn, *arc_prm_bttn, *text_bttn;
 	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label, *option_bttn;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
-	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon, *rot_icon, *decouple_icon, *help_icon, *circle_prm_icon, *arc_prm_icon;
+	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon, *rot_icon, *decouple_icon, *help_icon, *circle_prm_icon, *arc_prm_icon, *text_icon;
 
 	figure_list = list_init_node(NULL);
 
@@ -63,6 +64,7 @@ int main() {
 	curs_bttn = gtk_button_new_with_label("Cursor");
 	circle_prm_bttn = gtk_button_new_with_label("Circle (prmt)");
 	arc_prm_bttn = gtk_button_new_with_label("Arc (prmt)");
+	text_bttn = gtk_button_new_with_label("Text");
 
 	g_signal_connect(G_OBJECT(point_bttn), "clicked", G_CALLBACK(point_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(line_pp_bttn), "clicked", G_CALLBACK(line_bttn_click), NULL);
@@ -73,10 +75,11 @@ int main() {
 	g_signal_connect(G_OBJECT(arc_tp_bttn), "clicked", G_CALLBACK(arc_bttn_click), window);
 	g_signal_connect(G_OBJECT(circle_prm_bttn), "clicked", G_CALLBACK(circle_prm_bttn_click), window);
 	g_signal_connect(G_OBJECT(arc_prm_bttn), "clicked", G_CALLBACK(arc_prm_bttn_click), window);
+	g_signal_connect(G_OBJECT(curs_bttn), "clicked", G_CALLBACK(curs_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(text_bttn), "clicked", G_CALLBACK(text_bttn_click), window);
 
 	g_signal_connect(G_OBJECT(help_bttn), "clicked", G_CALLBACK(help_bttn_click), window);
 
-	g_signal_connect(G_OBJECT(curs_bttn), "clicked", G_CALLBACK(curs_bttn_click), NULL);
 
 	// create icon for buttons
 	line_icon1 = gtk_image_new_from_file("res/line.png");
@@ -95,6 +98,7 @@ int main() {
 	help_icon = gtk_image_new_from_file("res/help.png");
 	circle_prm_icon = gtk_image_new_from_file("res/ellipse.png");
 	arc_prm_icon = gtk_image_new_from_file("res/arc.png");
+	text_icon = gtk_image_new_from_file("res/text.png");
 
 	// set icons
 	// line_pp
@@ -152,6 +156,11 @@ int main() {
 	gtk_button_set_always_show_image(GTK_BUTTON(arc_prm_bttn), TRUE);
 	gtk_button_set_image_position(GTK_BUTTON(arc_prm_bttn), GTK_POS_TOP);
 
+	// text
+	gtk_button_set_image(GTK_BUTTON(text_bttn), text_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(text_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(text_bttn), GTK_POS_TOP);
+
 	// init down tool panel widgets
 	lay_entry = gtk_entry_new();
 	set_bttn = gtk_button_new_with_label("Set");
@@ -203,6 +212,7 @@ int main() {
 	gtk_box_pack_start(GTK_BOX(right_box), circle_rc_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), arc_prm_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), circle_prm_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), text_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), help_bttn, TRUE, TRUE, 0);
 
 	// init tools widgets
@@ -298,7 +308,7 @@ int main() {
 
 	gtk_main();
 
-	list_crawl(figure_list, figure_free_list);
+	list_crawl(figure_list, mol_free_from_node);
 	list_free_list(figure_list);
 
 	return 0;
