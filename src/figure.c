@@ -251,3 +251,9 @@ void figure_rotate(list *lptr, figure *base, double angle) {
 		break;
 	}
 }
+
+figure *figure_get_from_node(list *lptr) {
+	if (lptr && lptr->dt == OT_FIGURE)
+		return (figure*)(lptr->data);
+	return NULL;
+}
