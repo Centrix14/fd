@@ -11,7 +11,7 @@ char *bl_try_make_object_bind(list *lptr, double *x, double *y) {
 	figure *fptr = NULL;
 
 	while (node) {
-		fptr = (figure*)(list_get_data(node->next));
+		fptr = (figure*)(figure_get_from_node(node->next));
 
 		if (!fptr)
 			break;
