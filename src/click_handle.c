@@ -280,7 +280,7 @@ void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y
 
 	node = lptr;
 	while (node && !end) {
-		fptr = list_get_data(node);
+		fptr = figure_get_from_node(node);
 
 		if (!fptr) {
 			node = node->next;
