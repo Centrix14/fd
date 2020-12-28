@@ -70,4 +70,6 @@ void figure_rotate_line(figure *base, figure *l, double angle);
 void figure_rotate_rect(figure *base, figure *r, double angle, list *lptr);
 void figure_rotate(list *lptr, figure *base, double angle);
 
+figure *figure_get_from_node(list *lptr);
+
 #endif
