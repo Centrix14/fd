@@ -1,10 +1,18 @@
 #ifndef __FLAT_DRAW_DINAMIC_LIST_LIBRARY_HEADER_FILE_INCLUDED__
 #define __FLAT_DRAW_DINAMIC_LIST_LIBRARY_HEADER_FILE_INCLUDED__
 
+typedef enum {
+	OT_FIGURE = 0,
+	OT_TEXT
+} OBJ_TYPE;
+
 typedef struct __list__ {
 	struct __list__ *prev;
 	struct __list__ *next;
+
 	void *data;
+
+	OBJ_TYPE dt; // data type
 } list;
 
 list *list_init_node(list *parent);
