@@ -11,6 +11,11 @@ typedef struct {
 	int color_r;
 	int color_g;
 	int color_b;
+
+	int visible;
+
+	double x;
+	double y;
 } text;
 
 text *tl_new(char *font, int size, int r, int g, int b);
