@@ -182,3 +182,17 @@ void dl_switch_show_preview() {
 void dl_set_show_preview(int val) {
 	show_preview = val;
 }
+
+void dl_draw_text(text *tptr) {
+	cairo_text_extents_t te;
+
+	cairo_select_font_face(context, tptr->font, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
+	cairo_set_font_size(context, tptr->size);
+
+	cairo_text_extents(context, tptr->buffer, &te);
+	cairo_move_to(context, tptr->x, tptr->y);
+
+	cairo_set_source_rgb(context, tptr->color_r, tptr->color_g, tptr->color_b);
+	cairo_show_text(context, tptr->buffer);
+	cairo_fill(context);
+}
