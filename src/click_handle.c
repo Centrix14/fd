@@ -37,7 +37,7 @@ void ch_set_state(int new_state) {
 }
 
 void ch_click_handler(GtkWidget *draw_area, list *lptr, double x, double y) {
-	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_add_circle_prm, ch_add_arc_prm, ch_click_cursor_select, ch_move, ch_cp, ch_rotate};
+	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_add_circle_prm, ch_add_arc_prm, ch_click_cursor_select, ch_move, ch_cp, ch_rotate, ch_text};
 	int len = 0;
 
 	len = arr_len(handlers, ch_handler);
@@ -476,4 +476,30 @@ void ch_add_arc_prm(GtkWidget *draw_area, list *lptr, double x, double y) {
 	list_set_data(last, arc);
 
 	gtk_widget_queue_draw(draw_area);
+}
+
+int tx, ty;
+
+void ch_text(GtkWidget *draw_area, list *lptr, double x, double y) {
+	tx = x;
+	ty = y;
+
+	list_crawl(lptr, ch_proc_text);
+
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_proc_text(list *lptr) {
+	text *tptr;
+
+	if (lptr->dt == OT_TEXT && lptr->data) {
+		tptr = (text*)lptr->data;
+
+		if (tptr->visible == VM_PREVIEW) {
+			tptr->x = tx;
+			tptr->y = ty;
+
+			tptr->visible = VM_SHOW;
+		}
+	}
 }
