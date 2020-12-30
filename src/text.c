@@ -19,8 +19,8 @@ text *tl_new(char *font, int size, int r, int g, int b) {
 
 		return NULL;
 	}
-
 	strcpy(tptr->font, font);
+
 	tptr->size = size;
 	tptr->color_r = r;
 	tptr->color_g = g;
@@ -43,7 +43,7 @@ void tl_add_buffer(text *tptr, char *buf) {
 
 void tl_free(text *tptr) {
 	if (tptr) {
-		free(tptr->font);
+		//free(tptr->font);
 		free(tptr);
 	}
 }
