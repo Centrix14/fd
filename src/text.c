@@ -3,9 +3,10 @@
 #include <string.h>
 
 #include "text.h"
+#include "dbg.h"
 
 text *tl_new(char *font, int size, int r, int g, int b) {
-	text *tptr = malloc(sizeof(tptr));
+	text *tptr = malloc(sizeof(text));
 
 	if (!tptr) {
 		perror(__func__);
@@ -26,6 +27,8 @@ text *tl_new(char *font, int size, int r, int g, int b) {
 	tptr->color_g = g;
 	tptr->color_b = b;
 
+	text_log(tptr);
+
 	return tptr;
 }
 
@@ -43,7 +46,7 @@ void tl_add_buffer(text *tptr, char *buf) {
 
 void tl_free(text *tptr) {
 	if (tptr) {
-		//free(tptr->font);
+		free(tptr->font);
 		free(tptr);
 	}
 }
