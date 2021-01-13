@@ -9,11 +9,11 @@
 #include <gtk/gtk.h>
 
 #include "callbacks.h"
-#include "data/list.h"
-#include "figure.h"
-#include "error.h"
-#include "help.h"
-#include "multi_obj.h"
+#include "list/list.h"
+#include "figure/figure.h"
+#include "error/error.h"
+#include "help/help.h"
+#include "multi_obj/multi_obj.h"
 
 list *figure_list = NULL;
 GtkWidget *window;
