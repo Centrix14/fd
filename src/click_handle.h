@@ -21,6 +21,7 @@ void ch_add_arc_prm(GtkWidget *draw_area, list *lptr, double x, double y);
 
 void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, double y);
+void ch_click_cursor_select_text(GtkWidget *draw_area, list *lptr, double x, double y);
 
 void ch_unselect_last();
 void ch_fugure_move(list *lptr);
