@@ -2,13 +2,13 @@
 #include <math.h>
 #include <gtk/gtk.h>
 
-#include "data/list.h"
-#include "figure.h"
+#include "list/list.h"
+#include "figure/figure.h"
 #include "click_handle.h"
-#include "geometry.h"
-#include "draw.h"
+#include "geometry/geometry.h"
+#include "draw/draw.h"
 #include "callbacks.h"
-#include "help.h"
+#include "help/help.h"
 
 #include "dbg.h"
 
