@@ -4,8 +4,6 @@
 #include "../figure/figure.h"
 
 #define PI 3.14159265358979323846
-#define GR_MIN 0.2
-#define GR_MAX 0.9
 
 double gel_calculate_lenght(figure *line);
 char *gel_calculate_intersection(figure *line1, figure *line2, figure *p);
