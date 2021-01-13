@@ -2,18 +2,18 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 
-#include "figure.h"
+#include "figure/figure.h"
 #include "click_handle.h"
-#include "draw.h"
-#include "binding.h"
+#include "draw/draw.h"
+#include "binding/binding.h"
 #include "callbacks.h"
-#include "color.h"
-#include "fd_format.h"
+#include "color/color.h"
+#include "fd_format/fd_format.h"
 #include "dbg.h"
-#include "error.h"
-#include "help.h"
-#include "text.h"
-#include "multi_obj.h"
+#include "error/error.h"
+#include "help/help.h"
+#include "text/text.h"
+#include "multi_obj/multi_obj.h"
 
 extern list *figure_list;
 extern GtkWidget *window;
