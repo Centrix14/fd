@@ -194,5 +194,7 @@ void dl_draw_text(text *tptr) {
 
 	cairo_set_source_rgb(context, tptr->color_r, tptr->color_g, tptr->color_b);
 	cairo_show_text(context, tptr->buffer);
+
+	cairo_arc(context, tptr->x, tptr->y, 3, 0, 2 * G_PI);
 	cairo_fill(context);
 }
