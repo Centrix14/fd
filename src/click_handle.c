@@ -11,6 +11,7 @@
 #include "help/help.h"
 
 #include "dbg.h"
+#include "st/st.h"
 
 #define ch_handler void (*)(GtkWidget*, list*, double, double)
 #define arr_len(arr, elm) sizeof(arr) / sizeof(elm)
@@ -19,6 +20,8 @@ static int draw_mode = FG_TYPE_POINT, state = 0;
 static figure *ext_figure,
 			  tmp_figure;
 figure *last_selected_figure;
+
+st_debug_start(1);
 
 void ch_set_draw_mode(int new_mode) {
 	draw_mode = new_mode;
@@ -283,6 +286,9 @@ void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y
 		fptr = figure_get_from_node(node);
 
 		if (!fptr) {
+			if (node->dt == OT_TEXT)
+				ch_click_cursor_select_text(draw_area, node, x, y);
+
 			node = node->next;
 
 			continue;
@@ -336,6 +342,38 @@ void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, do
 
 void ch_unselect_last() {
 	last_selected_figure->visible = VM_SHOW;
+}
+
+
+void ch_click_cursor_select_text(GtkWidget *draw_area, list *lptr, double x, double y) {
+	figure text_area, p;
+	text *tptr;
+	cairo_surface_t *surf;
+	cairo_t *cr;
+	cairo_text_extents_t te;
+
+	tptr = (text*)lptr->data;
+	if (tptr->visible == VM_PREVIEW)
+		return ;
+
+	surf = gdk_window_create_similar_surface(gtk_widget_get_window(draw_area),
+											 CAIRO_CONTENT_COLOR, 
+											 gtk_widget_get_allocated_width(draw_area),
+											 gtk_widget_get_allocated_height(draw_area));
+	cr = cairo_create(surf);
+	cairo_text_extents(cr, tptr->buffer, &te);
+
+	figure_fill(&text_area, tptr->x, tptr->y, tptr->x + te.width, tptr->y + te.height, FG_TYPE_RECT_PP);
+	figure_fill(&p, x, y, 0, 0, FG_TYPE_POINT);
+
+	if (gel_is_point_in_area(&text_area, &p)) {
+		st_debug {
+			puts("hi!");
+		}
+	}
+
+	cairo_destroy(cr);
+	cairo_surface_destroy(surf);
 }
 
 double offset_x = 0, offset_y = 0;
