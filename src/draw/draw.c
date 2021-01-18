@@ -193,6 +193,9 @@ void dl_draw_text(text *tptr) {
 	cairo_move_to(context, tptr->x, tptr->y);
 
 	cairo_set_source_rgb(context, tptr->color_r, tptr->color_g, tptr->color_b);
+
+	if (tptr->visible == VM_SELECTED)
+		cl_set_color_fg(context, tptr->visible);
 	cairo_show_text(context, tptr->buffer);
 
 	cairo_arc(context, tptr->x, tptr->y, 3, 0, 2 * G_PI);
