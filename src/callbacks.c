@@ -760,7 +760,7 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	GtkWidget *bttn_box, *label_size_box, *label_font_box, *label_color_box, *label_opt_box, *main_box;
 	GtkTextBuffer *text_buffer;
 
-	dialog = gtk_dialog_new_with_buttons("Arc (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Text", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -856,7 +856,7 @@ void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	tptr = tl_new(font, size, color[0], color[1], color[2]);
 	tl_add_buffer(tptr, buf);
 
-	tptr->visible = VM_PREVIEW;
+	tptr->visible = VM_NOT_FINISHED;
 
 	list_set_data(last, tptr);
 
