@@ -348,32 +348,34 @@ void ch_unselect_last() {
 void ch_click_cursor_select_text(GtkWidget *draw_area, list *lptr, double x, double y) {
 	figure text_area, p;
 	text *tptr;
-	cairo_surface_t *surf;
-	cairo_t *cr;
-	cairo_text_extents_t te;
 
 	tptr = (text*)lptr->data;
 	if (tptr->visible == VM_PREVIEW)
 		return ;
 
-	surf = gdk_window_create_similar_surface(gtk_widget_get_window(draw_area),
-											 CAIRO_CONTENT_COLOR, 
-											 gtk_widget_get_allocated_width(draw_area),
-											 gtk_widget_get_allocated_height(draw_area));
-	cr = cairo_create(surf);
-	cairo_text_extents(cr, tptr->buffer, &te);
-
-	figure_fill(&text_area, tptr->x, tptr->y, tptr->x + te.width, tptr->y + te.height, FG_TYPE_RECT_PP);
+	figure_fill(&text_area, tptr->x, tptr->y, 0, 0, FG_TYPE_RECT_PP);
 	figure_fill(&p, x, y, 0, 0, FG_TYPE_POINT);
 
-	if (gel_is_point_in_area(&text_area, &p)) {
-		st_debug {
-			puts("hi!");
-		}
-	}
+	if (gel_is_point_in_point(&text_area, &p))
+		tptr->visible = VM_SELECTED;
+	else
+		ch_click_curcor_unselect_text(lptr);
 
-	cairo_destroy(cr);
-	cairo_surface_destroy(surf);
+	gtk_widget_queue_draw(draw_area);
+}
+
+void ch_click_curcor_unselect_text(list *lptr) {
+	list *node = lptr;
+	text *tptr;
+
+	while (node) {
+		tptr = (text*)node->data;
+		if (tptr)
+			if (tptr->visible == VM_SELECTED)
+				tptr->visible = VM_SHOW;
+
+		node = node->next;
+	}
 }
 
 double offset_x = 0, offset_y = 0;
@@ -533,7 +535,7 @@ void ch_proc_text(list *lptr) {
 	if (lptr->dt == OT_TEXT && lptr->data) {
 		tptr = (text*)lptr->data;
 
-		if (tptr->visible == VM_PREVIEW) {
+		if (tptr->visible == VM_NOT_FINISHED) {
 			tptr->x = tx;
 			tptr->y = ty;
 
