@@ -38,7 +38,8 @@ enum VISIBLE_MODES {
 	VM_SHOW,
 	VM_PREVIEW,
 	VM_PROJECTION,
-	VM_SELECTED
+	VM_SELECTED,
+	VM_NOT_FINISHED
 };
 
 figure *figure_new(double type, double x, double y, double a1, double a2, double a3);
