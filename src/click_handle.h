@@ -28,6 +28,7 @@ void ch_fugure_move(list *lptr);
 void ch_copy_offset(list *lptr);
 void ch_rot(list *lptr);
 void ch_proc_text(list *lptr);
+void ch_click_curcor_unselect_text(list *lptr);
 
 void ch_move(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y);
