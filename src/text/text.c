@@ -27,8 +27,6 @@ text *tl_new(char *font, int size, int r, int g, int b) {
 	tptr->color_g = g;
 	tptr->color_b = b;
 
-	text_log(tptr);
-
 	return tptr;
 }
 
