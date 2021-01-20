@@ -460,7 +460,8 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 
 	node = figure_list;
 	while (node) {
-		fptr = (figure*)node->data;
+		//fptr = (figure*)node->data;
+		fptr = mol_conv_to_figure(node);
 		if (!fptr) {
 			node = node->next;
 
