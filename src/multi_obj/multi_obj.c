@@ -41,3 +41,21 @@ void mol_draw_obj_from_node(list *lptr) {
 		break;
 	}
 }
+
+figure *mol_conv_to_figure(list *lptr) {
+	figure *fptr;
+	text *tptr;
+
+	if (!lptr || !lptr->data)
+		return NULL;
+
+	if (lptr->dt == OT_FIGURE)
+		return (figure*)(lptr->data);
+	else {
+		tptr = (text*)lptr->data;
+		fptr = figure_new_point(tptr->x, tptr->y);
+		fptr->visible = VM_SELECTED;
+
+		return fptr;
+	}
+}
