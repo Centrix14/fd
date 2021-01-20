@@ -5,14 +5,16 @@
 #include "../list/list.h"
 #include "../figure/figure.h"
 #include "../geometry/geometry.h"
+#include "../text/text.h"
+#include "../multi_obj/multi_obj.h"
 
 char *bl_try_make_object_bind(list *lptr, double *x, double *y) {
 	list *node = lptr;
 	figure *fptr = NULL;
 
 	while (node) {
-		fptr = (figure*)(figure_get_from_node(node->next));
-
+		//fptr = (figure*)(figure_get_from_node(node->next));
+		fptr = mol_conv_to_figure(node->next);
 		if (!fptr)
 			break;
 
@@ -180,13 +182,19 @@ char *bl_try_make_intersection_binding(list *lptr, double *x, double *y) {
 }
 
 void bl_bind(list *lptr, double *x, double *y) {
-	char *err = NULL;
+	char *res = NULL;
 
-	err = bl_try_make_object_bind(lptr, x, y);
-	if (!err)
-		err = bl_try_make_intersection_binding(lptr, x, y);
-	if (!err)
-		bl_try_make_vertical_binding(lptr, x, y);
+	res = bl_try_make_object_bind(lptr, x, y);
+	if (res)
+		return ;
+
+	res = bl_try_make_intersection_binding(lptr, x, y);
+	if (res)
+		return ;
+
+	res = bl_try_make_vertical_binding(lptr, x, y);
+	if (res)
+		return ;
 }
 
 char *bl_try_make_vertical_binding(list *lptr, double *x, double *y) {
@@ -263,6 +271,4 @@ void bl_make_binding_circle(figure *circle, double *x, double *y) {
 		*x = fabs(res_x - circle->x);
 	else
 		*x = res_x + circle->x;
-
-	//printf("x = %g\ty = %g\n", *x, *y);
 }
