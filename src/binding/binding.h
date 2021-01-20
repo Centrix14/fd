@@ -3,6 +3,7 @@
 
 #include "../list/list.h"
 #include "../figure/figure.h"
+#include "../text/text.h"
 
 #define BINDING_AREA 10
 
