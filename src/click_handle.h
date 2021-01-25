@@ -34,6 +34,8 @@ void ch_move(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_rotate(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_text(GtkWidget *draw_area, list *lptr, double x, double y);
+void ch_text_move(list *lptr);
+void ch_copy_text(list *lptr);
 
 enum CH_WORK_MODES {
 	WM_MOVE = FG_TYPE_NONE + 1,
