@@ -54,7 +54,7 @@ figure *mol_conv_to_figure(list *lptr) {
 	else {
 		tptr = (text*)lptr->data;
 		fptr = figure_new_point(tptr->x, tptr->y);
-		fptr->visible = VM_SELECTED;
+		fptr->visible = tptr->visible;
 
 		return fptr;
 	}
