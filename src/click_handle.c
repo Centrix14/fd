@@ -405,7 +405,13 @@ void ch_move(GtkWidget *draw_area, list *lptr, double x, double y) {
 void ch_fugure_move(list *lptr) {
 	figure *fptr;
 
-	fptr = (figure*)list_get_data(lptr);
+	if (lptr->dt == OT_TEXT) {
+		ch_text_move(lptr);
+
+		return ;
+	}
+
+	fptr = figure_get_from_node(lptr);
 	if (!fptr)
 		return;
 
@@ -414,6 +420,19 @@ void ch_fugure_move(list *lptr) {
 		fptr->y += offset_y;		
 		fptr->a1 += offset_x;
 		fptr->a2 += offset_y;
+	}
+}
+
+void ch_text_move(list *lptr) {
+	text *tptr;
+
+	tptr = (text*)lptr->data;
+	if (!tptr)
+		return ;
+
+	if (tptr->visible == VM_SELECTED) {
+		tptr->x += offset_x;
+		tptr->y += offset_y;
 	}
 }
 
@@ -443,7 +462,13 @@ void ch_copy_offset(list *lptr) {
 	figure *fptr, *new_figure;
 	list *last;
 
-	fptr = (figure*)list_get_data(lptr);
+	if (lptr && lptr->dt == OT_TEXT) {
+		ch_copy_text(lptr);
+
+		return ;
+	}
+
+	fptr = figure_get_from_node(lptr);
 	if (!fptr)
 		return ;
 
@@ -457,6 +482,31 @@ void ch_copy_offset(list *lptr) {
 		new_figure->visible = VM_SHOW;
 
 		list_set_data(last, new_figure);
+	}
+}
+
+void ch_copy_text(list *lptr) {
+	text *tptr, *new_text;
+	list *last;
+
+	tptr = (text*)lptr->data;
+	if (!tptr)
+		return ;
+
+	if (tptr->visible == VM_SELECTED) {
+		tptr->visible = VM_SHOW;
+
+		list_add_node(lptr);
+
+		last = list_get_last(lptr);
+		new_text = tl_new(tptr->font, tptr->size, tptr->color_r, tptr->color_g, tptr->color_b);
+		new_text->visible = VM_SHOW;
+		new_text->x = tptr->x + offset_x;
+		new_text->y = tptr->y + offset_y;
+		tl_add_buffer(new_text, tptr->buffer);
+
+		last->dt = OT_TEXT;
+		list_set_data(last, new_text);
 	}
 }
 
@@ -525,6 +575,8 @@ void ch_text(GtkWidget *draw_area, list *lptr, double x, double y) {
 	ty = y;
 
 	list_crawl(lptr, ch_proc_text);
+
+	hl_set_help(HC_SELECT_TOOL);
 
 	gtk_widget_queue_draw(draw_area);
 }
