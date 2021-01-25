@@ -460,7 +460,6 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 
 	node = figure_list;
 	while (node) {
-		//fptr = (figure*)node->data;
 		fptr = mol_conv_to_figure(node);
 		if (!fptr) {
 			node = node->next;
@@ -864,4 +863,5 @@ void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	gtk_widget_destroy(dialog);
 
 	ch_set_draw_mode(WM_TEXT);
+	hl_set_help(HC_INS_POINT);
 }
