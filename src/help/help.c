@@ -11,7 +11,8 @@ static char *help_msg[] = {
 		"Select radius point",
 		"Select figure, group, and/or action",
 		"Select the insertion point",
-		"Select base point"
+		"Select base point",
+		"Select tool"
 };
 
 char *hl_get_help(int code) {
