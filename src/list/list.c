@@ -13,7 +13,6 @@ list *list_init_node(list *parent) {
 		exit(0);
 	}
 
-	nptr = nptr;
 	nptr->prev = parent;
 	nptr->next = NULL;
 	nptr->data = NULL;
