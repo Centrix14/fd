@@ -9,6 +9,7 @@
 #include "draw/draw.h"
 #include "callbacks.h"
 #include "help/help.h"
+#include "multi_obj/multi_obj.h"
 
 #include "dbg.h"
 #include "st/st.h"
@@ -19,7 +20,7 @@
 static int draw_mode = FG_TYPE_POINT, state = 0;
 static figure *ext_figure,
 			  tmp_figure;
-figure *last_selected_figure;
+list *last_selected_node;
 
 st_debug_start(1);
 
@@ -275,106 +276,105 @@ void ch_add_arc(GtkWidget *draw_area, list *lptr, double x, double y) {
 }
 
 void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y) {
-	figure *fptr, *curs;
-	list *node;
-	int end = 0;
-
-	curs = figure_new_point(x, y);
+	list *node, *res = NULL;
+	multi_obj *mo;
 
 	node = lptr;
-	while (node && !end) {
-		fptr = figure_get_from_node(node);
+	while (node && !res) {
+		if (node->dt == OT_TEXT) {
+			res = ch_click_cursor_select_text(node, x, y);
 
-		if (!fptr) {
-			if (node->dt == OT_TEXT)
-				ch_click_cursor_select_text(draw_area, node, x, y);
-
-			node = node->next;
-
-			continue;
+			if (res)
+				break;
 		}
+		else {
+			res = ch_click_cursor_select_figure(node, x, y);
 
-		switch (fptr->type) {
-			case FG_TYPE_POINT:
-				if (gel_is_point_in_point(fptr, curs))
-					end = 1;
-			break;
-
-			case FG_TYPE_LINE_PP:
-				if (gel_is_point_in_line(fptr, curs))
-					end = 1;
-			break;
-
-			case FG_TYPE_RECT_PP:
-				if (gel_is_point_in_rect(fptr, curs))
-					end = 1;
-			break;
-
-			case FG_TYPE_CIRCLE:
-				if (gel_is_point_in_circle(fptr, curs))
-					end = 1;
-			break;
+			if (res)
+				break;
 		}
-
-		if (end) {
-			fptr->visible = VM_SELECTED;
-			last_selected_figure = fptr;
-
-			break;
-		}
-
 		node = node->next;
 	}
 
-	figure_free(curs);
+	if (res) {
+		mo = mol_extract(res);
 
-	if (!end)
-		ch_click_cursor_unselect_all(draw_area, lptr, x, y);
+		mo->visible = VM_SELECTED;
+
+		mol_apply(res, mo);
+	}
+	else
+		ch_click_cursor_unselect_all(lptr);
 
 	gtk_widget_queue_draw(draw_area);
 }
 
-void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, double y) {
-	list_crawl(lptr, unselect);
+list *ch_click_cursor_select_figure(list *lptr, double x, double y) {
+	figure *fptr, curs;
 
-	gtk_widget_queue_draw(draw_area);
+	figure_fill(&curs, x, y, 0, 0, FG_TYPE_POINT);
+	fptr = figure_get_from_node(lptr);
+
+	if (!fptr)
+		return NULL;
+
+	switch (fptr->type) {
+		case FG_TYPE_POINT:
+			if (gel_is_point_in_point(fptr, &curs))
+				return lptr;
+		break;
+
+		case FG_TYPE_LINE_PP:
+			if (gel_is_point_in_line(fptr, &curs))
+				return lptr;
+		break;
+
+		case FG_TYPE_RECT_PP:
+			if (gel_is_point_in_rect(fptr, &curs))
+				return lptr;
+		break;
+
+		case FG_TYPE_CIRCLE:
+			if (gel_is_point_in_circle(fptr, &curs))
+				return lptr;
+		break;
+	}
+
+	return NULL;
 }
 
-void ch_unselect_last() {
-	last_selected_figure->visible = VM_SHOW;
-}
-
-
-void ch_click_cursor_select_text(GtkWidget *draw_area, list *lptr, double x, double y) {
+list *ch_click_cursor_select_text(list *lptr, double x, double y) {
 	figure text_area, p;
 	text *tptr;
 
 	tptr = (text*)lptr->data;
-	if (tptr->visible == VM_PREVIEW)
-		return ;
-
 	figure_fill(&text_area, tptr->x, tptr->y, 0, 0, FG_TYPE_RECT_PP);
 	figure_fill(&p, x, y, 0, 0, FG_TYPE_POINT);
 
-	if (gel_is_point_in_point(&text_area, &p))
+	if (gel_is_point_in_point(&text_area, &p) && tptr->visible != VM_NOT_FINISHED) {
 		tptr->visible = VM_SELECTED;
-	else
-		ch_click_curcor_unselect_text(lptr);
+		last_selected_node = lptr;
 
-	gtk_widget_queue_draw(draw_area);
+		return lptr;
+	}
+	return NULL;
 }
 
-void ch_click_curcor_unselect_text(list *lptr) {
-	list *node = lptr;
-	text *tptr;
+void ch_click_cursor_unselect_all(list *lptr) {
+	list_crawl(lptr, unselect);
+}
 
-	while (node) {
-		tptr = (text*)node->data;
-		if (tptr)
-			if (tptr->visible == VM_SELECTED)
-				tptr->visible = VM_SHOW;
+void ch_unselect_last_node() {
+	figure *fptr = NULL;
+	text *tptr = NULL;
 
-		node = node->next;
+	if (last_selected_node->dt == OT_TEXT) {
+		tptr = (text*)last_selected_node->data;
+		tptr->visible = VM_SHOW;
+	}
+	else {
+		fptr = (figure*)last_selected_node->data;
+		fptr->visible = VM_SHOW;
 	}
 }
 
