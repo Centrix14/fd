@@ -20,15 +20,17 @@ void ch_add_circle_prm(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_add_arc_prm(GtkWidget *draw_area, list *lptr, double x, double y);
 
 void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y);
-void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, double y);
-void ch_click_cursor_select_text(GtkWidget *draw_area, list *lptr, double x, double y);
+void ch_click_cursor_unselect_all(list *lptr);
 
-void ch_unselect_last();
+list *ch_click_cursor_select_text(list *lptr, double x, double y);
+list *ch_click_cursor_select_figure(list *lptr, double x, double y);
+
+void ch_unselect_last_node();
 void ch_fugure_move(list *lptr);
 void ch_copy_offset(list *lptr);
 void ch_rot(list *lptr);
 void ch_proc_text(list *lptr);
-void ch_click_curcor_unselect_text(list *lptr);
+void ch_click_cursor_unselect_text(list *lptr);
 
 void ch_move(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y);
