@@ -4,6 +4,7 @@
 #include "../figure/figure.h"
 #include "../text/text.h"
 #include "../draw/draw.h"
+#include "multi_obj.h"
 
 void mol_free_from_node(list *lptr) {
 	text *tptr;
@@ -58,4 +59,68 @@ figure *mol_conv_to_figure(list *lptr) {
 
 		return fptr;
 	}
+}
+
+multi_obj *mol_extract(list *lptr) {
+	if (!lptr || !lptr->data)
+		return NULL;
+
+	if (lptr->dt == OT_TEXT)
+		return mol_extract_from_text(lptr);
+	else
+		return mol_extract_from_figure(lptr);
+}
+
+multi_obj *mol_extract_from_text(list *lptr) {
+	static multi_obj mo;
+	text *tptr;
+
+	tptr = (text*)lptr->data;
+
+	mo.x = tptr->x;
+	mo.y = tptr->y;
+	mo.visible = tptr->visible;
+
+	return &mo;
+}
+
+multi_obj *mol_extract_from_figure(list *lptr) {
+	static multi_obj mo;
+	figure *fptr;
+
+	fptr = (figure*)lptr->data;
+
+	mo.x = fptr->x;
+	mo.y = fptr->y;
+	mo.visible = fptr->visible;
+
+	return &mo;
+}
+
+void mol_apply(list *lptr, multi_obj *mo) {
+	if (!lptr || !lptr->data)
+		return ;
+
+	if (lptr->dt == OT_TEXT)
+		mol_apply_text(lptr, mo);
+	else
+		mol_apply_figure(lptr, mo);
+}
+
+void mol_apply_text(list *lptr, multi_obj *mo) {
+	text *tptr;
+
+	tptr = (text*)lptr->data;
+	tptr->x = mo->x;
+	tptr->y = mo->y;
+	tptr->visible = mo->visible;
+}
+
+void mol_apply_figure(list *lptr, multi_obj *mo) {
+	figure *fptr;
+
+	fptr = (figure*)lptr->data;
+	fptr->x = mo->x;
+	fptr->y = mo->y;
+	fptr->visible = mo->visible;
 }
