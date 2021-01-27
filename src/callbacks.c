@@ -81,7 +81,7 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 					ch_set_state(0);
 				}
 				else
-					ch_unselect_last();
+					ch_unselect_last_node();
 			
 				gtk_widget_queue_draw(widget);
 			break;
@@ -433,10 +433,18 @@ void curs_bttn_click(GtkWidget *bttn, gpointer data) {
 }
 
 void unselect(list *node) {
-	figure *fptr = (figure*)node->data;
+	/*figure *fptr = (figure*)node->data;
 
 	if (fptr && fptr->visible == VM_SELECTED)
-		fptr->visible = VM_SHOW;
+		fptr->visible = VM_SHOW;*/
+	multi_obj *mo;
+
+	mo = mol_extract(node);
+
+	if (mo && mo->visible == VM_SELECTED) {
+		mo->visible = VM_SHOW;
+		mol_apply(node, mo);
+	}
 }
 
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
