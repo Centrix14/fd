@@ -298,10 +298,10 @@ void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y
 
 	if (res) {
 		mo = mol_extract(res);
-
 		mo->visible = VM_SELECTED;
-
 		mol_apply(res, mo);
+
+		last_selected_node = res;
 	}
 	else
 		ch_click_cursor_unselect_all(lptr);
@@ -352,8 +352,8 @@ list *ch_click_cursor_select_text(list *lptr, double x, double y) {
 	figure_fill(&p, x, y, 0, 0, FG_TYPE_POINT);
 
 	if (gel_is_point_in_point(&text_area, &p) && tptr->visible != VM_NOT_FINISHED) {
-		tptr->visible = VM_SELECTED;
-		last_selected_node = lptr;
+		//tptr->visible = VM_SELECTED;
+		//last_selected_node = lptr;
 
 		return lptr;
 	}
