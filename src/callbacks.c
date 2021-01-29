@@ -398,15 +398,38 @@ void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *main_box;
 	GtkWidget *help_label, *logo;
 
+	PangoAttrList *attrs;
+	PangoAttribute *text_size, *text_font, *text_letter_spacing, *text_label_fallback, *text_stretch, *text_font_variant, *text_font_weight;
+
 	help_dialog = gtk_dialog_new_with_buttons("Help", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(help_dialog));
 	g_signal_connect_swapped(help_dialog, "response", G_CALLBACK(gtk_widget_destroy), help_dialog);
 
 	// widgets label
-	help_label = gtk_label_new(hl_get_help(HC_MAIN));
+	help_label = gtk_label_new("");
+	gtk_label_set_markup(GTK_LABEL(help_label), hl_get_help(HC_MAIN));
 	logo = gtk_image_new_from_file("res/fd.png");
 
-	gtk_label_set_selectable(GTK_LABEL(help_label), TRUE);
+	// adding attributes to text
+	attrs = pango_attr_list_new();
+
+	text_size = pango_attr_size_new(16);
+	text_font = pango_attr_family_new("Monospace");
+	text_letter_spacing = pango_attr_letter_spacing_new(1024 * 10);
+	text_label_fallback = pango_attr_fallback_new(TRUE);
+	text_stretch = pango_attr_stretch_new(PANGO_STRETCH_NORMAL);
+	text_font_variant = pango_attr_variant_new(PANGO_VARIANT_NORMAL);
+	text_font_weight = pango_attr_weight_new(PANGO_WEIGHT_NORMAL);
+
+	pango_attr_list_insert(attrs, text_size);
+	pango_attr_list_insert(attrs, text_font);
+	pango_attr_list_insert(attrs, text_letter_spacing);
+	pango_attr_list_insert(attrs, text_label_fallback);
+	pango_attr_list_insert(attrs, text_stretch);
+	pango_attr_list_insert(attrs, text_font_variant);
+	pango_attr_list_insert(attrs, text_font_weight);
+
+	gtk_label_set_attributes(GTK_LABEL(help_label), attrs);
 
 	// init main box
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
@@ -433,10 +456,6 @@ void curs_bttn_click(GtkWidget *bttn, gpointer data) {
 }
 
 void unselect(list *node) {
-	/*figure *fptr = (figure*)node->data;
-
-	if (fptr && fptr->visible == VM_SELECTED)
-		fptr->visible = VM_SHOW;*/
 	multi_obj *mo;
 
 	mo = mol_extract(node);
@@ -763,7 +782,7 @@ GtkWidget *text_size_entry, *text_font_entry, *text_color_entry;
 
 void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	GtkWidget *dialog_content;
-	GtkWidget *text_view, *ok_bttn, *help_bttn;
+	GtkWidget *text_view, *ok_bttn, *help_bttn, *ch_color_bttn;
 	GtkWidget *text_size_label, *text_font_label, *text_color_label;
 	GtkWidget *bttn_box, *label_size_box, *label_font_box, *label_color_box, *label_opt_box, *main_box;
 	GtkTextBuffer *text_buffer;
@@ -790,6 +809,7 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	// buttons
 	ok_bttn = gtk_button_new_with_label("OK");
 	help_bttn = gtk_button_new_with_label("Help");
+	ch_color_bttn = gtk_button_new_with_label("Select color");
 
 	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(text_dialog_ok_bttn_click), text_buffer);
 
