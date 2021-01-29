@@ -166,8 +166,12 @@ int gel_is_point_in_line(figure *l, figure *p) {
 	ab = sqrt(pow(dx1, 2) + pow(dy, 2));
 
 	h = S / ab;
+	if (fabs(h) < BINDING_AREA / 2)
+		if (gel_is_point_in_area(l, p))
+			return 1;
+	return 0;
 
-	return (fabs(h) < BINDING_AREA/2);
+	//return (fabs(h) < 5/2) && ();
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
