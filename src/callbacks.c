@@ -14,6 +14,7 @@
 #include "help/help.h"
 #include "text/text.h"
 #include "multi_obj/multi_obj.h"
+#include "util/util.h"
 
 extern list *figure_list;
 extern GtkWidget *window;
@@ -779,13 +780,17 @@ void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 }
 
 GtkWidget *text_size_entry, *text_font_entry, *text_color_entry;
+int colors[3] = {-1, -1, -1};
+int font_size = -1;
+char font_name[64] = "";
 
 void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	GtkWidget *dialog_content;
-	GtkWidget *text_view, *ok_bttn, *help_bttn, *ch_color_bttn;
+	GtkWidget *text_view, *ok_bttn, *help_bttn, *ch_color_bttn, *ch_font_bttn;
 	GtkWidget *text_size_label, *text_font_label, *text_color_label;
-	GtkWidget *bttn_box, *label_size_box, *label_font_box, *label_color_box, *label_opt_box, *main_box;
+	GtkWidget *bttn_box, *label_size_box, *label_font_box, *label_color_box, *label_opt_box, *main_box, *label_style_box, *label_style_entrys_box;
 	GtkTextBuffer *text_buffer;
+	GdkRGBA color_button_inital_color;
 
 	dialog = gtk_dialog_new_with_buttons("Text", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -809,9 +814,18 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	// buttons
 	ok_bttn = gtk_button_new_with_label("OK");
 	help_bttn = gtk_button_new_with_label("Help");
-	ch_color_bttn = gtk_button_new_with_label("Select color");
 
 	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(text_dialog_ok_bttn_click), text_buffer);
+	// create color button
+	gdk_rgba_parse(&color_button_inital_color, "rgb(255,255,255)");
+	ch_color_bttn = gtk_color_button_new_with_rgba(&color_button_inital_color);
+
+	g_signal_connect(G_OBJECT(ch_color_bttn), "color-set", G_CALLBACK(text_dialog_color_button_set), colors);
+
+	// create font button
+	ch_font_bttn = gtk_font_button_new_with_font((const gchar*)"Corbel 0");
+
+	g_signal_connect(G_OBJECT(ch_font_bttn), "font-set", G_CALLBACK(text_dialog_font_button_set), NULL);
 
 	// pack label size box
 	label_size_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -825,17 +839,29 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	gtk_box_pack_start(GTK_BOX(label_font_box), text_font_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(label_font_box), text_font_entry, TRUE, TRUE, 5);
 
+	// pack entry style box
+	label_style_entrys_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(label_style_entrys_box), label_size_box, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(label_style_entrys_box), label_font_box, TRUE, FALSE, 5);
+
+	// pack style box
+	label_style_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(label_style_box), label_style_entrys_box, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(label_style_box), ch_font_bttn, TRUE, FALSE, 5);
+
 	// pack label color box
 	label_color_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	gtk_box_pack_start(GTK_BOX(label_color_box), text_color_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(label_color_box), text_color_entry, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(label_color_box), ch_color_bttn, FALSE, FALSE, 5);
 
 	// pack label options box
 	label_opt_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
-	gtk_box_pack_start(GTK_BOX(label_opt_box), label_size_box, FALSE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(label_opt_box), label_font_box, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(label_opt_box), label_style_box, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(label_opt_box), label_color_box, FALSE, FALSE, 5);
 
 	// pack button box
@@ -857,8 +883,7 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 
 void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	GtkTextIter start, end;
-	char *buf = NULL, *font = NULL, col_str[256] = "", *col_token = NULL;
-	int size = 0, color[3] = {0, 0, 0}, i = 0;
+	char *buf = NULL;
 	list *last;
 	text *tptr;
 
@@ -866,22 +891,19 @@ void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	gtk_text_buffer_get_end_iter(tb, &end);
 
 	buf = gtk_text_buffer_get_text(tb, &start, &end, TRUE);
-	font = (char*)gtk_entry_get_text(GTK_ENTRY(text_font_entry));
-	size = atoi(gtk_entry_get_text(GTK_ENTRY(text_size_entry)));
 
-	strcpy(col_str, (char*)gtk_entry_get_text(GTK_ENTRY(text_color_entry)));
-	col_token = strtok(col_str, " ");
-	while (col_token) {
-		color[i++] = atoi(col_token);
-
-		col_token = strtok(NULL, " ");
-	}
+	if (!strlen(font_name))
+		strcpy(font_name, gtk_entry_get_text(GTK_ENTRY(text_font_entry)));
+	if (font_size == -1)
+		font_size = atoi(gtk_entry_get_text(GTK_ENTRY(text_size_entry)));
+	if (*colors == -1)
+		ul_get_colors(colors, text_color_entry);
 
 	list_add_node(figure_list);
 	last = list_get_last(figure_list);
 	last->dt = OT_TEXT;
 
-	tptr = tl_new(font, size, color[0], color[1], color[2]);
+	tptr = tl_new(font_name, font_size, colors[0], colors[1], colors[2]);
 	tl_add_buffer(tptr, buf);
 
 	tptr->visible = VM_NOT_FINISHED;
@@ -892,4 +914,30 @@ void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 
 	ch_set_draw_mode(WM_TEXT);
 	hl_set_help(HC_INS_POINT);
+
+	// resetting the buffers
+	*colors = -1;
+	font_size = -1;
+	strcpy(font_name, "");
+}
+
+void text_dialog_color_button_set(GtkColorButton *bttn, int *arr) {
+	GdkRGBA color;
+
+	gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(bttn), &color);
+
+	arr[0] = ul_map(color.red, 0, 1, 0, 255);
+	arr[1] = ul_map(color.green, 0, 1, 0, 255);
+	arr[2] = ul_map(color.blue, 0, 1, 0, 255);
+}
+
+void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
+	char *font = NULL;
+	char size[256] = "";
+
+	font = gtk_font_chooser_get_font(GTK_FONT_CHOOSER(bttn));
+
+	ul_pars_font(font, font_name, size);
+
+	font_size = atoi(size);
 }
