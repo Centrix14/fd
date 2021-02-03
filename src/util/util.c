@@ -5,6 +5,8 @@
 
 #include <gtk/gtk.h>
 
+#include "../list/list.h"
+
 // util function for mapping values
 double ul_map(double x, double in_min, double in_max, double out_min, double out_max) {
 	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
