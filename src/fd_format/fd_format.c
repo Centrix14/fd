@@ -28,11 +28,11 @@ void fdl_write_object_stream(FILE *stream, list *lptr) {
 	else if (lptr->dt == OT_TEXT) {
 		tptr = (text*)lptr->data;
 
-		fprintf(stream, "%d %d ", tptr->visible, tptr->size);
+		fprintf(stream, "%d %d %d ", tptr->visible, tptr->lay, tptr->size);
 		fprintf(stream, "%f %f ", tptr->x, tptr->y);
 		fprintf(stream, "%d %d %d\n", tptr->color_r, tptr->color_g, tptr->color_b);
 		fprintf(stream, "%s\n", tptr->font);
-		fprintf(stream, "%s\n/end", tptr->buffer);
+		fprintf(stream, "%s%c", tptr->buffer, FD_FORMAT_END);
 	}
 }
 
@@ -102,6 +102,7 @@ void fdl_read_file(list *lptr) {
 			fdl_pars_figure(file, lptr);
 		else if (op_code == (int)OT_TEXT)
 			fdl_pars_text(file, lptr);
+		fscanf(file, "%d", &op_code);
 	}
 
 	fclose(file);
@@ -123,26 +124,36 @@ void fdl_pars_figure(FILE *stream, list *lptr) {
 
 	last = list_get_last(lptr);
 	list_set_data(last, fptr);
+
+	last->dt = OT_FIGURE;
 }
 
 void fdl_pars_text(FILE *stream, list *lptr) {
-	char str[256] = "", buffer[2048] = "";
+	char buffer[2048] = "";
+	int i = 0, c = 0;
 	text *tptr;
 	list *last;
 
 	tptr = tl_new("Arial", 20, 255, 255, 255);
 
-	fscanf(stream, "%d %d ", &tptr->visible, &tptr->size);
+	fscanf(stream, "%d %d %d ", &tptr->visible, &tptr->lay, &tptr->size);
 	fscanf(stream, "%lf %lf ", &tptr->x, &tptr->y);
 	fscanf(stream, "%d %d %d\n", &tptr->color_r, &tptr->color_g, &tptr->color_b);
 	fscanf(stream, "%s\n", tptr->font);
 
-	fgets(str, 256, stream);
-	while (strcmp(str, FD_FORMAT_END)) {
-		strcat(buffer, str);
+	c = fgetc(stream);
+	while (c != FD_FORMAT_END) {
+		buffer[i++] = c;
 
-		fgets(str, 256, stream);
+		c = fgetc(stream);
 	}
 
 	tl_add_buffer(tptr, buffer);
+
+	list_add_node(lptr);
+
+	last = list_get_last(lptr);
+	list_set_data(last, tptr);
+
+	last->dt = OT_TEXT;
 }
