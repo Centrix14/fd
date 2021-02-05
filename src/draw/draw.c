@@ -186,6 +186,12 @@ void dl_set_show_preview(int val) {
 void dl_draw_text(text *tptr) {
 	cairo_text_extents_t te;
 
+	if (tptr->lay != figure_get_current_lay()) {
+		if (!all_lays)
+			if (tptr->visible != VM_PROJECTION)
+				return ;
+	}
+
 	cairo_select_font_face(context, tptr->font, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
 	cairo_set_font_size(context, tptr->size);
 
@@ -195,6 +201,8 @@ void dl_draw_text(text *tptr) {
 	cairo_set_source_rgb(context, tptr->color_r, tptr->color_g, tptr->color_b);
 
 	if (tptr->visible == VM_SELECTED)
+		cl_set_color_fg(context, tptr->visible);
+	else if (tptr->visible == VM_PROJECTION)
 		cl_set_color_fg(context, tptr->visible);
 	cairo_show_text(context, tptr->buffer);
 
