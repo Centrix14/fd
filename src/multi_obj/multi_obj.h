@@ -6,6 +6,8 @@ typedef struct {
 	double y;
 
 	int visible;
+
+	int lay;
 } multi_obj;
 
 void mol_free_from_node(list *lptr);
