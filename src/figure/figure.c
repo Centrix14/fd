@@ -6,6 +6,7 @@
 #include "figure.h"
 #include "../list/list.h"
 #include "../geometry/geometry.h"
+#include "../multi_obj/multi_obj.h"
 
 int curr_lay = 0, fg_num = 0;
 
@@ -127,19 +128,20 @@ int figure_is_line(figure *fptr) {
 }
 
 int figure_is_projection_lay_list(list *lptr, int lay) {
-	figure *fptr;
+	multi_obj *mo;
 	list *node;
 
 	node = lptr;
 	while (node) {
-		fptr = (figure*)node->data;
-		if (!fptr) {
+		mo = mol_extract(lptr);
+
+		if (!mo) {
 			node = node->next;
 
 			continue;
 		}
 
-		if (fptr->lay == lay && fptr->visible == VM_PROJECTION)
+		if (mo->lay == lay && mo->visible == VM_PROJECTION)
 			return 1;
 
 		node = node->next;
@@ -149,20 +151,22 @@ int figure_is_projection_lay_list(list *lptr, int lay) {
 }
 
 void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode) {
-	figure *fptr;
+	multi_obj *mo;
 	list *node;
 
 	node = lptr;
 	while (node) {
-		fptr = (figure*)node->data;
-		if (!fptr) {
+		mo = mol_extract(lptr);
+
+		if (!mo) {
 			node = node->next;
 
 			continue;
 		}
 
-		if (fptr->lay == lay)
-			fptr->visible = vm_mode;
+		if (mo->lay == lay)
+			mo->visible = vm_mode;
+		mol_apply(lptr, mo);
 
 		node = node->next;
 	}
