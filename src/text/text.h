@@ -16,6 +16,8 @@ typedef struct {
 
 	double x;
 	double y;
+
+	int lay;
 } text;
 
 text *tl_new(char *font, int size, int r, int g, int b);
