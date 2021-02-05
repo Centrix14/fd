@@ -907,6 +907,7 @@ void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	tl_add_buffer(tptr, buf);
 
 	tptr->visible = VM_NOT_FINISHED;
+	tptr->lay = figure_get_current_lay();
 
 	list_set_data(last, tptr);
 
