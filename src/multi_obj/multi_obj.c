@@ -28,6 +28,8 @@ void mol_free_from_node(list *lptr) {
 }
 
 void mol_draw_obj_from_node(list *lptr) {
+	text *tptr;
+
 	if (!lptr || !lptr->data)
 		return ;
 
@@ -37,7 +39,9 @@ void mol_draw_obj_from_node(list *lptr) {
 		break;
 
 		case OT_TEXT:
-			if (((text*)(lptr->data))->visible != VM_NOT_FINISHED)
+			tptr = (text*)lptr->data;
+
+			if ((tptr->visible != VM_NOT_FINISHED) && (tptr->lay == figure_get_current_lay()))
 				dl_draw_text((text*)lptr->data);
 		break;
 	}
@@ -56,6 +60,7 @@ figure *mol_conv_to_figure(list *lptr) {
 		tptr = (text*)lptr->data;
 		fptr = figure_new_point(tptr->x, tptr->y);
 		fptr->visible = tptr->visible;
+		fptr->lay = tptr->lay;
 
 		return fptr;
 	}
@@ -80,6 +85,7 @@ multi_obj *mol_extract_from_text(list *lptr) {
 	mo.x = tptr->x;
 	mo.y = tptr->y;
 	mo.visible = tptr->visible;
+	mo.lay = tptr->lay;
 
 	return &mo;
 }
@@ -93,6 +99,7 @@ multi_obj *mol_extract_from_figure(list *lptr) {
 	mo.x = fptr->x;
 	mo.y = fptr->y;
 	mo.visible = fptr->visible;
+	mo.lay = fptr->lay;
 
 	return &mo;
 }
@@ -114,6 +121,7 @@ void mol_apply_text(list *lptr, multi_obj *mo) {
 	tptr->x = mo->x;
 	tptr->y = mo->y;
 	tptr->visible = mo->visible;
+	tptr->lay = mo->lay;
 }
 
 void mol_apply_figure(list *lptr, multi_obj *mo) {
@@ -123,4 +131,5 @@ void mol_apply_figure(list *lptr, multi_obj *mo) {
 	fptr->x = mo->x;
 	fptr->y = mo->y;
 	fptr->visible = mo->visible;
+	fptr->lay = mo->lay;
 }
