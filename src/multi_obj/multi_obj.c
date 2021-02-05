@@ -41,7 +41,7 @@ void mol_draw_obj_from_node(list *lptr) {
 		case OT_TEXT:
 			tptr = (text*)lptr->data;
 
-			if ((tptr->visible != VM_NOT_FINISHED) && (tptr->lay == figure_get_current_lay()))
+			if (tptr->visible != VM_NOT_FINISHED)
 				dl_draw_text((text*)lptr->data);
 		break;
 	}
