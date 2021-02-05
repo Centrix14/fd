@@ -22,6 +22,7 @@ text *tl_new(char *font, int size, int r, int g, int b) {
 	}
 	strcpy(tptr->font, font);
 
+	tptr->lay = 0;
 	tptr->size = size;
 	tptr->color_r = r;
 	tptr->color_g = g;
