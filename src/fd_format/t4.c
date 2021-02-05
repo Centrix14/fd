@@ -12,8 +12,14 @@ int main(void) {
 	st_start();
 	st_descr("Simple read text");
 
+	list *node;
+
+	node = list_init_node(NULL);
+
 	fdl_target_file("text.fd");
-	fdl_read_file(NULL);
+	fdl_read_file(node);
+
+	list_free_list(node);
 
 	st_end();
 	return 0;
