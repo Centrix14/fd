@@ -820,6 +820,10 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	gdk_rgba_parse(&color_button_inital_color, "rgb(255,255,255)");
 	ch_color_bttn = gtk_color_button_new_with_rgba(&color_button_inital_color);
 
+	// set show-editor property of ch_color_bttn to false
+	g_object_set(G_OBJECT(ch_color_bttn), "show-editor", FALSE, NULL);
+
+	g_signal_connect(G_OBJECT(ch_color_bttn), "clicked", G_CALLBACK(text_dialog_color_button_click), parent_window);
 	g_signal_connect(G_OBJECT(ch_color_bttn), "color-set", G_CALLBACK(text_dialog_color_button_set), colors);
 
 	// create font button
@@ -857,6 +861,7 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	gtk_box_pack_start(GTK_BOX(label_color_box), text_color_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(label_color_box), text_color_entry, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(label_color_box), ch_color_bttn, FALSE, FALSE, 5);
+	
 
 	// pack label options box
 	label_opt_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -941,4 +946,12 @@ void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
 	ul_pars_font(font, font_name, size);
 
 	font_size = atoi(size);
+}
+
+void text_dialog_color_button_click(GtkWidget *bttn, GtkWidget *parent) {
+	GtkWidget *color_dialog = NULL;
+
+	color_dialog = gtk_color_chooser_dialog_new("Select color", GTK_WINDOW(parent));
+	gtk_dialog_run(GTK_DIALOG(color_dialog));
+	gtk_widget_destroy(color_dialog);
 }
