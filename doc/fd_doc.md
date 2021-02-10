@@ -15,6 +15,9 @@ Name                   | Short description
 [list.h](#lh)          | implements a doubly linked list of shapes
 [error.h](#eh)         | implements error handling functions
 [help.h](#hh)          | implements help messages
+[multi_obj.h](#mo)     | combines figure and text
+[text.h](#th)          | implements text
+[util.h](#uh)          | contains utility functions
 
 ## headers description
 <a name="bh"></a>
@@ -82,7 +85,7 @@ contains callback functions for the interface created in main.c
 + `gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);` -- tracks mouse clicks
 + `gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data);` -- monitors keystrokes of the keyboard. __Currently not used__
 
-##### bttn
+##### bttn (figures)
 + `void point_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for point button
 + `void line_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for line pp button
 + `void line_la_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for line la button
@@ -90,25 +93,23 @@ contains callback functions for the interface created in main.c
 + `void rect_wh_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for rect wh button
 + `void circle_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for circle button
 + `void arc_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for arc button
-+ `void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for set lay button
-+ `void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for all lays button
-+ `void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for add projection lay button
-+ `void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for options button
-+ `void save_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for save button
-+ `void open_bttn_click(GtkWidget *bttn, GtkWidget *parent_window); -- callback for open button`
-+ `void del_bttn_click(GtkWidget *bttn, GtkWidget *da);` -- callback for delete button
-+ `void direction_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for diarection button in line la, rect wh dialogs
-+ `void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for help button
++ `void circle_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for parametric circle
++ `void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for parametric arcs
 + `void curs_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for curs button
-+ `void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[])` -- callback for prm / free button, its change free / prm drawing mode
++ `void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window);` -- callback for text button
+
+##### bttn (file operations)
++ `void save_bttn_click(GtkWidget *bttn, gpointer data);` -- signal for file saving dialog
++ `void open_bttn_click(GtkWidget *bttn, gpointer data);` -- signal for file open dialog
+
+##### bttn (modify)
++ `void del_bttn_click(GtkWidget *bttn, GtkWidget *da);` -- callback for delete button
 + `void move_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for move button
 + `void cp_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for copy-paste button
 + `void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area);` -- callback for decouple button
 + `void rot_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for rotation button
-+ `void circle_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for parametric circle
-+ `void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for parametric arcs
 
-##### dialog
+##### bttn (dialog)
 + `void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in line la dialog
 + `void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in the rect wh dialog
 + `void save_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in save dialog
@@ -116,8 +117,19 @@ contains callback functions for the interface created in main.c
 + `void rot_dialog_apply_bttn(GtkWidget *bttn, GtkWidget *entry)` -- callback for apply button in rotation dialog
 + `void circle_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for OK button in parametric circle dialog
 + `void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in parametric arcs dialog
++ `void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb);` -- callback for OK button in text dialog
++ `void text_dialog_color_button_set(GtkColorButton *bttn, int *color);` -- callback for color choosing button in text dialog
++ `void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data);` -- callback for font choosing button in text dialog
++ `void text_dialog_color_button_click(GtkWidget *bttn, GtkWidget *parent);` -- callback for color button in text dialog
 
-##### other
+##### misc
++ `void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for set lay button
++ `void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for all lays button
++ `void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);` -- callback for add projection lay button
++ `void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for options button
++ `void direction_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for diarection button in line la, rect wh dialogs
++ `void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for help button
++ `void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[])` -- callback for prm / free button, its change free / prm drawing mode
 + `void unselect(list *node);` -- function for unselect
 + `void cb_dc(list *lptr);` -- function that decouple figure of given node
 
@@ -131,7 +143,8 @@ this section contains functions that handle clicks, and here you can add and sel
 enum CH_WORK_MODES {
 	WM_MOVE = FG_TYPE_NONE + 1,
 	WM_CP,
-	WM_ROTATE
+	WM_ROTATE,
+	WM_TEXT
 };
 ```
 
@@ -161,17 +174,24 @@ enum CH_WORK_MODES {
 ##### click_cursor
 + `void ch_click_cursor_select(GtkWidget *draw_area, list *lptr, double x, double y);` -- handle a click, when select Cursor mode
 + `void ch_click_cursor_unselect_all(GtkWidget *draw_area, list *lptr, double x, double y);` -- unselect all selected
++ `list *ch_click_cursor_select_text(list *lptr, double x, double y);` -- function for text selecting
++ `list *ch_click_cursor_select_figure(list *lptr, double x, double y);` -- function for figure selecting
 
 ##### additional
 + `void ch_move(GtkWidget *draw_area, list *lptr, double x, double y);` -- figure moving
 + `void ch_cp(GtkWidget *draw_area, list *lptr, double x, double y);` -- figure copy-paste
 + `void ch_rotate(GtkWidget *draw_area, list *lptr, double x, double y);` -- figure rotation
++ `void ch_text(GtkWidget *draw_area, list *lptr, double x, double y);` -- add text
++ `void ch_text_move(list *lptr);` -- text move
++ `void ch_copy_text(list *lptr);` -- text copy-paste
 
-##### others
+##### misc
 + `void ch_unselect_last();` -- function that unselect last selected
 + `void ch_fugure_move(list *lptr);` -- service function for moving all selected figures
 + `void ch_copy_offset(list *lptr);` -- service function for copy-paste all selected figures with moving
 + `void ch_rot(list *lptr);` -- service function for rotation all selected figuresaround base point
++ `void ch_proc_text(list *lptr);` -- sets text coordinates
++ `void ch_click_cursor_unselect_text(list *lptr);` -- unselect all selected text
 
 <a name="clh"></a>
 # color.h
@@ -215,6 +235,7 @@ that header defines drawing functions
 + `void dl_draw_circle(figure *fptr);` -- draw circle
 + `void dl_draw_arc(figure *fptr);` -- draw arc
 + `void dl_draw_preview(figure *fptr);` -- draw preview figure (is a milti-step figure, thats not finished, see click_handle.h)
++ `void dl_draw_text(text *tptr);` -- draw text
 
 ##### set
 + `void dl_set_cairo_context(cairo_t *cr);` -- set a cairo context
@@ -239,18 +260,22 @@ that header defines drawing functions
 this header defines functions for working with .fd files
 
 #### symbols
-+ `FD_FORMAT_DELIM ` -- defines a delimetrs in .fd files (currently is `" \n"`)
++ `FD_FORMAT_END` -- this symbol declarates end of figure defenition
 
 #### functions
 + `void fdl_target_file(char *name);` -- specifies the name of the target file
 
 ##### write
-+ `void fdl_write_figure_stream(FILE *stream, figure *fptr);` -- writes fptr to stream
++ `void fdl_write_object_stream(FILE *stream, list *lptr);` -- writes lptr to stream
 + `void fdl_write_from_list(list *lptr);` -- writes figures from list to target file
 
 ##### read
 + `void fdl_read_string(figure *fptr, char *str);` -- reads string from .fd file
 + `void fdl_read_file(list *lptr);` -- read figures from target file to list
+
+##### pars
++ `void fdl_pars_figure(FILE *stream, list *lptr);` -- extract figure from file
++ `void fdl_pars_text(FILE *stream, list *lptr);` -- extract text from file
 
 <a name="fh"></a>
 # figure.h
@@ -322,6 +347,7 @@ enum VISIBLE_MODES {
 ##### get
 + `int figure_get_current_lay();` -- returns current working layer
 + `char *figure_get_type(int type);` -- returns string that stores type of figure
++ `figure *figure_get_from_node(list *lptr);` -- extract figure from node of list
 
 ##### set
 + `void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode);` -- set visible mode for figures on given layer
@@ -337,7 +363,7 @@ enum VISIBLE_MODES {
 + `void figure_rotate_line(figure *base, figure *l, double angle);` -- rotates line `l` around `base` by an `angle`
 + `void figure_rotate_rect(figure *base, figure *r, double angle, list *lptr);` -- rotates rectangle `r` around `base` by an `angle`
 
-##### other
+##### misc
 + `figure *figure_rect_decompose(figure *rect);` -- decomposes rect to 4 lines
 + `void figure_fill(figure *fptr, double x, double y, double a1, double a2, double type);` -- fill allocated figure given parametrs
 + `void figure_copy(figure *dst, figure *src);` -- copy dst parametrs to src
@@ -381,7 +407,7 @@ this header contains geometry processing functions
 + `int gel_is_point_in_point(figure *p1, figure *p2);` -- similar to `gel_is_point_in_line`
 + `int gel_is_point_in_area(figure *area, figure *p);` -- similar to `gel_is_point_in_line`
 
-##### other
+##### misc
 + `void gel_rotate_point(double *x, double *y, double angle);` -- rotate point with `x` and `y` coordinates on `angle` around (0; 0)
 
 <a name="lh"></a>
@@ -394,22 +420,39 @@ this header contains functions for working with twice-linked lists
 typedef struct __list__ {
 	struct __list__ *prev;
 	struct __list__ *next;
+
 	void *data;
+
+	OBJ_TYPE dt; // data type
 } list;
+```
+
++ `OBJ_TYPE` -- enum of object types
+```c
+typedef enum {
+	OT_FIGURE = 0,
+	OT_TEXT
+} OBJ_TYPE;
 ```
 
 #### functions
 ##### common
 + `list *list_init_node(list *parent);` -- creates new node with parent
+
+##### free
++ `void list_free_node(list *node);` -- free node
++ `void list_free_list(list *node);` -- free all list
+
+##### get
++ `list *list_get_last(list *root);` -- returns last element of the list
++ `void *list_get_data(list *lptr);` -- returns data field of the list
+
+##### misc
 + `void list_add_node(list *parent);` -- add new node to end of list
 + `void list_set_data(list *node, void *new_data);` -- set data field of the list
 + `void list_show(list *root);` -- prints list to console
 + `void list_crawl(list *root, void (*func)(list*));` -- crawls list and call func for each node
 + `void list_dump_node(list *lptr);` -- prints info about node in console
-+ `void list_free_node(list *node);` -- free node
-+ `void list_free_list(list *node);` -- free all list
-+ `list *list_get_last(list *root);` -- returns last element of the list
-+ `void *list_get_data(list *lptr);` -- returns data field of the list
 
 <a name="eh"></a>
 # error.h
@@ -458,6 +501,18 @@ enum HELP_CODES {
 ##### set
 + `void hl_set_widget(GtkWidget *label);` -- sets label for help messages
 + `void hl_set_help(int code);` -- sets help message by code
+
+<a name="mo"></a>
+# multi_obj.h
+this header contains functions for combine text and figures
+
+<a name="th"></a>
+# text.h
+this header contains functions for text processing
+
+<a name="uh"></a>
+# util.h
+this header contains utility functions
 
 ---
 
