@@ -25,6 +25,7 @@ int main() {
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn, *circle_prm_bttn, *arc_prm_bttn, *text_bttn;
 	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label, *option_bttn;
 	GtkWidget *save_bttn, *open_bttn, *ver_sep;
+	GtkWidget *save_file_bttn, *open_file_bttn, *file_chooser_dialog;
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
@@ -196,8 +197,19 @@ int main() {
 	open_bttn = gtk_button_new_with_label("Open");
 	ver_sep = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
 
-	g_signal_connect(G_OBJECT(save_bttn), "clicked", G_CALLBACK(save_bttn_click), window);
-	g_signal_connect(G_OBJECT(open_bttn), "clicked", G_CALLBACK(open_bttn_click), window);
+	// file chooser buttons
+	save_file_bttn = gtk_file_chooser_button_new("Save", GTK_FILE_CHOOSER_ACTION_OPEN);
+	open_file_bttn = gtk_file_chooser_button_new("Open", GTK_FILE_CHOOSER_ACTION_OPEN);
+
+	// setting for buttons
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(save_file_bttn), ".");
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(open_file_bttn), ".");
+
+	gtk_file_chooser_button_set_title(GTK_FILE_CHOOSER_BUTTON(save_file_bttn), "Save");
+	gtk_file_chooser_button_set_title(GTK_FILE_CHOOSER_BUTTON(open_file_bttn), "Open");
+
+	g_signal_connect(G_OBJECT(save_file_bttn), "file-set", G_CALLBACK(save_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(open_file_bttn), "file-set", G_CALLBACK(open_bttn_click), NULL);
 
 	// init right box
 	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -281,8 +293,8 @@ int main() {
 
 	// file widgets
 	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(down_tool_box), save_bttn, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(down_tool_box), open_bttn, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), save_file_bttn, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), open_file_bttn, FALSE, FALSE, 0);
 
 	// init main_box
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
