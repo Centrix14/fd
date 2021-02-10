@@ -35,11 +35,9 @@ void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 
-void save_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
-void open_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void save_bttn_click(GtkWidget *bttn, gpointer data);
+void open_bttn_click(GtkWidget *bttn, gpointer data);
 
-void save_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
-void open_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]);
 
 void del_bttn_click(GtkWidget *bttn, GtkWidget *da);
