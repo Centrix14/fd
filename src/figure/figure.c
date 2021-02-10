@@ -133,7 +133,7 @@ int figure_is_projection_lay_list(list *lptr, int lay) {
 
 	node = lptr;
 	while (node) {
-		mo = mol_extract(lptr);
+		mo = mol_extract(node);
 
 		if (!mo) {
 			node = node->next;
@@ -156,7 +156,7 @@ void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode) {
 
 	node = lptr;
 	while (node) {
-		mo = mol_extract(lptr);
+		mo = mol_extract(node);
 
 		if (!mo) {
 			node = node->next;
@@ -166,7 +166,7 @@ void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode) {
 
 		if (mo->lay == lay)
 			mo->visible = vm_mode;
-		mol_apply(lptr, mo);
+		mol_apply(node, mo);
 
 		node = node->next;
 	}
