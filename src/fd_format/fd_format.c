@@ -55,38 +55,6 @@ void fdl_write_from_list(list *lptr) {
 	fclose(file);
 }
 
-/*void fdl_read_string(figure *fptr, char *str) {
-	char *tok = NULL;
-
-	tok = strtok(str, FD_FORMAT_DELIM);
-	if (tok)
-		fptr->type = atoi(tok);
-
-	tok = strtok(NULL, FD_FORMAT_DELIM);
-	if (tok)
-		fptr->visible = atoi(tok);
-
-	tok = strtok(NULL, FD_FORMAT_DELIM);
-	if (tok)
-		fptr->lay = atoi(tok);
-
-	tok = strtok(NULL, FD_FORMAT_DELIM);
-	if (tok)
-		fptr->x = atof(tok);
-
-	tok = strtok(NULL, FD_FORMAT_DELIM);
-	if (tok)
-		fptr->y = atof(tok);
-
-	tok = strtok(NULL, FD_FORMAT_DELIM);
-	if (tok)
-		fptr->a1 = atof(tok);
-
-	tok = strtok(NULL, FD_FORMAT_DELIM);
-	if (tok)
-		fptr->a2 = atof(tok);
-}*/
-
 void fdl_read_file(list *lptr) {
 	FILE *file = fopen(target_file, "r");
 	int op_code = 0;
