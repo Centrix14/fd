@@ -24,8 +24,7 @@ int main() {
 	GtkWidget *scrolled_window, *draw_area;
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn, *circle_prm_bttn, *arc_prm_bttn, *text_bttn;
 	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label, *option_bttn;
-	GtkWidget *save_bttn, *open_bttn, *ver_sep;
-	GtkWidget *save_file_bttn, *open_file_bttn, *file_chooser_dialog;
+	GtkWidget *save_file_bttn, *open_file_bttn, *ver_sep;
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
@@ -193,8 +192,6 @@ int main() {
 	g_signal_connect(G_OBJECT(draw_mode_bttn), "clicked", G_CALLBACK(prm_bttn_click), draw_bttns);
 
 	// file operations widgets
-	save_bttn = gtk_button_new_with_label("Save");
-	open_bttn = gtk_button_new_with_label("Open");
 	ver_sep = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
 
 	// file chooser buttons
