@@ -15,6 +15,7 @@
 	    - [Parametric](#cprm)
 	- [Arcs](#arcs)
 	    - [Parametric](#aprm)
+	- [Text](#text)
 + [Modification](#mod)
     - [Delete](#delete)
 	- [Copy/Paste](#cp)
@@ -102,6 +103,11 @@ Please use parametric mode only!
 Since version 0.16, parameterized arcs have been added. To start drawing, switch to parametric mode.
 After that, click on the "Arc" button. In the window that opens, fill in the fields, click "OK" and then click on the area where the center of the arc should be located.
 
+<a name="text"></a>
+### Text
+Text in FlatDraw supports the following features: different color, font, size.
+To create a text, click on the "Text" button. Then enter the required parameters in the input fields (or make a selection using the appropriate buttons). After that, close the dialog, and click to add the text in the desired place
+
 <a name="mod"></a>
 ## Modification
 To use the modification tools, switch to cursor mode (the "Cursor" button on the drawing panel). Then select the shape or group of shapes to apply the modification to.
@@ -122,11 +128,13 @@ This tool works similarly to Copy/Paste. But unlike it, "Move" deletes the origi
 ### Rotate
 By clicking on the button, a dialog will open in which you can select the rotation angle using the corresponding field. once the angle is specified, click "Apply".
 After that, you must specify the point relative to which the shape should rotate.
+The rotate option is not available for text.
 
 <a name="dc"></a>
 ### Decouple
 This tool is only available for rectangles. It turns the rectangle into four adjacent lines.
 Click the button and the rectangle will be ungrouped.
+The rotate option is not available for text.
 
 <a name="ct"></a>
 ## Common tool
