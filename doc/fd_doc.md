@@ -506,14 +506,79 @@ enum HELP_CODES {
 # multi_obj.h
 this header contains functions for combine text and figures
 
+#### symbols
++ `multi_obj` -- this struct implements multi_obj -- common interface for figure and text
+```c
+typedef struct {
+	double x;
+	double y;
+
+	int visible;
+
+	int lay;
+} multi_obj;
+```
+
+#### functions
+##### common
++ `void mol_free_from_node(list *lptr);` -- common interface for freeing up memory
++ `void mol_draw_obj_from_node(list *lptr);` -- common interface for drawing objects (figure and text)
++ `figure *mol_conv_to_figure(list *lptr);` -- converts multi_object to point
+
+##### extract
++ `multi_obj *mol_extract(list *lptr);` -- extracts multi_obj from a list node
++ `multi_obj *mol_extract_from_text(list *lptr);` -- extract multi_obj from text structure
++ `multi_obj *mol_extract_from_figure(list *lptr);` -- extract multi_obj from figure structure
+
+##### apply
++ `void mol_apply(list *lptr, multi_obj *mo);` -- writes multi_obj to list node
++ `void mol_apply_text(list *lptr, multi_obj *mo);` -- writes multi_obj to text
++ `void mol_apply_figure(list *lptr, multi_obj *mo);` -- writes multi_obj to figure
+
 <a name="th"></a>
 # text.h
 this header contains functions for text processing
+
+#### symbols
++ `text` -- implements text
+```c
+typedef struct {
+	char *buffer;
+
+	char *font;
+
+	int size;
+
+	int color_r;
+	int color_g;
+	int color_b;
+
+	int visible;
+
+	double x;
+	double y;
+
+	int lay;
+} text;
+```
+
+#### functions
+##### free
++ `void tl_free(text *tptr);` -- frees text
++ `void tl_free_buffer(text *tptr);` -- free buffer of text
+
+##### misc
++ `text *tl_new(char *font, int size, int r, int g, int b);` -- creates new text
++ `void tl_add_buffer(text *tptr, char *buf);` -- adds buffer to text
 
 <a name="uh"></a>
 # util.h
 this header contains utility functions
 
++ `double ul_map(double x, double in_min, double in_max, double out_min, double out_max);` -- converts a value from one system of units to another
++ `void ul_get_colors(int *arr, GtkWidget *color_entry);` -- writes colors of color_entry to arr
++ `void ul_pars_font(char *str, char *font_name, char *font_size);` -- parses a string like "font-name font-size", returns the result in arguments
+
 ---
 
-FlatDraw v0.16 23.12.2020 by Centrix14
+FlatDraw v0.17 12.02.2021 by Centrix14
