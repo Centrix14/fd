@@ -52,10 +52,14 @@ In the screenshot below, the main interface elements are highlighted and signed 
 <a name="points"></a>
 ### Points
 To put a point, click on the "Point" button and then click in the appropriate places in the workspace. Points will appear after each click.
+#### point button
+![point button](bttn/point.png)
 
 <a name="lines"></a>
 ### Lines
 FD supports 2 ways to create lines: free and parametric.
+#### button line
+![line button](bttn/line.png)
 
 <a name="lfree"></a>
 #### Free mode
@@ -71,6 +75,9 @@ You will see a dialog box where you can set the angle and length of the line, as
 ### Rectangles
 FD supports 2 ways to create rectangles: free and parametric.
 
+#### rect button
+![rect button](bttn/rect.png)
+
 <a name="rfree"></a>
 #### Free mode
 First, make sure that the "Rect" button is set to free mode. Otherwise, switch it. Click on the "Rect" button
@@ -85,6 +92,9 @@ You will see a dialog box where you can set the angle and length of the rect, as
 ### Circles
 At the moment, we only support 1 way to draw circles: free. Click on the "Circle" button.
 
+#### circle button
+![circle button](bttn/circle.png)
+
 <a name="cfree"></a>
 #### Free mode
 Click to start the circle, and click again to finish it, after moving the cursor to the desired location. When creating a drawing, you don't need to hold down the left mouse button.
@@ -98,6 +108,9 @@ After that, click on the "Circle" button. In the window that opens, fill in the 
 ### Arcs
 Please use parametric mode only!
 
+#### arc button
+![arc button](bttn/arc.png)
+
 <a name="aprm"></a>
 #### Parametric mode
 Since version 0.16, parameterized arcs have been added. To start drawing, switch to parametric mode.
@@ -108,21 +121,36 @@ After that, click on the "Arc" button. In the window that opens, fill in the fie
 Text in FlatDraw supports the following features: different color, font, size.
 To create a text, click on the "Text" button. Then enter the required parameters in the input fields (or make a selection using the appropriate buttons). After that, close the dialog, and click to add the text in the desired place
 
+#### text button
+![text button](bttn/text.png)
+
 <a name="mod"></a>
 ## Modification
 To use the modification tools, switch to cursor mode (the "Cursor" button on the drawing panel). Then select the shape or group of shapes to apply the modification to.
+
+#### cursor button
+![cursor button](bttn/cursor.png)
 
 <a name="delete"></a>
 ### Delete
 To delete the selected shapes, click the button.
 
+#### delete button
+![delete button](bttn/delete.png)
+
 <a name="cp"></a>
 ### Copy/Paste
 To copy the selected shapes, click the button. Then, select the base point relative to which you want to move. Then click on the point where the copied image should be inserted.
 
+#### copy/paste button
+![copy-paste button](bttn/copy-paste.png)
+
 <a name="move"></a>
 ### Move
 This tool works similarly to Copy/Paste. But unlike it, "Move" deletes the original.
+
+#### move button
+![move button](bttn/move.png)
 
 <a name="rotate"></a>
 ### Rotate
@@ -130,14 +158,23 @@ By clicking on the button, a dialog will open in which you can select the rotati
 After that, you must specify the point relative to which the shape should rotate.
 The rotate option is not available for text.
 
+#### rotate button
+![rotate button](bttn/rotate.png)
+
 <a name="dc"></a>
 ### Decouple
 This tool is only available for rectangles. It turns the rectangle into four adjacent lines.
 Click the button and the rectangle will be ungrouped.
 The rotate option is not available for text.
 
+#### decouple bttn
+![decouple button](bttn/decouple.png)
+
 <a name="ct"></a>
 ## Common tool
+#### common tool panel
+![common tool panel](bttn/info-panel.png)
+
 <a name="lf"></a>
 ### Layer field
 The only field located on the General toolbar indicates the current working level, or the level that will be made current.
@@ -175,4 +212,4 @@ This button selects the level set in the field as current.
 In this panel, you can see the cursor position in parentheses on the left, and short hints on the right.
 
 ---
-FlatDraw v0.16 23.12.2020 by Centrix14
+FlatDraw v0.17 14.02.2021 by Centrix14
