@@ -19,6 +19,7 @@ the program is still under development, but the following features are already a
 + Copy / paste
 + Decouple of rectangles
 + Figure rotation
++ Text
 
 in development:
 + arcs
@@ -36,7 +37,7 @@ the program also supports bindings:
 ### please do not clone the repository if you are going to use the program, download the release
 To compile and run the program successfully, you will need:
 + gcc compiler
-+ gtk library
++ gtk library (+ glib, pango, dbus, etc.)
 + cairo library
 + pkg-config
 + make
