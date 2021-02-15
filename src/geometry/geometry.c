@@ -5,6 +5,9 @@
 #include "../figure/figure.h"
 #include "../binding/binding.h"
 #include "../ccVector/ccVector.h"
+#include "../st/st.h"
+
+st_debug_start(0);
 
 double gel_calculate_lenght(figure *line) {
 	int lx, ly; // lenght-x, lenght-y
@@ -170,8 +173,6 @@ int gel_is_point_in_line(figure *l, figure *p) {
 		if (gel_is_point_in_area(l, p))
 			return 1;
 	return 0;
-
-	//return (fabs(h) < 5/2) && ();
 }
 
 int gel_is_point_in_rect(figure *r, figure *p) {
@@ -267,13 +268,17 @@ figure *gel_get_arc_center(figure *l1, figure *l2) {
 	ma = (y2 - y1) / (x2 - x1);
 	mb = (y3 - y2) / (x3 - x2);
 
-	printf("mb expr %g\nmb expr %g\n", (y3 - y2), (x3 - x2));
+	st_debug{
+		printf("mb expr %g\nmb expr %g\n", (y3 - y2), (x3 - x2));
+	}
 
 	xc = (ma * mb * (y1 - y3) + mb * (x1 + x2) - ma * (x2 + x3)) / (2 * (mb - ma));
 	yc = -(1 / ma) * (xc - ((x1 + x2) / 2)) + ((y1 + y2 ) / 2);
 
-	printf("C(%g %g)\n", xc, yc);
-	printf("ma = %g\nmb = %g\n", ma, mb);
+	st_debug {
+		printf("C(%g %g)\n", xc, yc);
+		printf("ma = %g\nmb = %g\n", ma, mb);
+	}
 
 	figure_fill(&cp, xc, yc, 0, 0, FG_TYPE_POINT);
 
@@ -328,9 +333,10 @@ double gel_convert_angle_by_crd(figure *l, double a) {
 		a = -a;
 	}
 
-#ifdef DBG
-	printf("%s: %g\n", __func__, a);
-#endif
+	st_debug {
+		printf("%s: %g\n", __func__, a);
+	}
+
 	return a;
 }
 
