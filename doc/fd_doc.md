@@ -44,29 +44,87 @@ these bindings are to the x or y of another object:
 #### functions
 ##### main
 + `void bl_bind(list *lptr, double *x, double *y);` -- this function creates a binding for the x and y coordinates relative to the list of lptr shapes
+  - `lptr` -- pointer to a list of objects
+  - `x` -- the x coordinate of the cursor
+  - `y` -- the y coordinate of the cursor
 
 ##### try
 + `char *bl_try_make_object_bind(list *lptr, double *x, double *y);` -- an internal function that attempts to create an object binding to an object
+  - `lptr` -- pointer to th list of objects
+  - `x` -- the x coordinate of the cursor
+  - `y` -- the y coordinate of the cursor
+
 + `char *bl_try_make_intersection_binding(list *lptr, double *x, double *y);` -- tries to create an intersection binding, otherwise similar `bl_try_make_object_binding`
+  - `lptr` -- pointer to th list of objects
+  - `x` -- the x coordinate of the cursor
+  - `y` -- the y coordinate of the cursor
+
 + `char *bl_try_make_vertical_binding(list *lptr, double *x, double *y);` -- tries to create a vertical binding, similar to `bl_try_make_object_binding`
+  - `lptr` -- pointer to th list of objects
+  - `x` -- the x coordinate of the cursor
+  - `y` -- the y coordinate of the cursor
 
 ##### is
 + `int bl_is_create_binding(figure *target, double x, double y);` -- returns 1 if you can create an object binding, 0 otherwise
+  - `target` -- target figure
+  - `x` -- the x coordinate of the cursor
+  - `y` -- the y coordinate of the cursor
 
 ##### get
 + `double bl_get_coords_dif(double c1, double c2);` -- returns the difference of the coordinates
-+ `int bl_get_binding_possibility_point(figure *point, double x, double y);` -- returns the ability to create a link to a point (1 or 0)
+  - `c1` -- first coordinate
+  - `c2` -- second coordinate
+
++ `int bl_get_binding_possibility_point(figure *point, double x, double y);` -- returns the ability to create a binding to a point (1 or 0)
+  - `point` -- target point
+  - `x` -- the x coordinate of the point
+  - `y` -- the y coordinate of the point
+
 + `int bl_get_binding_possibility_line(figure *line, double x, double y);` -- similar to `bl_get_binding_possibility_point`
-+ `int bl_get_binding_possibility_rect(figure *line, double x, double y);` -- similar to `bl_get_binding_possibility_point`
+  - `line` -- target line
+  - `x` -- the x coordinate of the point
+  - `y` -- the x coordinate of the point
+
++ `int bl_get_binding_possibility_rect(figure *rect, double x, double y);` -- similar to `bl_get_binding_possibility_point`
+  - `rect` -- target rect
+  - `x` -- the x coordinate of the point
+  - `y` -- the y coordinate of the point
+
 + `int bl_get_binding_possibility_circle(figure *circle, double x, double y);` -- similar to `bl_get_binding_possibility_point`
+  - `circle` -- target circle
+  - `x` -- the x coordinate of the point
+  - `y` -- the y coordinate of the point
 
 ##### make
 + `void bl_make_binding(figure *fptr, double *x, double *y);` -- directly creates a binding
+  - `fptr` -- target figure
+  - `x` -- the x coordinate of the point
+  - `y` -- the x coordinate of the point
+
 + `void bl_make_binding_point(figure *point, double *x, double *y);` -- directly creates a binding to point
-+ `void bl_make_binding_line(figure *point, double *x, double *y);` -- directly creates a binding to line
-+ `void bl_make_binding_rect(figure *point, double *x, double *y);` -- directly creates a binding to rect
+  - `point` -- target point
+  - `x` -- the x coordinate of the point
+  - `y` -- the x coordinate of the point
+
++ `void bl_make_binding_line(figure *line, double *x, double *y);` -- directly creates a binding to line
+  - `line` -- target line
+  - `x` -- the x coordinate of the point
+  - `y` -- the x coordinate of the point
+
++ `void bl_make_binding_rect(figure *rect, double *x, double *y);` -- directly creates a binding to rect
+  - `rect` -- target rect
+  - `x` -- the x coordinate of the point
+  - `y` -- the x coordinate of the point
+
 + `void bl_make_binding_circle(figure *circle, double *x, double *y);` -- directly creates a binding to circle
+  - `circle` -- target circle
+  - `x` -- the x coordinate of the point
+  - `y` -- the x coordinate of the point
+
 + `char *bl_make_vertical_bind_if_possible(list *node, double *x, double *y);` -- creates a vertical binding
+  - `node` -- target node
+  - `x` -- the x coordinate of the point
+  - `y` -- the x coordinate of the point
 
 #### symbols
 + `BINDING_AREA` -- the distance within which the binding is created
@@ -81,11 +139,31 @@ contains callback functions for the interface created in main.c
 #### functions
 ##### events
 + `gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);` -- drawing the canvas
+  - `area` -- drawing area
+  - `cr` -- cairo context
+  - `data` -- not used
+
 + `gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);` -- tracks the mouse movement
+  - `widget` -- drawing area
+  - `event` -- GdkEvent pointer
+  - `crd_label` -- label the coordinate display
+
 + `gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);` -- tracks mouse clicks
+  - `widget` -- drawing area
+  - `event` -- GdkEvent pointer
+  - `crd_label` -- label the coordinate display
+
 + `gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data);` -- monitors keystrokes of the keyboard. __Currently not used__
+  - `widget` -- drawing area
+  - `event` -- Gdkevent pointer
+  - `data` -- not used
+
 
 ##### bttn (figures)
+For all of the following functions: 
+- `bttn` -- pointer to the button that the signal is bound to
+- `data` -- not used
+
 + `void point_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for point button
 + `void line_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for line pp button
 + `void line_la_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for line la button
@@ -93,21 +171,43 @@ contains callback functions for the interface created in main.c
 + `void rect_wh_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for rect wh button
 + `void circle_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for circle button
 + `void arc_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for arc button
++ `void curs_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for curs button
+
+For all of the following functions:
+- `bttn` -- pointer to the button that the signal is bound to
+- `parent_window` -- the parent window of the dialog
+
 + `void circle_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for parametric circle
 + `void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for parametric arcs
-+ `void curs_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for curs button
 + `void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window);` -- callback for text button
 
 ##### bttn (file operations)
+For all of the following functions:
+- `bttn` -- pointer to the button that the signal is bound to
+- `parent_window` -- the parent window of the dialog
+
 + `void save_bttn_click(GtkWidget *bttn, gpointer data);` -- signal for file saving dialog
 + `void open_bttn_click(GtkWidget *bttn, gpointer data);` -- signal for file open dialog
 
 ##### bttn (modify)
 + `void del_bttn_click(GtkWidget *bttn, GtkWidget *da);` -- callback for delete button
+  - `bttn` -- pointer to the button that the signal is bound to
+  - `da` -- drawing area
+
+For all of the following functions:
+- `bttn` -- pointer to the button that the signal is bound to
+- `parent_window` -- the parent window of the dialog
+
 + `void move_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for move button
 + `void cp_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for copy-paste button
+
 + `void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area);` -- callback for decouple button
+  - `bttn` -- pointer to the button that the signal is bound to
+  - `drawing_area` -- drawing area
+
 + `void rot_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);` -- callback for rotation button
+  - `bttn` -- pointer to the button that the signal is bound to
+  - `parent_window` -- the parent window of the dialog
 
 ##### bttn (dialog)
 + `void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);` -- callback for OK button in line la dialog
