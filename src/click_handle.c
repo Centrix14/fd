@@ -11,7 +11,6 @@
 #include "help/help.h"
 #include "multi_obj/multi_obj.h"
 
-#include "dbg.h"
 #include "st/st.h"
 
 #define ch_handler void (*)(GtkWidget*, list*, double, double)
