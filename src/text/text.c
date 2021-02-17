@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "../text/text.h"
-#include "../dbg.h"
 
 text *tl_new(char *font, int size, int r, int g, int b) {
 	text *tptr = malloc(sizeof(text));
