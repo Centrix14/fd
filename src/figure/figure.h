@@ -16,8 +16,6 @@ typedef struct {
 	int visible;
 
 	int lay;
-
-	char id[16];
 } figure;
 
 enum FG_TYPES {
@@ -57,7 +55,6 @@ figure *figure_rect_decompose(figure *rect);
 void figure_fill(figure *fptr, double x, double y, double a1, double a2, double type);
 
 int figure_get_current_lay();
-char *figure_get_type(int type);
 
 void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode);
 void figure_set_current_lay(int new_lay);
