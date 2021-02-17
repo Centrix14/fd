@@ -8,7 +8,11 @@
 #include "../geometry/geometry.h"
 #include "../multi_obj/multi_obj.h"
 
+#include "../st/st.h"
+
 int curr_lay = 0, fg_num = 0;
+
+st_debug_start(0);
 
 figure *figure_new(double type, double x, double y, double a1, double a2, double a3) {
 	figure *fptr = malloc(sizeof(figure));
@@ -28,7 +32,6 @@ figure *figure_new(double type, double x, double y, double a1, double a2, double
 	fptr->visible = VM_SHOW;
 	fptr->lay = curr_lay;
 
-	sprintf(fptr->id, "%s%d", figure_get_type(fptr->type), fg_num);
 	fg_num++;
 
 	return fptr;
@@ -90,11 +93,11 @@ figure *figure_rect_decompose(figure *rect) {
 	figure_fill(&elms[2], x1, y2, x2, y2, FG_TYPE_LINE_PP);
 	figure_fill(&elms[3], x2, y1, x2, y2, FG_TYPE_LINE_PP);
 
-#ifdef DBG
-	for (int i = 0; i < 4; i++)
-		printf("%d | %f\t%f\t%f\t%f\n", i, elms[i].x, elms[i].y, elms[i].a1, elms[i].a2);
-	putc('\n', stdout);
-#endif
+	st_debug {
+		for (int i = 0; i < 4; i++)
+			printf("%d | %f\t%f\t%f\t%f\n", i, elms[i].x, elms[i].y, elms[i].a1, elms[i].a2);
+		putc('\n', stdout);
+	}
 
 	return elms;
 }
@@ -170,12 +173,6 @@ void figure_set_visible_by_lay_list(list *lptr, int lay, int vm_mode) {
 
 		node = node->next;
 	}
-}
-
-char *figure_get_type(int type) {
-	char *types[] = {"point", "line", "line", "rect", "rect", "circle", "arc"};
-
-	return types[type];
 }
 
 void figure_rotate_point(figure *base, figure *p, double angle) {
