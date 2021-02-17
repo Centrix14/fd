@@ -9,7 +9,6 @@
 #include "callbacks.h"
 #include "color/color.h"
 #include "fd_format/fd_format.h"
-#include "dbg.h"
 #include "error/error.h"
 #include "help/help.h"
 #include "text/text.h"
@@ -464,11 +463,6 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 
 		node = node->next;
 	}
-
-#ifdef DBG
-	list_crawl(figure_list, list_dump_node);
-	putc('\n', stdout);
-#endif
 
 	gtk_widget_queue_draw(da);
 }
