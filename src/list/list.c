@@ -3,7 +3,10 @@
 
 #include "list.h"
 #include "../figure/figure.h"
-#include "../dbg.h"
+
+#include "../st/st.h"
+
+st_debug_start(0);
 
 list *list_init_node(list *parent) {
 	list *nptr = malloc(sizeof(list));
@@ -23,9 +26,10 @@ list *list_init_node(list *parent) {
 
 void list_free_node(list *node) {
 	if (node) {
-#ifdef DBG
-		printf("*** free: %p\n", node);
-#endif
+		st_debug {
+			printf("*** free: %p\n", node);
+		}
+
 		free(node);
 	}
 }
@@ -78,17 +82,4 @@ void *list_get_data(list *lptr) {
 	if (lptr && lptr->data)
 		return lptr->data;
 	return NULL;
-}
-
-void list_dump_node(list *lptr) {
-	FILE *file = fopen("dump", "w");
-	figure *fptr = NULL;
-
-	fptr = list_get_data(lptr);
-	if (!fptr)
-		return ;
-	
-	fprintf(stdout, "id = %s\tme = %p\tprev = %p\tnext = %p\tvm = %d (need 4)\n", fptr->id, lptr, lptr->prev, lptr->next, fptr->visible);
-
-	fclose(file);
 }
