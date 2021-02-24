@@ -419,6 +419,13 @@ void unselect(list *node) {
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *dialog_box;
+	GtkWidget *mode_box;
+	GtkWidget *position_bttn, *size_bttn;
+
+	GtkWidget *position_box_entry, *position_box_set_bttn, *position_box_select, *position_box_label,*position_box_apply_bttn;
+	GtkWidget *position_box, *position_data_box;
+
+	//GtkWidget *size_box_label, *
 
 	dialog = gtk_dialog_new_with_buttons("Options", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -426,6 +433,43 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// init main box
 	dialog_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	// init buttons
+	position_bttn = gtk_button_new_with_label("Position");
+	size_bttn = gtk_button_new_with_label("Size");
+
+	// init mode box
+	mode_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(mode_box), position_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(mode_box), size_bttn, TRUE, FALSE, 5);
+
+	// create position box widgets
+	position_box_label = gtk_label_new("Figure type");
+	position_box_entry = gtk_entry_new();
+	position_box_set_bttn = gtk_button_new_with_label("Set");
+	position_box_select = gtk_button_new_with_label("Select");
+	position_box_apply_bttn = gtk_button_new_with_label("Apply");
+
+	// create position data box
+	position_data_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_entry, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_set_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_select, TRUE, FALSE, 5);
+	
+	// create position box
+	position_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(position_box), position_box_label, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(position_box), position_data_box, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(position_box), position_box_apply_bttn, FALSE, FALSE, 5);
+
+	gtk_widget_set_visible(position_box, TRUE);
+
+	// pack main box
+	gtk_box_pack_start(GTK_BOX(dialog_box), mode_box, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dialog_box), position_box, TRUE, FALSE, 5);
 
 	gtk_container_add(GTK_CONTAINER(dialog_content), dialog_box);
 	gtk_widget_show_all(dialog);
