@@ -21,8 +21,6 @@ static figure *ext_figure,
 			  tmp_figure;
 list *last_selected_node;
 
-st_debug_start(1);
-
 void ch_set_draw_mode(int new_mode) {
 	draw_mode = new_mode;
 }
