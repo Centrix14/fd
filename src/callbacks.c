@@ -15,6 +15,14 @@
 #include "multi_obj/multi_obj.h"
 #include "util/util.h"
 
+#include "st/st.h"
+
+st_debug_start(1);
+st_name("_fd");
+
+#define POS_BOX 0
+#define SIZE_BOX 1
+
 extern list *figure_list;
 extern GtkWidget *window;
 double curs_x = 0, curs_y = 0,
@@ -416,16 +424,80 @@ void unselect(list *node) {
 	}
 }
 
+char *get_fig_type(figure *fig) {
+	char *types[] = {"Point", "Line", "Line", "Rect", "Rect", "Circle", "Arc", "Circle", "Arc"};
+
+	return types[fig->type];
+}
+
+char *extract_type(list *lptr) {
+	if (lptr->dt == OT_FIGURE)
+		return get_fig_type((figure*)lptr->data);
+	else
+		return "Text";
+}
+
+char *get_figure_mnemonic(list *lptr) {
+	list *node = NULL, *target = NULL;
+	multi_obj *mo = NULL;
+
+	int j = 0;
+
+	node = lptr;
+	while (node) {
+		mo = mol_extract(node);
+		if (mo && mo->visible == VM_SELECTED) {
+			target = node;
+			j++;
+		}
+
+		node = node->next;
+	}
+
+	if (j == 0)
+		return "None";
+	if (j == 1)
+		return extract_type(target);
+	else
+		return "Group";
+}
+
+char *get_figure_pos(list *lptr) {
+	static char out[256] = "";
+	multi_obj *mo = NULL;
+	list *node = NULL;
+
+	node = lptr;
+	while (node) {
+		mo = mol_extract(node);
+		if (mo && mo->visible == VM_SELECTED)
+			break;
+
+		mo = NULL;
+		node = node->next;
+	}
+
+	if (mo)
+		sprintf(out, "%g %g", mo->x, mo->y);
+	else
+		return "";
+	return out;
+}
+
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *dialog_box;
 	GtkWidget *mode_box;
 	GtkWidget *position_bttn, *size_bttn;
 
-	GtkWidget *position_box_entry, *position_box_set_bttn, *position_box_select, *position_box_label,*position_box_apply_bttn;
-	GtkWidget *position_box, *position_data_box;
+	GtkWidget *position_box_entry, *position_box_set_bttn, *position_box_select,
+			  *position_box_label, *position_box_apply_bttn, *position_box_ok_bttn;
+	GtkWidget *position_box, *position_data_box, *position_bttn_box;
 
-	//GtkWidget *size_box_label, *
+	GtkWidget *size_box, *size_format_box, *size_data_box, *size_data_entry_box;
+	GtkWidget *size_format_box_pp_bttn, *size_format_box_prm_bttn,
+			  *size_data_box_set_bttn, *size_data_entry_box_entr1, *size_data_entry_box_entr2;
+	GtkWidget *boxes[3];
 
 	dialog = gtk_dialog_new_with_buttons("Options", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -441,8 +513,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// init mode box
 	mode_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
-	gtk_box_pack_start(GTK_BOX(mode_box), position_bttn, TRUE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(mode_box), size_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(mode_box), position_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(mode_box), size_bttn, TRUE, TRUE, 5);
 
 	// create position box widgets
 	position_box_label = gtk_label_new("Figure type");
@@ -450,6 +522,11 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	position_box_set_bttn = gtk_button_new_with_label("Set");
 	position_box_select = gtk_button_new_with_label("Select");
 	position_box_apply_bttn = gtk_button_new_with_label("Apply");
+	position_box_ok_bttn = gtk_button_new_with_label("OK");
+
+	// setting values for widgets
+	gtk_label_set_text(GTK_LABEL(position_box_label), get_figure_mnemonic(figure_list));
+	gtk_entry_set_text(GTK_ENTRY(position_box_entry), get_figure_pos(figure_list));
 
 	// create position data box
 	position_data_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -457,22 +534,101 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_entry, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_set_bttn, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_select, TRUE, FALSE, 5);
+
+	// pack position button box
+	position_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_apply_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_ok_bttn, TRUE, FALSE, 5);
 	
 	// create position box
 	position_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
 	gtk_box_pack_start(GTK_BOX(position_box), position_box_label, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(position_box), position_data_box, TRUE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(position_box), position_box_apply_bttn, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(position_box), position_bttn_box, FALSE, FALSE, 5);
 
 	gtk_widget_set_visible(position_box, TRUE);
+
+	// create size box widgets
+	size_format_box_pp_bttn = gtk_button_new_with_label("PP");
+	size_format_box_prm_bttn = gtk_button_new_with_label("PRM");
+	size_data_box_set_bttn = gtk_button_new_with_label("Set");
+	size_data_entry_box_entr1 = gtk_entry_new();
+	size_data_entry_box_entr2 = gtk_entry_new();
+
+	// create size format box
+	size_format_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(size_format_box), size_format_box_pp_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(size_format_box), size_format_box_prm_bttn, TRUE, TRUE, 5);
+
+	// create size data entry box
+	size_data_entry_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(size_data_entry_box), size_data_entry_box_entr1, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(size_data_entry_box), size_data_entry_box_entr2, TRUE, TRUE, 5);
+
+	// create size data box
+	size_data_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(size_data_box), size_data_entry_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(size_data_box), size_data_box_set_bttn, TRUE, TRUE, 5);
+
+	// create size box
+	size_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(size_box), size_format_box, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(size_box), size_data_box, TRUE, FALSE, 5);
 
 	// pack main box
 	gtk_box_pack_start(GTK_BOX(dialog_box), mode_box, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(dialog_box), position_box, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dialog_box), size_box, TRUE, FALSE, 5);
 
+	// init boxes
+	boxes[0] = position_box;
+	boxes[1] = size_box;
+	boxes[2] = NULL;
+
+	// adding signals
+	g_signal_connect(G_OBJECT(position_box_set_bttn), "clicked",
+			G_CALLBACK(options_dialog_set_button),
+			(char*)gtk_entry_get_text(GTK_ENTRY(position_box_entry)));
+	g_signal_connect(G_OBJECT(size_bttn), "clicked",
+			G_CALLBACK(options_dialog_size_bttn_click), boxes);
+
+	// show dialog
 	gtk_container_add(GTK_CONTAINER(dialog_content), dialog_box);
 	gtk_widget_show_all(dialog);
+	
+	// set visible for size and position boxes
+	gtk_widget_hide(size_box);
+
+	// resize window
+	gtk_widget_queue_resize(dialog);
+}
+
+void options_dialog_set_button(GtkWidget *bttn, char *coords) {
+	list *node = NULL;
+	multi_obj *mo = NULL;
+	double x = 0, y = 0;
+
+	sscanf(coords, "%lf %lf", &x, &y);
+
+	node = figure_list;
+	while (node) {
+		mo = mol_extract(node);
+
+		if (mo && mo->visible == VM_SELECTED) {
+			mo->x = x;
+			mo->y = y;
+
+			mol_apply(node, mo);
+		}
+
+		node = node->next;
+	}
 }
 
 void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
@@ -811,7 +967,6 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	// set show-editor property of ch_color_bttn to false
 	g_object_set(G_OBJECT(ch_color_bttn), "show-editor", FALSE, NULL);
 
-	g_signal_connect(G_OBJECT(ch_color_bttn), "clicked", G_CALLBACK(text_dialog_color_button_click), parent_window);
 	g_signal_connect(G_OBJECT(ch_color_bttn), "color-set", G_CALLBACK(text_dialog_color_button_set), colors);
 
 	// create font button
@@ -936,10 +1091,14 @@ void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
 	font_size = atoi(size);
 }
 
-void text_dialog_color_button_click(GtkWidget *bttn, GtkWidget *parent) {
-	GtkWidget *color_dialog = NULL;
+void options_dialog_size_bttn_click(GtkWidget *bttn, GtkWidget *boxes[]) {
+	st_logf("call");
 
-	color_dialog = gtk_color_chooser_dialog_new("Select color", GTK_WINDOW(parent));
-	gtk_dialog_run(GTK_DIALOG(color_dialog));
-	gtk_widget_destroy(color_dialog);
+	for (int i = 0; boxes[i]; i++) {
+		if (i == SIZE_BOX)
+			gtk_widget_show(boxes[i]);
+		else
+			gtk_widget_hide(boxes[i]);
+		st_logf("loop");
+	}
 }
