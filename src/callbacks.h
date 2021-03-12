@@ -33,7 +33,10 @@ void text_dialog_color_button_click(GtkWidget *bttn, GtkWidget *parent);
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
+
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void options_dialog_set_button(GtkWidget *bttn, char *coords);
+void options_dialog_size_bttn_click(GtkWidget *bttn, GtkWidget *boxes[]);
 
 void save_bttn_click(GtkWidget *bttn, gpointer data);
 void open_bttn_click(GtkWidget *bttn, gpointer data);
