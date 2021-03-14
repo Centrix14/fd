@@ -30,6 +30,7 @@ double curs_x = 0, curs_y = 0,
 int direction_val = 1, type_val = 1;
 
 static GtkWidget *target_window, *dialog;
+static GtkWidget *boxes[3];
 
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	cairo_set_source_rgb(cr, 0, 0, 0);
@@ -497,7 +498,6 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *size_box, *size_format_box, *size_data_box, *size_data_entry_box;
 	GtkWidget *size_format_box_pp_bttn, *size_format_box_prm_bttn,
 			  *size_data_box_set_bttn, *size_data_entry_box_entr1, *size_data_entry_box_entr2;
-	GtkWidget *boxes[3];
 
 	dialog = gtk_dialog_new_with_buttons("Options", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -606,7 +606,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_widget_hide(size_box);
 
 	// resize window
-	gtk_widget_queue_resize(dialog);
+	gtk_window_resize(GTK_WINDOW(dialog), 100, 100);
 }
 
 void options_dialog_set_button(GtkWidget *bttn, char *coords) {
@@ -1091,14 +1091,11 @@ void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
 	font_size = atoi(size);
 }
 
-void options_dialog_size_bttn_click(GtkWidget *bttn, GtkWidget *boxes[]) {
-	st_logf("call");
-
+void options_dialog_size_bttn_click(GtkWidget *bttn, gpointer data) {
 	for (int i = 0; boxes[i]; i++) {
 		if (i == SIZE_BOX)
 			gtk_widget_show(boxes[i]);
 		else
 			gtk_widget_hide(boxes[i]);
-		st_logf("loop");
 	}
 }
