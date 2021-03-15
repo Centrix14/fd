@@ -21,6 +21,8 @@ static figure *ext_figure,
 			  tmp_figure;
 list *last_selected_node;
 
+void (*last_node_cb)(list*, double, double) = ch_null_op;
+
 void ch_set_draw_mode(int new_mode) {
 	draw_mode = new_mode;
 }
@@ -37,12 +39,25 @@ void ch_set_state(int new_state) {
 	state = new_state;
 }
 
+int is_spec_mode() {
+	if (draw_mode == S_LAST_SELECTED_OP)
+		return 1;
+	return 0;
+}
+
 void ch_click_handler(GtkWidget *draw_area, list *lptr, double x, double y) {
-	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp, ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc, ch_add_circle_prm, ch_add_arc_prm, ch_click_cursor_select, ch_move, ch_cp, ch_rotate, ch_text};
+	void (*handlers[])(GtkWidget*, list*, double, double) = {ch_add_point, ch_add_line_pp,
+		ch_add_line_la, ch_add_rect_pp, ch_add_rect_wh, ch_add_circle, ch_add_arc,
+		ch_add_circle_prm, ch_add_arc_prm, ch_click_cursor_select, ch_move, ch_cp,
+		ch_rotate, ch_text};
 	int len = 0;
 
 	len = arr_len(handlers, ch_handler);
-	if (draw_mode < len)
+	if (is_spec_mode()) {
+		(*last_node_cb)(last_selected_node, x, y);
+		draw_mode = FG_TYPE_NONE;
+	}
+	else if (draw_mode < len)
 		(*handlers[draw_mode])(draw_area, lptr, x, y);	
 }
 
@@ -591,4 +606,12 @@ void ch_proc_text(list *lptr) {
 			tptr->visible = VM_SHOW;
 		}
 	}
+}
+
+void ch_null_op(list *lptr, double x, double y) {
+
+}
+
+void ch_set_last_node_cb(void (*fun)(list *, double, double)) {
+	last_node_cb = fun;
 }
