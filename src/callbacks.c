@@ -488,16 +488,18 @@ char *get_figure_pos(list *lptr) {
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *dialog_box;
-	GtkWidget *mode_box;
-	GtkWidget *position_bttn, *size_bttn;
+	GtkWidget *mode_box, *down_bttn_box;
+
+	GtkWidget *position_bttn, *size_bttn, *type_label;
+	GtkWidget *vert_sep;
 
 	GtkWidget *position_box_entry, *position_box_set_bttn, *position_box_select,
-			  *position_box_label, *position_box_apply_bttn, *position_box_ok_bttn;
-	GtkWidget *position_box, *position_data_box, *position_bttn_box;
+			  *position_box_help_bttn, *position_box_ok_bttn;
+	GtkWidget *position_box, *position_data_box;
 
 	GtkWidget *size_box, *size_format_box, *size_data_box, *size_data_entry_box;
 	GtkWidget *size_format_box_pp_bttn, *size_format_box_prm_bttn,
-			  *size_data_box_set_bttn, *size_data_entry_box_entr1, *size_data_entry_box_entr2;
+			  *size_data_box_set_bttn, *size_data_entry_box_entr1,*size_data_entry_box_entr2;
 
 	dialog = gtk_dialog_new_with_buttons("Options", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -517,36 +519,26 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(mode_box), size_bttn, TRUE, TRUE, 5);
 
 	// create position box widgets
-	position_box_label = gtk_label_new("Figure type");
 	position_box_entry = gtk_entry_new();
 	position_box_set_bttn = gtk_button_new_with_label("Set");
 	position_box_select = gtk_button_new_with_label("Select");
-	position_box_apply_bttn = gtk_button_new_with_label("Apply");
+	position_box_help_bttn = gtk_button_new_with_label("Help");
 	position_box_ok_bttn = gtk_button_new_with_label("OK");
 
 	// setting values for widgets
-	gtk_label_set_text(GTK_LABEL(position_box_label), get_figure_mnemonic(figure_list));
 	gtk_entry_set_text(GTK_ENTRY(position_box_entry), get_figure_pos(figure_list));
 
 	// create position data box
 	position_data_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
-	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_entry, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_entry, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_set_bttn, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(position_data_box), position_box_select, TRUE, FALSE, 5);
 
-	// pack position button box
-	position_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
-
-	gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_apply_bttn, TRUE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_ok_bttn, TRUE, FALSE, 5);
-	
 	// create position box
 	position_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
-	gtk_box_pack_start(GTK_BOX(position_box), position_box_label, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(position_box), position_data_box, TRUE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(position_box), position_bttn_box, FALSE, FALSE, 5);
 
 	gtk_widget_set_visible(position_box, TRUE);
 
@@ -581,10 +573,27 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(size_box), size_format_box, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(size_box), size_data_box, TRUE, FALSE, 5);
 
+	// pack position button box
+	down_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(down_bttn_box), position_box_help_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(down_bttn_box), position_box_ok_bttn, TRUE, TRUE, 5);
+	
+	// create sertical separator between mode box and other widgets
+	vert_sep = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
+
+	// create and set type label
+	type_label = gtk_label_new("Figure type");
+	
+	gtk_label_set_text(GTK_LABEL(type_label), get_figure_mnemonic(figure_list));
+
 	// pack main box
 	gtk_box_pack_start(GTK_BOX(dialog_box), mode_box, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dialog_box), vert_sep, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dialog_box), type_label, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(dialog_box), position_box, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(dialog_box), size_box, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dialog_box), down_bttn_box, TRUE, FALSE, 5);
 
 	// init boxes
 	boxes[0] = position_box;
@@ -596,7 +605,13 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			G_CALLBACK(options_dialog_set_button),
 			(char*)gtk_entry_get_text(GTK_ENTRY(position_box_entry)));
 	g_signal_connect(G_OBJECT(size_bttn), "clicked",
-			G_CALLBACK(options_dialog_size_bttn_click), boxes);
+			G_CALLBACK(options_dialog_mode_bttn_click), SIZE_BOX);
+	g_signal_connect(G_OBJECT(position_bttn), "clicked",
+			G_CALLBACK(options_dialog_mode_bttn_click), POS_BOX);
+	g_signal_connect(G_OBJECT(position_box_select), "clicked",
+			G_CALLBACK(options_dialog_select_bttn_click), dialog);
+	g_signal_connect(G_OBJECT(position_box_ok_bttn), "clicked",
+			G_CALLBACK(options_dialog_ok_bttn_click), dialog);
 
 	// show dialog
 	gtk_container_add(GTK_CONTAINER(dialog_content), dialog_box);
@@ -1091,11 +1106,34 @@ void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
 	font_size = atoi(size);
 }
 
-void options_dialog_size_bttn_click(GtkWidget *bttn, gpointer data) {
+void options_dialog_mode_bttn_click(GtkWidget *bttn, int box_type) {
 	for (int i = 0; boxes[i]; i++) {
-		if (i == SIZE_BOX)
+		if (i == box_type)
 			gtk_widget_show(boxes[i]);
 		else
 			gtk_widget_hide(boxes[i]);
 	}
+}
+
+void select_point_cb(list *node, double x, double y) {
+	multi_obj *mo = NULL;
+
+	mo = mol_extract(node);
+	if (mo) {
+		mo->x = x;
+		mo->y = y;
+
+		mol_apply(node, mo);
+	}
+}
+
+void options_dialog_select_bttn_click(GtkWidget *bttn, GtkWidget *dialog) {
+	gtk_widget_destroy(dialog);
+
+	ch_set_draw_mode(S_LAST_SELECTED_OP);
+	ch_set_last_node_cb(select_point_cb);
+}
+
+void options_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *dialog) {
+	gtk_widget_destroy(dialog);
 }
