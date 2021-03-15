@@ -4,6 +4,7 @@
 void ch_set_draw_mode(int new_mode);
 void ch_set_external_figure(figure *fptr);
 void ch_set_state(int new_state);
+void ch_set_last_node_cb(void (*fun)(list *, double, double));
 
 int ch_get_draw_mode();
 
@@ -39,11 +40,17 @@ void ch_text(GtkWidget *draw_area, list *lptr, double x, double y);
 void ch_text_move(list *lptr);
 void ch_copy_text(list *lptr);
 
+void ch_null_op(list *lptr, double x, double y);
+
 enum CH_WORK_MODES {
 	WM_MOVE = FG_TYPE_NONE + 1,
 	WM_CP,
 	WM_ROTATE,
 	WM_TEXT
+};
+
+enum CH_SPECIAL {
+	S_LAST_SELECTED_OP = -1
 };
 
 #endif
