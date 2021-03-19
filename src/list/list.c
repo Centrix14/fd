@@ -4,7 +4,7 @@
 #include "list.h"
 #include "../figure/figure.h"
 
-#include "../st/st.h"
+#include "../st.h/st.h"
 
 st_debug_start(0);
 
