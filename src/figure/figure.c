@@ -8,7 +8,7 @@
 #include "../geometry/geometry.h"
 #include "../multi_obj/multi_obj.h"
 
-#include "../st/st.h"
+#include "../st.h/st.h"
 
 int curr_lay = 0, fg_num = 0;
 
