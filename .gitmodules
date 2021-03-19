@@ -4,3 +4,6 @@
 [submodule "src/ccVector"]
 	path = src/ccVector
 	url = https://github.com/jobtalle/ccVector.git
+[submodule "src/pechkin"]
+	path = src/pechkin
+	url = https://github.com/Centrix14/pechkin.git
