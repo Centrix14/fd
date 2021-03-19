@@ -1,0 +1,3 @@
+[submodule "src/st.h"]
+	path = src/st.h
+	url = https://github.com/Centrix14/st.h.git
