@@ -15,7 +15,7 @@
 #include "multi_obj/multi_obj.h"
 #include "util/util.h"
 
-#include "st/st.h"
+#include "st.h/st.h"
 
 st_debug_start(1);
 st_name("_fd");
