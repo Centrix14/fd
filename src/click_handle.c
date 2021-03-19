@@ -11,7 +11,7 @@
 #include "help/help.h"
 #include "multi_obj/multi_obj.h"
 
-#include "st/st.h"
+#include "st.h/st.h"
 
 #define ch_handler void (*)(GtkWidget*, list*, double, double)
 #define arr_len(arr, elm) sizeof(arr) / sizeof(elm)
