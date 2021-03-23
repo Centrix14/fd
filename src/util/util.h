@@ -21,4 +21,8 @@ char *ul_get_file_from_home(char *path);
 char *ul_get_system_name();
 char *ul_get_path_delim();
 
+int ul_is_exist(char *filename);
+
+char *ul_remove_char(char *str, int c);
+
 #endif
