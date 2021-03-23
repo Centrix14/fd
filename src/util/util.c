@@ -6,6 +6,7 @@
 #include <gtk/gtk.h>
 
 #include "../list/list.h"
+#include "util.h"
 
 // util function for mapping values
 double ul_map(double x, double in_min, double in_max, double out_min, double out_max) {
@@ -44,4 +45,36 @@ void ul_pars_font(char *str, char *font_name, char *font_size) {
 
 		tok = strtok(NULL, " ");
 	}
+}
+
+char *ul_get_home_path() {
+	return getenv("HOME");
+}
+
+char *ul_get_file_from_home(char *path) {
+	char *home = NULL, *delim = NULL;
+
+	delim = ul_get_path_delim();
+	home = ul_get_home_path();
+	if (home) {
+		strcat(home, delim);
+		strcat(home, path);
+
+		return home;
+	}
+
+	return NULL;
+}
+
+char *ul_get_system_name() {
+	return SYSTEM;
+}
+
+char *ul_get_path_delim() {
+	char *sys = NULL;
+
+	sys = ul_get_system_name();
+	if (!strcmp(sys, UL_WINDOWS))
+		return "\\";
+	return "/";
 }
