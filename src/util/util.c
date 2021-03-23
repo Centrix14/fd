@@ -78,3 +78,25 @@ char *ul_get_path_delim() {
 		return "\\";
 	return "/";
 }
+
+int ul_is_exist(char *filename) {
+	FILE *fptr = fopen(filename, "r");
+	int out = 0;
+
+	if (fptr)
+		out = 1;
+	fclose(fptr);
+
+	return out;
+}
+
+char *ul_remove_char(char *str, int c) {
+	static char buf[256] = "";
+	int j = 0;
+
+	for (int i = 0; str[i]; i++)
+		if (str[i] != c)
+			buf[j++] = str[i];
+	buf[j] = 0;
+	return buf;
+}
