@@ -3,8 +3,22 @@
 
 #include <gtk/gtk.h>
 
+#define UL_WINDOWS "win"
+#define UL_NIX "nix"
+
+#ifdef WIN32
+	#define SYSTEM UL_WINDOWS
+#else
+	#define SYSTEM UL_NIX
+#endif
+
 double ul_map(double x, double in_min, double in_max, double out_min, double out_max);
-void ul_get_colors(int *arr, GtkWidget *color_entry);
 void ul_pars_font(char *str, char *font_name, char *font_size);
+
+void ul_get_colors(int *arr, GtkWidget *color_entry);
+char *ul_get_home_path();
+char *ul_get_file_from_home(char *path);
+char *ul_get_system_name();
+char *ul_get_path_delim();
 
 #endif
