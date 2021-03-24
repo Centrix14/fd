@@ -210,7 +210,9 @@ void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	line_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(lenght_entry)));
 	line_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(angle_entry))) * direction_val;
 
+	pl_remove("msg:ext_figure");
 	pl_send("msg:ext_figure", &line_data, sizeof(figure));
+
 	ch_set_draw_mode(FG_TYPE_LINE_LA);
 
 	gtk_widget_destroy(dialog);
@@ -349,6 +351,7 @@ void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	rect_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(width_entry)));
 	rect_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(height_entry))) * direction_val;
 
+	pl_remove("msg:ext_figure");
 	pl_send("msg:ext_figure", &rect_data, sizeof(figure));
 	ch_set_draw_mode(FG_TYPE_RECT_WH);
 
@@ -815,6 +818,8 @@ void rot_dialog_apply_bttn(GtkWidget *bttn, GtkWidget *entry) {
 	static figure ang_figure;
 
 	ang_figure.x = atof(gtk_entry_get_text(GTK_ENTRY(entry)));
+
+	pl_remove("msg:ext_figure");
 	pl_send("msg:ext_figure", &ang_figure, sizeof(figure));
 
 	gtk_widget_destroy(dialog);
@@ -873,7 +878,9 @@ void circle_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 
 	circle_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(entry)));
 
-	ch_set_external_figure(&circle_data);
+	pl_remove("msg:ext_figure");
+	pl_send("msg:ext_figure", &circle_data, sizeof(figure));
+
 	ch_set_draw_mode(FG_TYPE_CIRCLE_PRM);
 
 	hl_set_help(HC_CENTER_POINT);
@@ -957,7 +964,9 @@ void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	arc_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(ang1_entry)));
 	arc_data.a3 = atof(gtk_entry_get_text(GTK_ENTRY(ang2_entry)));
 
-	ch_set_external_figure(&arc_data);
+	pl_remove("msg:ext_figure");
+	pl_send("msg:ext_figure", &arc_data, sizeof(figure));
+
 	ch_set_draw_mode(FG_TYPE_ARC_PRM);
 
 	hl_set_help(HC_CENTER_POINT);
