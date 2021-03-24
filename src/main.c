@@ -14,6 +14,8 @@
 #include "error/error.h"
 #include "help/help.h"
 #include "multi_obj/multi_obj.h"
+#include "plugin/plugin.h"
+#include "pechkin/pl.h"
 
 list *figure_list = NULL;
 GtkWidget *window;
@@ -30,7 +32,11 @@ int main() {
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
 	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon, *rot_icon, *decouple_icon, *help_icon, *circle_prm_icon, *arc_prm_icon, *text_icon;
 
+	// create list, that stores geometry
 	figure_list = list_init_node(NULL);
+
+	// send message with figure list
+	pl_send("msg:geometry_buffer", &figure_list, sizeof(list*));
 
 	gtk_init(NULL, NULL);
 
@@ -315,8 +321,13 @@ int main() {
 	gtk_widget_hide(arc_prm_bttn);
 	gtk_widget_hide(circle_prm_bttn);
 
+	// load plugins
+	pil_load_plugins(draw_area, figure_list);
+
+	// main loop
 	gtk_main();
 
+	// free figure_list
 	list_crawl(figure_list, mol_free_from_node);
 	list_free_list(figure_list);
 
