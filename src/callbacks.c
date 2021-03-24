@@ -1055,7 +1055,6 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	gtk_box_pack_start(GTK_BOX(label_color_box), text_color_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(label_color_box), text_color_entry, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(label_color_box), ch_color_bttn, FALSE, FALSE, 5);
-	
 
 	// pack label options box
 	label_opt_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
