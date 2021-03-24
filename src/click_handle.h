@@ -2,7 +2,6 @@
 #define __FLAT_DRAW_CLICK_HANDLE_LIBRARY_HEADER_FILE_INCLUDED__
 
 void ch_set_draw_mode(int new_mode);
-void ch_set_external_figure(figure *fptr);
 void ch_set_state(int new_state);
 void ch_set_last_node_cb(void (*fun)(list *, double, double));
 
