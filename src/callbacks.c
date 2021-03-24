@@ -210,7 +210,7 @@ void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	line_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(lenght_entry)));
 	line_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(angle_entry))) * direction_val;
 
-	ch_set_external_figure(&line_data);
+	pl_send("msg:ext_figure", &line_data, sizeof(figure));
 	ch_set_draw_mode(FG_TYPE_LINE_LA);
 
 	gtk_widget_destroy(dialog);
@@ -349,7 +349,7 @@ void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	rect_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(width_entry)));
 	rect_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(height_entry))) * direction_val;
 
-	ch_set_external_figure(&rect_data);
+	pl_send("msg:ext_figure", &rect_data, sizeof(figure));
 	ch_set_draw_mode(FG_TYPE_RECT_WH);
 
 	gtk_widget_destroy(dialog);
@@ -815,7 +815,7 @@ void rot_dialog_apply_bttn(GtkWidget *bttn, GtkWidget *entry) {
 	static figure ang_figure;
 
 	ang_figure.x = atof(gtk_entry_get_text(GTK_ENTRY(entry)));
-	ch_set_external_figure(&ang_figure);
+	pl_send("msg:ext_figure", &ang_figure, sizeof(figure));
 
 	gtk_widget_destroy(dialog);
 
