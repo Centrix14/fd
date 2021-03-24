@@ -14,6 +14,7 @@
 #include "text/text.h"
 #include "multi_obj/multi_obj.h"
 #include "util/util.h"
+#include "pechkin/pl.h"
 
 #include "st.h/st.h"
 
@@ -23,7 +24,6 @@ st_name("_fd");
 #define POS_BOX 0
 #define SIZE_BOX 1
 
-extern list *figure_list;
 extern GtkWidget *window;
 double curs_x = 0, curs_y = 0,
 	   click_x = 0, click_y = 0;
@@ -33,12 +33,18 @@ static GtkWidget *target_window, *dialog;
 static GtkWidget *boxes[3];
 
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
+	list *geometry_buffer = NULL;
+
+	// make bg black
 	cairo_set_source_rgb(cr, 0, 0, 0);
 	cairo_paint(cr);
 
+	// recive message
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+
 	// draw figures
 	dl_set_cairo_context(cr);
-	list_crawl(figure_list, mol_draw_obj_from_node);
+	list_crawl(geometry_buffer, mol_draw_obj_from_node);
 	dl_draw_preview();
 
 	// draw cursor preview
@@ -53,13 +59,16 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 
 gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label) {
 	GdkEventMotion *em = (GdkEventMotion*)event;
+	list *geometry_buffer = NULL;
 	char crd[256];
+
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
 	if (event->type == GDK_MOTION_NOTIFY) {
 		curs_x = (double)em->x;
 		curs_y = (double)em->y;
 
-		bl_bind(figure_list, &curs_x, &curs_y);
+		bl_bind(geometry_buffer, &curs_x, &curs_y);
 		dl_set_preview_coords(curs_x, curs_y);
 
 		sprintf(crd, "(%g;%g)", curs_x, curs_y);
@@ -73,6 +82,9 @@ gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label) {
 
 gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 	GdkEventButton *eb = (GdkEventButton*)event;
+	list *geometry_buffer = NULL;
+
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
 	if (event->type == GDK_BUTTON_PRESS) {
 		switch (eb->button) {
@@ -80,8 +92,8 @@ gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data) {
 				click_x = (double)eb->x;
 				click_y = (double)eb->y;
 
-				bl_bind(figure_list, &click_x, &click_y);
-				ch_click_handler(widget, figure_list, click_x, click_y);
+				bl_bind(geometry_buffer, &click_x, &click_y);
+				ch_click_handler(widget, geometry_buffer, click_x, click_y);
 			break;
 
 			case GDK_BUTTON_SECONDARY:
@@ -229,16 +241,22 @@ void set_window(GtkWidget *new_window) {
 
 void save_bttn_click(GtkWidget *bttn, gpointer data) {
 	const char *name = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(bttn));
+	list *geometry_buffer = NULL;
+
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
 	fdl_target_file((char*)name);
-	fdl_write_from_list(figure_list);
+	fdl_write_from_list(geometry_buffer);
 }
 
 void open_bttn_click(GtkWidget *bttn, gpointer data) {
 	const char *name = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(bttn));
+	list *geometry_buffer = NULL;
+
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
 	fdl_target_file((char*)name);
-	fdl_read_file(figure_list);
+	fdl_read_file(geometry_buffer);
 }
 
 GtkWidget *width_entry, *height_entry, *direction_bttn;
@@ -342,14 +360,16 @@ void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 	char *text = (char*)gtk_entry_get_text(GTK_ENTRY(entry));
 	int is_prj_lay = 0, entry_lay = 0;
+	list *geometry_buffer = NULL;
 
 	entry_lay = atoi(text);
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
-	is_prj_lay = figure_is_projection_lay_list(figure_list, entry_lay);
+	is_prj_lay = figure_is_projection_lay_list(geometry_buffer, entry_lay);
 	if (is_prj_lay)
-		figure_set_visible_by_lay_list(figure_list, entry_lay, VM_HIDE);
+		figure_set_visible_by_lay_list(geometry_buffer, entry_lay, VM_HIDE);
 	else
-		figure_set_visible_by_lay_list(figure_list, entry_lay, VM_PROJECTION);
+		figure_set_visible_by_lay_list(geometry_buffer, entry_lay, VM_PROJECTION);
 }
 
 void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
@@ -499,7 +519,10 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	GtkWidget *size_box, *size_format_box, *size_data_box, *size_data_entry_box;
 	GtkWidget *size_format_box_pp_bttn, *size_format_box_prm_bttn,
-			  *size_data_box_set_bttn, *size_data_entry_box_entr1,*size_data_entry_box_entr2;
+			  *size_data_box_set_bttn, *size_data_entry_box_entr1, *size_data_entry_box_entr2;
+	list *geometry_buffer = NULL;
+
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
 	dialog = gtk_dialog_new_with_buttons("Options", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -526,7 +549,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	position_box_ok_bttn = gtk_button_new_with_label("OK");
 
 	// setting values for widgets
-	gtk_entry_set_text(GTK_ENTRY(position_box_entry), get_figure_pos(figure_list));
+	gtk_entry_set_text(GTK_ENTRY(position_box_entry), get_figure_pos(geometry_buffer));
 
 	// create position data box
 	position_data_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -585,7 +608,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// create and set type label
 	type_label = gtk_label_new("Figure type");
 	
-	gtk_label_set_text(GTK_LABEL(type_label), get_figure_mnemonic(figure_list));
+	gtk_label_set_text(GTK_LABEL(type_label), get_figure_mnemonic(geometry_buffer));
 
 	// pack main box
 	gtk_box_pack_start(GTK_BOX(dialog_box), mode_box, TRUE, FALSE, 5);
@@ -631,7 +654,7 @@ void options_dialog_set_button(GtkWidget *bttn, char *coords) {
 
 	sscanf(coords, "%lf %lf", &x, &y);
 
-	node = figure_list;
+	node = *(list**)pl_read("msg:geometry_buffer");
 	while (node) {
 		mo = mol_extract(node);
 
@@ -650,7 +673,7 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 	list *node, *node_next, *node_prev;
 	figure *fptr;
 
-	node = figure_list;
+	node = *(list**)pl_read("msg:geometry_buffer");
 	while (node) {
 		fptr = mol_conv_to_figure(node);
 		if (!fptr) {
@@ -719,7 +742,11 @@ void cp_bttn_click(GtkWidget *bttn, gpointer data) {
 }
 
 void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area) {
-	list_crawl(figure_list, cb_dc);
+	list *geometry_buffer = NULL;
+
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+
+	list_crawl(geometry_buffer, cb_dc);
 
 	gtk_widget_queue_draw(draw_area);
 }
@@ -1047,12 +1074,13 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	GtkTextIter start, end;
 	char *buf = NULL;
-	list *last;
+	list *last, *geometry_buffer;
 	text *tptr;
 
 	gtk_text_buffer_get_start_iter(tb, &start);
 	gtk_text_buffer_get_end_iter(tb, &end);
 
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	buf = gtk_text_buffer_get_text(tb, &start, &end, TRUE);
 
 	if (!strlen(font_name))
@@ -1062,8 +1090,8 @@ void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	if (*colors == -1)
 		ul_get_colors(colors, text_color_entry);
 
-	list_add_node(figure_list);
-	last = list_get_last(figure_list);
+	list_add_node(geometry_buffer);
+	last = list_get_last(geometry_buffer);
 	last->dt = OT_TEXT;
 
 	tptr = tl_new(font_name, font_size, colors[0], colors[1], colors[2]);
