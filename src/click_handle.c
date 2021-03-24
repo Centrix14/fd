@@ -11,6 +11,7 @@
 #include "help/help.h"
 #include "multi_obj/multi_obj.h"
 
+#include "pechkin/pl.h"
 #include "st.h/st.h"
 
 #define ch_handler void (*)(GtkWidget*, list*, double, double)
@@ -110,8 +111,10 @@ void ch_add_line_pp(GtkWidget *draw_area, list *lptr, double x, double y) {
 }
 
 void ch_add_line_la(GtkWidget *draw_area, list *lptr, double x, double y) {
+	figure *line, *ext_line;
 	list *last;
-	figure *line;
+
+	ext_line = (figure*)pl_read("msg:ext_figure");
 
 	list_add_node(lptr);
 
@@ -119,7 +122,7 @@ void ch_add_line_la(GtkWidget *draw_area, list *lptr, double x, double y) {
 	line = figure_new_line_pp(x, y, 0, 0);
 	line->visible = VM_SHOW;
 
-	gel_calculate_line_la(line, ext_figure->a1, ext_figure->a2);
+	gel_calculate_line_la(line, ext_line->a1, ext_line->a2);
 
 	list_set_data(last, line);
 
@@ -161,8 +164,8 @@ void ch_add_rect_pp(GtkWidget *draw_area, list *lptr, double x, double y) {
 }
 
 void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, double x, double y) {
+	figure *rect, *ext_rect;
 	list *last;
-	figure *rect;
 
 	list_add_node(lptr);
 
@@ -170,8 +173,10 @@ void ch_add_rect_wh(GtkWidget *draw_area, list *lptr, double x, double y) {
 	rect = figure_new_rect_pp(x, y, 0, 0);
 	rect->visible = VM_SHOW;
 
-	rect->a1 = rect->x + ext_figure->a1;
-	rect->a2 = rect->y + ext_figure->a2;
+	ext_rect = (figure*)pl_read("msg:ext_figure");
+
+	rect->a1 = rect->x + ext_rect->a1;
+	rect->a2 = rect->y + ext_rect->a2;
 
 	list_set_data(last, rect);
 
@@ -526,7 +531,10 @@ double angle = 0;
 figure base;
 
 void ch_rotate(GtkWidget *draw_area, list *lptr, double x, double y) {
-	angle = gel_convert_grades_to_rads(ext_figure->x);
+	figure *ext_ang = NULL;
+
+	ext_ang = (figure*)pl_read("msg:ext_figure");
+	angle = gel_convert_grades_to_rads(ext_ang->x);
 
 	base.x = x;
 	base.y = y;
