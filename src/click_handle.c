@@ -18,8 +18,7 @@
 #define arr_len(arr, elm) sizeof(arr) / sizeof(elm)
 
 static int draw_mode = FG_TYPE_POINT, state = 0;
-static figure *ext_figure,
-			  tmp_figure;
+static figure tmp_figure;
 list *last_selected_node;
 
 void (*last_node_cb)(list*, double, double) = ch_null_op;
@@ -30,10 +29,6 @@ void ch_set_draw_mode(int new_mode) {
 
 int ch_get_draw_mode() {
 	return draw_mode;
-}
-
-void ch_set_external_figure(figure *fptr) {
-	ext_figure = fptr;
 }
 
 void ch_set_state(int new_state) {
@@ -557,12 +552,13 @@ void ch_rot(list *lptr) {
 }
 
 void ch_add_circle_prm(GtkWidget *draw_area, list *lptr, double x, double y) {
-	figure *circle;
+	figure *circle, *ext_circle;
 	list *last;
 
 	list_add_node(lptr);
 
-	circle = figure_new_circle(x, y, ext_figure->a1);
+	ext_circle = (figure*)pl_read("msg:ext_figure");
+	circle = figure_new_circle(x, y, ext_circle->a1);
 	last = list_get_last(lptr);
 
 	circle->visible = VM_SHOW;
@@ -573,12 +569,13 @@ void ch_add_circle_prm(GtkWidget *draw_area, list *lptr, double x, double y) {
 }
 
 void ch_add_arc_prm(GtkWidget *draw_area, list *lptr, double x, double y) {
-	figure *arc;
+	figure *arc, *ext_arc;
 	list *last;
 
 	list_add_node(lptr);
 
-	arc = figure_new_arc(x, y, ext_figure->a1, ext_figure->a2, ext_figure->a3);
+	ext_arc = (figure*)pl_read("msg:ext_figure");
+	arc = figure_new_arc(x, y, ext_arc->a1, ext_arc->a2, ext_arc->a3);
 	last = list_get_last(lptr);
 
 	arc->visible = VM_SHOW;
