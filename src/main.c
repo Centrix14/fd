@@ -53,6 +53,9 @@ int main() {
 	draw_area = gtk_drawing_area_new();
 	gtk_widget_set_size_request(draw_area, 1000, 800);
 
+	// send drawing area message
+	pl_send("msg:drawing_area", &draw_area, sizeof(GtkWidget*));
+
 	// init scrolled window
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_ALWAYS, GTK_POLICY_AUTOMATIC);
