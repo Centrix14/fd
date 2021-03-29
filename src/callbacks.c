@@ -253,12 +253,16 @@ void save_bttn_click(GtkWidget *bttn, gpointer data) {
 
 void open_bttn_click(GtkWidget *bttn, gpointer data) {
 	const char *name = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(bttn));
+	GtkWidget *drawing_area = NULL;
 	list *geometry_buffer = NULL;
 
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
 	fdl_target_file((char*)name);
 	fdl_read_file(geometry_buffer);
+
+	drawing_area = *(GtkWidget**)pl_read("msg:drawing_area");
+	gtk_widget_queue_draw(drawing_area);
 }
 
 GtkWidget *width_entry, *height_entry, *direction_bttn;
@@ -269,7 +273,8 @@ void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *ok_bttn, *apply_bttn;
 	GtkWidget *width_box, *height_box, *direction_box, *bttn_box, *main_box;
 
-	dialog = gtk_dialog_new_with_buttons("Rect (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Rect (PRMT)",
+			GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -533,6 +538,9 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// init main box
 	dialog_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	// send dialog message
+	pl_send("msg:options_dialog", &dialog, sizeof(GtkWidget*));
 
 	// init buttons
 	position_bttn = gtk_button_new_with_label("Position");
@@ -898,7 +906,8 @@ void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *entrys[3];
 	GtkWidget *ang1_box, *ang2_box, *radii_box, *bttn_box, *main_box;
 
-	dialog = gtk_dialog_new_with_buttons("Arc (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Arc (PRMT)",
+			GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -1143,15 +1152,21 @@ void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
 }
 
 void options_dialog_mode_bttn_click(GtkWidget *bttn, int box_type) {
+	GtkWidget *dialog = NULL;
+
 	for (int i = 0; boxes[i]; i++) {
 		if (i == box_type)
 			gtk_widget_show(boxes[i]);
 		else
 			gtk_widget_hide(boxes[i]);
 	}
+
+	dialog = *(GtkWidget**)pl_read("msg:options_dialog");
+	gtk_window_resize(GTK_WINDOW(dialog), 300, 100);
 }
 
 void select_point_cb(list *node, double x, double y) {
+	GtkWidget *drawing_area = NULL;
 	multi_obj *mo = NULL;
 
 	mo = mol_extract(node);
@@ -1161,6 +1176,9 @@ void select_point_cb(list *node, double x, double y) {
 
 		mol_apply(node, mo);
 	}
+
+	drawing_area = *(GtkWidget**)pl_read("msg:drawing_area");
+	gtk_widget_queue_draw(drawing_area);
 }
 
 void options_dialog_select_bttn_click(GtkWidget *bttn, GtkWidget *dialog) {
