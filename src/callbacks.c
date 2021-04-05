@@ -24,7 +24,6 @@ st_name("_fd");
 #define POS_BOX 0
 #define SIZE_BOX 1
 
-extern GtkWidget *window;
 double curs_x = 0, curs_y = 0,
 	   click_x = 0, click_y = 0;
 int direction_val = 1, type_val = 1;
@@ -134,13 +133,12 @@ void line_bttn_click(GtkWidget *bttn, gpointer data) {
 	hl_set_help(HC_START_POINT);
 }
 
-GtkWidget *lenght_entry, *angle_entry;
-
 void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *lenght_label, *angle_label, *direction_label,
 			  *ok_bttn, *apply_bttn, *direction_bttn;
 	GtkWidget *lenght_box, *angle_box, *bttn_box, *direction_box, *main_box;
+	GtkWidget *lenght_entry, *angle_entry;
 
 	dialog = gtk_dialog_new_with_buttons("Line (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -153,6 +151,14 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// init entrys
 	lenght_entry = gtk_entry_new();
 	angle_entry = gtk_entry_new();
+
+	// removing messages
+	pl_remove("msg:lenght_entry");
+	pl_remove("msg:angle_entry");
+
+	// send message
+	pl_send("msg:lenght_entry", &lenght_entry, sizeof(GtkWidget*));
+	pl_send("msg:angle_entry", &angle_entry, sizeof(GtkWidget*));
 
 	// init direction widgets
 	direction_label = gtk_label_new("Direction");
@@ -205,8 +211,14 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 }
 
 void line_la_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
+	GtkWidget *lenght_entry, *angle_entry;
 	static figure line_data;
 
+	// read messages
+	lenght_entry = *(GtkWidget**)pl_read("msg:lenght_entry");
+	angle_entry = *(GtkWidget**)pl_read("msg:angle_entry");
+
+	// extract data from line & angle entry
 	line_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(lenght_entry)));
 	line_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(angle_entry))) * direction_val;
 
@@ -265,13 +277,12 @@ void open_bttn_click(GtkWidget *bttn, gpointer data) {
 	gtk_widget_queue_draw(drawing_area);
 }
 
-GtkWidget *width_entry, *height_entry, *direction_bttn;
-
 void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *width_label, *height_label, *direction_label,
 			  *ok_bttn, *apply_bttn;
 	GtkWidget *width_box, *height_box, *direction_box, *bttn_box, *main_box;
+	GtkWidget *width_entry, *height_entry, *direction_bttn;
 
 	dialog = gtk_dialog_new_with_buttons("Rect (PRMT)",
 			GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
@@ -286,11 +297,22 @@ void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	width_entry = gtk_entry_new();
 	height_entry = gtk_entry_new();
 
+	// remove messages
+	pl_remove("msg:width_entry");
+	pl_remove("msg:height_entry");
+
+	// send message
+	pl_send("msg:width_entry", &width_entry, sizeof(GtkWidget*));
+	pl_send("msg:height_entry", &height_entry, sizeof(GtkWidget*));
+
 	// init direction widgets
 	direction_label = gtk_label_new("Direction");
 	direction_bttn = gtk_button_new_with_label("↑");
 
 	g_signal_connect(G_OBJECT(direction_bttn), "clicked", G_CALLBACK(direction_bttn_click), NULL);
+
+	// send message
+	pl_send("msg:direction_bttn", &direction_bttn, sizeof(GtkWidget*));
 
 	// init buttons
 	ok_bttn = gtk_button_new_with_label("OK");
@@ -351,7 +373,12 @@ void direction_bttn_click(GtkWidget *bttn, gpointer data) {
 }
 
 void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
+	GtkWidget *width_entry, *height_entry;
 	static figure rect_data;
+
+	// read messages
+	width_entry = *(GtkWidget**)pl_read("msg:width_entry");
+	height_entry = *(GtkWidget**)pl_read("msg:height_entry");
 
 	rect_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(width_entry)));
 	rect_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(height_entry))) * direction_val;
@@ -538,6 +565,9 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// init main box
 	dialog_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	// remove message
+	pl_remove("msg:options_dialog");
 
 	// send dialog message
 	pl_send("msg:options_dialog", &dialog, sizeof(GtkWidget*));
@@ -896,8 +926,6 @@ void circle_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
 	gtk_widget_destroy(dialog);
 }
 
-GtkWidget *ang1_entry, *ang2_entry, *radii_entry;
-
 void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *ang1_label, *ang2_label,
@@ -905,6 +933,7 @@ void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *ok_bttn;
 	GtkWidget *entrys[3];
 	GtkWidget *ang1_box, *ang2_box, *radii_box, *bttn_box, *main_box;
+	GtkWidget *ang1_entry, *ang2_entry, *radii_entry;
 
 	dialog = gtk_dialog_new_with_buttons("Arc (PRMT)",
 			GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
@@ -920,6 +949,16 @@ void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	ang1_entry = gtk_entry_new();
 	ang2_entry = gtk_entry_new();
 	radii_entry = gtk_entry_new();
+
+	// removing messages
+	pl_remove("msg:ang1_entry");
+	pl_remove("msg:ang2_entry");
+	pl_remove("msg:radii_entry");
+
+	// send messages
+	pl_send("msg:ang1_entry", &ang1_entry, sizeof(GtkWidget*));
+	pl_send("msg:ang2_entry", &ang2_entry, sizeof(GtkWidget*));
+	pl_send("msg:radii_entry", &radii_entry, sizeof(GtkWidget*));
 
 	// init buttons
 	ok_bttn = gtk_button_new_with_label("OK");
@@ -964,7 +1003,13 @@ void arc_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 }
 
 void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
+	GtkWidget *ang1_entry, *ang2_entry, *radii_entry;
 	static figure arc_data;
+
+	// read messages
+	ang1_entry = *(GtkWidget**)pl_read("msg:ang1_entry");
+	ang2_entry = *(GtkWidget**)pl_read("msg:ang2_entry");
+	radii_entry = *(GtkWidget**)pl_read("msg:radii_entry");
 
 	// radius
 	arc_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(radii_entry)));
@@ -983,18 +1028,18 @@ void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	gtk_widget_destroy(dialog);
 }
 
-GtkWidget *text_size_entry, *text_font_entry, *text_color_entry;
-int colors[3] = {-1, -1, -1};
-int font_size = -1;
-char font_name[64] = "";
-
 void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *text_view, *ok_bttn, *help_bttn, *ch_color_bttn, *ch_font_bttn;
 	GtkWidget *text_size_label, *text_font_label, *text_color_label;
 	GtkWidget *bttn_box, *label_size_box, *label_font_box, *label_color_box, *label_opt_box, *main_box, *label_style_box, *label_style_entrys_box;
+	GtkWidget *text_size_entry, *text_font_entry, *text_color_entry;
 	GtkTextBuffer *text_buffer;
 	GdkRGBA color_button_inital_color;
+	
+	int colors[3] = {-1, -1, -1};
+	int font_size = -1;
+	char font_name[64] = "";
 
 	dialog = gtk_dialog_new_with_buttons("Text", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -1008,6 +1053,15 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	text_size_entry = gtk_entry_new();
 	text_font_entry = gtk_entry_new();
 	text_color_entry = gtk_entry_new();
+
+	// remove messages
+	pl_remove("msg:size_entry");
+	pl_remove("msg:font_entry");
+	pl_remove("msg:color_entry");
+
+	pl_send("msg:size_entry", &text_size_entry, sizeof(GtkWidget*));
+	pl_send("msg:font_entry", &text_font_entry, sizeof(GtkWidget*));
+	pl_send("msg:color_entry", &text_color_entry, sizeof(GtkWidget*));
 
 	// create text buffer & view
 	text_buffer = gtk_text_buffer_new(NULL);
@@ -1086,19 +1140,44 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 
 	gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
 	gtk_widget_show_all(dialog);
+
+	// remove message
+	pl_remove("msg:colors");
+	pl_remove("msg:font_size_int");
+	pl_remove("msg:font_name_str");
+
+	// send messages
+	pl_send("msg:colors", &colors, sizeof(int) * 3);
+	pl_send("msg:font_size_int", &font_size, sizeof(int));
+	pl_send("msg:font_name_str", font_name, strlen(font_name));
 }
 
 void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
+	GtkWidget *text_font_entry, *text_size_entry, *text_color_entry;
 	GtkTextIter start, end;
-	char *buf = NULL;
+	char *buf = NULL, *font_name = NULL;
 	list *last, *geometry_buffer;
 	text *tptr;
+	int *colors, font_size;
 
+	// read messages
+	text_font_entry = *(GtkWidget**)pl_read("msg:size_entry");
+	text_size_entry = *(GtkWidget**)pl_read("msg:font_entry");
+	text_color_entry = *(GtkWidget**)pl_read("msg:color_entry");
+
+	colors = (int*)pl_read("msg:colors");
+	font_size = *(int*)pl_read("msg:font_size_int");
+
+	// get iterators
 	gtk_text_buffer_get_start_iter(tb, &start);
 	gtk_text_buffer_get_end_iter(tb, &end);
 
+	// read message
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	buf = gtk_text_buffer_get_text(tb, &start, &end, TRUE);
+
+	// read message
+	font_name = (char*)pl_read("msg:font_name_str");
 
 	if (!strlen(font_name))
 		strcpy(font_name, gtk_entry_get_text(GTK_ENTRY(text_font_entry)));
@@ -1141,14 +1220,21 @@ void text_dialog_color_button_set(GtkColorButton *bttn, int *arr) {
 }
 
 void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
-	char *font = NULL;
-	char size[256] = "";
+	char *font = NULL, *font_name = NULL;
+	char size[256] = "", font_size = 0;
 
 	font = gtk_font_chooser_get_font(GTK_FONT_CHOOSER(bttn));
+
+	// read message
+	font_name = (char*)pl_read("msg:font_name_str");
 
 	ul_pars_font(font, font_name, size);
 
 	font_size = atoi(size);
+
+	// remove & send message
+	pl_remove("msg:font_size_int");
+	pl_send("msg:font_size_int", &font_size, sizeof(int));
 }
 
 void options_dialog_mode_bttn_click(GtkWidget *bttn, int box_type) {
