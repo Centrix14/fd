@@ -47,6 +47,11 @@ int main() {
 	gtk_window_set_default_icon_from_file("res/fd.png", NULL);
 
 	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+
+	// send main window
+	pl_send("msg:window", &window, sizeof(GtkWidget*));
+
+	// error library bind
 	el_set_par_window(window);
 
 	// init drawing area
@@ -333,6 +338,9 @@ int main() {
 	// free figure_list
 	list_crawl(figure_list, mol_free_from_node);
 	list_free_list(figure_list);
+
+	// delete all messages
+	pl_free();
 
 	return 0;
 }
