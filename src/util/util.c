@@ -100,3 +100,14 @@ char *ul_remove_char(char *str, int c) {
 	buf[j] = 0;
 	return buf;
 }
+
+void ul_pars_coords(char *str, int count, int *arr) {
+	char *token = NULL;
+
+	token = strtok(str, " ");
+	for (int i = 0; i < count && token; i++) {
+		arr[i] = atof(token);
+
+		token = strtok(NULL, " ");
+	}
+}
