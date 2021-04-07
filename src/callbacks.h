@@ -39,6 +39,11 @@ void options_dialog_set_button(GtkWidget *bttn, char *coords);
 void options_dialog_mode_bttn_click(GtkWidget *bttn, int box_type);
 void options_dialog_select_bttn_click(GtkWidget *bttn, GtkWidget *dialog);
 void options_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *dialog);
+void options_dialog_size_box_set_bttn_click(GtkWidget *bttn, gpointer data);
+void options_dialog_size_box_select_bttn_click(GtkWidget *bttn, GtkWidget *dialog);
+void options_dialog_size_format_box_prm_bttn_click(GtkWidget *bttn, GtkWidget *select_bttn);
+void options_dialog_size_box_set_prm_bttn_click(GtkWidget *bttn, gpointer data);
+void options_dialog_size_format_box_pp_bttn_click(GtkWidget *bttn, GtkWidget *select_bttn);
 
 void save_bttn_click(GtkWidget *bttn, gpointer data);
 void open_bttn_click(GtkWidget *bttn, gpointer data);
