@@ -25,4 +25,6 @@ int ul_is_exist(char *filename);
 
 char *ul_remove_char(char *str, int c);
 
+void ul_pars_coords(char *str, int count, int *arr);
+
 #endif
