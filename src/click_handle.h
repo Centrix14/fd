@@ -4,6 +4,7 @@
 void ch_set_draw_mode(int new_mode);
 void ch_set_state(int new_state);
 void ch_set_last_node_cb(void (*fun)(list *, double, double));
+void ch_set_spec_hold_clicks(int clicks);
 
 int ch_get_draw_mode();
 
