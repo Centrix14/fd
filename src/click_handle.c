@@ -19,6 +19,7 @@
 
 static int draw_mode = FG_TYPE_POINT, state = 0;
 static figure tmp_figure;
+static int spec_hold_clicks = 0;
 list *last_selected_node;
 
 void (*last_node_cb)(list*, double, double) = ch_null_op;
@@ -33,6 +34,10 @@ int ch_get_draw_mode() {
 
 void ch_set_state(int new_state) {
 	state = new_state;
+}
+
+void ch_set_spec_hold_clicks(int clicks) {
+	spec_hold_clicks = clicks;
 }
 
 int is_spec_mode() {
@@ -51,7 +56,10 @@ void ch_click_handler(GtkWidget *draw_area, list *lptr, double x, double y) {
 	len = arr_len(handlers, ch_handler);
 	if (is_spec_mode()) {
 		(*last_node_cb)(last_selected_node, x, y);
-		draw_mode = FG_TYPE_NONE;
+
+		if (!spec_hold_clicks)
+			draw_mode = FG_TYPE_NONE;
+		spec_hold_clicks--;
 	}
 	else if (draw_mode < len)
 		(*handlers[draw_mode])(draw_area, lptr, x, y);	
