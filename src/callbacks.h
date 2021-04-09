@@ -30,6 +30,10 @@ void text_dialog_color_button_set(GtkColorButton *bttn, int *color);
 void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data);
 void text_dialog_color_button_click(GtkWidget *bttn, GtkWidget *parent);
 
+void line_la_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void rect_wh_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void text_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
