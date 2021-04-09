@@ -136,7 +136,7 @@ void line_bttn_click(GtkWidget *bttn, gpointer data) {
 void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *lenght_label, *angle_label, *direction_label,
-			  *ok_bttn, *apply_bttn, *direction_bttn;
+			  *ok_bttn, *help_bttn, *direction_bttn;
 	GtkWidget *lenght_box, *angle_box, *bttn_box, *direction_box, *main_box;
 	GtkWidget *lenght_entry, *angle_entry;
 
@@ -168,9 +168,13 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// init buttons
 	ok_bttn = gtk_button_new_with_label("OK");
-	apply_bttn = gtk_button_new_with_label("Help");
+	help_bttn = gtk_button_new_with_label("Help");
 
-	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(line_la_dialog_ok_bttn_click), NULL);
+	// bind signals
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked",
+			G_CALLBACK(line_la_dialog_ok_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(help_bttn), "clicked",
+			G_CALLBACK(line_la_dialog_help_bttn_click), dialog);
 
 	// init lenght- angle- boxes
 	lenght_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -195,7 +199,7 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// pack button box
 	gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
-	gtk_box_pack_start(GTK_BOX(bttn_box), apply_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(bttn_box), help_bttn, TRUE, TRUE, 5);
 
 	// init main box
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -280,7 +284,7 @@ void open_bttn_click(GtkWidget *bttn, gpointer data) {
 void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *width_label, *height_label, *direction_label,
-			  *ok_bttn, *apply_bttn;
+			  *ok_bttn, *help_bttn;
 	GtkWidget *width_box, *height_box, *direction_box, *bttn_box, *main_box;
 	GtkWidget *width_entry, *height_entry, *direction_bttn;
 
@@ -316,9 +320,12 @@ void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// init buttons
 	ok_bttn = gtk_button_new_with_label("OK");
-	apply_bttn = gtk_button_new_with_label("Help");
+	help_bttn = gtk_button_new_with_label("Help");
 
-	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(rect_wh_dialog_ok_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked",
+			G_CALLBACK(rect_wh_dialog_ok_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(help_bttn), "clicked",
+			G_CALLBACK(rect_wh_dialog_help_bttn_click), dialog);
 
 	// init lenght- angle- boxes
 	width_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -343,7 +350,7 @@ void rect_wh_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// pack button box
 	gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
-	gtk_box_pack_start(GTK_BOX(bttn_box), apply_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(bttn_box), help_bttn, TRUE, TRUE, 5);
 
 	// init main box
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -1091,7 +1098,11 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	ok_bttn = gtk_button_new_with_label("OK");
 	help_bttn = gtk_button_new_with_label("Help");
 
-	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(text_dialog_ok_bttn_click), text_buffer);
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked",
+			G_CALLBACK(text_dialog_ok_bttn_click), text_buffer);
+	g_signal_connect(G_OBJECT(help_bttn), "clicked",
+			G_CALLBACK(text_dialog_help_bttn_click), dialog);
+
 	// create color button
 	gdk_rgba_parse(&color_button_inital_color, "rgb(255,255,255)");
 	ch_color_bttn = gtk_color_button_new_with_rgba(&color_button_inital_color);
@@ -1099,12 +1110,14 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	// set show-editor property of ch_color_bttn to false
 	g_object_set(G_OBJECT(ch_color_bttn), "show-editor", FALSE, NULL);
 
-	g_signal_connect(G_OBJECT(ch_color_bttn), "color-set", G_CALLBACK(text_dialog_color_button_set), colors);
+	g_signal_connect(G_OBJECT(ch_color_bttn), "color-set",
+			G_CALLBACK(text_dialog_color_button_set), colors);
 
 	// create font button
 	ch_font_bttn = gtk_font_button_new_with_font((const gchar*)"Corbel 0");
 
-	g_signal_connect(G_OBJECT(ch_font_bttn), "font-set", G_CALLBACK(text_dialog_font_button_set), NULL);
+	g_signal_connect(G_OBJECT(ch_font_bttn), "font-set",
+			G_CALLBACK(text_dialog_font_button_set), NULL);
 
 	// pack label size box
 	label_size_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -1453,4 +1466,16 @@ void options_dialog_size_format_box_pp_bttn_click(GtkWidget *bttn, GtkWidget *se
 	// connect new signal
 	g_signal_connect(G_OBJECT(size_data_box_set_bttn), "clicked",
 		G_CALLBACK(options_dialog_size_box_set_bttn_click), NULL);
+}
+
+void line_la_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	hl_show_help_by_dialog(HC_LINE_PRMT, parent_window);
+}
+
+void rect_wh_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	hl_show_help_by_dialog(HC_RECT_PRMT, parent_window);
+}
+
+void text_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	hl_show_help_by_dialog(HC_TEXT, parent_window);
 }
