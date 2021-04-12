@@ -4,6 +4,7 @@
 #include "../figure/figure.h"
 #include "../text/text.h"
 #include "../draw/draw.h"
+#include "../options/opt.h"
 #include "multi_obj.h"
 
 void mol_free_from_node(list *lptr) {
@@ -25,6 +26,9 @@ void mol_free_from_node(list *lptr) {
 			tl_free(tptr);
 		break;
 	}
+
+	if (lptr->opt)
+		ol_free_node(lptr);
 }
 
 void mol_draw_obj_from_node(list *lptr) {
