@@ -18,6 +18,7 @@
 #include "so/so.h"
 #include "text/text.h"
 #include "util/util.h"
+#include "flags/flags.h"
 
 // additional utils
 #include "pechkin/pl.h"
