@@ -15,12 +15,14 @@
 #include "help/help.h"
 #include "multi_obj/multi_obj.h"
 #include "plugin/plugin.h"
+#include "flags/flags.h"
+
 #include "pechkin/pl.h"
 
 list *figure_list = NULL;
 GtkWidget *window;
 
-int main() {
+int main(int argc, char *argv[]) {
 	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box, *left_box;
 
 	GtkWidget *scrolled_window, *draw_area;
@@ -37,6 +39,9 @@ int main() {
 
 	// send message with figure list
 	pl_send("msg:geometry_buffer", &figure_list, sizeof(list*));
+
+	// parse fd flags
+	fl_parse(argc, argv);
 
 	gtk_init(NULL, NULL);
 
