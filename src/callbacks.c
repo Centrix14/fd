@@ -552,7 +552,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_box;
 	GtkWidget *mode_box, *down_bttn_box;
 
-	GtkWidget *position_bttn, *size_bttn, *type_label;
+	GtkWidget *position_bttn, *size_bttn, *type_label, *color_bttn;
 	GtkWidget *vert_sep;
 
 	GtkWidget *position_box_entry, *position_box_set_bttn, *position_box_select,
@@ -563,6 +563,13 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *size_format_box_pp_bttn, *size_format_box_prm_bttn,
 			  *size_data_box_set_bttn, *size_data_entry_box_entr1, *size_data_entry_box_entr2,
 			  *size_data_box_select_bttn;
+
+	GtkWidget *color_box, *color_red_box, *color_green_box, *color_blue_box, *color_rgb_box;
+	GtkWidget *color_red_box_label, *color_red_box_spin,
+			  *color_green_box_label, *color_green_box_spin,
+			  *color_blue_box_label, *color_blue_box_spin,
+			  *color_data_box_color_bttn, *color_data_box_set_bttn;
+
 	list *geometry_buffer = NULL;
 
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
@@ -583,12 +590,14 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// init buttons
 	position_bttn = gtk_button_new_with_label("Position");
 	size_bttn = gtk_button_new_with_label("Size");
+	color_bttn = gtk_button_new_with_label("Color");
 
 	// init mode box
 	mode_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	gtk_box_pack_start(GTK_BOX(mode_box), position_bttn, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(mode_box), size_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(mode_box), color_bttn, TRUE, TRUE, 5);
 
 	// create position box widgets
 	position_box_entry = gtk_entry_new();
@@ -661,6 +670,50 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	gtk_box_pack_start(GTK_BOX(size_box), size_format_box, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(size_box), size_data_box, TRUE, FALSE, 5);
+
+	// color_red_box
+	color_red_box_label = gtk_label_new("Red value");
+	color_red_box_spin = gtk_spin_button_new_with_range(0, 256, 0.1);
+
+	color_red_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(color_red_box), color_red_box_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(color_red_box), color_red_box_spin, TRUE, TRUE, 5);
+
+	// color_green_box
+	color_green_box_label = gtk_label_new("Green value");
+	color_green_box_spin = gtk_spin_button_new_with_range(0, 256, 0.1);
+
+	color_green_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(color_green_box), color_green_box_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(color_green_box), color_green_box_spin, TRUE, TRUE, 5);
+
+	// color_blue_box
+	color_blue_box_label = gtk_label_new("Blue value");
+	color_blue_box_spin = gtk_spin_button_new_with_range(0, 256, 0.1);
+
+	color_blue_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(color_blue_box), color_blue_box_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(color_blue_box), color_blue_box_spin, TRUE, TRUE, 5);
+
+	// color_rgb_box
+	color_rgb_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(color_rgb_box), color_red_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(color_rgb_box), color_green_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(color_rgb_box), color_blue_box, TRUE, TRUE, 5);
+
+	// color_data_box
+	color_data_box_color_bttn = gtk_color_button_new();
+	color_data_box_set_bttn = gtk_button_new_with_label("Set");
+
+	color_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(color_box), color_rgb_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(color_box), color_data_box_color_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(color_box), color_data_box_set_bttn, TRUE, TRUE, 5);
 
 	// pack position button box
 	down_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
