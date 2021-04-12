@@ -7,9 +7,13 @@
 #include "plugin.h"
 
 #include "../st.h/st.h"
+#include "../pechkin/pl.h"
 
 void pil_load_plugins(GtkWidget *drawing_area, list *figures) {
 	char *plug_list_home = NULL, *plug_list_current = NULL;
+
+	if (pl_read("msg:plug_off")) // if plug-ins switched off
+		return ;
 
 	plug_list_current = ".fdplug";
 	plug_list_home = ul_get_file_from_home(plug_list_current);
