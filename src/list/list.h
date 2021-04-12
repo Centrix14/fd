@@ -11,6 +11,7 @@ typedef struct __list__ {
 	struct __list__ *next;
 
 	void *data;
+	void *opt;
 
 	OBJ_TYPE dt; // data type
 } list;
