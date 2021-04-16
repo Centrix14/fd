@@ -551,7 +551,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 
 	GtkWidget *mode_notebook;
-	GtkWidget *position_page_label, *size_page_label, *color_page_label;
+	GtkWidget *position_page_label, *size_page_label, *color_page_label, *type_page_label,
+			  *lay_page_label;
 
 	GtkWidget *position_box_entry, *position_box_set_bttn, *position_box_select,
 			  *position_box_help_bttn, *position_box_ok_bttn, *position_box_figure_type_label;
@@ -573,6 +574,10 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *color_blue_box_label, *color_blue_box_spin,
 			  *color_data_box_color_bttn, *color_data_box_set_bttn,
 			  *color_bttn_box_ok_bttn, *color_bttn_box_help_bttn;
+
+	GtkWidget *type_box;
+
+	GtkWidget *lay_box;
 	GdkRGBA color;
 
 	list *geometry_buffer = NULL;
@@ -789,6 +794,12 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(color_box), color_rgb_box, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(color_box), color_bttn_box, TRUE, TRUE, 5);
 
+	// type_box
+	type_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	// lay_box
+	lay_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
 	// create mode notebook
 	mode_notebook = gtk_notebook_new();
 
@@ -796,11 +807,15 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	position_page_label = gtk_label_new("Position");
 	size_page_label = gtk_label_new("Size");
 	color_page_label = gtk_label_new("Color");
+	type_page_label = gtk_label_new("Type");
+	lay_page_label = gtk_label_new("Layer");
 
 	// pack mode notebook
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), position_box, position_page_label);
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), size_box, size_page_label);
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), color_box, color_page_label);
+	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), type_box, type_page_label);
+	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), lay_box, lay_page_label);
 	
 	// show dialog
 	gtk_container_add(GTK_CONTAINER(dialog_content), mode_notebook);
