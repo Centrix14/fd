@@ -6,7 +6,7 @@
 
 #include "../st.h/st.h"
 
-void ol_check_options(list *node, int opt_code, void *opt_val) {
+void ol_check_options(list *node) {
 	if (node && !node->opt)
 		ol_add_options(node);
 }
