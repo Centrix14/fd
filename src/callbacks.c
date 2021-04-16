@@ -560,10 +560,10 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *size_box, *size_format_box, *size_data_box, *size_data_entry_box,
 			  *size_data_line_box1, *size_data_line_box2, *size_bttn_box;
 	GtkWidget *size_format_box_pp_bttn, *size_format_box_prm_bttn,
-			  *size_data_box_set_bttn, *size_data_entry_box_entr1, *size_data_entry_box_entr2,
+			  *size_data_box_set_bttn1, *size_data_box_set_bttn2,
+			  *size_data_entry_box_entr1, *size_data_entry_box_entr2,
 			  *size_data_box_select_bttn,
-			  *size_data_entry_box_pp_label1, *size_data_entry_box_pp_label2,
-		      *size_data_entry_box_prm_label1, *size_data_entry_box_prm_label2,
+			  *size_data_entry_box_label1, *size_data_entry_box_label2,
 			  *size_bttn_box_ok_bttn, *size_bttn_box_help_bttn;
 
 	GtkWidget *color_box, *color_red_box, *color_green_box, *color_blue_box, *color_rgb_box,
@@ -621,25 +621,37 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// create size box widgets
 	size_format_box_pp_bttn = gtk_button_new_with_label("PP");
 	size_format_box_prm_bttn = gtk_button_new_with_label("PRM");
-	size_data_box_set_bttn = gtk_button_new_with_label("Set");
+	size_data_box_set_bttn1 = gtk_button_new_with_label("Set");
+	size_data_box_set_bttn2 = gtk_button_new_with_label("Set");
 	size_data_box_select_bttn = gtk_button_new_with_label("Select");
 
 	size_data_entry_box_entr1 = gtk_entry_new();
 	size_data_entry_box_entr2 = gtk_entry_new();
 
-	size_data_entry_box_pp_label1 = gtk_label_new("Inital point (x y)");
-	size_data_entry_box_pp_label2 = gtk_label_new("End point (x y)");
-	size_data_entry_box_prm_label1 = gtk_label_new("Width");
-	size_data_entry_box_prm_label2 = gtk_label_new("Height");
+	size_data_entry_box_label1 = gtk_label_new("Inital point (x y)");
+	size_data_entry_box_label2 = gtk_label_new("End point (x y)");
+
+	// remove messages
+	pl_remove("msg:size_data_entry1");
+	pl_remove("msg:size_data_entry2");
+	pl_remove("msg:size_data_box_set_bttn1");
+	pl_remove("msg:size_data_box_set_bttn2");
+	pl_remove("msg:size_data_entry_box_label1");
+	pl_remove("msg:size_data_entry_box_label2");
 
 	// send message
 	pl_send("msg:size_data_entry1", &size_data_entry_box_entr1, sizeof(GtkWidget*));
 	pl_send("msg:size_data_entry2", &size_data_entry_box_entr2, sizeof(GtkWidget*));
-	pl_send("msg:size_data_box_set_bttn", &size_data_box_set_bttn, sizeof(GtkWidget*));
+	pl_send("msg:size_data_box_set_bttn1", &size_data_box_set_bttn1, sizeof(GtkWidget*));
+	pl_send("msg:size_data_box_set_bttn2", &size_data_box_set_bttn2, sizeof(GtkWidget*));
+	pl_send("msg:size_data_entry_box_label1", &size_data_entry_box_label1, sizeof(GtkWidget*));
+	pl_send("msg:size_data_entry_box_label2", &size_data_entry_box_label2, sizeof(GtkWidget*));
 
 	// bind signals
-	g_signal_connect(G_OBJECT(size_data_box_set_bttn), "clicked",
+	g_signal_connect(G_OBJECT(size_data_box_set_bttn1), "clicked",
 			G_CALLBACK(options_dialog_size_box_set_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(size_data_box_set_bttn2), "clicked",
+			G_CALLBACK(options_dialog_size_box_set_prm_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(size_data_box_select_bttn), "clicked",
 			G_CALLBACK(options_dialog_size_box_select_bttn_click), dialog);
 	g_signal_connect(G_OBJECT(size_format_box_prm_bttn), "clicked",
@@ -657,11 +669,13 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	size_data_line_box1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 	 
 	gtk_box_pack_start(GTK_BOX(size_data_line_box1),
-			size_data_entry_box_pp_label1, FALSE, FALSE, 5);
+			size_data_entry_box_label1, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(size_data_line_box1),
 			size_data_entry_box_entr1, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(size_data_line_box1),
-			size_data_box_set_bttn, TRUE, TRUE, 5);
+			size_data_box_set_bttn1, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(size_data_line_box1),
+			size_data_box_set_bttn2, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(size_data_line_box1),
 			size_data_box_select_bttn, TRUE, TRUE, 5);
 
@@ -669,7 +683,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	size_data_line_box2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	gtk_box_pack_start(GTK_BOX(size_data_line_box2),
-			size_data_entry_box_pp_label2, FALSE, FALSE, 5);
+			size_data_entry_box_label2, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(size_data_line_box2),
 			size_data_entry_box_entr2, TRUE, TRUE, 5);
 
@@ -786,6 +800,9 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// show dialog
 	gtk_container_add(GTK_CONTAINER(dialog_content), mode_notebook);
 	gtk_widget_show_all(dialog);
+
+	// hide bttn2
+	gtk_widget_hide(size_data_box_set_bttn2);
 }
 
 void options_dialog_set_button(GtkWidget *bttn, char *coords) {
@@ -1343,20 +1360,6 @@ void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
 	pl_send("msg:font_size_int", &font_size, sizeof(int));
 }
 
-void options_dialog_mode_bttn_click(GtkWidget *bttn, int box_type) {
-	GtkWidget *dialog = NULL;
-
-	for (int i = 0; boxes[i]; i++) {
-		if (i == box_type)
-			gtk_widget_show(boxes[i]);
-		else
-			gtk_widget_hide(boxes[i]);
-	}
-
-	dialog = *(GtkWidget**)pl_read("msg:options_dialog");
-	gtk_window_resize(GTK_WINDOW(dialog), 400, 100);
-}
-
 void select_point_cb(list *node, double x, double y) {
 	GtkWidget *drawing_area = NULL;
 	multi_obj *mo = NULL;
@@ -1469,27 +1472,29 @@ void options_dialog_size_box_select_bttn_click(GtkWidget *bttn, GtkWidget *dialo
 }
 
 void options_dialog_size_box_set_prm_bttn_click(GtkWidget *bttn, gpointer data) {
-	int coords[4] = {0, 0, 0, 0};
-	char buf1[256] = "", buf2[256] = "";
 	GtkWidget *entry1, *entry2, *draw_area;
-	list *node = NULL;
+	list *geometry_buffer = NULL, *node = NULL;
 	multi_obj *mo = NULL;
 	figure *fptr = NULL;
+	
+	int width = 0, height = 0;
+	char *buf1 = NULL, *buf2 = NULL;
 
 	// read messages
 	entry1 = *(GtkWidget**)pl_read("msg:size_data_entry1");
 	entry2 = *(GtkWidget**)pl_read("msg:size_data_entry2");
 
 	// get strings from entrys
-	strcpy(buf1, (char*)gtk_entry_get_text(GTK_ENTRY(entry1)));
-	strcpy(buf2, (char*)gtk_entry_get_text(GTK_ENTRY(entry2)));
+	buf1 = (char*)gtk_entry_get_text(GTK_ENTRY(entry1));
+	buf2 = (char*)gtk_entry_get_text(GTK_ENTRY(entry2));
 
-	// get coords from bufs
-	ul_pars_coords(buf1, 2, &coords[0]);
-	ul_pars_coords(buf2, 2, &coords[2]);
+	// get parametrs from buffers
+	width = atof(buf1);
+	height = atof(buf2);
 
 	// changing coords
-	node = *(list**)pl_read("msg:geometry_buffer");
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	node = geometry_buffer;
 	while (node) {
 		mo = mol_extract(node);
 
@@ -1502,10 +1507,8 @@ void options_dialog_size_box_set_prm_bttn_click(GtkWidget *bttn, gpointer data) 
 		if (mo->visible == VM_SELECTED) {
 			fptr = figure_get_from_node(node);
 
-			fptr->x = coords[0];
-			fptr->y = coords[1];
-			fptr->a1 = coords[0] + coords[2];
-			fptr->a2 = coords[1] + coords[3];
+			fptr->a1 = fptr->x + width;
+			fptr->a2 = fptr->y + height;
 		}
 
 		node = node->next;
@@ -1518,29 +1521,51 @@ void options_dialog_size_box_set_prm_bttn_click(GtkWidget *bttn, gpointer data) 
 }
 
 void options_dialog_size_format_box_prm_bttn_click(GtkWidget *bttn, GtkWidget *select_bttn) {
-	GtkWidget *size_data_box_set_bttn = NULL;
+	GtkWidget *size_data_box_set_bttn1 = NULL, *size_data_box_set_bttn2 = NULL;
+	GtkWidget *label1, *label2;
 
 	// read message
-	size_data_box_set_bttn = *(GtkWidget**)pl_read("msg:size_data_box_set_bttn");
+	size_data_box_set_bttn1 = *(GtkWidget**)pl_read("msg:size_data_box_set_bttn1");
+	size_data_box_set_bttn2 = *(GtkWidget**)pl_read("msg:size_data_box_set_bttn2");
+	label1 = *(GtkWidget**)pl_read("msg:size_data_entry_box_label1");
+	label2 = *(GtkWidget**)pl_read("msg:size_data_entry_box_label2");
 
+	// hide select bttn
 	gtk_widget_hide(select_bttn);
 
-	// connect new signal
-	g_signal_connect(G_OBJECT(size_data_box_set_bttn), "clicked",
-		G_CALLBACK(options_dialog_size_box_set_prm_bttn_click), NULL);
+	// hide bttn1
+	gtk_widget_hide(size_data_box_set_bttn1);
+
+	// show bttn2
+	gtk_widget_show(size_data_box_set_bttn2);
+
+	// set label text
+	gtk_label_set_text(GTK_LABEL(label1), "Width");
+	gtk_label_set_text(GTK_LABEL(label2), "Height");
 }
 
 void options_dialog_size_format_box_pp_bttn_click(GtkWidget *bttn, GtkWidget *select_bttn) {
-	GtkWidget *size_data_box_set_bttn = NULL;
+	GtkWidget *size_data_box_set_bttn1 = NULL, *size_data_box_set_bttn2 = NULL;
+	GtkWidget *label1, *label2;
 
 	// read message
-	size_data_box_set_bttn = *(GtkWidget**)pl_read("msg:size_data_box_set_bttn");
+	size_data_box_set_bttn1 = *(GtkWidget**)pl_read("msg:size_data_box_set_bttn1");
+	size_data_box_set_bttn2 = *(GtkWidget**)pl_read("msg:size_data_box_set_bttn2");
+	label1 = *(GtkWidget**)pl_read("msg:size_data_entry_box_label1");
+	label2 = *(GtkWidget**)pl_read("msg:size_data_entry_box_label2");
 
+	// hide select_bttn
 	gtk_widget_show(select_bttn);
 
-	// connect new signal
-	g_signal_connect(G_OBJECT(size_data_box_set_bttn), "clicked",
-		G_CALLBACK(options_dialog_size_box_set_bttn_click), NULL);
+	// hide bttn1
+	gtk_widget_hide(size_data_box_set_bttn1);
+
+	// show bttn2
+	gtk_widget_show(size_data_box_set_bttn2);
+
+	// set label text
+	gtk_label_set_text(GTK_LABEL(label1), "Inital point (x y)");
+	gtk_label_set_text(GTK_LABEL(label2), "End point (x y)");
 }
 
 void line_la_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
