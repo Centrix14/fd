@@ -12,7 +12,7 @@ typedef struct {
 	char *tag;
 } options;
 
-void ol_check_options(list *node, int opt_code, void *opt_val);
+void ol_check_options(list *node);
 void ol_add_options(list *node);
 void ol_free_node(list *node);
 
