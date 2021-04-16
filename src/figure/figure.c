@@ -258,3 +258,11 @@ figure *figure_get_from_node(list *lptr) {
 		return (figure*)(lptr->data);
 	return NULL;
 }
+
+void figure_show(list *node) {
+	figure *fptr;
+
+	fptr = figure_get_from_node(node);
+	if (fptr)
+		printf("x1 = %g\ny1 = %g\nx2 = %g\ny2 = %g\n\n", fptr->x, fptr->y, fptr->a1, fptr->a2);
+}
