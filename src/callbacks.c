@@ -554,7 +554,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *position_page_label, *size_page_label, *color_page_label;
 
 	GtkWidget *position_box_entry, *position_box_set_bttn, *position_box_select,
-			  *position_box_help_bttn, *position_box_ok_bttn;
+			  *position_box_help_bttn, *position_box_ok_bttn, *position_box_figure_type_label;
 	GtkWidget *position_box, *position_data_box, *position_bttn_box;
 
 	GtkWidget *size_box, *size_format_box, *size_data_box, *size_data_entry_box,
@@ -595,9 +595,12 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	position_box_select = gtk_button_new_with_label("Select");
 	position_box_help_bttn = gtk_button_new_with_label("Help");
 	position_box_ok_bttn = gtk_button_new_with_label("OK");
+	position_box_figure_type_label = gtk_label_new("");
 
 	// setting values for widgets
 	gtk_entry_set_text(GTK_ENTRY(position_box_entry), get_figure_pos(geometry_buffer));
+	gtk_label_set_text(GTK_LABEL(position_box_figure_type_label),
+			get_figure_mnemonic(geometry_buffer));
 
 	// create position data box
 	position_data_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -615,6 +618,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// create position box
 	position_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
+	gtk_box_pack_start(GTK_BOX(position_box),
+			position_box_figure_type_label, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(position_box), position_data_box, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(position_box), position_bttn_box, TRUE, FALSE, 5);
 	
