@@ -71,4 +71,6 @@ void figure_rotate(list *lptr, figure *base, double angle);
 
 figure *figure_get_from_node(list *lptr);
 
+void figure_show(list *node);
+
 #endif
