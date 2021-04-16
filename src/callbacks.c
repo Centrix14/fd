@@ -622,6 +622,15 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			position_box_figure_type_label, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(position_box), position_data_box, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(position_box), position_bttn_box, TRUE, FALSE, 5);
+
+	// adding signals
+	g_signal_connect(G_OBJECT(position_box_set_bttn), "clicked",
+			G_CALLBACK(options_dialog_set_button),
+			(char*)gtk_entry_get_text(GTK_ENTRY(position_box_entry)));
+	g_signal_connect(G_OBJECT(position_box_select), "clicked",
+			G_CALLBACK(options_dialog_select_bttn_click), dialog);
+	g_signal_connect(G_OBJECT(position_box_ok_bttn), "clicked",
+			G_CALLBACK(options_dialog_ok_bttn_click), dialog);
 	
 	// create size box widgets
 	size_format_box_pp_bttn = gtk_button_new_with_label("PP");
@@ -793,15 +802,6 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), size_box, size_page_label);
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), color_box, color_page_label);
 	
-	// adding signals
-	g_signal_connect(G_OBJECT(position_box_set_bttn), "clicked",
-			G_CALLBACK(options_dialog_set_button),
-			(char*)gtk_entry_get_text(GTK_ENTRY(position_box_entry)));
-	g_signal_connect(G_OBJECT(position_box_select), "clicked",
-			G_CALLBACK(options_dialog_select_bttn_click), dialog);
-	g_signal_connect(G_OBJECT(position_box_ok_bttn), "clicked",
-			G_CALLBACK(options_dialog_ok_bttn_click), dialog);
-
 	// show dialog
 	gtk_container_add(GTK_CONTAINER(dialog_content), mode_notebook);
 	gtk_widget_show_all(dialog);
