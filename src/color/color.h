@@ -5,6 +5,7 @@
 
 void cl_set_color(cairo_t *cr, int color_set);
 void cl_set_color_fg(cairo_t *cr, int fg_color_set);
+void cl_set_color_rgb(cairo_t *cr, double r, double g, double b);
 
 enum DEF_COLORS {
 	CL_DEF_CURS_COLOR = 0,
