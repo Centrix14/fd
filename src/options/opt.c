@@ -33,3 +33,22 @@ void ol_free_node(list *node) {
 	if (node && node->opt)
 		free(node->opt);
 }
+
+options *ol_get_opt(list *node) {
+	if (node && node->opt)
+		return (options*)node->opt;
+	return NULL;
+}
+
+void ol_set_color(list *node, double r, double g, double b) {
+	options *opt = NULL;
+
+	opt = ol_get_opt(node);
+	if (!opt) {
+		st_err("fail to get options field");
+	}
+
+	opt->r = r;
+	opt->g = b;
+	opt->g = b;
+}
