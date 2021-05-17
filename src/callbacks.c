@@ -14,8 +14,9 @@
 #include "text/text.h"
 #include "multi_obj/multi_obj.h"
 #include "util/util.h"
-#include "pechkin/pl.h"
+#include "options/opt.h"
 
+#include "pechkin/pl.h"
 #include "st.h/st.h"
 
 st_debug_start(1);
@@ -29,7 +30,6 @@ double curs_x = 0, curs_y = 0,
 int direction_val = 1, type_val = 1;
 
 static GtkWidget *target_window, *dialog;
-static GtkWidget *boxes[3];
 
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	list *geometry_buffer = NULL;
@@ -674,9 +674,11 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	g_signal_connect(G_OBJECT(size_data_box_select_bttn), "clicked",
 			G_CALLBACK(options_dialog_size_box_select_bttn_click), dialog);
 	g_signal_connect(G_OBJECT(size_format_box_prm_bttn), "clicked",
-			G_CALLBACK(options_dialog_size_format_box_prm_bttn_click), size_data_box_select_bttn);
+			G_CALLBACK(options_dialog_size_format_box_prm_bttn_click),
+			size_data_box_select_bttn);
 	g_signal_connect(G_OBJECT(size_format_box_pp_bttn), "clicked",
-			G_CALLBACK(options_dialog_size_format_box_pp_bttn_click), size_data_box_select_bttn);
+			G_CALLBACK(options_dialog_size_format_box_pp_bttn_click),
+			size_data_box_select_bttn);
 
 	// create size format box
 	size_format_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -747,6 +749,10 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(color_red_box), color_data_box_color_bttn, TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(color_red_box), color_data_box_set_bttn, TRUE, FALSE, 5);
 
+	// add signal
+	g_signal_connect(G_OBJECT(color_data_box_set_bttn), "clicked",
+			G_CALLBACK(options_dialog_color_data_box_set_bttn_click), NULL);
+
 	// fill color
 	gdk_rgba_parse(&color, "rgb(255,255,255)");
 
@@ -793,6 +799,15 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	gtk_box_pack_start(GTK_BOX(color_box), color_rgb_box, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(color_box), color_bttn_box, TRUE, TRUE, 5);
+
+	// send spins
+	pl_remove("msg:color_red_box_spin");
+	pl_remove("msg:color_green_box_spin");
+	pl_remove("msg:color_blue_box_spin");
+
+	pl_send("msg:color_red_box_spin", &color_red_box_spin, sizeof(GtkWidget*));
+	pl_send("msg:color_green_box_spin", &color_green_box_spin, sizeof(GtkWidget*));
+	pl_send("msg:color_blue_box_spin", &color_blue_box_spin, sizeof(GtkWidget*));
 
 	// type_box
 	type_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -1598,4 +1613,33 @@ void rect_wh_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 void text_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	hl_show_help_by_dialog(HC_TEXT, parent_window);
+}
+
+void options_dialog_color_data_box_set_bttn_click(GtkWidget *bttn, gpointer data) {
+	GtkWidget *red_spin, *green_spin, *blue_spin;
+	list *geometry_buffer, *sel;
+	double red, green, blue;
+
+	// read msg
+	red_spin = *(GtkWidget**)pl_read("msg:color_red_box_spin");
+	green_spin = *(GtkWidget**)pl_read("msg:color_green_box_spin");
+	blue_spin = *(GtkWidget**)pl_read("msg:color_blue_box_spin");
+
+	// get value
+	red = (double)gtk_spin_button_get_value(GTK_SPIN_BUTTON(red_spin));
+	green = (double)gtk_spin_button_get_value(GTK_SPIN_BUTTON(green_spin));
+	blue = (double)gtk_spin_button_get_value(GTK_SPIN_BUTTON(blue_spin));
+
+	// get geometry buffer
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+
+	// get selected
+	sel = ul_get_selected_node(geometry_buffer);
+	if (!sel) {
+		st_err("can\'t get selected figure");
+	}
+
+	// add options
+	ol_check_options(sel);
+	ol_set_color(sel, red, green, blue);
 }
