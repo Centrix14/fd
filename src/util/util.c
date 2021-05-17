@@ -5,8 +5,10 @@
 
 #include <gtk/gtk.h>
 
-#include "../list/list.h"
 #include "util.h"
+#include "../list/list.h"
+#include "../figure/figure.h"
+#include "../multi_obj/multi_obj.h"
 
 // util function for mapping values
 double ul_map(double x, double in_min, double in_max, double out_min, double out_max) {
@@ -110,4 +112,20 @@ void ul_pars_coords(char *str, int count, int *arr) {
 
 		token = strtok(NULL, " ");
 	}
+}
+
+list *ul_get_selected_node(list *buf) {
+	list *lptr = NULL;
+	multi_obj *mo = NULL;
+
+	lptr = buf;
+	while (lptr) {
+		mo = mol_extract(lptr);
+		if (mo && mo->visible == VM_SELECTED)
+			return lptr;
+
+		lptr = lptr->next;
+	}
+
+	return NULL;
 }
