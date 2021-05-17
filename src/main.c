@@ -32,7 +32,10 @@ int main(int argc, char *argv[]) {
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
-	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon, *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon, *rot_icon, *decouple_icon, *help_icon, *circle_prm_icon, *arc_prm_icon, *text_icon;
+	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon,
+			  *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon,
+			  *rot_icon, *decouple_icon, *help_icon, *circle_prm_icon,
+			  *arc_prm_icon, *text_icon;
 
 	// create list, that stores geometry
 	figure_list = list_init_node(NULL);
