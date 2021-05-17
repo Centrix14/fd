@@ -45,16 +45,7 @@ void mol_draw_obj_from_node(list *lptr) {
 
 	switch(lptr->dt) {
 		case OT_FIGURE:
-			cr = *(cairo_t**)pl_read("msg:drawing_area");
-			opt = ol_get_opt(lptr);
-			fptr = (figure*)lptr->data;
-
-			if (opt)
-				cl_set_color_rgb(cr, opt->r, opt->g, opt->b);
-			else
-				cl_set_color_fg(cr, fptr->visible);
-
-			dl_draw_figure(fptr);
+						dl_draw_figure(fptr);
 		break;
 
 		case OT_TEXT:
@@ -151,4 +142,19 @@ void mol_apply_figure(list *lptr, multi_obj *mo) {
 	fptr->y = mo->y;
 	fptr->visible = mo->visible;
 	fptr->lay = mo->lay;
+}
+
+void mol_context_color_set(list *lptr) {
+	figure *fptr;
+	options *opt;
+	cairo_t *cr;
+
+	cr = *(cairo_t**)pl_read("msg:cairo-context");
+	opt = ol_get_opt(lptr);
+	fptr = (figure*)lptr->data;
+
+	if (opt)
+		cl_set_color_rgb(cr, opt->r, opt->g, opt->b);
+	else
+		cl_set_color_fg(cr, fptr->visible);
 }
