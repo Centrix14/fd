@@ -27,7 +27,12 @@ void cl_set_color(cairo_t *cr, int color_set) {
 }
 
 void cl_set_color_fg(cairo_t *cr, int fg_color_set) {
-	int cl_color_set[] = {CL_DEF_DRAW_COLOR, CL_DEF_PREVIEW_COLOR, CL_DEF_PROJECTION_COLOR, CL_DEF_SELECTED_COLOR};
+	int cl_color_set[] = {CL_DEF_DRAW_COLOR, CL_DEF_PREVIEW_COLOR,
+		CL_DEF_PROJECTION_COLOR, CL_DEF_SELECTED_COLOR};
 
 	cl_set_color(cr, cl_color_set[fg_color_set-1]);
+}
+
+void cl_set_color_rgb(cairo_t *cr, double r, double g, double b) {
+	cairo_set_source_rgb(cr, r, g, b);
 }
