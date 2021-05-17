@@ -3,6 +3,8 @@
 
 #include <gtk/gtk.h>
 
+#include "../list/list.h"
+
 #define UL_WINDOWS "win"
 #define UL_NIX "nix"
 
@@ -20,6 +22,7 @@ char *ul_get_home_path();
 char *ul_get_file_from_home(char *path);
 char *ul_get_system_name();
 char *ul_get_path_delim();
+list *ul_get_selected_node(list *buf);
 
 int ul_is_exist(char *filename);
 
