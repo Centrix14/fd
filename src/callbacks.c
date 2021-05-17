@@ -53,6 +53,10 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 		cairo_fill(cr);
 	}
 
+	// send cairo context
+	pl_remove("msg:cairo-context");
+	pl_send("msg:cairo-context", &cr, sizeof(cairo_t*));
+
 	return TRUE;
 }
 
