@@ -60,8 +60,6 @@ void dl_draw_figure_list(list *lptr) {
 }
 
 void dl_draw_point(figure *fptr) {
-	cl_set_color_fg(context, fptr->visible);
-
 	if (fptr->visible == VM_PROJECTION && all_lays)
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
@@ -78,8 +76,6 @@ void dl_draw_line_pp(figure *fptr) {
 	
 	x2 = fptr->a1;
 	y2 = fptr->a2;
-
-	cl_set_color_fg(context, fptr->visible);
 
 	if (fptr->visible == VM_PREVIEW) {
 		x2 = preview_x;
@@ -103,8 +99,6 @@ void dl_draw_rect_pp(figure *fptr) {
 	w = fptr->a1 - x;
 	h = fptr->a2 - y;
 
-	cl_set_color_fg(context, fptr->visible);
-
 	if (fptr->visible == VM_PREVIEW) {
 		w = preview_x - x;
 		h = preview_y - y;
@@ -124,8 +118,6 @@ void dl_draw_circle(figure *fptr) {
 	x = fptr->x;
 	y = fptr->y;
 	r = fptr->a1;
-
-	cl_set_color_fg(context, fptr->visible);
 
 	if (fptr->visible == VM_PREVIEW) {
 		rad_line = figure_new_line_pp(x, y, preview_x, preview_y);
@@ -150,8 +142,6 @@ void dl_draw_arc(figure *fptr) {
 	a2 = fptr->a2;
 	r = fptr->a3;
 
-	cl_set_color_fg(context, fptr->visible);
-
 	if (fptr->visible == VM_PROJECTION && all_lays)
 		cl_set_color(context, CL_DEF_DRAW_COLOR);
 
@@ -161,7 +151,9 @@ void dl_draw_arc(figure *fptr) {
 }
 
 int dl_is_need_draw(figure *fptr) {
-	if (!fptr || fptr->visible == VM_HIDE || (fptr->lay != figure_get_current_lay() && !all_lays && fptr->visible != VM_PROJECTION))
+	if (!fptr || fptr->visible == VM_HIDE
+			|| (fptr->lay != figure_get_current_lay()
+				&& !all_lays && fptr->visible != VM_PROJECTION))
 		return 0;
 	return 1;
 }
@@ -192,7 +184,8 @@ void dl_draw_text(text *tptr) {
 				return ;
 	}
 
-	cairo_select_font_face(context, tptr->font, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
+	cairo_select_font_face(context, tptr->font, CAIRO_FONT_SLANT_NORMAL,
+			CAIRO_FONT_WEIGHT_NORMAL);
 	cairo_set_font_size(context, tptr->size);
 
 	cairo_text_extents(context, tptr->buffer, &te);
