@@ -5,7 +5,10 @@
 #include "../text/text.h"
 #include "../draw/draw.h"
 #include "../options/opt.h"
+#include "../color/color.h"
 #include "multi_obj.h"
+
+#include "../pechkin/pl.h"
 
 void mol_free_from_node(list *lptr) {
 	text *tptr;
@@ -32,14 +35,26 @@ void mol_free_from_node(list *lptr) {
 }
 
 void mol_draw_obj_from_node(list *lptr) {
+	figure *fptr;
 	text *tptr;
+	options *opt;
+	cairo_t *cr;
 
 	if (!lptr || !lptr->data)
 		return ;
 
 	switch(lptr->dt) {
 		case OT_FIGURE:
-			dl_draw_figure((figure*)lptr->data);
+			cr = *(cairo_t**)pl_read("msg:drawing_area");
+			opt = ol_get_opt(lptr);
+			fptr = (figure*)lptr->data;
+
+			if (opt)
+				cl_set_color_rgb(cr, opt->r, opt->g, opt->b);
+			else
+				cl_set_color_fg(cr, fptr->visible);
+
+			dl_draw_figure(fptr);
 		break;
 
 		case OT_TEXT:
