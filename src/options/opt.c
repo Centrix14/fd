@@ -49,6 +49,6 @@ void ol_set_color(list *node, double r, double g, double b) {
 	}
 
 	opt->r = r;
-	opt->g = b;
-	opt->g = b;
+	opt->g = g;
+	opt->b = b;
 }
