@@ -6,6 +6,9 @@
 #include "../color/color.h"
 #include "../geometry/geometry.h"
 
+#include "../pechkin/pl.h"
+#include "../st.h/st.h"
+
 static cairo_t *context;
 static double preview_x = 0, preview_y = 0;
 static int all_lays = 0, show_preview = 0;
@@ -163,8 +166,17 @@ void dl_send_preview_figure(figure *fptr) {
 }
 
 void dl_draw_preview() {
-	if (show_preview)
+	cairo_t **cr_ptr, *cr;
+
+	cr_ptr = (cairo_t**)pl_read("msg:cairo-context");
+	if (!cr_ptr)
+		return ;
+	cr = *cr_ptr;
+
+	if (show_preview) {
+		cl_set_color(cr, CL_DEF_PREVIEW_COLOR);
 		dl_draw_figure(preview);
+	}
 }
 
 void dl_switch_show_preview() {
