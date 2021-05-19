@@ -45,7 +45,15 @@ void mol_draw_obj_from_node(list *lptr) {
 
 	switch(lptr->dt) {
 		case OT_FIGURE:
-						dl_draw_figure(fptr);
+			cr = *(cairo_t**)pl_read("msg:cairo-context");
+			fptr = (figure*)lptr->data;
+			opt = (options*)lptr->opt;
+
+			if (opt && fptr->visible != VM_SELECTED)
+				cl_set_color_rgb(cr, opt->r, opt->g, opt->b);
+			else
+				cl_set_color_fg(cr, fptr->visible);
+			dl_draw_figure(fptr);
 		break;
 
 		case OT_TEXT:
