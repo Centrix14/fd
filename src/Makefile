@@ -1,11 +1,16 @@
+.PHONY: pechkin list
+
 ct = gcc
 
 dbg_flags = -o
+dbg_flags_obj = -Wall -O0 -c
+
 flags = -o
+flags_obj = -c
 
 res = fd
 pechkin_lib = pechkin/pl.c
-files = main.c list/list.c callbacks.c figure/figure.c click_handle.c draw/draw.c binding/binding.c geometry/geometry.c color/color.c fd_format/fd_format.c error/error.c help/help.c text/text.c multi_obj/multi_obj.c util/util.c so/so.c plugin/plugin.c flags/flags.c options/opt.c $(pechkin_lib)
+files = main.c callbacks.c figure/figure.c click_handle.c draw/draw.c binding/binding.c geometry/geometry.c color/color.c fd_format/fd_format.c error/error.c help/help.c text/text.c multi_obj/multi_obj.c util/util.c so/so.c plugin/plugin.c flags/flags.c options/opt.c list.o pl.o
 gtk = `pkg-config --static --libs --cflags "gtk+-3.0"`
 libs = -lm
 destr = ../destr
@@ -18,11 +23,27 @@ endif
 
 dbg_flags = -Wall -O0 -g $(flags)
 
-all:
+all: pechkin list build-dbg
+
+rel: pechkin-rel list-rel build-rel
+
+build-dbg:
 	$(ct) $(dbg_flags) $(res) $(files) $(libs) $(gtk)
 
-rel:
+build-rel:
 	$(ct) $(flags) $(res) $(files) $(libs) $(gtk)
 
 dsync:
 	cp $(res) $(destr)/$(res)
+
+pechkin:
+	$(ct) $(dbg_flags_obj) pechkin/pl.c
+
+list:
+	$(ct) $(dbg_flags_obj) list/list.c
+
+pechkin-rel:
+	$(ct) $(flags_obj) pechkin/pl.c
+
+list-rel:
+	$(ct) $(flags_obj) list/list.c
