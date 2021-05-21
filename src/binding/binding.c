@@ -13,7 +13,6 @@ char *bl_try_make_object_bind(list *lptr, double *x, double *y) {
 	figure *fptr = NULL;
 
 	while (node) {
-		//fptr = (figure*)(figure_get_from_node(node->next));
 		fptr = mol_conv_to_figure(node->next);
 		if (!fptr)
 			break;
@@ -60,7 +59,8 @@ int bl_get_binding_possibility_point(figure *point, double x, double y) {
 	if (point->lay != figure_get_current_lay())
 		return 0;
 
-	if (bl_get_coords_dif(point->x, x) < BINDING_AREA && bl_get_coords_dif(point->y, y) < BINDING_AREA)
+	if (bl_get_coords_dif(point->x, x)< BINDING_AREA
+			&& bl_get_coords_dif(point->y, y) < BINDING_AREA)
 		return 1;
 	return 0;
 }
@@ -69,9 +69,11 @@ int bl_get_binding_possibility_line(figure *line, double x, double y) {
 	if (line->lay != figure_get_current_lay())
 		return 0;
 
-	if (bl_get_coords_dif(line->x, x) < BINDING_AREA && bl_get_coords_dif(line->y, y) < BINDING_AREA)
+	if (bl_get_coords_dif(line->x, x) < BINDING_AREA
+			&& bl_get_coords_dif(line->y, y) < BINDING_AREA)
 		return 1;
-	else if (bl_get_coords_dif(line->a1, x) < BINDING_AREA && bl_get_coords_dif(line->a2, y) < BINDING_AREA)
+	else if (bl_get_coords_dif(line->a1, x) < BINDING_AREA
+			&& bl_get_coords_dif(line->a2, y) < BINDING_AREA)
 		return 1;
 	else if (gel_is_middle_point_area(line, x, y, BINDING_AREA))
 		return 1;
@@ -256,6 +258,7 @@ int bl_get_binding_possibility_circle(figure *circle, double x, double y) {
 
 void bl_make_binding_circle(figure *circle, double *x, double *y) {
 	double angle, res_x;
+	double dx, dy;
 	figure l;
 
 	l.x = circle->x;
@@ -265,10 +268,24 @@ void bl_make_binding_circle(figure *circle, double *x, double *y) {
 
 	angle = gel_convert_grades_to_rads(gel_calculate_line_angle(&l));
 	res_x = circle->a1 * cos(angle);
-	*y = circle->a1 * sin(angle) + circle->y;
+	/**y = circle->a1 * sin(angle) + circle->y;
 
 	if (*x < circle->x)
 		*x = fabs(res_x - circle->x);
 	else
-		*x = res_x + circle->x;
+		*x = res_x + circle->x;*/
+	dx = circle->a1 * cos(angle);
+	dy = circle->a1 * sin(angle);
+
+	/*if (*x > circle->x)
+		*x = circle->x + dx;
+	else
+		*x = fabs(circle->x - dx);
+
+	if (*y > circle->y)
+		*y = circle->y + dy;
+	else
+		*y = fabs(circle->y - dy);*/
+	*x = *x - (dx + circle->a1);
+	*y = *y - (dy + circle->a1);
 }
