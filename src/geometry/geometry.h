@@ -38,4 +38,6 @@ void gel_rotate_point(double *x, double *y, double angle);
 double gel_min(double v1, double v2);
 double gel_max(double v1, double v2);
 
+double gel_reflect_coord(double cb, double ct);
+
 #endif
