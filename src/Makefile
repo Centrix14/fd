@@ -10,8 +10,9 @@ flags_obj = -c
 
 res = fd
 pechkin_lib = pechkin/pl.c
-files = main.c callbacks.c figure/figure.c click_handle.c draw/draw.c binding/binding.c geometry/geometry.c color/color.c fd_format/fd_format.c error/error.c help/help.c text/text.c multi_obj/multi_obj.c util/util.c so/so.c plugin/plugin.c flags/flags.c options/opt.c list.o pl.o
+core = callbacks.c figure/figure.c click_handle.c draw/draw.c binding/binding.c geometry/geometry.c color/color.c fd_format/fd_format.c error/error.c help/help.c text/text.c multi_obj/multi_obj.c util/util.c so/so.c plugin/plugin.c flags/flags.c options/opt.c list.o pl.o
 gtk = `pkg-config --static --libs --cflags "gtk+-3.0"`
+cairo = `pkg-config --static --libs --cflags "cairo-gobject" "cairo-ps" "cairo-pdf" "cairo-win32-font" "pangocairo" "cairo-win32" "cairo-fc" "cairo-png" "cairo-ft" "cairo-svg" "cairo-script" "cairo-tee" "cairo"`
 libs = -lm
 destr = ../destr
 
@@ -28,10 +29,10 @@ all: pechkin list build-dbg
 rel: pechkin-rel list-rel build-rel
 
 build-dbg:
-	$(ct) $(dbg_flags) $(res) $(files) $(libs) $(gtk)
+	$(ct) $(dbg_flags) $(res) main.c $(core) $(libs) $(gtk)
 
 build-rel:
-	$(ct) $(flags) $(res) $(files) $(libs) $(gtk)
+	$(ct) $(flags) $(res) main.c $(core) $(libs) $(gtk)
 
 dsync:
 	cp $(res) $(destr)/$(res)
@@ -47,3 +48,7 @@ pechkin-rel:
 
 list-rel:
 	$(ct) $(flags_obj) list/list.c
+
+core:
+	$(ct) $(flags_obj) $(core) $(gtk) $(cairo)
+	ar rc fd_core.a *.o
