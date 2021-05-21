@@ -326,12 +326,18 @@ double gel_convert_angle_by_crd(figure *l, double a) {
 	dx = l->a1 - l->x;
 	dy = l->a2 - l->y;
 
-	if (dx < 0) {
+	/*if (dx < 0) {
 		a += PI / 2;
 	}
 	if (dy < 0) {
 		a = -a;
-	}
+	}*/
+	if (dx < 0 && dy > 0)
+		a += (PI / 2);
+	if (dx < 0 && dy < 0)
+		a += (PI);
+	if (dx > 0 && dy < 0)
+		a = -a;
 
 	st_debug {
 		printf("%s: %g\n", __func__, a);
@@ -357,4 +363,10 @@ void gel_convert_crd_by_angle(figure *l, double a, double lx, double ly) {
 		l->a1 = l->x + lx;
 		l->a2 = l->y - fabs(ly);
 	}
+}
+
+// cb -- coord base
+// ct -- coord target
+double gel_reflect_coord(double cb, double ct) {
+	return cb + (cb - ct);
 }
