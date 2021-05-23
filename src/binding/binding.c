@@ -256,9 +256,39 @@ int bl_get_binding_possibility_circle(figure *circle, double x, double y) {
 	return gel_is_point_in_circle(circle, &p);
 }
 
+void __bl_make_trivial_circle_binding(figure *circle, double *x, double *y) {
+	double R = circle->a1;
+
+	if (circle->x == *x) {
+		if (circle->y < *y)
+			*y = circle->y + R;
+		else
+			*y = fabs(R - circle->y);
+	}
+	else {
+		if (circle->x < *x)
+			*x = circle->x + R;
+		else
+			*x = fabs(R - circle->x);
+	}
+}
+
+double __bl_eval_coords_positive(double base, double c, double step) {
+	if (c > base)
+		return c - step;
+	else
+		return c + step;
+}
+
+double __bl_eval_coords_negative(double base, double c, double step) {
+	if (c < base)
+		return c - step;
+	else
+		return c + step;
+}
+
 void bl_make_binding_circle(figure *circle, double *x, double *y) {
-	double angle, res_x;
-	double dx, dy;
+	double R, len, c, a;
 	figure l;
 
 	l.x = circle->x;
@@ -266,26 +296,27 @@ void bl_make_binding_circle(figure *circle, double *x, double *y) {
 	l.a1 = *x;
 	l.a2 = *y;
 
-	angle = gel_convert_grades_to_rads(gel_calculate_line_angle(&l));
-	res_x = circle->a1 * cos(angle);
-	/**y = circle->a1 * sin(angle) + circle->y;
+	// check for trivial case
+	if (circle->x == *x || circle->y == *y)
+		__bl_make_trivial_circle_binding(circle, x, y);
 
-	if (*x < circle->x)
-		*x = fabs(res_x - circle->x);
-	else
-		*x = res_x + circle->x;*/
-	dx = circle->a1 * cos(angle);
-	dy = circle->a1 * sin(angle);
+	// get radii, and length of l
+	R = circle->a1;
+	len = gel_calculate_lenght(&l);
 
-	/*if (*x > circle->x)
-		*x = circle->x + dx;
-	else
-		*x = fabs(circle->x - dx);
+	// get c
+	c = fabs(len - R);
 
-	if (*y > circle->y)
-		*y = circle->y + dy;
-	else
-		*y = fabs(circle->y - dy);*/
-	*x = *x - (dx + circle->a1);
-	*y = *y - (dy + circle->a1);
+	// get side of square
+	a = sqrt(pow(c, 2) / 2);
+
+	// make binding
+	if ((len - R) > 0) {
+		*x = __bl_eval_coords_positive(circle->x, *x, a);
+		*y = __bl_eval_coords_positive(circle->y, *y, a);
+	}
+	else {
+		*x = __bl_eval_coords_negative(circle->x, *x, a);
+		*y = __bl_eval_coords_negative(circle->y, *y, a);
+	}
 }
