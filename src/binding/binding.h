@@ -5,7 +5,7 @@
 #include "../figure/figure.h"
 #include "../text/text.h"
 
-#define BINDING_AREA 5
+#define BINDING_AREA 15
 
 void bl_bind(list *lptr, double *x, double *y);
 
