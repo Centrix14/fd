@@ -20,6 +20,7 @@ list *list_init_node(list *parent) {
 	nptr->next = NULL;
 	nptr->data = NULL;
 	nptr->dt = OT_FIGURE;
+	nptr->opt = NULL;
 
 	return nptr;
 }
