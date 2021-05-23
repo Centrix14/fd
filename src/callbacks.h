@@ -49,6 +49,7 @@ void options_dialog_size_format_box_prm_bttn_click(GtkWidget *bttn, GtkWidget *s
 void options_dialog_size_box_set_prm_bttn_click(GtkWidget *bttn, gpointer data);
 void options_dialog_size_format_box_pp_bttn_click(GtkWidget *bttn, GtkWidget *select_bttn);
 void options_dialog_color_data_box_set_bttn_click(GtkWidget *bttn, gpointer data);
+void options_dialog_color_data_box_color_bttn_click(GtkWidget *bttn, gpointer data);
 
 void save_bttn_click(GtkWidget *bttn, gpointer data);
 void open_bttn_click(GtkWidget *bttn, gpointer data);
