@@ -122,11 +122,13 @@ void bl_make_binding_point(figure *point, double *x, double *y) {
 void bl_make_binding_line(figure *line, double *x, double *y) {
 	figure *point;
 
-	if (bl_get_coords_dif(line->x, *x) < BINDING_AREA && bl_get_coords_dif(line->y, *y) < BINDING_AREA) {
+	if (bl_get_coords_dif(line->x, *x) < BINDING_AREA
+			&& bl_get_coords_dif(line->y, *y) < BINDING_AREA) {
 		*x = line->x;
 		*y = line->y;
 	}
-	else if (bl_get_coords_dif(line->a1, *x) < BINDING_AREA && bl_get_coords_dif(line->a2, *y) < BINDING_AREA) {
+	else if (bl_get_coords_dif(line->a1, *x) < BINDING_AREA
+			&& bl_get_coords_dif(line->a2, *y) < BINDING_AREA) {
 		*x = line->a1;
 		*y = line->a2;
 	}
@@ -164,7 +166,8 @@ char *bl_try_make_intersection_binding(list *lptr, double *x, double *y) {
 					is_correct = gel_calculate_intersection(l1, l2, &p);
 
 					if (is_correct) {
-						if (bl_get_coords_dif(p.x, *x) <= BINDING_AREA && bl_get_coords_dif(p.y, *y) <= BINDING_AREA) {
+						if (bl_get_coords_dif(p.x, *x) <= BINDING_AREA
+								&& bl_get_coords_dif(p.y, *y) <= BINDING_AREA) {
 							*x = p.x;
 							*y = p.y;
 
