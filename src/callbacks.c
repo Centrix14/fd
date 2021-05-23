@@ -555,11 +555,12 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 
 	GtkWidget *mode_notebook;
-	GtkWidget *position_page_label, *size_page_label, *color_page_label, *type_page_label,
-			  *lay_page_label;
+	GtkWidget *position_page_label, *size_page_label, *color_page_label,
+			  *lay_page_label, *group_page_label;
 
 	GtkWidget *position_box_entry, *position_box_set_bttn, *position_box_select,
-			  *position_box_help_bttn, *position_box_ok_bttn, *position_box_figure_type_label;
+			  *position_box_help_bttn, *position_box_ok_bttn,
+			  *position_box_figure_type_label;
 	GtkWidget *position_box, *position_data_box, *position_bttn_box;
 
 	GtkWidget *size_box, *size_format_box, *size_data_box, *size_data_entry_box,
@@ -579,9 +580,15 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *color_data_box_color_bttn, *color_data_box_set_bttn,
 			  *color_bttn_box_ok_bttn, *color_bttn_box_help_bttn;
 
-	GtkWidget *type_box;
+	GtkWidget *layer_box, *layer_obj_box, *layer_obj_bttn_box;
+	GtkWidget *layer_obj_box_type_label, *layer_obj_box_lay_label,
+			  *layer_obj_box_pr_label, *layer_obj_bttn_box_to_0,
+			  *layer_obj_bttn_box_to_sel,
+			  *layer_box_scroll, *layer_box_list,
+			  *layer_box_list_lay_0;
 
-	GtkWidget *lay_box;
+	GtkWidget *group_box;
+
 	GdkRGBA color;
 
 	list *geometry_buffer = NULL;
@@ -756,6 +763,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// add signal
 	g_signal_connect(G_OBJECT(color_data_box_set_bttn), "clicked",
 			G_CALLBACK(options_dialog_color_data_box_set_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(color_data_box_color_bttn), "color-set",
+			G_CALLBACK(options_dialog_color_data_box_color_bttn_click), NULL);
 
 	// fill color
 	gdk_rgba_parse(&color, "rgb(255,255,255)");
@@ -813,11 +822,58 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	pl_send("msg:color_green_box_spin", &color_green_box_spin, sizeof(GtkWidget*));
 	pl_send("msg:color_blue_box_spin", &color_blue_box_spin, sizeof(GtkWidget*));
 
-	// type_box
-	type_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	// create buttons
+	layer_obj_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	layer_obj_bttn_box_to_0 = gtk_button_new_with_label("Move to 0 label");
+	layer_obj_bttn_box_to_sel = gtk_button_new_with_label("Move to selected");
 
-	// lay_box
-	lay_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	gtk_box_pack_start(GTK_BOX(layer_obj_bttn_box), layer_obj_bttn_box_to_0,
+			TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(layer_obj_bttn_box), layer_obj_bttn_box_to_sel,
+			TRUE, TRUE, 5);
+
+	// create layer obj widgets
+	layer_obj_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	layer_obj_box_type_label = gtk_label_new("Type");
+	layer_obj_box_lay_label = gtk_label_new("Lay");
+	layer_obj_box_pr_label = gtk_label_new("PR");
+
+	gtk_label_set_justify(GTK_LABEL(layer_obj_box_type_label), GTK_JUSTIFY_LEFT);
+	gtk_label_set_justify(GTK_LABEL(layer_obj_box_lay_label), GTK_JUSTIFY_LEFT);
+	gtk_label_set_justify(GTK_LABEL(layer_obj_box_pr_label), GTK_JUSTIFY_LEFT);
+
+	gtk_box_pack_start(GTK_BOX(layer_obj_box), layer_obj_box_type_label,
+			TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(layer_obj_box), layer_obj_box_lay_label,
+			TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(layer_obj_box), layer_obj_box_pr_label,
+			TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(layer_obj_box), layer_obj_bttn_box,
+			TRUE, TRUE, 5);
+
+	// create list box
+	layer_box_list = gtk_list_box_new();
+	layer_box_list_lay_0 = gtk_label_new("Layer0");
+
+	gtk_list_box_prepend(GTK_LIST_BOX(layer_box_list), layer_box_list_lay_0);
+
+	// create scrolled window for list box
+	layer_box_scroll = gtk_scrolled_window_new(NULL, NULL);
+
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(layer_box_scroll),
+			GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+	gtk_container_add(GTK_CONTAINER(layer_box_scroll), layer_box_list);
+
+	// create layer box
+	layer_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(layer_box), layer_obj_box,
+			FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(layer_box), layer_box_scroll,
+			TRUE, TRUE, 5);
+
+	// group box
+	group_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	// create mode notebook
 	mode_notebook = gtk_notebook_new();
@@ -826,15 +882,15 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	position_page_label = gtk_label_new("Position");
 	size_page_label = gtk_label_new("Size");
 	color_page_label = gtk_label_new("Color");
-	type_page_label = gtk_label_new("Type");
 	lay_page_label = gtk_label_new("Layer");
+	group_page_label = gtk_label_new("Group");
 
 	// pack mode notebook
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), position_box, position_page_label);
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), size_box, size_page_label);
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), color_box, color_page_label);
-	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), type_box, type_page_label);
-	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), lay_box, lay_page_label);
+	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), layer_box, lay_page_label);
+	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), group_box, group_page_label);
 	
 	// show dialog
 	gtk_container_add(GTK_CONTAINER(dialog_content), mode_notebook);
@@ -1638,6 +1694,33 @@ void options_dialog_color_data_box_set_bttn_click(GtkWidget *bttn, gpointer data
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
 	// get selected
+	sel = ul_get_selected_node(geometry_buffer);
+	if (!sel) {
+		st_err("can\'t get selected figure");
+	}
+
+	// add options
+	ol_check_options(sel);
+	ol_set_color(sel, red, green, blue);
+}
+
+void options_dialog_color_data_box_color_bttn_click(GtkWidget *bttn, gpointer data) {
+	GdkRGBA color;
+	int red, green, blue;
+	list *geometry_buffer, *sel;
+
+	// get color from button
+	gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(bttn), &color);
+
+	// get colors
+	red = ul_map(color.red, 0, 1, 0, 255);
+	green = ul_map(color.green, 0, 1, 0, 255);
+	blue = ul_map(color.blue, 0, 1, 0, 255);
+
+	// get geometry_buffer
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+
+	// get selected figure
 	sel = ul_get_selected_node(geometry_buffer);
 	if (!sel) {
 		st_err("can\'t get selected figure");
