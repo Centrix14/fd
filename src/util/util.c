@@ -129,3 +129,12 @@ list *ul_get_selected_node(list *buf) {
 
 	return NULL;
 }
+
+int ul_pars_layer_str(char *str) {
+	char *tok = NULL;
+
+	tok = strtok(str, " ");
+	tok = strtok(NULL, " ");
+
+	return atoi(tok);
+}
