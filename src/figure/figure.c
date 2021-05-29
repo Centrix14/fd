@@ -31,6 +31,7 @@ figure *figure_new(double type, double x, double y, double a1, double a2, double
 
 	fptr->visible = VM_SHOW;
 	fptr->lay = curr_lay;
+	fptr->pr_mode = 0;
 
 	fg_num++;
 
@@ -144,7 +145,7 @@ int figure_is_projection_lay_list(list *lptr, int lay) {
 			continue;
 		}
 
-		if (mo->lay == lay && mo->visible == VM_PROJECTION)
+		if (mo->lay == lay && mo->pr_mode)
 			return 1;
 
 		node = node->next;
@@ -264,5 +265,6 @@ void figure_show(list *node) {
 
 	fptr = figure_get_from_node(node);
 	if (fptr)
-		printf("x1 = %g\ny1 = %g\nx2 = %g\ny2 = %g\n\n", fptr->x, fptr->y, fptr->a1, fptr->a2);
+		printf("x1 = %g\ny1 = %g\nx2 = %g\ny2 = %g\n\n",
+				fptr->x, fptr->y, fptr->a1, fptr->a2);
 }
