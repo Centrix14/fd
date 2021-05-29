@@ -570,9 +570,78 @@ char *get_figure_is_pr(list *lptr) {
 		return "None";
 	mo = mol_extract(sel);
 
-	if (mo->visible == VM_PROJECTION)
+	if (mo->pr_mode)
 		return "Projection: True";
 	return "Projection: False";
+}
+
+int get_index_of(int *arr, int size, int val) {
+	for (int i = 0; i < size; i++)
+		if (arr[i] == val)
+			return i;
+	return -1;
+}
+
+int *get_layers_list(list *buffer) {
+	list *node;
+	multi_obj *mo;
+	int *layers = NULL, i = 0;
+	size_t sz = 16;
+
+	node = buffer;
+	layers = (int*)calloc(sz, sizeof(int));
+	memset(layers, -1, sz);
+
+	while (node) {
+		if (!node->data) {
+			node = node->next;
+
+			continue;
+		}
+
+		mo = mol_extract(node);
+		if (get_index_of(layers, i, mo->lay) == -1)
+			layers[i++] = mo->lay;
+
+		// check for overflow
+		if (i == sz) {
+			sz += 8;
+			layers = (int*)realloc(layers, sz * sizeof(int));
+		}
+
+		node = node->next;
+	}
+
+	layers[i] = -1;
+	return layers;
+}
+
+int get_list_length(int *lst, int end) {
+	int i = 0;
+
+	for (i = 0; lst[i] != end; i++) ;
+	return i;
+}
+
+void fill_layers_list(GtkWidget *lst, list *lptr) {
+	int *layers_list = NULL, len = 0;
+	GtkWidget **labels = NULL;
+	char label_str[64] = "";
+
+	// get list of layers
+	layers_list = get_layers_list(lptr);
+	len = get_list_length(layers_list, -1);
+
+	// create array of labels
+	labels = (GtkWidget**)malloc(len * sizeof(GtkWidget*));
+	for (int i = 0; i < len; i++) {
+		sprintf(label_str, "Layer: %d", layers_list[i]);
+
+		labels[i] = gtk_label_new(label_str);
+		gtk_list_box_prepend(GTK_LIST_BOX(lst), labels[i]);
+	}
+
+	free(layers_list);
 }
 
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
@@ -608,8 +677,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *layer_obj_box_type_label, *layer_obj_box_lay_label,
 			  *layer_obj_box_pr_label, *layer_obj_bttn_box_to_0,
 			  *layer_obj_bttn_box_to_sel,
-			  *layer_box_scroll, *layer_box_list,
-			  *layer_box_list_lay_0;
+			  *layer_box_scroll, *layer_box_list;
 
 	GtkWidget *group_box;
 
@@ -857,13 +925,18 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// create buttons
 	layer_obj_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
-	layer_obj_bttn_box_to_0 = gtk_button_new_with_label("Move to 0 label");
+	layer_obj_bttn_box_to_0 = gtk_button_new_with_label("Move to layer 0");
 	layer_obj_bttn_box_to_sel = gtk_button_new_with_label("Move to selected");
 
 	gtk_box_pack_start(GTK_BOX(layer_obj_bttn_box), layer_obj_bttn_box_to_0,
 			TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(layer_obj_bttn_box), layer_obj_bttn_box_to_sel,
 			TRUE, TRUE, 5);
+
+	g_signal_connect(G_OBJECT(layer_obj_bttn_box_to_0), "clicked",
+			G_CALLBACK(options_dialog_layer_obj_bttn_box_to_0), NULL);
+
+	// ! signal for layer_obj_bttn_box_to_sel in 971
 
 	// create layer obj widgets
 	layer_obj_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -894,9 +967,14 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// create list box
 	layer_box_list = gtk_list_box_new();
-	layer_box_list_lay_0 = gtk_label_new("Layer0");
 
-	gtk_list_box_prepend(GTK_LIST_BOX(layer_box_list), layer_box_list_lay_0);
+	gtk_list_box_set_selection_mode(GTK_LIST_BOX(layer_box_list), GTK_SELECTION_SINGLE);
+	
+	g_signal_connect(G_OBJECT(layer_obj_bttn_box_to_sel), "clicked",
+			G_CALLBACK(options_dialog_layer_obj_bttn_box_to_sel), layer_box_list);
+
+	// fill layer_box_list
+	fill_layers_list(layer_box_list, geometry_buffer);
 
 	// create scrolled window for list box
 	layer_box_scroll = gtk_scrolled_window_new(NULL, NULL);
@@ -1763,11 +1841,52 @@ void options_dialog_color_data_box_color_bttn_click(GtkWidget *bttn, gpointer da
 
 	// get selected figure
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel) {
-		st_err("can\'t get selected figure");
-	}
+	if (!sel)
+		return ;
 
 	// add options
 	ol_check_options(sel);
 	ol_set_color(sel, red, green, blue);
 }
+
+void options_dialog_layer_obj_bttn_box_to_0(GtkWidget *bttn, gpointer data) {
+	list *geometry_buffer = NULL, *sel = NULL;
+	multi_obj *mo;
+
+	// get geometry buffer
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+
+	// get selected figure
+	sel = ul_get_selected_node(geometry_buffer);
+	if (!sel)
+		return ;
+
+	// move figure to layer 0
+	mo = mol_extract(sel);
+	mo->lay = 0;
+	mol_apply(sel, mo);
+} 
+
+void options_dialog_layer_obj_bttn_box_to_sel(GtkWidget *bttn, GtkWidget *layers_list) {
+	GtkListBoxRow *selected_row;
+	GtkWidget *selected_widget;
+	list *geometry_buffer = NULL, *sel = NULL;
+	multi_obj *mo;
+	int new_lay = 0;
+
+	// get selected row
+	selected_row = gtk_list_box_get_selected_row(GTK_LIST_BOX(layers_list));
+	selected_widget = gtk_bin_get_child(GTK_BIN(selected_row));
+
+	// get selected node
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node(geometry_buffer);
+	if (!sel)
+		return ;
+	
+	// move node to new lay
+	new_lay = ul_pars_layer_str((char*)gtk_label_get_text(GTK_LABEL(selected_widget)));
+	mo = mol_extract(sel);
+	mo->lay = new_lay;
+	mol_apply(sel, mo);
+} 
