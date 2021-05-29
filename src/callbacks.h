@@ -35,8 +35,8 @@ void rect_wh_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void text_dialog_help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 
 void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
-void all_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry);
+void all_bttn_click(GtkWidget *bttn, gpointer data);
 
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 void options_dialog_set_button(GtkWidget *bttn, char *coords);
