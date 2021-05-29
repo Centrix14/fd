@@ -19,6 +19,9 @@
 
 #include "pechkin/pl.h"
 
+#define WIDTH 1200
+#define LENGTH 900
+
 list *figure_list = NULL;
 GtkWidget *window;
 
@@ -54,7 +57,7 @@ int main(int argc, char *argv[]) {
 	// init window
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), "FlatDraw");
-	gtk_window_set_default_size(GTK_WINDOW(window), 1000, 800);
+	gtk_window_set_default_size(GTK_WINDOW(window), WIDTH, LENGTH);
 	gtk_window_set_default_icon_from_file("res/fd.png", NULL);
 
 	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
@@ -67,14 +70,15 @@ int main(int argc, char *argv[]) {
 
 	// init drawing area
 	draw_area = gtk_drawing_area_new();
-	gtk_widget_set_size_request(draw_area, 1000, 800);
+	gtk_widget_set_size_request(draw_area, WIDTH, LENGTH);
 
 	// send drawing area message
 	pl_send("msg:drawing_area", &draw_area, sizeof(GtkWidget*));
 
 	// init scrolled window
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_ALWAYS, GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
+			GTK_POLICY_ALWAYS, GTK_POLICY_AUTOMATIC);
 	gtk_container_add(GTK_CONTAINER(scrolled_window), draw_area);
 
 	// init buttons
@@ -93,13 +97,20 @@ int main(int argc, char *argv[]) {
 
 	g_signal_connect(G_OBJECT(point_bttn), "clicked", G_CALLBACK(point_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(line_pp_bttn), "clicked", G_CALLBACK(line_bttn_click), NULL);
-	g_signal_connect(G_OBJECT(line_la_bttn), "clicked", G_CALLBACK(line_la_bttn_click), window);
-	g_signal_connect(G_OBJECT(rect_pp_bttn), "clicked", G_CALLBACK(rect_pp_bttn_click), NULL);
-	g_signal_connect(G_OBJECT(rect_wh_bttn), "clicked", G_CALLBACK(rect_wh_bttn_click), window);
-	g_signal_connect(G_OBJECT(circle_rc_bttn), "clicked", G_CALLBACK(circle_bttn_click), NULL);
-	g_signal_connect(G_OBJECT(arc_tp_bttn), "clicked", G_CALLBACK(arc_bttn_click), window);
-	g_signal_connect(G_OBJECT(circle_prm_bttn), "clicked", G_CALLBACK(circle_prm_bttn_click), window);
-	g_signal_connect(G_OBJECT(arc_prm_bttn), "clicked", G_CALLBACK(arc_prm_bttn_click), window);
+	g_signal_connect(G_OBJECT(line_la_bttn), "clicked",
+			G_CALLBACK(line_la_bttn_click), window);
+	g_signal_connect(G_OBJECT(rect_pp_bttn), "clicked",
+			G_CALLBACK(rect_pp_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(rect_wh_bttn), "clicked",
+			G_CALLBACK(rect_wh_bttn_click), window);
+	g_signal_connect(G_OBJECT(circle_rc_bttn), "clicked",
+			G_CALLBACK(circle_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(arc_tp_bttn), "clicked",
+		   	G_CALLBACK(arc_bttn_click), window);
+	g_signal_connect(G_OBJECT(circle_prm_bttn), "clicked",
+		   	G_CALLBACK(circle_prm_bttn_click), window);
+	g_signal_connect(G_OBJECT(arc_prm_bttn), "clicked",
+		   	G_CALLBACK(arc_prm_bttn_click), window);
 	g_signal_connect(G_OBJECT(curs_bttn), "clicked", G_CALLBACK(curs_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(text_bttn), "clicked", G_CALLBACK(text_bttn_click), window);
 
@@ -234,8 +245,10 @@ int main(int argc, char *argv[]) {
 	gtk_file_chooser_button_set_title(GTK_FILE_CHOOSER_BUTTON(save_file_bttn), "Save");
 	gtk_file_chooser_button_set_title(GTK_FILE_CHOOSER_BUTTON(open_file_bttn), "Open");
 
-	g_signal_connect(G_OBJECT(save_file_bttn), "file-set", G_CALLBACK(save_bttn_click), NULL);
-	g_signal_connect(G_OBJECT(open_file_bttn), "file-set", G_CALLBACK(open_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(save_file_bttn), "file-set",
+		   	G_CALLBACK(save_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(open_file_bttn), "file-set",
+		   	G_CALLBACK(open_bttn_click), NULL);
 
 	// init right box
 	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
