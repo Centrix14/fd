@@ -16,6 +16,7 @@
 
 double ul_map(double x, double in_min, double in_max, double out_min, double out_max);
 void ul_pars_font(char *str, char *font_name, char *font_size);
+int ul_pars_layer_str(char *str);
 
 void ul_get_colors(int *arr, GtkWidget *color_entry);
 char *ul_get_home_path();
