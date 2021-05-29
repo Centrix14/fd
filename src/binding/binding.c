@@ -17,7 +17,9 @@ char *bl_try_make_object_bind(list *lptr, double *x, double *y) {
 		if (!fptr)
 			break;
 
-		if (bl_is_create_binding(fptr, *x, *y)) {
+		if (fptr->lay != figure_get_current_lay())
+			node = node->next;
+		else if (bl_is_create_binding(fptr, *x, *y)) {
 			bl_make_binding(fptr, x, y);
 
 			return "";
@@ -163,8 +165,11 @@ char *bl_try_make_intersection_binding(list *lptr, double *x, double *y) {
 
 			if (node1 != node2) {
 				if (figure_is_line(l1) && figure_is_line(l2)) {
-					is_correct = gel_calculate_intersection(l1, l2, &p);
+					if (l1->lay != figure_get_current_lay())
+						if (l2->lay != figure_get_current_lay())
+							return NULL;
 
+					is_correct = gel_calculate_intersection(l1, l2, &p);
 					if (is_correct) {
 						if (bl_get_coords_dif(p.x, *x) <= BINDING_AREA
 								&& bl_get_coords_dif(p.y, *y) <= BINDING_AREA) {
@@ -223,6 +228,8 @@ char *bl_make_vertical_bind_if_possible(list *node, double *x, double *y) {
 
 	fptr = (figure*)node->data;
 	if (!fptr)
+		return NULL;
+	if (fptr->lay != figure_get_current_lay())
 		return NULL;
 
 	if (bl_get_coords_dif(fptr->x, *x) <= BINDING_AREA) {
