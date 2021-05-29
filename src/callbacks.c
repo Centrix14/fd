@@ -245,16 +245,14 @@ void rect_pp_bttn_click(GtkWidget *bttn, gpointer data) {
 	hl_set_help(HC_START_POINT);
 }
 
-void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
-	int new_lay = atoi(gtk_entry_get_text(GTK_ENTRY(entry)));
+void set_lay_bttn_click(GtkWidget *bttn, GtkWidget *spin) {
+	int new_lay = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin));
 
 	figure_set_current_lay(new_lay);
 }
 
-void all_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
+void all_bttn_click(GtkWidget *bttn, gpointer data) {
 	dl_switch_display_all_lays();
-
-	gtk_entry_set_text(GTK_ENTRY(entry), "all");
 } 
 
 void set_window(GtkWidget *new_window) {
@@ -403,19 +401,14 @@ void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data) {
 	hl_set_help(HC_POINT);
 }
 
-void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *entry) {
-	char *text = (char*)gtk_entry_get_text(GTK_ENTRY(entry));
-	int is_prj_lay = 0, entry_lay = 0;
+void add_projection_lay_bttn_click(GtkWidget *bttn, GtkWidget *spin) {
+	int lay = 0;
 	list *geometry_buffer = NULL;
 
-	entry_lay = atoi(text);
+	lay = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin));
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
-	is_prj_lay = figure_is_projection_lay_list(geometry_buffer, entry_lay);
-	if (is_prj_lay)
-		figure_set_visible_by_lay_list(geometry_buffer, entry_lay, VM_HIDE);
-	else
-		figure_set_visible_by_lay_list(geometry_buffer, entry_lay, VM_PROJECTION);
+	mol_switch_pr_mode_for_lay(geometry_buffer, lay);
 }
 
 void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
@@ -424,11 +417,14 @@ void help_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *help_label, *logo;
 
 	PangoAttrList *attrs;
-	PangoAttribute *text_size, *text_font, *text_letter_spacing, *text_label_fallback, *text_stretch, *text_font_variant, *text_font_weight;
+	PangoAttribute *text_size, *text_font, *text_letter_spacing, *text_label_fallback,
+				   *text_stretch, *text_font_variant, *text_font_weight;
 
-	help_dialog = gtk_dialog_new_with_buttons("Help", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	help_dialog = gtk_dialog_new_with_buttons("Help", GTK_WINDOW(parent_window),
+			(GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(help_dialog));
-	g_signal_connect_swapped(help_dialog, "response", G_CALLBACK(gtk_widget_destroy), help_dialog);
+	g_signal_connect_swapped(help_dialog, "response", G_CALLBACK(gtk_widget_destroy),
+			help_dialog);
 
 	// widgets label
 	help_label = gtk_label_new("");
@@ -551,6 +547,34 @@ char *get_figure_pos(list *lptr) {
 	return out;
 }
 
+char *get_figure_lay(list *lptr) {
+	list *sel = NULL;
+	multi_obj *mo;
+	static char lay[8] = "";
+
+	sel = ul_get_selected_node(lptr);
+	if (!sel)
+		return "None";
+	mo = mol_extract(sel);
+
+	sprintf(lay, "%d", mo->lay);
+	return lay;
+}
+
+char *get_figure_is_pr(list *lptr) {
+	list *sel = NULL;
+	multi_obj *mo;
+
+	sel = ul_get_selected_node(lptr);
+	if (!sel)
+		return "None";
+	mo = mol_extract(sel);
+
+	if (mo->visible == VM_PROJECTION)
+		return "Projection: True";
+	return "Projection: False";
+}
+
 void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_content;
 
@@ -595,7 +619,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 
-	dialog = gtk_dialog_new_with_buttons("Options", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Options", GTK_WINDOW(parent_window),
+			(GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -674,8 +699,10 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	pl_send("msg:size_data_entry2", &size_data_entry_box_entr2, sizeof(GtkWidget*));
 	pl_send("msg:size_data_box_set_bttn1", &size_data_box_set_bttn1, sizeof(GtkWidget*));
 	pl_send("msg:size_data_box_set_bttn2", &size_data_box_set_bttn2, sizeof(GtkWidget*));
-	pl_send("msg:size_data_entry_box_label1", &size_data_entry_box_label1, sizeof(GtkWidget*));
-	pl_send("msg:size_data_entry_box_label2", &size_data_entry_box_label2, sizeof(GtkWidget*));
+	pl_send("msg:size_data_entry_box_label1", &size_data_entry_box_label1,
+			sizeof(GtkWidget*));
+	pl_send("msg:size_data_entry_box_label2", &size_data_entry_box_label2,
+			sizeof(GtkWidget*));
 
 	// bind signals
 	g_signal_connect(G_OBJECT(size_data_box_set_bttn1), "clicked",
@@ -733,6 +760,9 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// create size bttns
 	size_bttn_box_ok_bttn = gtk_button_new_with_label("OK");
 	size_bttn_box_help_bttn = gtk_button_new_with_label("Help");
+
+	g_signal_connect(G_OBJECT(size_bttn_box_ok_bttn), "clicked",
+			G_CALLBACK(options_dialog_ok_bttn_click), dialog);
 
 	// create size bttn box
 	size_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -801,6 +831,9 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	color_bttn_box_ok_bttn = gtk_button_new_with_label("OK");
 	color_bttn_box_help_bttn = gtk_button_new_with_label("Help");
 
+	g_signal_connect(G_OBJECT(color_bttn_box_ok_bttn), "clicked",
+			G_CALLBACK(options_dialog_ok_bttn_click), dialog);
+
 	// create color bttn box
 	color_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
@@ -850,6 +883,14 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(layer_obj_box), layer_obj_bttn_box,
 			TRUE, TRUE, 5);
+
+	// change labels text
+	gtk_label_set_text(GTK_LABEL(layer_obj_box_type_label),
+			get_figure_mnemonic(geometry_buffer));
+	gtk_label_set_text(GTK_LABEL(layer_obj_box_lay_label),
+			get_figure_lay(geometry_buffer));
+	gtk_label_set_text(GTK_LABEL(layer_obj_box_pr_label),
+		get_figure_is_pr(geometry_buffer));
 
 	// create list box
 	layer_box_list = gtk_list_box_new();
