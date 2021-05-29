@@ -16,6 +16,7 @@ typedef struct {
 	int visible;
 
 	int lay;
+	char pr_mode;
 } figure;
 
 enum FG_TYPES {
