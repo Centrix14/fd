@@ -8,6 +8,7 @@ typedef struct {
 	int visible;
 
 	int lay;
+	char pr_mode;
 } multi_obj;
 
 void mol_free_from_node(list *lptr);
@@ -22,5 +23,7 @@ multi_obj *mol_extract_from_figure(list *lptr);
 void mol_apply(list *lptr, multi_obj *mo);
 void mol_apply_text(list *lptr, multi_obj *mo);
 void mol_apply_figure(list *lptr, multi_obj *mo);
+
+void mol_switch_pr_mode_for_lay(list *lptr, int lay);
 
 #endif
