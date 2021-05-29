@@ -156,7 +156,7 @@ void dl_draw_arc(figure *fptr) {
 int dl_is_need_draw(figure *fptr) {
 	if (!fptr || fptr->visible == VM_HIDE
 			|| (fptr->lay != figure_get_current_lay()
-				&& !all_lays && fptr->visible != VM_PROJECTION))
+				&& !all_lays && !fptr->pr_mode))
 		return 0;
 	return 1;
 }
