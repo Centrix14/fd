@@ -26,8 +26,11 @@ int main(int argc, char *argv[]) {
 	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box, *left_box;
 
 	GtkWidget *scrolled_window, *draw_area;
-	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn, *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn, *circle_prm_bttn, *arc_prm_bttn, *text_bttn;
-	GtkWidget *lay_entry, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label, *hint_label, *option_bttn;
+	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn,
+			  *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn, *circle_prm_bttn,
+			  *arc_prm_bttn, *text_bttn;
+	GtkWidget *lay_spin, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label,
+			  *hint_label, *option_bttn;
 	GtkWidget *save_file_bttn, *open_file_bttn, *ver_sep;
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
 	GtkWidget *draw_mode_bttn;
@@ -184,7 +187,7 @@ int main(int argc, char *argv[]) {
 	gtk_button_set_image_position(GTK_BUTTON(text_bttn), GTK_POS_TOP);
 
 	// init down tool panel widgets
-	lay_entry = gtk_entry_new();
+	lay_spin = gtk_spin_button_new_with_range(0, 2000, 1);
 	set_bttn = gtk_button_new_with_label("Set");
 	all_bttn = gtk_button_new_with_label("All");
 	add_projection_lay_bttn = gtk_button_new_with_label("+ / -");
@@ -207,11 +210,15 @@ int main(int argc, char *argv[]) {
 	draw_bttns[7] = circle_rc_bttn;
 	draw_bttns[8] = arc_tp_bttn;
 
-	g_signal_connect(G_OBJECT(set_bttn), "clicked", G_CALLBACK(set_lay_bttn_click), lay_entry);
-	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), lay_entry);
-	g_signal_connect(G_OBJECT(add_projection_lay_bttn), "clicked", G_CALLBACK(add_projection_lay_bttn_click), lay_entry);
-	g_signal_connect(G_OBJECT(option_bttn), "clicked", G_CALLBACK(options_bttn_click), window);
-	g_signal_connect(G_OBJECT(draw_mode_bttn), "clicked", G_CALLBACK(prm_bttn_click), draw_bttns);
+	g_signal_connect(G_OBJECT(set_bttn), "clicked",
+			G_CALLBACK(set_lay_bttn_click), lay_spin);
+	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(add_projection_lay_bttn), "clicked",
+			G_CALLBACK(add_projection_lay_bttn_click), lay_spin);
+	g_signal_connect(G_OBJECT(option_bttn), "clicked",
+			G_CALLBACK(options_bttn_click), window);
+	g_signal_connect(G_OBJECT(draw_mode_bttn), "clicked",
+			G_CALLBACK(prm_bttn_click), draw_bttns);
 
 	// file operations widgets
 	ver_sep = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
@@ -256,7 +263,8 @@ int main(int argc, char *argv[]) {
 	g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(copy_paste_bttn), "clicked", G_CALLBACK(cp_bttn_click), NULL);
-	g_signal_connect(G_OBJECT(decouple_bttn), "clicked", G_CALLBACK(dc_bttn_click), draw_area);
+	g_signal_connect(G_OBJECT(decouple_bttn), "clicked",
+			G_CALLBACK(dc_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(rot_bttn), "clicked", G_CALLBACK(rot_bttn_click), window);
 
 	// del
@@ -303,7 +311,7 @@ int main(int argc, char *argv[]) {
 	down_tool_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), crd_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), hint_label, FALSE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(down_tool_box), lay_entry, TRUE, TRUE, 3);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), lay_spin, TRUE, TRUE, 3);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), set_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), add_projection_lay_bttn, FALSE, FALSE, 0);
