@@ -35,8 +35,8 @@ void mol_free_from_node(list *lptr) {
 }
 
 void mol_draw_obj_from_node(list *lptr) {
-	figure *fptr;
 	text *tptr;
+	figure *fptr;
 	options *opt;
 	cairo_t *cr;
 
@@ -49,8 +49,16 @@ void mol_draw_obj_from_node(list *lptr) {
 			fptr = (figure*)lptr->data;
 			opt = (options*)lptr->opt;
 
-			if (opt && fptr->visible != VM_SELECTED)
+			if (fptr->visible == VM_SELECTED)
+				cl_set_color(cr, CL_DEF_SELECTED_COLOR);
+			else if (opt)
 				cl_set_color_rgb(cr, opt->r, opt->g, opt->b);
+			else if (fptr->pr_mode) {
+				if (figure_get_current_lay() != fptr->lay)
+					cl_set_color(cr, CL_DEF_PROJECTION_COLOR);
+				else
+					cl_set_color(cr, CL_DEF_DRAW_COLOR);
+			}
 			else
 				cl_set_color_fg(cr, fptr->visible);
 			dl_draw_figure(fptr);
@@ -104,6 +112,7 @@ multi_obj *mol_extract_from_text(list *lptr) {
 	mo.y = tptr->y;
 	mo.visible = tptr->visible;
 	mo.lay = tptr->lay;
+	mo.pr_mode = tptr->pr_mode;
 
 	return &mo;
 }
@@ -118,6 +127,7 @@ multi_obj *mol_extract_from_figure(list *lptr) {
 	mo.y = fptr->y;
 	mo.visible = fptr->visible;
 	mo.lay = fptr->lay;
+	mo.pr_mode = fptr->pr_mode;
 
 	return &mo;
 }
@@ -140,6 +150,7 @@ void mol_apply_text(list *lptr, multi_obj *mo) {
 	tptr->y = mo->y;
 	tptr->visible = mo->visible;
 	tptr->lay = mo->lay;
+	tptr->pr_mode = mo->pr_mode;
 }
 
 void mol_apply_figure(list *lptr, multi_obj *mo) {
@@ -150,6 +161,7 @@ void mol_apply_figure(list *lptr, multi_obj *mo) {
 	fptr->y = mo->y;
 	fptr->visible = mo->visible;
 	fptr->lay = mo->lay;
+	fptr->pr_mode = mo->pr_mode;
 }
 
 void mol_context_color_set(list *lptr) {
@@ -165,4 +177,26 @@ void mol_context_color_set(list *lptr) {
 		cl_set_color_rgb(cr, opt->r, opt->g, opt->b);
 	else
 		cl_set_color_fg(cr, fptr->visible);
+}
+
+void mol_switch_pr_mode_for_lay(list *lptr, int lay) {
+	list *node = NULL;
+	multi_obj *mo;
+
+	node = lptr;
+	while (node) {
+		if (!node->data) {
+			node = node->next;
+
+			continue;
+		}
+		mo = mol_extract(node);
+
+		if (mo->lay == lay) {
+			mo->pr_mode = !mo->pr_mode;
+			mol_apply(node, mo);
+		}
+
+		node = node->next;
+	}
 }
