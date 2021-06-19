@@ -665,7 +665,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *size_data_entry_box_label1, *size_data_entry_box_label2,
 			  *size_bttn_box_ok_bttn, *size_bttn_box_help_bttn;
 
-	GtkWidget *color_box, *color_red_box, *color_green_box, *color_blue_box, *color_rgb_box,
+	GtkWidget *color_box, *color_red_box, *color_green_box, *color_blue_box,
+			  *color_rgb_box,
 			  *color_bttn_box;
 	GtkWidget *color_red_box_label, *color_red_box_spin,
 			  *color_green_box_label, *color_green_box_spin,
@@ -679,7 +680,12 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *layer_obj_bttn_box_to_sel,
 			  *layer_box_scroll, *layer_box_list;
 
-	GtkWidget *group_box;
+	GtkWidget *group_box, *group_info_box, *group_action_box, *group_bttn_box,
+			  *group_list_box;
+	GtkWidget *group_info_box_group_label, *group_info_box_tag_label,
+			  *group_action_box_ungroup, *group_action_box_join,
+			  *group_bttn_box_ok, *group_bttn_box_help,
+			  *group_box_scrolled_window;
 
 	GdkRGBA color;
 
@@ -722,7 +728,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	position_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_ok_bttn, TRUE, TRUE, 5);
-	gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_help_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_help_bttn,
+			TRUE, TRUE, 5);
 
 	// create position box
 	position_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -790,7 +797,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	size_format_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	gtk_box_pack_start(GTK_BOX(size_format_box), size_format_box_pp_bttn, TRUE, TRUE, 5);
-	gtk_box_pack_start(GTK_BOX(size_format_box), size_format_box_prm_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(size_format_box), size_format_box_prm_bttn,
+			TRUE, TRUE, 5);
 
 	// size data line box 1
 	size_data_line_box1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -855,7 +863,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	gtk_box_pack_start(GTK_BOX(color_red_box), color_red_box_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(color_red_box), color_red_box_spin, TRUE, TRUE, 5);
-	gtk_box_pack_start(GTK_BOX(color_red_box), color_data_box_color_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(color_red_box), color_data_box_color_bttn,
+			TRUE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(color_red_box), color_data_box_set_bttn, TRUE, FALSE, 5);
 
 	// add signal
@@ -1758,7 +1767,8 @@ void options_dialog_size_format_box_prm_bttn_click(GtkWidget *bttn, GtkWidget *s
 	gtk_label_set_text(GTK_LABEL(label2), "Height");
 }
 
-void options_dialog_size_format_box_pp_bttn_click(GtkWidget *bttn, GtkWidget *select_bttn) {
+void options_dialog_size_format_box_pp_bttn_click(GtkWidget *bttn,
+		GtkWidget *select_bttn) {
 	GtkWidget *size_data_box_set_bttn1 = NULL, *size_data_box_set_bttn2 = NULL;
 	GtkWidget *label1, *label2;
 
