@@ -52,6 +52,7 @@ void options_dialog_color_data_box_set_bttn_click(GtkWidget *bttn, gpointer data
 void options_dialog_color_data_box_color_bttn_click(GtkWidget *bttn, gpointer data);
 void options_dialog_layer_obj_bttn_box_to_0(GtkWidget *bttn, gpointer data);
 void options_dialog_layer_obj_bttn_box_to_sel(GtkWidget *bttn, GtkWidget *layers_list);
+void options_dialog_get_group_name(GtkWidget *entry);
 
 void save_bttn_click(GtkWidget *bttn, gpointer data);
 void open_bttn_click(GtkWidget *bttn, gpointer data);

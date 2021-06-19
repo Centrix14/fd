@@ -388,6 +388,9 @@ void ch_unselect_last_node() {
 	figure *fptr = NULL;
 	text *tptr = NULL;
 
+	if (!last_selected_node)
+		return ;
+
 	if (last_selected_node->dt == OT_TEXT) {
 		tptr = (text*)last_selected_node->data;
 		tptr->visible = VM_SHOW;

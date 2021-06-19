@@ -680,12 +680,12 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 			  *layer_obj_bttn_box_to_sel,
 			  *layer_box_scroll, *layer_box_list;
 
-	GtkWidget *group_box, *group_info_box, *group_action_box, *group_bttn_box,
+	GtkWidget *group_box, *group_data_box, *group_remove_box, *group_set_box,
 			  *group_list_box;
-	GtkWidget *group_info_box_group_label, *group_info_box_tag_label,
-			  *group_action_box_ungroup, *group_action_box_join,
-			  *group_bttn_box_ok, *group_bttn_box_help,
-			  *group_box_scrolled_window;
+	GtkWidget *group_data_box_tag_entry, *group_data_box_group_entry,
+			  *group_remove_box_tag_bttn, *group_remove_box_group_bttn,
+			  *group_set_box_tag_bttn, *group_set_box_group_bttn,
+			  *group_box_scroll;
 
 	GdkRGBA color;
 
@@ -1000,8 +1000,46 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(layer_box), layer_box_scroll,
 			TRUE, TRUE, 5);
 
+	// group set box
+	group_set_box_tag_bttn = gtk_button_new_with_label("Set tag");
+	group_set_box_group_bttn = gtk_button_new_with_label("Set group");
+	group_set_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(group_set_box), group_set_box_tag_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(group_set_box), group_set_box_group_bttn, TRUE, TRUE, 5);
+
+	// group remove box
+	group_remove_box_tag_bttn = gtk_button_new_with_label("Remove tag");
+	group_remove_box_group_bttn = gtk_button_new_with_label("Remove group");
+	group_remove_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_tag_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_group_bttn, TRUE, TRUE, 5);
+
+	// group data box
+	group_data_box_tag_entry = gtk_entry_new();
+	group_data_box_group_entry = gtk_entry_new();
+	group_data_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_tag_entry, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_group_entry, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(group_data_box), group_set_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(group_data_box), group_remove_box, TRUE, TRUE, 5);
+	
 	// group box
+	group_list_box = gtk_list_box_new();
+	group_box_scroll = gtk_scrolled_window_new(NULL, NULL);
 	group_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_container_add(GTK_CONTAINER(group_box_scroll), group_list_box);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(group_box_scroll),
+			GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+
+	gtk_box_pack_start(GTK_BOX(group_box), group_data_box, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(group_box), group_box_scroll, TRUE, TRUE, 5);
+
+	// set entrys
+	options_dialog_get_group_name(group_data_box_group_entry);
 
 	// create mode notebook
 	mode_notebook = gtk_notebook_new();
@@ -1900,3 +1938,25 @@ void options_dialog_layer_obj_bttn_box_to_sel(GtkWidget *bttn, GtkWidget *layers
 	mo->lay = new_lay;
 	mol_apply(sel, mo);
 } 
+
+void options_dialog_get_group_name(GtkWidget *entry) {
+	list *sel = NULL, *geometry_buffer = NULL;
+	options *opt;
+	char *group_name = NULL;
+
+	// get gb and selected node
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node(geometry_buffer);
+	if (!sel)
+		return ;
+
+	// get group
+	opt = ol_get_opt(sel);
+	if (!opt || !opt->group)
+		group_name = "";
+	else
+		group_name = opt->group;
+
+	// set entry text
+	gtk_entry_set_text(GTK_ENTRY(entry), group_name);
+}
