@@ -53,6 +53,12 @@ void options_dialog_color_data_box_color_bttn_click(GtkWidget *bttn, gpointer da
 void options_dialog_layer_obj_bttn_box_to_0(GtkWidget *bttn, gpointer data);
 void options_dialog_layer_obj_bttn_box_to_sel(GtkWidget *bttn, GtkWidget *layers_list);
 void options_dialog_get_group_name(GtkWidget *entry);
+void options_dialog_get_tag(GtkWidget *entry);
+void options_dialog_set_group_bttn_click(GtkWidget *bttn, GtkWidget *group_entry);
+void options_dialog_set_tag_bttn_click(GtkWidget *bttn, GtkWidget *tag_entry);
+void options_dialog_remove_tag_bttn_click(GtkWidget *bttn, gpointer data);
+void options_dialog_remove_group_bttn_click(GtkWidget *bttn, gpointer data);
+void options_dialog_fill_group_list(GtkWidget *group_list);
 
 void save_bttn_click(GtkWidget *bttn, gpointer data);
 void open_bttn_click(GtkWidget *bttn, gpointer data);
