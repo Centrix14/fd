@@ -51,7 +51,7 @@ void mol_draw_obj_from_node(list *lptr) {
 
 			if (fptr->visible == VM_SELECTED)
 				cl_set_color(cr, CL_DEF_SELECTED_COLOR);
-			else if (opt)
+			else if (ol_is_color_set(lptr))
 				cl_set_color_rgb(cr, opt->r, opt->g, opt->b);
 			else if (fptr->pr_mode) {
 				if (figure_get_current_lay() != fptr->lay)
