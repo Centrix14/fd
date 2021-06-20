@@ -19,9 +19,9 @@ void ol_add_options(list *node) {
 		st_err("fail to allocate options field");
 	}
 
-	new_opt->r = 0;
-	new_opt->g = 0;
-	new_opt->b = 0;
+	new_opt->r = OPT_FIELD_UNSET;
+	new_opt->g = OPT_FIELD_UNSET;
+	new_opt->b = OPT_FIELD_UNSET;
 
 	new_opt->tag = NULL;
 	new_opt->group = NULL;
@@ -30,8 +30,17 @@ void ol_add_options(list *node) {
 }
 
 void ol_free_node(list *node) {
-	if (node && node->opt)
-		free(node->opt);
+	options *opt;
+
+	if (!node || !node->opt)
+		return ;
+
+	opt = node->opt;
+	if (opt->tag)
+		free(opt->tag);
+	if (opt->group)
+		free(opt->group);
+	free(node->opt);
 }
 
 options *ol_get_opt(list *node) {
@@ -51,4 +60,16 @@ void ol_set_color(list *node, double r, double g, double b) {
 	opt->r = r;
 	opt->g = g;
 	opt->b = b;
+}
+
+int ol_is_color_set(list *node) {
+	options *opt = NULL;
+
+	opt = ol_get_opt(node);
+	if (!opt)
+		return 0;
+
+	if (opt->r == OPT_FIELD_UNSET || opt->g == OPT_FIELD_UNSET || opt->b == OPT_FIELD_UNSET)
+		return 0;
+	return 1;
 }
