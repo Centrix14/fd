@@ -682,7 +682,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	GtkWidget *group_box, *group_data_box, *group_remove_box, *group_set_box,
 			  *group_list_box;
-	GtkWidget *group_data_box_tag_entry, *group_data_box_group_entry,
+	GtkWidget *group_data_box_tag_entry, *group_data_box_group_entry, *group_data_box_move_bttn,
 			  *group_remove_box_tag_bttn, *group_remove_box_group_bttn,
 			  *group_set_box_tag_bttn, *group_set_box_group_bttn,
 			  *group_box_scroll;
@@ -1027,17 +1027,24 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// group data box
 	group_data_box_tag_entry = gtk_entry_new();
 	group_data_box_group_entry = gtk_entry_new();
+	group_data_box_move_bttn = gtk_button_new_with_label("Move to selected");
 	group_data_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
 	gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_tag_entry, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_group_entry, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(group_data_box), group_set_box, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(group_data_box), group_remove_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_move_bttn, TRUE, TRUE, 5);
 	
 	g_signal_connect(G_OBJECT(group_set_box_group_bttn), "clicked",
 			G_CALLBACK(options_dialog_set_group_bttn_click), group_data_box_group_entry);
 	g_signal_connect(G_OBJECT(group_set_box_tag_bttn), "clicked",
 			G_CALLBACK(options_dialog_set_tag_bttn_click), group_data_box_tag_entry);
+
+	// ! callback for group_data_box_move_bttn in 'group_box' section
+
+	gtk_entry_set_text(GTK_ENTRY(group_data_box_tag_entry), "Tag");
+	gtk_entry_set_text(GTK_ENTRY(group_data_box_group_entry), "Group");
 	
 	// group box
 	group_list_box = gtk_list_box_new();
@@ -1050,6 +1057,9 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	gtk_box_pack_start(GTK_BOX(group_box), group_data_box, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(group_box), group_box_scroll, TRUE, TRUE, 5);
+
+	g_signal_connect(G_OBJECT(group_data_box_move_bttn), "clicked",
+			G_CALLBACK(options_dialog_group_data_box_move_bttn_click), group_list_box);
 
 	// set entrys
 	options_dialog_get_group_name(group_data_box_group_entry);
@@ -1973,7 +1983,7 @@ void options_dialog_get_group_name(GtkWidget *entry) {
 	// get group
 	opt = ol_get_opt(sel);
 	if (!opt || !opt->group)
-		group_name = "";
+		return ;
 	else
 		group_name = opt->group;
 
@@ -1995,7 +2005,7 @@ void options_dialog_get_tag(GtkWidget *entry) {
 	// get tag
 	opt = ol_get_opt(sel);
 	if (!opt || !opt->tag)
-		tag = "";
+		return ;
 	else
 		tag = opt->tag;
 
@@ -2167,4 +2177,33 @@ void options_dialog_fill_group_list(GtkWidget *group_list) {
 	}
 
 	free_str_arr(group_names_list, sz);
+}
+
+void options_dialog_group_data_box_move_bttn_click(GtkWidget *bttn, GtkWidget *list_box) {
+	GtkListBoxRow *row;
+	GtkWidget *selected_label;
+	list *geometry_buffer, *sel;
+	options *opt;
+	char *group = NULL;
+
+	// get selected label
+	row = gtk_list_box_get_selected_row(GTK_LIST_BOX(list_box));
+	selected_label = gtk_bin_get_child(GTK_BIN(row));
+
+	// get selected node
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node(geometry_buffer);
+
+	// get options
+	ol_check_options(sel);
+	opt = ol_get_opt(sel);
+
+	// get group
+	group = (char*)gtk_label_get_text(GTK_LABEL(selected_label));
+	if (!group)
+		return ;
+
+	// set group
+	opt->group = (char*)malloc(strlen(group) + 1);
+	strcpy(opt->group, group);
 }
