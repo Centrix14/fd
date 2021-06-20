@@ -3,6 +3,8 @@
 
 #include "../list/list.h"
 
+#define OPT_FIELD_UNSET -1
+
 typedef struct {
 	int r;
 	int g;
@@ -18,5 +20,7 @@ void ol_free_node(list *node);
 
 options *ol_get_opt(list *node);
 void ol_set_color(list *node, double r, double g, double b);
+
+int ol_is_color_set(list *node);
 
 #endif
