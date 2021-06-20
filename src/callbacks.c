@@ -1008,6 +1008,9 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(group_set_box), group_set_box_tag_bttn, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(group_set_box), group_set_box_group_bttn, TRUE, TRUE, 5);
 
+	// ! callback for group_set_box_group_bttn in 'group_data_box' section
+	// ! callback for group_set_box_tag_bttn in 'group_data_box' section
+
 	// group remove box
 	group_remove_box_tag_bttn = gtk_button_new_with_label("Remove tag");
 	group_remove_box_group_bttn = gtk_button_new_with_label("Remove group");
@@ -1015,6 +1018,11 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_tag_bttn, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_group_bttn, TRUE, TRUE, 5);
+
+	g_signal_connect(G_OBJECT(group_remove_box_tag_bttn), "clicked",
+			G_CALLBACK(options_dialog_remove_tag_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(group_remove_box_group_bttn), "clicked",
+			G_CALLBACK(options_dialog_remove_group_bttn_click), NULL);
 
 	// group data box
 	group_data_box_tag_entry = gtk_entry_new();
@@ -1025,6 +1033,11 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_group_entry, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(group_data_box), group_set_box, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(group_data_box), group_remove_box, TRUE, TRUE, 5);
+	
+	g_signal_connect(G_OBJECT(group_set_box_group_bttn), "clicked",
+			G_CALLBACK(options_dialog_set_group_bttn_click), group_data_box_group_entry);
+	g_signal_connect(G_OBJECT(group_set_box_tag_bttn), "clicked",
+			G_CALLBACK(options_dialog_set_tag_bttn_click), group_data_box_tag_entry);
 	
 	// group box
 	group_list_box = gtk_list_box_new();
@@ -1040,6 +1053,10 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// set entrys
 	options_dialog_get_group_name(group_data_box_group_entry);
+	options_dialog_get_tag(group_data_box_tag_entry);
+
+	// fill group_list_box
+	options_dialog_fill_group_list(group_list_box);
 
 	// create mode notebook
 	mode_notebook = gtk_notebook_new();
@@ -1410,7 +1427,8 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	GtkWidget *dialog_content;
 	GtkWidget *text_view, *ok_bttn, *help_bttn, *ch_color_bttn, *ch_font_bttn;
 	GtkWidget *text_size_label, *text_font_label, *text_color_label;
-	GtkWidget *bttn_box, *label_size_box, *label_font_box, *label_color_box, *label_opt_box, *main_box, *label_style_box, *label_style_entrys_box;
+	GtkWidget *bttn_box, *label_size_box, *label_font_box, *label_color_box, *label_opt_box,
+			  *main_box, *label_style_box, *label_style_entrys_box;
 	GtkWidget *text_size_entry, *text_font_entry, *text_color_entry;
 	GtkTextBuffer *text_buffer;
 	GdkRGBA color_button_inital_color;
@@ -1419,7 +1437,8 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	int font_size = -1;
 	char font_name[64] = "";
 
-	dialog = gtk_dialog_new_with_buttons("Text", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Text", GTK_WINDOW(parent_window),
+			(GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -1533,7 +1552,7 @@ void text_bttn_click(GtkWidget *bttn, GtkWindow *parent_window) {
 	// send messages
 	pl_send("msg:colors", &colors, sizeof(int) * 3);
 	pl_send("msg:font_size_int", &font_size, sizeof(int));
-	pl_send("msg:font_name_str", font_name, strlen(font_name));
+	pl_send("msg:font_name_str", &font_name, 64);
 }
 
 void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
@@ -1545,8 +1564,8 @@ void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	int *colors, font_size;
 
 	// read messages
-	text_font_entry = *(GtkWidget**)pl_read("msg:size_entry");
-	text_size_entry = *(GtkWidget**)pl_read("msg:font_entry");
+	text_font_entry = *(GtkWidget**)pl_read("msg:font_entry");
+	text_size_entry = *(GtkWidget**)pl_read("msg:size_entry");
 	text_color_entry = *(GtkWidget**)pl_read("msg:color_entry");
 
 	colors = (int*)pl_read("msg:colors");
@@ -1605,13 +1624,14 @@ void text_dialog_color_button_set(GtkColorButton *bttn, int *arr) {
 
 void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data) {
 	char *font = NULL, *font_name = NULL;
-	char size[256] = "", font_size = 0;
+	char size[256] = "";
+	int font_size = 0;
 
 	font = gtk_font_chooser_get_font(GTK_FONT_CHOOSER(bttn));
 
 	// read message
 	font_name = (char*)pl_read("msg:font_name_str");
-
+	strcpy(font_name, "");
 	ul_pars_font(font, font_name, size);
 
 	font_size = atoi(size);
@@ -1959,4 +1979,192 @@ void options_dialog_get_group_name(GtkWidget *entry) {
 
 	// set entry text
 	gtk_entry_set_text(GTK_ENTRY(entry), group_name);
+}
+
+void options_dialog_get_tag(GtkWidget *entry) {
+	list *sel = NULL, *geometry_buffer = NULL;
+	options *opt;
+	char *tag = NULL;
+
+	// get gb and selected node
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node(geometry_buffer);
+	if (!sel)
+		return ;
+
+	// get tag
+	opt = ol_get_opt(sel);
+	if (!opt || !opt->tag)
+		tag = "";
+	else
+		tag = opt->tag;
+
+	// set entry text
+	gtk_entry_set_text(GTK_ENTRY(entry), tag);
+}
+
+void options_dialog_set_group_bttn_click(GtkWidget *bttn, GtkWidget *group_entry) {
+	list *geometry_buffer = NULL, *sel = NULL;
+	options *opt;
+	char *group_name = "";
+
+	// get geometry buffer
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node(geometry_buffer);
+	if (!sel)
+		return ;
+
+	// get options
+	ol_check_options(sel);
+	opt = ol_get_opt(sel);
+	if (!opt)
+		return ;
+
+	// get group_name
+	group_name = (char*)gtk_entry_get_text(GTK_ENTRY(group_entry));
+	if (!strlen(group_name))
+		return ;
+
+	// allocate group field
+	if (opt->group)
+		opt->group = (char*)realloc(opt->group, strlen(group_name) + 1);
+	else
+		opt->group = (char*)malloc(strlen(group_name) + 1);
+
+	// copy
+	strcpy(opt->group, group_name);
+}
+
+void options_dialog_set_tag_bttn_click(GtkWidget *bttn, GtkWidget *tag_entry) {
+	list *geometry_buffer = NULL, *sel = NULL;
+	options *opt;
+	char *tag_name = "";
+
+	// get geometry buffer
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node(geometry_buffer);
+	if (!sel)
+		return ;
+
+	// get options
+	ol_check_options(sel);
+	opt = ol_get_opt(sel);
+	if (!opt)
+		return ;
+
+	// get tag_name
+	tag_name = (char*)gtk_entry_get_text(GTK_ENTRY(tag_entry));
+	if (!strlen(tag_name))
+		return ;
+
+	// allocate group field
+	if (opt->tag)
+		opt->tag = (char*)realloc(opt->tag, strlen(tag_name) + 1);
+	else
+		opt->tag = (char*)malloc(strlen(tag_name) + 1);
+
+	// copy
+	strcpy(opt->tag, tag_name);
+}
+
+void options_dialog_remove_tag_bttn_click(GtkWidget *bttn, gpointer data) {
+	list *geometry_buffer = NULL, *sel = NULL;
+	options *opt = NULL;
+
+	// get geometry_buffer
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node(geometry_buffer);
+
+	// get options
+	opt = ol_get_opt(sel);
+	if (!opt || !opt->tag)
+		return ;
+
+	// remove tag
+	free(opt->tag);
+	opt->tag = NULL;
+}
+
+void options_dialog_remove_group_bttn_click(GtkWidget *bttn, gpointer data) {
+	list *geometry_buffer = NULL, *sel = NULL;
+	options *opt = NULL;
+
+	// get geometry_buffer
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node(geometry_buffer);
+
+	// get options
+	opt = ol_get_opt(sel);
+	if (!opt || !opt->group)
+		return ;
+
+	// remove tag
+	free(opt->group);
+	opt->group = NULL;
+}
+
+int find_str(char **arr, char *elm, int size) {
+	for (int i = 0; i < size; i++)
+		if (arr[i] && !strcmp(arr[i], elm))
+			return i;
+	return -1;
+}
+
+void free_str_arr(char **arr, int size) {
+	for (int i = 0; i < size; i++)
+		if (arr[i])
+			free(arr[i]);
+	free(arr);
+}
+
+void fill_arr(char **arr, int start, int end, char *val) {
+	for (int i = start; i < end; i++)
+		arr[i] = val;
+}
+
+void options_dialog_fill_group_list(GtkWidget *group_list) {
+	GtkWidget *label = NULL;
+	list *geometry_buffer = NULL, *lptr = NULL;
+	options *opt = NULL;
+	char *group_name = NULL, **group_names_list = NULL;
+	int i = 0, sz = 8;
+
+	// get geometry_buffer
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	lptr = geometry_buffer;
+
+	// allocate list
+	group_names_list = (char**)malloc(sz * sizeof(char**));
+	memset(group_names_list, 0, sz * sizeof(char**));
+
+	// main loop
+	while (lptr) {
+		opt = ol_get_opt(lptr);
+		if (opt && opt->group) {
+			group_name = opt->group;
+
+			if (find_str(group_names_list, group_name, sz) == -1) {
+				// add group_name to list
+				group_names_list[i] = malloc(strlen(group_name) + 1);
+				strcpy(group_names_list[i], group_name);
+				
+				// create label
+				label = gtk_label_new(group_name);
+				gtk_list_box_prepend(GTK_LIST_BOX(group_list), label);
+			}
+		}
+
+		// realloc if overflow
+		i++;
+		if (i == sz) {
+			sz += 8;
+
+			group_names_list = (char**)realloc(group_names_list, sz * sizeof(char**));
+			fill_arr(group_names_list, i, sz, NULL);
+		}
+
+		lptr = lptr->next;
+	}
+
+	free_str_arr(group_names_list, sz);
 }
