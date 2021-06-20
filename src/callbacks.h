@@ -59,6 +59,7 @@ void options_dialog_set_tag_bttn_click(GtkWidget *bttn, GtkWidget *tag_entry);
 void options_dialog_remove_tag_bttn_click(GtkWidget *bttn, gpointer data);
 void options_dialog_remove_group_bttn_click(GtkWidget *bttn, gpointer data);
 void options_dialog_fill_group_list(GtkWidget *group_list);
+void options_dialog_group_data_box_move_bttn_click(GtkWidget *bttn, GtkWidget *list_box);
 
 void save_bttn_click(GtkWidget *bttn, gpointer data);
 void open_bttn_click(GtkWidget *bttn, gpointer data);
