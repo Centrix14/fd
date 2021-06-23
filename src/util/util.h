@@ -24,6 +24,7 @@ char *ul_get_file_from_home(char *path);
 char *ul_get_system_name();
 char *ul_get_path_delim();
 list *ul_get_selected_node(list *buf);
+list *ul_get_selected_node_multiple(list *src, int (*check)(list*));
 
 int ul_is_exist(char *filename);
 
