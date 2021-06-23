@@ -9,6 +9,8 @@
 #include "../list/list.h"
 #include "../figure/figure.h"
 #include "../multi_obj/multi_obj.h"
+#include "../text/text.h"
+#include "../options/opt.h"
 
 // util function for mapping values
 double ul_map(double x, double in_min, double in_max, double out_min, double out_max) {
@@ -137,4 +139,58 @@ int ul_pars_layer_str(char *str) {
 	tok = strtok(NULL, " ");
 
 	return atoi(tok);
+}
+
+size_t __ul_get_data_size(list *node) {
+	switch (node->dt) {
+		case OT_FIGURE:
+			return sizeof(figure);
+		break;
+
+		case OT_TEXT:
+			return sizeof(text);
+		break;
+	}
+
+	return 0;
+}
+
+void __ul_copy_to_dest(list *dest, list *src) {
+	list *last = NULL;
+	size_t size = 0;
+
+	// add node
+	list_add_node(dest);
+	last = list_get_last(dest);
+	
+	// copy
+	if (src->opt) {
+		last->opt = (options*)malloc(sizeof(options));
+		memcpy(last->opt, src->opt, sizeof(options));
+	}
+	if (src->data) {
+		size = __ul_get_data_size(src);
+		last->data = malloc(size);
+		memcpy(last->data, src->data, size);
+	}
+}
+
+list *ul_get_selected_node_multiple(list *src, int (*check)(list*)) {
+	list *lptr = NULL, *dest = NULL;
+	int res = 0;
+
+	// init list of results
+	dest = list_init_node(NULL);
+
+	// main loop
+	lptr = src;
+	while (lptr) {
+		res = (*check)(lptr);
+		if (res)
+			__ul_copy_to_dest(dest, lptr);
+
+		lptr = lptr->next;
+	}
+
+	return dest;
 }
