@@ -71,6 +71,7 @@ void move_bttn_click(GtkWidget *bttn, gpointer data);
 void cp_bttn_click(GtkWidget *bttn, gpointer data);
 void dc_bttn_click(GtkWidget *bttn, GtkWidget *draw_area);
 void rot_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void size_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
 
 void rot_dialog_apply_bttn(GtkWidget *bttn, GtkWidget *entry);
 
