@@ -2207,3 +2207,24 @@ void options_dialog_group_data_box_move_bttn_click(GtkWidget *bttn, GtkWidget *l
 	opt->group = (char*)malloc(strlen(group) + 1);
 	strcpy(opt->group, group);
 }
+
+int __check_f(list *node) {
+	multi_obj *mo = NULL;
+
+	mo = mol_extract(node);
+	if (!mo || mo->visible != VM_SELECTED)
+		return 0;
+	return 1;
+}
+
+void __check_selected(list *results) {
+	
+}
+
+void size_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	list *geometry_buffer = NULL, *sel = NULL;
+
+	// get geometry_buffer and selected nodes
+	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
+	sel = ul_get_selected_node_multiple(geometry_buffer, __check_f);
+}
