@@ -35,7 +35,8 @@ int main(int argc, char *argv[]) {
 	GtkWidget *lay_spin, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label,
 			  *hint_label, *option_bttn;
 	GtkWidget *save_file_bttn, *open_file_bttn, *ver_sep;
-	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn;
+	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn,
+			  *size_bttn;
 	GtkWidget *draw_mode_bttn;
 	GtkWidget *draw_bttns[DRAW_BUTTONS];
 	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon,
@@ -272,6 +273,7 @@ int main(int argc, char *argv[]) {
 	move_bttn = gtk_button_new_with_label("Move");
 	rot_bttn = gtk_button_new_with_label("Rotate");
 	decouple_bttn = gtk_button_new_with_label("Decouple");
+	size_bttn = gtk_button_new_with_label("Size");
 
 	g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
@@ -279,6 +281,7 @@ int main(int argc, char *argv[]) {
 	g_signal_connect(G_OBJECT(decouple_bttn), "clicked",
 			G_CALLBACK(dc_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(rot_bttn), "clicked", G_CALLBACK(rot_bttn_click), window);
+	g_signal_connect(G_OBJECT(size_bttn), "clicked", G_CALLBACK(size_bttn_click), window);
 
 	// del
 	gtk_button_set_image(GTK_BUTTON(del_bttn), del_icon);
@@ -313,6 +316,7 @@ int main(int argc, char *argv[]) {
 	gtk_box_pack_start(GTK_BOX(left_box), move_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(left_box), rot_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(left_box), decouple_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(left_box), size_bttn, TRUE, TRUE, 0);
 
 	// init draw box
 	draw_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
