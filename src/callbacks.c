@@ -2218,7 +2218,7 @@ int __check_f(list *node) {
 	return 1;
 }
 
-/*int __get_selected_len(list *results) {
+int __get_selected_len(list *results) {
 	list *start = NULL;
 
 	start = results->next;
@@ -2233,9 +2233,13 @@ int __check_f(list *node) {
 
 void __show_size_of_figure(figure *fig) {
 	GtkWidget *dialog;
+	char *info = NULL;
 
-	dialog = gtk_message_dialog_new(NULL, (GtkDialogFlags*)NULL, GTK_MESSAGE_INFO,
-			GTK_BUTTONS_OK, "Hello!");
+	// get information about fig
+	info = figure_get_size_info(fig);
+
+	dialog = gtk_message_dialog_new(NULL, (GtkDialogFlags)NULL, GTK_MESSAGE_INFO,
+			GTK_BUTTONS_OK, info);
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
 	gtk_widget_show_all(dialog);
@@ -2258,6 +2262,14 @@ void __get_size_of_1(list *results) {
 	}
 }
 
+void __get_size_of_2(list *results) {
+	
+}
+
+void __get_size_of_group(list *results) {
+	
+}
+ 
 void __check_selected(list *results) {
 	int len = 0;
 
@@ -2290,8 +2302,4 @@ void size_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// check selected
 	__check_selected(sel);
-}*/
-
-void size_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
-	
 }
