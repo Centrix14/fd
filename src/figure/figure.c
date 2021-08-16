@@ -268,3 +268,68 @@ void figure_show(list *node) {
 		printf("x1 = %g\ny1 = %g\nx2 = %g\ny2 = %g\n\n",
 				fptr->x, fptr->y, fptr->a1, fptr->a2);
 }
+
+char *__get_point_info(figure *p) {
+	static char buf[256] = "";
+
+	sprintf(buf, "P(%g; %g)\n", p->x, p->y);
+
+	return buf;
+}
+
+char *__get_line_info(figure *l) {
+	static char buf[256] = "";
+
+	sprintf(buf, "l = %g\n", gel_calculate_lenght(l));
+
+	return buf;
+}
+
+char *__get_rect_info(figure *r) {
+	static char buf[256] = "";
+	double h = 0, w = 0, S = 0, d = 0;
+
+	d = gel_calculate_lenght(r);
+	h = fabs(r->y - r->a2);
+	w = fabs(r->x - r->a1);
+	S = h * w;
+
+	sprintf(buf, "d = %g\nh = %g\nw = %g\nS = %g\n", d, h, w, S);
+
+	return buf;
+}
+
+char *__get_circle_info(figure *c) {
+	static char buf[256] = "";
+	double R = 0, D = 0, l = 0;
+
+	R = c->a1;
+	D = 2 * R;
+	l = PI * D;
+
+	sprintf(buf, "R = %g\nD = %g\nl = %g\n", R, D, l);
+
+	return buf;
+}
+
+char *figure_get_size_info(figure *fptr) {
+	switch (fptr->type) {
+		case FG_TYPE_POINT:
+			return __get_point_info(fptr);
+		break;
+
+		case FG_TYPE_LINE_PP:
+			return __get_line_info(fptr);
+		break;
+
+		case FG_TYPE_RECT_PP:
+			return __get_rect_info(fptr);
+		break;
+
+		case FG_TYPE_CIRCLE:
+			return __get_circle_info(fptr);
+		break;
+	}
+	
+	return "Empty";
+}
