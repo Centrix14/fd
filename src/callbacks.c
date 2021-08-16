@@ -24,6 +24,7 @@ st_name("_fd");
 
 #define POS_BOX 0
 #define SIZE_BOX 1
+#define RESULTS_MULT 3
 
 double curs_x = 0, curs_y = 0,
 	   click_x = 0, click_y = 0;
@@ -2217,8 +2218,67 @@ int __check_f(list *node) {
 	return 1;
 }
 
+/*int __get_selected_len(list *results) {
+	list *start = NULL;
+
+	start = results->next;
+	if (!start)
+		return 0;
+	else if (!start->next)
+		return 1;
+	else if (!start->next->next)
+		return 2;
+	return RESULTS_MULT;
+}
+
+void __show_size_of_figure(figure *fig) {
+	GtkWidget *dialog;
+
+	dialog = gtk_message_dialog_new(NULL, (GtkDialogFlags*)NULL, GTK_MESSAGE_INFO,
+			GTK_BUTTONS_OK, "Hello!");
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	gtk_widget_show_all(dialog);
+}
+
+void __get_size_of_1(list *results) {
+	list *node = NULL;
+
+	node = results->next;
+	if (!node)
+		return ;
+
+	switch (node->dt) {
+		case OT_FIGURE:
+			__show_size_of_figure((figure*)node->data);
+		break;
+
+		case OT_TEXT:
+		break;
+	}
+}
+
 void __check_selected(list *results) {
-	
+	int len = 0;
+
+	len = __get_selected_len(results);
+	switch (len) {
+		case 0:
+			return ;
+		break;
+
+		case 1:
+			__get_size_of_1(results);
+		break;
+
+		case 2:
+			__get_size_of_2(results);
+		break;
+
+		default:
+			__get_size_of_group(results);
+		break;
+	}
 }
 
 void size_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
@@ -2227,4 +2287,11 @@ void size_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// get geometry_buffer and selected nodes
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	sel = ul_get_selected_node_multiple(geometry_buffer, __check_f);
+
+	// check selected
+	__check_selected(sel);
+}*/
+
+void size_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	
 }
