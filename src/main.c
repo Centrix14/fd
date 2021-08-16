@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
 	GtkWidget *line_icon1, *rect_icon1, *arc_icon, *circle_icon, *point_icon,
 			  *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon,
 			  *rot_icon, *decouple_icon, *help_icon, *circle_prm_icon,
-			  *arc_prm_icon, *text_icon;
+			  *arc_prm_icon, *text_icon, *size_icon;
 
 	// create list, that stores geometry
 	figure_list = list_init_node(NULL);
@@ -136,6 +136,7 @@ int main(int argc, char *argv[]) {
 	circle_prm_icon = gtk_image_new_from_file("res/ellipse.png");
 	arc_prm_icon = gtk_image_new_from_file("res/arc.png");
 	text_icon = gtk_image_new_from_file("res/text.png");
+	size_icon = gtk_image_new_from_file("res/measuring.png");
 
 	// set icons
 	// line_pp
@@ -308,7 +309,11 @@ int main(int argc, char *argv[]) {
 	gtk_button_set_always_show_image(GTK_BUTTON(decouple_bttn), TRUE);
 	gtk_button_set_image_position(GTK_BUTTON(decouple_bttn), GTK_POS_TOP);
 
-	// init left box
+	// size
+	gtk_button_set_image(GTK_BUTTON(size_bttn), size_icon);
+	gtk_button_set_always_show_image(GTK_BUTTON(size_bttn), TRUE);
+	gtk_button_set_image_position(GTK_BUTTON(size_bttn), GTK_POS_TOP);// init left box
+
 	left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
 	gtk_box_pack_start(GTK_BOX(left_box), del_bttn, TRUE, TRUE, 0);
