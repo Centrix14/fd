@@ -157,19 +157,17 @@ figure *gel_get_equal_point(figure *line1, figure *line2) {
 }
 
 int gel_is_point_in_line(figure *l, figure *p) {
-	double dx1, dy1, dx, dy, S, ab, h;
+	double a1 = 0, a2 = 0, a3 = 0;
+	figure lp; // line from point to (x; y) of line
 
-	dx1 = l->a1 - l->x;
-	dy1 = l->a2 - l->y;
+	// create line (px; py), (lx, ly)
+	figure_fill(&lp, p->x, p->y, l->x, l->y, FG_TYPE_LINE_PP);
 
-	dx = p->x - l->x;
-	dy = p->y - l->y;
+	a1 = atan(fabs(l->a2 - l->y) / fabs(l->a1 - l->x));
+	a2 = atan(fabs(p->y - l->y) / fabs(p->x - l->x));
+	a3 = gel_convert_rads_to_grades(fabs(a1 - a2));
 
-	S = dx1 * dy - dx * dy1;
-	ab = sqrt(pow(dx1, 2) + pow(dy, 2));
-
-	h = S / ab;
-	if (fabs(h) < BINDING_AREA / 2)
+	if (a3 < 2)
 		if (gel_is_point_in_area(l, p))
 			return 1;
 	return 0;
@@ -181,10 +179,9 @@ int gel_is_point_in_rect(figure *r, figure *p) {
 
 	lines = figure_rect_decompose(r);
 
-	for (int i = 0; i < 4; i++) {
-		res += gel_is_point_in_line(&lines[i], p);
-	}
-	return res;
+	for (int i = 0; i < 4; i++)
+		res += gel_is_point_in_line(&lines[i], p) - !gel_is_point_in_area(r, p);
+	return (res > 0) ? 1 : 0;
 }
 
 int gel_is_point_in_circle(figure *c, figure *p) {
@@ -302,8 +299,8 @@ int gel_is_point_in_area(figure *area, figure *p) {
 	x2 = area->a1;
 	y2 = area->a2;
 
-	if ((p->x >= gel_min(x1, x2)) && (p->a1 <= gel_max(x1, x2)))
-		if ((p->y >= gel_min(y1, y2)) && (p->a2 <= gel_max(y1, y2)))
+	if ((p->x >= gel_min(x1, x2)) && (p->x <= gel_max(x1, x2)))
+		if ((p->y >= gel_min(y1, y2)) && (p->y <= gel_max(y1, y2)))
 			return 1;
 	return 0;
 }
