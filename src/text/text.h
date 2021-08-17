@@ -28,4 +28,6 @@ void tl_free_buffer(text *tptr);
 
 void tl_add_buffer(text *tptr, char *buf);
 
+char *tl_get_info(text *tptr);
+
 #endif
