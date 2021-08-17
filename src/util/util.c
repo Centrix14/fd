@@ -172,6 +172,8 @@ void __ul_copy_to_dest(list *dest, list *src) {
 		size = __ul_get_data_size(src);
 		last->data = malloc(size);
 		memcpy(last->data, src->data, size);
+
+		last->dt = src->dt;
 	}
 }
 
