@@ -26,7 +26,7 @@ void rect_wh_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 void circle_dialog_ok_bttn_click(GtkWidget *bttn, GtkWidget *entry);
 void arc_dialog_ok_bttn_click(GtkWidget *bttn, gpointer data);
 void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb);
-void text_dialog_color_button_set(GtkColorButton *bttn, int *color);
+void text_dialog_color_button_set(GtkColorButton *bttn, gpointer data);
 void text_dialog_font_button_set(GtkFontButton *bttn, gpointer data);
 void text_dialog_color_button_click(GtkWidget *bttn, GtkWidget *parent);
 
