@@ -54,3 +54,11 @@ void tl_free_buffer(text *tptr) {
 	if (tptr->buffer)
 		free(tptr->buffer);
 }
+
+char *tl_get_info(text *tptr) {
+	static char buf[256] = "";
+
+	sprintf(buf, "T(%g; %g)\nh = %d\n", tptr->x, tptr->y, tptr->size);
+
+	return buf;
+}
