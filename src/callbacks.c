@@ -1623,10 +1623,15 @@ void text_dialog_ok_bttn_click(GtkWidget *bttn, GtkTextBuffer *tb) {
 	strcpy(font_name, "");
 }
 
-void text_dialog_color_button_set(GtkColorButton *bttn, int *arr) {
+void text_dialog_color_button_set(GtkColorButton *bttn, gpointer data) {
 	GdkRGBA color;
+	int *arr = NULL;
 
+	// get color
 	gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(bttn), &color);
+
+	// get array of rgb
+	arr = (int*)pl_read("msg:colors");
 
 	arr[0] = ul_map(color.red, 0, 1, 0, 255);
 	arr[1] = ul_map(color.green, 0, 1, 0, 255);
@@ -2231,15 +2236,11 @@ int __get_selected_len(list *results) {
 	return RESULTS_MULT;
 }
 
-void __show_size_of_figure(figure *fig) {
+void __show_size_of_figure(char *msg) {
 	GtkWidget *dialog;
-	char *info = NULL;
-
-	// get information about fig
-	info = figure_get_size_info(fig);
 
 	dialog = gtk_message_dialog_new(NULL, (GtkDialogFlags)NULL, GTK_MESSAGE_INFO,
-			GTK_BUTTONS_OK, info);
+			GTK_BUTTONS_OK, msg);
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
 	gtk_widget_show_all(dialog);
@@ -2247,6 +2248,7 @@ void __show_size_of_figure(figure *fig) {
 
 void __get_size_of_1(list *results) {
 	list *node = NULL;
+	char *info = NULL;
 
 	node = results->next;
 	if (!node)
@@ -2254,10 +2256,13 @@ void __get_size_of_1(list *results) {
 
 	switch (node->dt) {
 		case OT_FIGURE:
-			__show_size_of_figure((figure*)node->data);
+			info = figure_get_size_info((figure*)node->data);
+			__show_size_of_figure(info);
 		break;
 
 		case OT_TEXT:
+			info = tl_get_info((text*)node->data);
+			__show_size_of_figure(info);
 		break;
 	}
 }
