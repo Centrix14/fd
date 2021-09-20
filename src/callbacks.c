@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
 #include <gtk/gtk.h>
 
 #include "figure/figure.h"
@@ -2267,12 +2269,46 @@ void __get_size_of_1(list *results) {
 	}
 }
 
+char *__get_size_of_pair(figure *fptr1, figure *fptr2) {
+	double dx = 0, dy = 0, d = 0;
+	static char buf[64] = "";
+
+	dx = fabs(fptr1->x - fptr2->x);
+	dy = fabs(fptr1->y - fptr2->y);
+
+	d = sqrt(pow(dx, 2) + pow(dy, 2));
+
+	sprintf(buf, "%g", d);
+
+	return buf;
+}
+
 void __get_size_of_2(list *results) {
-	
+	figure *fptr1 = NULL, *fptr2 = NULL;
+	list *node = NULL;
+	char *info = NULL;
+
+	node = results->next;
+	if (!node)
+		return ;
+
+	if (node->dt == OT_FIGURE) {
+		fptr1 = (figure*)node->data;
+		fptr2 = (figure*)node->next->data;
+
+		if (fptr1->type == FG_TYPE_POINT && fptr2->type == FG_TYPE_POINT)
+			info = __get_size_of_pair(fptr1, fptr2);
+		else
+			info = "The objects must be points.";
+	}
+	else
+		info = "The objects must be figures.";
+
+	__show_size_of_figure(info);
 }
 
 void __get_size_of_group(list *results) {
-	
+	__show_size_of_figure("Measuring the size of the group is not yet available.");
 }
  
 void __check_selected(list *results) {
