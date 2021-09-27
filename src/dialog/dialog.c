@@ -1,10 +1,19 @@
 #include <gtk/gtk.h>
+#include <dirent.h>
 
 #include "dialog.h"
+#include "../util/util.h"
 
 void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
-	GtkWidget *dialog = NULL;
-	GtkWidget *content_box = NULL;
+	GtkWidget *dialog;
+	GtkWidget *content_box, *main_box;
+	GtkWidget *main_space_box, *bottom_bttn_box, *dir_box;
+
+	GtkWidget *addr_entry;
+	GtkWidget *dir_up_bttn, *dir_new_bttn, *dir_del_bttn, *dir_rename_bttn, *dir_act_bttn;
+	GtkWidget *scroll_window, *list_box;
+	GtkWidget *act_bttn, *cancel_bttn;
+
 	char *title = NULL;
 
 	if (dcf == DCF_SAVE)
@@ -12,9 +21,94 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	else
 		title = "Open";
 
-	dialog = gtk_dialog_new_with_buttons(title, NULL, (GtkDialogFlags)NULL, NULL);
-	content_box = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(dialog), title);
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 600, 400);
 
-	//gtk_container_add(GTK_CONTAINER(content_box), main_box);
+	g_signal_connect(G_OBJECT(dialog), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	
+	// create addr_entry
+	addr_entry = gtk_entry_new();
+
+	gtk_entry_set_text(GTK_ENTRY(addr_entry), ul_get_home_path());
+
+	// create dir bttns
+	dir_up_bttn = gtk_button_new_with_label("Up");
+	dir_new_bttn = gtk_button_new_with_label("New");
+	dir_del_bttn = gtk_button_new_with_label("Delete");
+	dir_rename_bttn = gtk_button_new_with_label("Rename");
+	dir_act_bttn = gtk_button_new_with_label("Act");
+
+	// create main space
+	scroll_window = gtk_scrolled_window_new(NULL, NULL);
+	list_box = gtk_list_box_new();
+
+	gtk_list_box_set_activate_on_single_click(GTK_LIST_BOX(list_box), FALSE);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll_window),
+			GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+	gtk_container_add(GTK_CONTAINER(scroll_window), list_box);
+
+	__dial_fill_dir_list(list_box);
+
+	// create act buttons
+	act_bttn = gtk_button_new_with_label(title);
+	cancel_bttn = gtk_button_new_with_label("Cancel");
+
+	// create boxes
+	dir_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	main_space_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	bottom_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+
+	// pack dir box
+	gtk_box_pack_start(GTK_BOX(dir_box), dir_act_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dir_box), dir_up_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dir_box), dir_new_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dir_box), dir_del_bttn, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(dir_box), dir_rename_bttn, TRUE, FALSE, 5);
+
+	// pack main space box
+	gtk_box_pack_start(GTK_BOX(main_space_box), dir_box, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(main_space_box), scroll_window, TRUE, TRUE, 5);
+
+	// pack bottom box
+	gtk_box_pack_end(GTK_BOX(bottom_bttn_box), act_bttn, FALSE, FALSE, 5);
+	gtk_box_pack_end(GTK_BOX(bottom_bttn_box), cancel_bttn, FALSE, FALSE, 5);
+
+	// pack content box
+	gtk_box_pack_start(GTK_BOX(main_box), addr_entry, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), main_space_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), bottom_bttn_box, FALSE, FALSE, 5);
+
+	gtk_container_add(GTK_CONTAINER(dialog), main_box);
 	gtk_widget_show_all(dialog);
+}
+
+void __dial_fill_dir_list(GtkWidget *list_box) {
+	GtkWidget *dir_element = NULL, *elm_box = NULL;
+
+	struct dirent *entry = NULL;
+	DIR *dirptr = NULL;
+	char *home = NULL;
+	int i = 0;
+
+	home = ul_get_home_path();
+
+	dirptr = opendir(home);
+	if (!dirptr) {
+		perror("fd");
+		return ;
+	}
+
+	entry = readdir(dirptr);
+	while (entry) {
+		elm_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+		dir_element = gtk_label_new(entry->d_name);
+
+		gtk_label_set_justify(GTK_LABEL(dir_element), GTK_JUSTIFY_LEFT);
+		gtk_box_pack_start(GTK_BOX(elm_box), dir_element, FALSE, FALSE, 5);
+		gtk_list_box_insert(GTK_LIST_BOX(list_box), elm_box, i++);
+
+		entry = readdir(dirptr);
+	}
 }
