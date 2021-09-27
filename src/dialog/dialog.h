@@ -8,4 +8,6 @@ typedef enum {
 
 void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf);
 
+void __dial_fill_dir_list(GtkWidget *list_box);
+
 #endif
