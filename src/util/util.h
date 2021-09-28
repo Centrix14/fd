@@ -32,4 +32,8 @@ char *ul_remove_char(char *str, int c);
 
 void ul_pars_coords(char *str, int count, int *arr);
 
+char *ul_get_file_ext(char *name);
+
+void ul_str_reverse(char *str);
+
 #endif
