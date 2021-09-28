@@ -196,3 +196,32 @@ list *ul_get_selected_node_multiple(list *src, int (*check)(list*)) {
 
 	return dest;
 }
+
+char *ul_get_file_ext(char *name) {
+	static char ext[256] = "";
+	int i = 0, j = 0;
+
+	i = strlen(name) - 1;
+	for (; i; i--) {
+		if (name[i] == '.')
+			break;
+		ext[j++] = name[i];
+	}
+
+	if (!i)
+		return NULL;
+	return ext;
+}
+
+void ul_str_reverse(char *str) {
+	int len = 0;
+
+	len = strlen(str);
+	for (int i = 0; i < len; i++) {
+		for (int j = 0; j < len - 1 - i; j++) {
+			str[j] ^= str[j+1];
+			str[j+1] ^= str[j];
+			str[j] ^= str[j+1];
+		}
+	}
+}
