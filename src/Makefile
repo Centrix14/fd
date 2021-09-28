@@ -49,9 +49,17 @@ pechkin-rel:
 list-rel:
 	$(ct) $(flags_obj) list/list.c
 
-core:
+compile-core-rel:
 	$(ct) $(flags_obj) $(core) $(gtk) $(cairo)
+
+compile-core-dbg:
+	$(ct) $(dbg_flags_obj) $(core) $(gtk) $(cairo)
+
+collect-core:
 	ar rc fd_core.a *.o
+
+core-rel: compile-core-rel collect-core
+core-dbg: compile-core-dbg collect-core
 
 gdb-r:
 	gdb fd -ex="r" -ex="q"
