@@ -38,6 +38,8 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	dir_del_bttn = gtk_button_new_with_label("Delete");
 	dir_rename_bttn = gtk_button_new_with_label("Rename");
 	dir_act_bttn = gtk_button_new_with_label("Act");
+	
+	g_signal_connect(G_OBJECT(dir_act_bttn), "clicked", G_CALLBACK(__dial_act_bttn_click), NULL);
 
 	// create main space
 	scroll_window = gtk_scrolled_window_new(NULL, NULL);
@@ -49,6 +51,7 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	gtk_container_add(GTK_CONTAINER(scroll_window), list_box);
 
 	__dial_fill_dir_list(list_box);
+	pl_send("msg:dial_list_box", &list_box, sizeof(GtkWidget*));
 
 	// create act buttons
 	act_bttn = gtk_button_new_with_label(title);
@@ -111,4 +114,15 @@ void __dial_fill_dir_list(GtkWidget *list_box) {
 
 		entry = readdir(dirptr);
 	}
+}
+
+void __dial_act_bttn_click(GtkWidget *bttn, gpointer data) {
+	GtkWidget *list_box, *selected_row, *selected_label;
+
+	list_box = *(GtkWidget**)pl_read("msg:dial_list_box");
+
+	selected_row = gtk_list_box_get_selected_row(GTK_LIST_BOX(list_box));
+	selected_label = gtk_bin_get_child(GTK_BIN(selected_row));
+
+	puts(gtk_label_get_text(GTK_LABEL(selected_label)));
 }
