@@ -1,8 +1,8 @@
 #include <gtk/gtk.h>
 #include <dirent.h>
 
+#include "../fd_core.h"
 #include "dialog.h"
-#include "../util/util.h"
 
 void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	GtkWidget *dialog;
@@ -32,14 +32,14 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 
 	gtk_entry_set_text(GTK_ENTRY(addr_entry), ul_get_home_path());
 
+	pl_send("msg:dial_addr_entry", &addr_entry, sizeof(GtkWidget*));
+
 	// create dir bttns
 	dir_up_bttn = gtk_button_new_with_label("Up");
 	dir_new_bttn = gtk_button_new_with_label("New");
 	dir_del_bttn = gtk_button_new_with_label("Delete");
 	dir_rename_bttn = gtk_button_new_with_label("Rename");
 	dir_act_bttn = gtk_button_new_with_label("Act");
-	
-	g_signal_connect(G_OBJECT(dir_act_bttn), "clicked", G_CALLBACK(__dial_act_bttn_click), NULL);
 
 	// create main space
 	scroll_window = gtk_scrolled_window_new(NULL, NULL);
@@ -56,6 +56,8 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	// create act buttons
 	act_bttn = gtk_button_new_with_label(title);
 	cancel_bttn = gtk_button_new_with_label("Cancel");
+
+	g_signal_connect(G_OBJECT(act_bttn), "clicked", G_CALLBACK(__dial_act_bttn_click), NULL);
 
 	// create boxes
 	dir_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -117,12 +119,24 @@ void __dial_fill_dir_list(GtkWidget *list_box) {
 }
 
 void __dial_act_bttn_click(GtkWidget *bttn, gpointer data) {
-	GtkWidget *list_box, *selected_row, *selected_label;
+	GtkWidget *list_box, *selected_box, *selected_label;
+	GtkWidget *addr_entry;
+	GtkListBoxRow *selected_row;
+	GList *selected_box_child_list, *first_element;
+	char *addr = NULL, *file = NULL, *full_path = NULL;
 
 	list_box = *(GtkWidget**)pl_read("msg:dial_list_box");
 
 	selected_row = gtk_list_box_get_selected_row(GTK_LIST_BOX(list_box));
-	selected_label = gtk_bin_get_child(GTK_BIN(selected_row));
+	selected_box = gtk_bin_get_child(GTK_BIN(selected_row));
+	selected_box_child_list = gtk_container_get_children(GTK_CONTAINER(selected_box));
+	first_element = g_list_first(selected_box_child_list);
+	selected_label = (GtkWidget*)first_element->data;
 
-	puts(gtk_label_get_text(GTK_LABEL(selected_label)));
+	addr_entry = *(GtkWidget**)pl_read("msg:dial_addr_entry");
+	addr = (char*)gtk_entry_get_text(GTK_ENTRY(addr_entry));
+	file = (char*)gtk_label_get_text(GTK_LABEL(selected_label));
+	full_path = ul_get_full_path(addr, file);
+
+	puts(full_path);
 }
