@@ -25,14 +25,14 @@ char *ul_get_system_name();
 char *ul_get_path_delim();
 list *ul_get_selected_node(list *buf);
 list *ul_get_selected_node_multiple(list *src, int (*check)(list*));
+char *ul_get_file_ext(char *name);
+char *ul_get_full_path(char *path, char *file);
 
 int ul_is_exist(char *filename);
 
 char *ul_remove_char(char *str, int c);
 
 void ul_pars_coords(char *str, int count, int *arr);
-
-char *ul_get_file_ext(char *name);
 
 void ul_str_reverse(char *str);
 
