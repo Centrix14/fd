@@ -225,3 +225,15 @@ void ul_str_reverse(char *str) {
 		}
 	}
 }
+
+char *ul_get_full_path(char *path, char *file) {
+	static char result[256] = "";
+	int len = 0;
+
+	len = strlen(path);
+	if (path[len-1] == '/')
+		sprintf(result, "%s%s", path, file);
+	else
+		sprintf(result, "%s/%s", path, file);
+	return result;
+}
