@@ -7,14 +7,14 @@
 void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	GtkWidget *dialog;
 	GtkWidget *content_box, *main_box;
-	GtkWidget *main_space_box, *bottom_bttn_box, *dir_box;
+	GtkWidget *main_space_box, *bottom_bttn_box, *dir_box, *addr_box;
 
-	GtkWidget *addr_entry;
+	GtkWidget *addr_entry, *go_by_addr_bttn;
 	GtkWidget *dir_up_bttn, *dir_new_bttn, *dir_del_bttn, *dir_rename_bttn, *dir_act_bttn;
 	GtkWidget *scroll_window, *list_box;
 	GtkWidget *act_bttn, *cancel_bttn;
 
-	char *title = NULL;
+	char *title = NULL, *home = NULL;
 
 	if (dcf == DCF_SAVE)
 		title = "Save";
@@ -29,10 +29,14 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	
 	// create addr_entry
 	addr_entry = gtk_entry_new();
+	go_by_addr_bttn = gtk_button_new_with_label("Go");
 
 	gtk_entry_set_text(GTK_ENTRY(addr_entry), ul_get_home_path());
 
 	pl_send("msg:dial_addr_entry", &addr_entry, sizeof(GtkWidget*));
+
+	g_signal_connect(G_OBJECT(go_by_addr_bttn), "clicked",
+			G_CALLBACK(__dial_go_by_addr_bttn_click), NULL);
 
 	// create dir bttns
 	dir_up_bttn = gtk_button_new_with_label("Up");
@@ -50,7 +54,8 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 			GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
 	gtk_container_add(GTK_CONTAINER(scroll_window), list_box);
 
-	__dial_fill_dir_list(list_box);
+	home = ul_get_home_path();
+	__dial_fill_dir_list(list_box, home);
 	pl_send("msg:dial_list_box", &list_box, sizeof(GtkWidget*));
 
 	// create act buttons
@@ -63,6 +68,7 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	dir_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 	main_space_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 	bottom_bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	addr_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
 	// pack dir box
@@ -80,8 +86,12 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	gtk_box_pack_end(GTK_BOX(bottom_bttn_box), act_bttn, FALSE, FALSE, 5);
 	gtk_box_pack_end(GTK_BOX(bottom_bttn_box), cancel_bttn, FALSE, FALSE, 5);
 
+	// pack addr_box
+	gtk_box_pack_start(GTK_BOX(addr_box), addr_entry, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(addr_box), go_by_addr_bttn, FALSE, FALSE, 5);
+
 	// pack content box
-	gtk_box_pack_start(GTK_BOX(main_box), addr_entry, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), addr_box, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(main_box), main_space_box, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(main_box), bottom_bttn_box, FALSE, FALSE, 5);
 
@@ -89,17 +99,14 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	gtk_widget_show_all(dialog);
 }
 
-void __dial_fill_dir_list(GtkWidget *list_box) {
+void __dial_fill_dir_list(GtkWidget *list_box, char *path) {
 	GtkWidget *dir_element = NULL, *elm_box = NULL;
 
 	struct dirent *entry = NULL;
 	DIR *dirptr = NULL;
-	char *home = NULL;
 	int i = 0;
 
-	home = ul_get_home_path();
-
-	dirptr = opendir(home);
+	dirptr = opendir(path);
 	if (!dirptr) {
 		perror("fd");
 		return ;
@@ -114,8 +121,12 @@ void __dial_fill_dir_list(GtkWidget *list_box) {
 		gtk_box_pack_start(GTK_BOX(elm_box), dir_element, FALSE, FALSE, 5);
 		gtk_list_box_insert(GTK_LIST_BOX(list_box), elm_box, i++);
 
+		puts((char*)gtk_label_get_text(GTK_LABEL(dir_element)));
+
 		entry = readdir(dirptr);
 	}
+
+	closedir(dirptr);
 }
 
 void __dial_act_bttn_click(GtkWidget *bttn, gpointer data) {
@@ -139,4 +150,27 @@ void __dial_act_bttn_click(GtkWidget *bttn, gpointer data) {
 	full_path = ul_get_full_path(addr, file);
 
 	puts(full_path);
+}
+
+void __dial_go_by_addr_bttn_click(GtkWidget *bttn, gpointer data) {
+	GtkWidget *addr_entry, *list_box;
+	char *path = NULL;
+
+	addr_entry = *(GtkWidget**)pl_read("msg:dial_addr_entry");
+	path = (char*)gtk_entry_get_text(GTK_ENTRY(addr_entry));
+
+	list_box = *(GtkWidget**)pl_read("msg:dial_list_box");
+	__dial_list_box_clear(list_box);
+	__dial_fill_dir_list(list_box, path);
+}
+
+void __dial_remove_widget_glib_func(GtkWidget *element, GtkWidget *list_box) {
+	gtk_container_remove(GTK_CONTAINER(list_box), element);
+}
+
+void __dial_list_box_clear(GtkWidget *list_box) {
+	GList *child_list;
+
+	child_list = gtk_container_get_children(GTK_CONTAINER(list_box));
+	g_list_foreach(child_list, (GFunc)__dial_remove_widget_glib_func, list_box);
 }
