@@ -63,6 +63,7 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	cancel_bttn = gtk_button_new_with_label("Cancel");
 
 	g_signal_connect(G_OBJECT(act_bttn), "clicked", G_CALLBACK(__dial_act_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(cancel_bttn), "clicked", G_CALLBACK(gtk_main_quit), NULL);
 
 	// create boxes
 	dir_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -117,11 +118,12 @@ void __dial_fill_dir_list(GtkWidget *list_box, char *path) {
 		elm_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 		dir_element = gtk_label_new(entry->d_name);
 
+		gtk_widget_set_visible(elm_box, TRUE);
+		gtk_widget_set_visible(dir_element, TRUE);
+
 		gtk_label_set_justify(GTK_LABEL(dir_element), GTK_JUSTIFY_LEFT);
 		gtk_box_pack_start(GTK_BOX(elm_box), dir_element, FALSE, FALSE, 5);
 		gtk_list_box_insert(GTK_LIST_BOX(list_box), elm_box, i++);
-
-		puts((char*)gtk_label_get_text(GTK_LABEL(dir_element)));
 
 		entry = readdir(dirptr);
 	}
