@@ -1,12 +1,22 @@
 #ifndef __FLAT_DRAW_DIALOG_LIBRARY_HEADER_FILE_INCLUDED__
 #define __FLAT_DRAW_DIALOG_LIBRARY_HEADER_FILE_INCLUDED__
 
+#include <dirent.h>
+
 typedef enum {
 	DCF_SAVE = 0,
 	DCF_OPEN
 } DIAL_CHOOSE_FUNC;
 
+typedef enum {
+	DFT_FILE = 0,
+	DFT_DIR
+} DIAL_FILE_TYPES;
+
 void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf);
+
+DIAL_FILE_TYPES dial_get_entry_type(struct dirent *entry);
+char *dial_get_entry_type_str(DIAL_FILE_TYPES dft);
 
 // service
 void __dial_fill_dir_list(GtkWidget *list_box, char *path);
