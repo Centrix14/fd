@@ -6,7 +6,7 @@
 
 void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	GtkWidget *dialog;
-	GtkWidget *content_box, *main_box;
+	GtkWidget *main_box;
 	GtkWidget *main_space_box, *bottom_bttn_box, *dir_box, *addr_box;
 
 	GtkWidget *addr_entry, *go_by_addr_bttn;
@@ -101,11 +101,13 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 }
 
 void __dial_fill_dir_list(GtkWidget *list_box, char *path) {
-	GtkWidget *dir_element = NULL, *elm_box = NULL;
+	GtkWidget *dir_element = NULL, *elm_box = NULL, *entry_type_label = NULL;
 
+	DIAL_FILE_TYPES dft;
 	struct dirent *entry = NULL;
 	DIR *dirptr = NULL;
 	int i = 0;
+	char *mnemonic = NULL;
 
 	dirptr = opendir(path);
 	if (!dirptr) {
@@ -115,14 +117,22 @@ void __dial_fill_dir_list(GtkWidget *list_box, char *path) {
 
 	entry = readdir(dirptr);
 	while (entry) {
+		dft = dial_get_entry_type(entry);
+		mnemonic = dial_get_entry_type_str(dft);
+
 		elm_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 		dir_element = gtk_label_new(entry->d_name);
+		entry_type_label = gtk_label_new(mnemonic);
 
 		gtk_widget_set_visible(elm_box, TRUE);
 		gtk_widget_set_visible(dir_element, TRUE);
+		gtk_widget_set_visible(entry_type_label, TRUE);
 
 		gtk_label_set_justify(GTK_LABEL(dir_element), GTK_JUSTIFY_LEFT);
+
 		gtk_box_pack_start(GTK_BOX(elm_box), dir_element, FALSE, FALSE, 5);
+		gtk_box_pack_start(GTK_BOX(elm_box), entry_type_label, TRUE, TRUE, 5);
+
 		gtk_list_box_insert(GTK_LIST_BOX(list_box), elm_box, i++);
 
 		entry = readdir(dirptr);
@@ -175,4 +185,16 @@ void __dial_list_box_clear(GtkWidget *list_box) {
 
 	child_list = gtk_container_get_children(GTK_CONTAINER(list_box));
 	g_list_foreach(child_list, (GFunc)__dial_remove_widget_glib_func, list_box);
+}
+
+DIAL_FILE_TYPES dial_get_entry_type(struct dirent *entry) {
+	if (entry->d_type == DT_REG)
+		return DFT_FILE;
+	return DFT_DIR;
+}
+
+char *dial_get_entry_type_str(DIAL_FILE_TYPES dft) {
+	if (dft == DFT_FILE)
+		return "FILE";
+	return "DIRECTORY";
 }
