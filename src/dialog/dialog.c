@@ -100,6 +100,29 @@ void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf) {
 	gtk_widget_show_all(dialog);
 }
 
+void __dial_set_text_attr(GtkWidget *label, char *font, double size) {
+	PangoAttrList *list;
+	PangoAttribute *font_family, *letter_spacing, *rise, *fallback, *scale;
+
+	// attr list
+	list = pango_attr_list_new();
+
+	// attributes
+	font_family = pango_attr_family_new(font);
+	letter_spacing = pango_attr_letter_spacing_new(1024 * 1);
+	rise = pango_attr_rise_new(5);
+	fallback = pango_attr_fallback_new(TRUE);
+	scale = pango_attr_scale_new(size);
+
+	pango_attr_list_insert(list, font_family);
+	pango_attr_list_insert(list, letter_spacing);
+	pango_attr_list_insert(list, rise);
+	pango_attr_list_insert(list, fallback);
+	pango_attr_list_insert(list, scale);
+
+	gtk_label_set_attributes(GTK_LABEL(label), list);
+}
+
 void __dial_fill_dir_list(GtkWidget *list_box, char *path) {
 	GtkWidget *dir_element = NULL, *elm_box = NULL, *entry_type_label = NULL;
 
@@ -121,17 +144,20 @@ void __dial_fill_dir_list(GtkWidget *list_box, char *path) {
 		mnemonic = dial_get_entry_type_str(dft);
 
 		elm_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
-		dir_element = gtk_label_new(entry->d_name);
+		dir_element = gtk_button_new_with_label(entry->d_name);
 		entry_type_label = gtk_label_new(mnemonic);
 
 		gtk_widget_set_visible(elm_box, TRUE);
 		gtk_widget_set_visible(dir_element, TRUE);
 		gtk_widget_set_visible(entry_type_label, TRUE);
 
-		gtk_label_set_justify(GTK_LABEL(dir_element), GTK_JUSTIFY_LEFT);
+		g_signal_connect(G_OBJECT(dir_element), "clicked",
+				G_CALLBACK(__dial_dir_element_bttn_click), NULL);
+		gtk_button_set_relief(GTK_BUTTON(dir_element), GTK_RELIEF_NONE);
+		__dial_set_text_attr((entry_type_label), "Monospace", 1.2);
 
-		gtk_box_pack_start(GTK_BOX(elm_box), dir_element, FALSE, FALSE, 5);
-		gtk_box_pack_start(GTK_BOX(elm_box), entry_type_label, TRUE, TRUE, 5);
+		gtk_box_pack_start(GTK_BOX(elm_box), entry_type_label, FALSE, FALSE, 5);
+		gtk_box_pack_start(GTK_BOX(elm_box), dir_element, TRUE, TRUE, 5);
 
 		gtk_list_box_insert(GTK_LIST_BOX(list_box), elm_box, i++);
 
@@ -142,7 +168,7 @@ void __dial_fill_dir_list(GtkWidget *list_box, char *path) {
 }
 
 void __dial_act_bttn_click(GtkWidget *bttn, gpointer data) {
-	GtkWidget *list_box, *selected_box, *selected_label;
+	GtkWidget *list_box, *selected_box, *selected_button;
 	GtkWidget *addr_entry;
 	GtkListBoxRow *selected_row;
 	GList *selected_box_child_list, *first_element;
@@ -154,11 +180,11 @@ void __dial_act_bttn_click(GtkWidget *bttn, gpointer data) {
 	selected_box = gtk_bin_get_child(GTK_BIN(selected_row));
 	selected_box_child_list = gtk_container_get_children(GTK_CONTAINER(selected_box));
 	first_element = g_list_first(selected_box_child_list);
-	selected_label = (GtkWidget*)first_element->data;
+	selected_button = (GtkWidget*)first_element->data;
 
 	addr_entry = *(GtkWidget**)pl_read("msg:dial_addr_entry");
 	addr = (char*)gtk_entry_get_text(GTK_ENTRY(addr_entry));
-	file = (char*)gtk_label_get_text(GTK_LABEL(selected_label));
+	file = (char*)gtk_button_get_label(GTK_BUTTON(selected_button));
 	full_path = ul_get_full_path(addr, file);
 
 	puts(full_path);
@@ -195,6 +221,10 @@ DIAL_FILE_TYPES dial_get_entry_type(struct dirent *entry) {
 
 char *dial_get_entry_type_str(DIAL_FILE_TYPES dft) {
 	if (dft == DFT_FILE)
-		return "FILE";
-	return "DIRECTORY";
+		return "FILE  ";
+	return "FOLDER";
+}
+
+void __dial_dir_element_bttn_click(GtkWidget *bttn, gpointer data) {
+	printf("%s\n", gtk_button_get_label(GTK_BUTTON(bttn)));
 }
