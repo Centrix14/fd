@@ -26,5 +26,6 @@ void __dial_list_box_clear(GtkWidget *list_box);
 // callbacks
 void __dial_act_bttn_click(GtkWidget *bttn, gpointer data);
 void __dial_go_by_addr_bttn_click(GtkWidget *bttn, gpointer data);
+void __dial_dir_element_bttn_click(GtkWidget *bttn, gpointer data);
 
 #endif
