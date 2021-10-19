@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 #include "../fd_core.h"
 #include "dialog.h"
@@ -138,9 +139,12 @@ void __dial_fill_dir_list(GtkWidget *list_box, char *path) {
 		return ;
 	}
 
+	pl_remove("msg:dial_path");
+	pl_send("msg:dial_path", path, strlen(path) + 1);
+
 	entry = readdir(dirptr);
 	while (entry) {
-		dft = dial_get_entry_type(entry);
+		dft = dial_get_entry_type(entry, path);
 		mnemonic = dial_get_entry_type_str(dft);
 
 		elm_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -171,7 +175,7 @@ void __dial_act_bttn_click(GtkWidget *bttn, gpointer data) {
 	GtkWidget *list_box, *selected_box, *selected_button;
 	GtkWidget *addr_entry;
 	GtkListBoxRow *selected_row;
-	GList *selected_box_child_list, *first_element;
+	GList *selected_box_child_list, *second_element;
 	char *addr = NULL, *file = NULL, *full_path = NULL;
 
 	list_box = *(GtkWidget**)pl_read("msg:dial_list_box");
@@ -179,8 +183,8 @@ void __dial_act_bttn_click(GtkWidget *bttn, gpointer data) {
 	selected_row = gtk_list_box_get_selected_row(GTK_LIST_BOX(list_box));
 	selected_box = gtk_bin_get_child(GTK_BIN(selected_row));
 	selected_box_child_list = gtk_container_get_children(GTK_CONTAINER(selected_box));
-	first_element = g_list_first(selected_box_child_list);
-	selected_button = (GtkWidget*)first_element->data;
+	second_element = g_list_nth(selected_box_child_list, 1);
+	selected_button = (GtkWidget*)second_element->data;
 
 	addr_entry = *(GtkWidget**)pl_read("msg:dial_addr_entry");
 	addr = (char*)gtk_entry_get_text(GTK_ENTRY(addr_entry));
@@ -213,18 +217,63 @@ void __dial_list_box_clear(GtkWidget *list_box) {
 	g_list_foreach(child_list, (GFunc)__dial_remove_widget_glib_func, list_box);
 }
 
-DIAL_FILE_TYPES dial_get_entry_type(struct dirent *entry) {
-	if (entry->d_type == DT_REG)
+DIAL_FILE_TYPES dial_get_entry_type(struct dirent *entry, char *path) {
+	struct stat f_stat;
+	char *full_filename = NULL;
+	int err = 0;
+
+	full_filename = ul_get_full_path(path, entry->d_name);
+	err = stat(full_filename, &f_stat);
+	if (err) {
+		perror("fd");
+		exit(0);
+	}
+
+	if (f_stat.st_mode & S_IFREG)
 		return DFT_FILE;
-	return DFT_DIR;
+	else if (f_stat.st_mode & S_IFDIR)
+		return DFT_DIR;
+	return DFT_STH;
 }
 
 char *dial_get_entry_type_str(DIAL_FILE_TYPES dft) {
 	if (dft == DFT_FILE)
 		return "FILE  ";
-	return "FOLDER";
+	else if (dft == DFT_DIR)
+		return "FOLDER";
+	return "STH   ";
 }
 
 void __dial_dir_element_bttn_click(GtkWidget *bttn, gpointer data) {
-	printf("%s\n", gtk_button_get_label(GTK_BUTTON(bttn)));
+	char *filename = NULL, *path = NULL, *full_path = NULL;
+	struct stat dirent_stat;
+	int res = 0;
+
+	filename = (char*)gtk_button_get_label(GTK_BUTTON(bttn));
+	path = pl_read("msg:dial_path");
+	full_path = ul_get_full_path(path, filename);
+
+	res = stat(full_path, &dirent_stat);
+	if (res) {
+		perror("fd");
+		exit(0);
+	}
+
+	if (dirent_stat.st_mode & S_IFREG)
+		__dial_act_with_file(filename);
+	else if (dirent_stat.st_mode & S_IFDIR)
+		__dial_act_with_dir(filename);
+	else
+		fprintf(stderr, "fd: unknown object `%s`\n", full_path);
+}
+
+void __dial_act_with_file(char *filename) {
+	printf("file: %s\n", filename);
+}
+
+void __dial_act_with_dir(char *dirname) {
+	GtkWidget *list_box;
+
+	list_box = *(GtkWidget**)pl_read("msg:dial_list_box");
+	__dial_fill_dir_list(list_box, dirname);
 }
