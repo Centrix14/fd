@@ -9,13 +9,14 @@ typedef enum {
 } DIAL_CHOOSE_FUNC;
 
 typedef enum {
-	DFT_FILE = 0,
+	DFT_STH = 0,
+	DFT_FILE,
 	DFT_DIR
 } DIAL_FILE_TYPES;
 
 void dial_show_file_choose_dialog(DIAL_CHOOSE_FUNC dcf);
 
-DIAL_FILE_TYPES dial_get_entry_type(struct dirent *entry);
+DIAL_FILE_TYPES dial_get_entry_type(struct dirent *entry, char *path);
 char *dial_get_entry_type_str(DIAL_FILE_TYPES dft);
 
 // service
@@ -27,5 +28,8 @@ void __dial_list_box_clear(GtkWidget *list_box);
 void __dial_act_bttn_click(GtkWidget *bttn, gpointer data);
 void __dial_go_by_addr_bttn_click(GtkWidget *bttn, gpointer data);
 void __dial_dir_element_bttn_click(GtkWidget *bttn, gpointer data);
+
+void __dial_act_with_file(char *filename);
+void __dial_act_with_dir(char *dirname);
 
 #endif
