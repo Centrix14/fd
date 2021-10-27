@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../text/text.h"
+#include "../fd_core.h"
 
 text *tl_new(char *font, int size, int r, int g, int b) {
 	text *tptr = malloc(sizeof(text));
 
 	if (!tptr) {
-		perror(__func__);
+		el_call_error(ET_FAIL_TO_CREATE_TEXT_OBJECT);
 
 		return NULL;
 	}
 
 	tptr->font = malloc(strlen(font)+1);
 	if (!tptr->font) {
-		perror(__func__);
+		el_call_error(ET_FAIL_TO_ALLOCATE_MEMORY_FOR_FONT);
 
 		return NULL;
 	}
@@ -35,7 +35,7 @@ void tl_add_buffer(text *tptr, char *buf) {
 	tptr->buffer = malloc(strlen(buf)+1);
 
 	if (!tptr->buffer) {
-		perror(__func__);
+		el_call_error(ET_FAIL_TO_ALLOCATE_MEMORY_FOR_TEXT_BUFFER);
 
 		return ;
 	}
