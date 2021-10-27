@@ -4,7 +4,16 @@
 
 GtkWidget *par_window = NULL;
 
-char *err_msg[] = {"Error: wrong selecting"};
+char *err_msg[] = {"Error: wrong selecting",
+				   "Error: fail to create / get options field",
+				   "Error: invalid data",
+				   "Error: fail to open file",
+				   "Error: fail to create figure",
+				   "Error: fail to create list node",
+				   "Error: fail to run plugin",
+				   "Error: fail to create text object",
+				   "Error: fail to allocate memory for font",
+				   "Error: fail to allocate memory for text buffer"};
 
 void el_set_par_window(GtkWidget *window) {
 	par_window = window;
@@ -20,7 +29,8 @@ void el_call_dialog(char *msg) {
 	GtkWidget *main_box;
 	GtkWidget *err_label;
 
-	dialog = gtk_dialog_new_with_buttons("Error", GTK_WINDOW(par_window), (GtkDialogFlags)NULL, "OK", GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Error", GTK_WINDOW(par_window),
+			(GtkDialogFlags)NULL, "OK", GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
