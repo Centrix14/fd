@@ -949,7 +949,7 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	g_signal_connect(G_OBJECT(layer_obj_bttn_box_to_0), "clicked",
 			G_CALLBACK(options_dialog_layer_obj_bttn_box_to_0), NULL);
 
-	// ! signal for layer_obj_bttn_box_to_sel in 971
+	// ! signal for layer_obj_bttn_box_to_sel slithly lower
 
 	// create layer obj widgets
 	layer_obj_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -1249,7 +1249,8 @@ void rot_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	angle_entry = gtk_entry_new();
 	apply_bttn = gtk_button_new_with_label("Apply");
 
-	g_signal_connect(G_OBJECT(apply_bttn), "clicked", G_CALLBACK(rot_dialog_apply_bttn), angle_entry);
+	g_signal_connect(G_OBJECT(apply_bttn), "clicked", G_CALLBACK(rot_dialog_apply_bttn),
+			angle_entry);
 
 	// init main box
 	dialog_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -1999,11 +2000,8 @@ void options_dialog_get_group_name(GtkWidget *entry) {
 	// get gb and selected node
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel) {
-		el_call_error(ET_WRONG_SELECTING);
-
+	if (!sel)
 		return ;
-	}
 
 	// get group
 	opt = ol_get_opt(sel);
@@ -2024,11 +2022,8 @@ void options_dialog_get_tag(GtkWidget *entry) {
 	// get gb and selected node
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel) {
-		el_call_error(ET_WRONG_SELECTING);
-
+	if (!sel)
 		return ;
-	}
 
 	// get tag
 	opt = ol_get_opt(sel);
