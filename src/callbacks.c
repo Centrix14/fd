@@ -147,7 +147,8 @@ void line_la_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *lenght_box, *angle_box, *bttn_box, *direction_box, *main_box;
 	GtkWidget *lenght_entry, *angle_entry;
 
-	dialog = gtk_dialog_new_with_buttons("Line (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Line (PRMT)", GTK_WINDOW(parent_window),
+			(GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -1238,7 +1239,8 @@ void rot_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *dialog_box;
 	GtkWidget *info_label, *angle_entry, *apply_bttn;
 
-	dialog = gtk_dialog_new_with_buttons("Rotate", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Rotate", GTK_WINDOW(parent_window),
+			(GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -1280,7 +1282,8 @@ void circle_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	GtkWidget *radii_label, *radii_entry, *ok_bttn;
 	GtkWidget *radii_box, *bttn_box, *main_box;
 
-	dialog = gtk_dialog_new_with_buttons("Circle (PRMT)", GTK_WINDOW(parent_window), (GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	dialog = gtk_dialog_new_with_buttons("Circle (PRMT)", GTK_WINDOW(parent_window),
+			(GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
 	dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 
@@ -1293,7 +1296,8 @@ void circle_prm_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// init buttons
 	ok_bttn = gtk_button_new_with_label("OK");
 
-	g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(circle_dialog_ok_bttn_click), radii_entry);
+	g_signal_connect(G_OBJECT(ok_bttn), "clicked",
+			G_CALLBACK(circle_dialog_ok_bttn_click), radii_entry);
 
 	// init lenght- angle- boxes
 	radii_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -1901,7 +1905,8 @@ void options_dialog_color_data_box_set_bttn_click(GtkWidget *bttn, gpointer data
 	// get selected
 	sel = ul_get_selected_node(geometry_buffer);
 	if (!sel) {
-		st_err("can\'t get selected figure");
+		el_call_error(ET_WRONG_SELECTING);
+		return ;
 	}
 
 	// add options
@@ -1927,8 +1932,11 @@ void options_dialog_color_data_box_color_bttn_click(GtkWidget *bttn, gpointer da
 
 	// get selected figure
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel)
+	if (!sel) {
+		el_call_error(ET_WRONG_SELECTING);
+
 		return ;
+	}
 
 	// add options
 	ol_check_options(sel);
@@ -1944,8 +1952,11 @@ void options_dialog_layer_obj_bttn_box_to_0(GtkWidget *bttn, gpointer data) {
 
 	// get selected figure
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel)
+	if (!sel) {
+		el_call_error(ET_WRONG_SELECTING);
+
 		return ;
+	}
 
 	// move figure to layer 0
 	mo = mol_extract(sel);
@@ -1967,8 +1978,11 @@ void options_dialog_layer_obj_bttn_box_to_sel(GtkWidget *bttn, GtkWidget *layers
 	// get selected node
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel)
+	if (!sel) {
+		el_call_error(ET_WRONG_SELECTING);
+
 		return ;
+	}
 	
 	// move node to new lay
 	new_lay = ul_pars_layer_str((char*)gtk_label_get_text(GTK_LABEL(selected_widget)));
@@ -1985,8 +1999,11 @@ void options_dialog_get_group_name(GtkWidget *entry) {
 	// get gb and selected node
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel)
+	if (!sel) {
+		el_call_error(ET_WRONG_SELECTING);
+
 		return ;
+	}
 
 	// get group
 	opt = ol_get_opt(sel);
@@ -2007,8 +2024,11 @@ void options_dialog_get_tag(GtkWidget *entry) {
 	// get gb and selected node
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel)
+	if (!sel) {
+		el_call_error(ET_WRONG_SELECTING);
+
 		return ;
+	}
 
 	// get tag
 	opt = ol_get_opt(sel);
@@ -2029,14 +2049,20 @@ void options_dialog_set_group_bttn_click(GtkWidget *bttn, GtkWidget *group_entry
 	// get geometry buffer
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel)
+	if (!sel) {
+		el_call_error(ET_WRONG_SELECTING);
+
 		return ;
+	}
 
 	// get options
 	ol_check_options(sel);
 	opt = ol_get_opt(sel);
-	if (!opt)
+	if (!opt) {
+		el_call_error(ET_CREATE_OPTIONS_FAIL);
+
 		return ;
+	}
 
 	// get group_name
 	group_name = (char*)gtk_entry_get_text(GTK_ENTRY(group_entry));
@@ -2061,19 +2087,27 @@ void options_dialog_set_tag_bttn_click(GtkWidget *bttn, GtkWidget *tag_entry) {
 	// get geometry buffer
 	geometry_buffer = *(list**)pl_read("msg:geometry_buffer");
 	sel = ul_get_selected_node(geometry_buffer);
-	if (!sel)
+	if (!sel) {
+		el_call_error(ET_WRONG_SELECTING);
+
 		return ;
+	}
 
 	// get options
 	ol_check_options(sel);
 	opt = ol_get_opt(sel);
-	if (!opt)
+	if (!opt) {
+		el_call_error(ET_CREATE_OPTIONS_FAIL);
+
 		return ;
+	}
 
 	// get tag_name
 	tag_name = (char*)gtk_entry_get_text(GTK_ENTRY(tag_entry));
-	if (!strlen(tag_name))
+	if (!strlen(tag_name)) {
+		el_call_error(ET_WRONG_DATA);
 		return ;
+	}
 
 	// allocate group field
 	if (opt->tag)
@@ -2095,8 +2129,11 @@ void options_dialog_remove_tag_bttn_click(GtkWidget *bttn, gpointer data) {
 
 	// get options
 	opt = ol_get_opt(sel);
-	if (!opt || !opt->tag)
+	if (!opt || !opt->tag) {
+		el_call_error(ET_CREATE_OPTIONS_FAIL);
+
 		return ;
+	}
 
 	// remove tag
 	free(opt->tag);
@@ -2113,8 +2150,11 @@ void options_dialog_remove_group_bttn_click(GtkWidget *bttn, gpointer data) {
 
 	// get options
 	opt = ol_get_opt(sel);
-	if (!opt || !opt->group)
+	if (!opt || !opt->group) {
+		el_call_error(ET_CREATE_OPTIONS_FAIL);
+
 		return ;
+	}
 
 	// remove tag
 	free(opt->group);
@@ -2208,8 +2248,11 @@ void options_dialog_group_data_box_move_bttn_click(GtkWidget *bttn, GtkWidget *l
 
 	// get group
 	group = (char*)gtk_label_get_text(GTK_LABEL(selected_label));
-	if (!group)
+	if (!group) {
+		el_call_error(ET_CREATE_OPTIONS_FAIL);
+
 		return ;
+	}
 
 	// set group
 	opt->group = (char*)malloc(strlen(group) + 1);
