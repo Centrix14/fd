@@ -3,12 +3,7 @@
 #include <string.h>
 #include <math.h>
 
-#include "figure.h"
-#include "../list/list.h"
-#include "../geometry/geometry.h"
-#include "../multi_obj/multi_obj.h"
-
-#include "../st.h/st.h"
+#include "../fd_core.h"
 
 int curr_lay = 0, fg_num = 0;
 
@@ -18,7 +13,8 @@ figure *figure_new(double type, double x, double y, double a1, double a2, double
 	figure *fptr = malloc(sizeof(figure));
 
 	if (!fptr) {
-		perror(__func__);
+		el_call_error(ET_FAIL_TO_CREATE_FIGURE);
+
 		exit(0);
 	}
 
