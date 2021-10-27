@@ -19,6 +19,7 @@
 #include "text/text.h"
 #include "util/util.h"
 #include "flags/flags.h"
+#include "options/opt.h"
 
 // additional utils
 #include "pechkin/pl.h"
