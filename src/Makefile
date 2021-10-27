@@ -38,16 +38,16 @@ dsync:
 	cp $(res) $(destr)/$(res)
 
 pechkin:
-	$(ct) $(dbg_flags_obj) pechkin/pl.c
+	$(ct) $(dbg_flags_obj) pechkin/pl.c $(gtk)
 
 list:
-	$(ct) $(dbg_flags_obj) list/list.c
+	$(ct) $(dbg_flags_obj) list/list.c $(gtk)
 
 pechkin-rel:
-	$(ct) $(flags_obj) pechkin/pl.c
+	$(ct) $(flags_obj) pechkin/pl.c $(gtk)
 
 list-rel:
-	$(ct) $(flags_obj) list/list.c
+	$(ct) $(flags_obj) list/list.c $(gtk)
 
 compile-core-rel:
 	$(ct) $(flags_obj) $(core) $(gtk) $(cairo)
