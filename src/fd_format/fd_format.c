@@ -2,11 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../list/list.h"
-#include "../figure/figure.h"
-#include "../fd_format/fd_format.h"
-#include "../text/text.h"
-#include "../util/util.h"
+#include "../fd_core.h"
 
 static char target_file[256] = "\0";
 
@@ -41,7 +37,8 @@ void fdl_write_from_list(list *lptr) {
 	list *node = lptr;
 
 	if (!file) {
-		perror(__func__);
+		el_call_error(ET_FAIL_TO_OPEN_FILE);
+
 		return ;
 	}
 
@@ -60,7 +57,8 @@ void fdl_read_file(list *lptr) {
 	int op_code = 0;
 
 	if (!file) {
-		perror(__func__);
+		el_call_error(ET_FAIL_TO_OPEN_FILE);
+
 		return ;
 	}
 
