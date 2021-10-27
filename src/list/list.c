@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "list.h"
-#include "../figure/figure.h"
-
-#include "../st.h/st.h"
+#include "../fd_core.h"
 
 st_debug_start(0);
 
@@ -12,8 +9,9 @@ list *list_init_node(list *parent) {
 	list *nptr = malloc(sizeof(list));
 
 	if (!nptr) {
-		perror(__func__);
-		exit(0);
+		el_call_error(ET_FAIL_TO_CREATE_LIST_NODE);
+
+		return NULL;
 	}
 
 	nptr->prev = parent;
