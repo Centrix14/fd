@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../list/list.h"
-#include "opt.h"
-
-#include "../st.h/st.h"
+#include "../fd_core.h"
 
 void ol_check_options(list *node) {
 	if (node && !node->opt)
@@ -16,7 +13,9 @@ void ol_add_options(list *node) {
 
 	new_opt = malloc(sizeof(options));
 	if (!new_opt) {
-		st_err("fail to allocate options field");
+		el_call_error(ET_CREATE_OPTIONS_FAIL);
+
+		return ;
 	}
 
 	new_opt->r = OPT_FIELD_UNSET;
@@ -54,7 +53,9 @@ void ol_set_color(list *node, double r, double g, double b) {
 
 	opt = ol_get_opt(node);
 	if (!opt) {
-		st_err("fail to get options field");
+		el_call_error(ET_CREATE_OPTIONS_FAIL);
+
+		return ;
 	}
 
 	opt->r = r;
