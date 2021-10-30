@@ -20,9 +20,8 @@ share-hw:
 	$(CC) $(SHARE_FLAGS) hello_world.c $(GTK)
 	$(CC) $(COLLECT_SO_FLAGS) hello_world.so hello_world.o
 
-share-ga:
-	$(CC) $(SHARE_FLAGS) get_arg.c $(GTK)
-	$(CC) $(SHARE_FLAGS) ../list/list.c
-	$(CC) $(COLLECT_SO_FLAGS) get_arg.so get_arg.o list.o
+share-tp:
+	$(CC) $(SHARE_FLAGS) test_plug.c $(GTK)
+	$(CC) $(COLLECT_SO_FLAGS) test_plug.so test_plug.o ../pl.o ../list.o ../error/error.c $(GTK)
 
-share: share-hw share-ga
+share: share-hw share-tp
