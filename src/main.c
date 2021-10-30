@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 			  *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn, *circle_prm_bttn,
 			  *arc_prm_bttn, *text_bttn;
 	GtkWidget *lay_spin, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label,
-			  *hint_label, *option_bttn;
+			  *hint_label, *option_bttn, *plugin_bttn;
 	GtkWidget *save_file_bttn, *open_file_bttn, *ver_sep;
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn,
 			  *size_bttn;
@@ -43,6 +43,8 @@ int main(int argc, char *argv[]) {
 			  *cursor_icon, *line_icon2, *rect_icon2, *del_icon, *cp_icon, *move_icon,
 			  *rot_icon, *decouple_icon, *help_icon, *circle_prm_icon,
 			  *arc_prm_icon, *text_icon, *size_icon;
+
+	list *pechkin_msg_list = NULL;
 
 	// create list, that stores geometry
 	figure_list = list_init_node(NULL);
@@ -204,6 +206,7 @@ int main(int argc, char *argv[]) {
 	set_bttn = gtk_button_new_with_label("Set");
 	all_bttn = gtk_button_new_with_label("All");
 	add_projection_lay_bttn = gtk_button_new_with_label("+ / -");
+	plugin_bttn = gtk_button_new_with_label("Plugins");
 	option_bttn = gtk_button_new_with_label("Options");
 	draw_mode_bttn = gtk_button_new_with_label("free");
 
@@ -278,7 +281,8 @@ int main(int argc, char *argv[]) {
 
 	g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
-	g_signal_connect(G_OBJECT(copy_paste_bttn), "clicked", G_CALLBACK(cp_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(copy_paste_bttn), "clicked",
+			G_CALLBACK(cp_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(decouple_bttn), "clicked",
 			G_CALLBACK(dc_bttn_click), draw_area);
 	g_signal_connect(G_OBJECT(rot_bttn), "clicked", G_CALLBACK(rot_bttn_click), window);
@@ -312,8 +316,9 @@ int main(int argc, char *argv[]) {
 	// size
 	gtk_button_set_image(GTK_BUTTON(size_bttn), size_icon);
 	gtk_button_set_always_show_image(GTK_BUTTON(size_bttn), TRUE);
-	gtk_button_set_image_position(GTK_BUTTON(size_bttn), GTK_POS_TOP);// init left box
-
+	gtk_button_set_image_position(GTK_BUTTON(size_bttn), GTK_POS_TOP);
+	
+	// init left box
 	left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
 	gtk_box_pack_start(GTK_BOX(left_box), del_bttn, TRUE, TRUE, 0);
@@ -337,6 +342,7 @@ int main(int argc, char *argv[]) {
 	gtk_box_pack_start(GTK_BOX(down_tool_box), set_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), add_projection_lay_bttn, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), plugin_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), option_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), draw_mode_bttn, FALSE, FALSE, 0);
 
@@ -352,8 +358,10 @@ int main(int argc, char *argv[]) {
 
 	// add events
 	g_signal_connect(G_OBJECT(draw_area), "draw", G_CALLBACK(draw_area_draw), NULL);
-	g_signal_connect(G_OBJECT(draw_area), "motion-notify-event", G_CALLBACK(mouse_move), crd_label);
-	g_signal_connect(G_OBJECT(draw_area), "button-press-event", G_CALLBACK(mouse_click), NULL);
+	g_signal_connect(G_OBJECT(draw_area), "motion-notify-event",
+			G_CALLBACK(mouse_move), crd_label);
+	g_signal_connect(G_OBJECT(draw_area), "button-press-event",
+			G_CALLBACK(mouse_click), NULL);
 
 	gtk_widget_add_events(draw_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
 	gtk_widget_set_can_focus(draw_area, TRUE);
@@ -367,8 +375,11 @@ int main(int argc, char *argv[]) {
 	gtk_widget_hide(arc_prm_bttn);
 	gtk_widget_hide(circle_prm_bttn);
 
+	// get pechkin message list
+	pechkin_msg_list = pl_get_msg_list();
+
 	// load plugins
-	pil_load_plugins(draw_area, figure_list);
+	pil_load_plugins(pechkin_msg_list);
 
 	// main loop
 	gtk_main();
