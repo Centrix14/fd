@@ -2,6 +2,6 @@
 
 #include "../fd_core.h"
 
-void plug_main(GtkWidget *da, list *lptr) {
+void plug_main(list *msg_list) {
 	printf("\nHello, from plugin!\n");
 }
