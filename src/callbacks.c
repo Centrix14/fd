@@ -2,24 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include <gtk/gtk.h>
-
-#include "figure/figure.h"
-#include "click_handle.h"
-#include "draw/draw.h"
-#include "binding/binding.h"
-#include "callbacks.h"
-#include "color/color.h"
-#include "fd_format/fd_format.h"
-#include "error/error.h"
-#include "help/help.h"
-#include "text/text.h"
-#include "multi_obj/multi_obj.h"
-#include "util/util.h"
-#include "options/opt.h"
-
-#include "pechkin/pl.h"
-#include "st.h/st.h"
+#include "fd_core.h"
 
 st_debug_start(1);
 st_name("_fd");
@@ -1021,7 +1004,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	group_remove_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_tag_bttn, TRUE, TRUE, 5);
-	gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_group_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_group_bttn,
+			TRUE, TRUE, 5);
 
 	g_signal_connect(G_OBJECT(group_remove_box_tag_bttn), "clicked",
 			G_CALLBACK(options_dialog_remove_tag_bttn_click), NULL);
@@ -1083,7 +1067,8 @@ void options_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	group_page_label = gtk_label_new("Group");
 
 	// pack mode notebook
-	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), position_box, position_page_label);
+	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), position_box,
+			position_page_label);
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), size_box, size_page_label);
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), color_box, color_page_label);
 	gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), layer_box, lay_page_label);
@@ -2381,4 +2366,53 @@ void size_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 
 	// check selected
 	__check_selected(sel);
+}
+
+void plugin_bttn_click(GtkWidget *bttn, gpointer data) {
+	GtkWidget *dialog;
+	GtkWidget *content_box;
+	GtkWidget *main_box;
+
+	GtkWidget *plugin_path_entry, *plugin_run_bttn;
+
+	dialog = gtk_dialog_new_with_buttons("Plugins", NULL,
+			(GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+
+	content_box = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+
+	plugin_path_entry = gtk_entry_new();
+	plugin_run_bttn = gtk_button_new_with_label("Run");
+
+	main_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), plugin_path_entry, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), plugin_run_bttn, FALSE, FALSE, 5);
+
+	g_signal_connect(G_OBJECT(plugin_run_bttn), "clicked",
+			G_CALLBACK(plugin_run_bttn_click), plugin_path_entry);
+
+	gtk_container_add(GTK_CONTAINER(content_box), main_box);
+	gtk_widget_show_all(dialog);
+}
+
+void plugin_run_bttn_click(GtkWidget *bttn, GtkWidget *plugin_path_entry) {
+	char *path = NULL, *path_buf = NULL;
+	list *msg_list = NULL;
+
+	// create path duplicate
+	path = (char*)gtk_entry_get_text(GTK_ENTRY(plugin_path_entry));
+	path_buf = (char*)malloc(strlen(path) + 1);
+	if (!path_buf) {
+		el_call_error(ET_FAIL_TO_ALLOCATE_MEMORY_FOR_TEXT_BUFFER);
+
+		return ;
+	}
+	strcpy(path_buf, path);
+
+	// call plugin
+	msg_list = pl_get_msg_list();
+	pil_call_plugin(path_buf, "plug_call", msg_list);
+
+	// free path duplicate
+	free(path_buf);
 }
