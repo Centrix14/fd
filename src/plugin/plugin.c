@@ -38,13 +38,17 @@ void pil_load_list(char *filename, list *msg_list) {
 }
 
 void pil_load_plugin(char *filename, list *msg_list) {
+	pil_call_plugin(filename, "plug_main", msg_list);
+}
+
+void pil_call_plugin(char *file_name, char *func_name, list *msg_list) {
 	void (*plug_fn)(list*) = NULL;
 	char *correct_filename = NULL;
 
-	correct_filename = ul_remove_char(filename, '\n'); // fgets returns a string with \n
+	correct_filename = ul_remove_char(file_name, '\n'); // fgets returns a string with \n
 	sl_open_file(correct_filename);
 
-	plug_fn = sl_get_function("plug_main");
+	plug_fn = sl_get_function(func_name);
 	if (plug_fn)
 		(*plug_fn)(msg_list);
 	sl_close();
