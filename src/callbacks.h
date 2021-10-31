@@ -83,4 +83,7 @@ void curs_bttn_click(GtkWidget *bttn, gpointer data);
 void unselect(list *node);
 void cb_dc(list *lptr);
 
+void plugin_bttn_click(GtkWidget *bttn, gpointer data);
+void plugin_run_bttn_click(GtkWidget *bttn, GtkWidget *plugin_path_entry);
+
 #endif
