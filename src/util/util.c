@@ -237,3 +237,7 @@ char *ul_get_full_path(char *path, char *file) {
 		sprintf(result, "%s/%s", path, file);
 	return result;
 }
+
+int ul_get_system_code() {
+	return SYSTEM_CODE;
+}
