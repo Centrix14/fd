@@ -3,22 +3,30 @@
 
 #include <gtk/gtk.h>
 
-// fd core
+// base
+#include "figure/figure.h"
+#include "list/list.h"
+#include "geometry/geometry.h"
+
+// low-level core
+#include "callbacks.h"
+#include "click_handle.h"
+
+// util
+#include "error/error.h"
+#include "help/help.h"
+#include "util/util.h"
+#include "flags/flags.h"
+#include "plugin/plugin.h"
+#include "so/so.h"
+
+// misc
 #include "binding/binding.h"
 #include "color/color.h"
 #include "draw/draw.h"
-#include "error/error.h"
 #include "fd_format/fd_format.h"
-#include "figure/figure.h"
-#include "geometry/geometry.h"
-#include "help/help.h"
-#include "list/list.h"
 #include "multi_obj/multi_obj.h"
-#include "plugin/plugin.h"
-#include "so/so.h"
 #include "text/text.h"
-#include "util/util.h"
-#include "flags/flags.h"
 #include "options/opt.h"
 
 // additional utils
