@@ -235,6 +235,7 @@ int main(int argc, char *argv[]) {
 			G_CALLBACK(options_bttn_click), window);
 	g_signal_connect(G_OBJECT(draw_mode_bttn), "clicked",
 			G_CALLBACK(prm_bttn_click), draw_bttns);
+	g_signal_connect(G_OBJECT(plugin_bttn), "clicked", G_CALLBACK(plugin_bttn_click), NULL);
 
 	// file operations widgets
 	ver_sep = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
