@@ -10,9 +10,16 @@ flags_obj = -c
 
 res = fd
 pechkin_lib = pechkin/pl.c
-core = callbacks.c figure/figure.c click_handle.c draw/draw.c binding/binding.c geometry/geometry.c color/color.c fd_format/fd_format.c error/error.c help/help.c text/text.c multi_obj/multi_obj.c util/util.c so/so.c plugin/plugin.c flags/flags.c options/opt.c dialog/dialog.c list.o pl.o
+additional_libs = list.o pl.o
+
+core = callbacks.c figure/figure.c click_handle.c draw/draw.c binding/binding.c geometry/geometry.c color/color.c fd_format/fd_format.c error/error.c help/help.c text/text.c multi_obj/multi_obj.c util/util.c so/so.c plugin/plugin.c flags/flags.c options/opt.c dialog/dialog.c
+
 gtk = `pkg-config --static --libs --cflags "gtk+-3.0"`
-cairo = `pkg-config --static --libs --cflags "cairo-gobject" "cairo-ps" "cairo-pdf" "cairo-win32-font" "pangocairo" "cairo-win32" "cairo-fc" "cairo-png" "cairo-ft" "cairo-svg" "cairo-script" "cairo-tee" "cairo"`
+
+cairo_full = `pkg-config --static --libs --cflags "cairo-gobject" "cairo-ps" "cairo-pdf" "cairo-win32-font" "pangocairo" "cairo-win32" "cairo-fc" "cairo-png" "cairo-ft" "cairo-svg" "cairo-script" "cairo-tee" "cairo"`
+
+cairo_short = `pkg-config --static --libs --cflags "cairo"` -lcairo-gobject -lcairo-script-interpreter
+
 libs = -lm -ldl
 destr = ../destr
 
@@ -29,10 +36,10 @@ all: pechkin list build-dbg
 rel: pechkin-rel list-rel build-rel
 
 build-dbg:
-	$(ct) $(dbg_flags) $(res) main.c $(core) $(libs) $(gtk)
+	$(ct) $(dbg_flags) $(res) main.c $(core) $(additional_libs) $(libs) $(gtk)
 
 build-rel:
-	$(ct) $(flags) $(res) main.c $(core) $(libs) $(gtk)
+	$(ct) $(flags) $(res) main.c $(core) $(additional_libs) $(libs) $(gtk)
 
 dsync:
 	cp $(res) $(destr)/$(res)
@@ -50,10 +57,10 @@ list-rel:
 	$(ct) $(flags_obj) list/list.c $(gtk)
 
 compile-core-rel:
-	$(ct) $(flags_obj) $(core) $(gtk) $(cairo)
+	$(ct) $(flags_obj) $(core) $(gtk) $(cairo_short)
 
 compile-core-dbg:
-	$(ct) $(dbg_flags_obj) $(core) $(gtk) $(cairo)
+	$(ct) $(dbg_flags_obj) $(core) $(gtk) $(cairo_short)
 
 collect-core:
 	ar rc fd_core.a *.o
