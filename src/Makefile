@@ -65,8 +65,11 @@ compile-core-dbg:
 collect-core:
 	ar rc fd_core.a *.o
 
-core-rel: compile-core-rel collect-core
-core-dbg: compile-core-dbg collect-core
+core-move-obj:
+	./move.sh some_bins *.o
+
+core-rel: compile-core-rel collect-core core-move-obj
+core-dbg: compile-core-dbg collect-core core-move-obj
 
 gdb-r:
 	gdb fd -ex="r" -ex="q"
