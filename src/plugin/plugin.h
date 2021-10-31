@@ -4,5 +4,6 @@
 void pil_load_plugins(list *msg_list);
 void pil_load_list(char *filename, list *msg_list);
 void pil_load_plugin(char *filename, list *msg_list);
+void pil_call_plugin(char *file_name, char *func_name, list *msg_list);
 
 #endif
