@@ -26,6 +26,6 @@ share-tp:
 
 share-mc:
 	$(CC) $(SHARE_FLAGS) model_commander.c $(GTK)
-	$(CC) $(COLLECT_SO_FLAGS) mc.so model_commander.o  ../fd_core.a $(GTK)
+	$(CC) $(COLLECT_SO_FLAGS) mc.so model_commander.o ../fd_core.a $(GTK)
 
 share: share-hw share-tp share-mc
