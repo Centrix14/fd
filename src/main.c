@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 			  *arc_prm_bttn, *text_bttn;
 	GtkWidget *lay_spin, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label,
 			  *hint_label, *option_bttn, *plugin_bttn;
-	GtkWidget *save_file_bttn, *open_file_bttn, *ver_sep;
+	GtkWidget *save_file_bttn, *open_file_bttn, *ver_sep, *load_proc_model_bttn;
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn,
 			  *size_bttn;
 	GtkWidget *draw_mode_bttn;
@@ -243,6 +243,7 @@ int main(int argc, char *argv[]) {
 	// file chooser buttons
 	save_file_bttn = gtk_file_chooser_button_new("Save", GTK_FILE_CHOOSER_ACTION_OPEN);
 	open_file_bttn = gtk_file_chooser_button_new("Open", GTK_FILE_CHOOSER_ACTION_OPEN);
+	load_proc_model_bttn = gtk_button_new_with_label("Load proc");
 
 	// setting for buttons
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(save_file_bttn), ".");
@@ -255,6 +256,8 @@ int main(int argc, char *argv[]) {
 		   	G_CALLBACK(save_bttn_click), NULL);
 	g_signal_connect(G_OBJECT(open_file_bttn), "file-set",
 		   	G_CALLBACK(open_bttn_click), NULL);
+	g_signal_connect(G_OBJECT(load_proc_model_bttn), "clicked",
+			G_CALLBACK(load_proc_model_bttn_click), window);
 
 	// init right box
 	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -349,6 +352,7 @@ int main(int argc, char *argv[]) {
 
 	// file widgets
 	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), load_proc_model_bttn, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), save_file_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), open_file_bttn, FALSE, FALSE, 0);
 
