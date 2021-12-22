@@ -11,7 +11,8 @@ lib:
 	ar rc cmodel.a cmodel.o
 
 test:
-	$(CC) $(BUILD_FLAGS) test test.c cmodel.a ../fd_core.a $(GTK)
+	$(CC) $(OBJ_FLAGS) test.c $(GTK)
+	$(CC) $(COLLECT_FLAGS) test.so test.o cmodel.a ../fd_core.a $(GTK)
 
 clear:
 	touch test
