@@ -86,4 +86,7 @@ void cb_dc(list *lptr);
 void plugin_bttn_click(GtkWidget *bttn, gpointer data);
 void plugin_run_bttn_click(GtkWidget *bttn, GtkWidget *plugin_path_entry);
 
+void load_proc_model_bttn_click(GtkWidget *bttn, GtkWidget *parent_window);
+void load_cmodel_model_bttn_click(GtkWidget *bttn, GtkWidget *path_entry);
+
 #endif
