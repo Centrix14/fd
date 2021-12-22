@@ -2416,3 +2416,57 @@ void plugin_run_bttn_click(GtkWidget *bttn, GtkWidget *plugin_path_entry) {
 	// free path duplicate
 	free(path_buf);
 }
+
+void load_proc_model_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
+	GtkWidget *dialog;
+	GtkWidget *content_box, *main_box, *bttn_box;
+	GtkWidget *load_lua_model_bttn, *load_cmodel_model_bttn, *path_entry;
+
+	dialog = gtk_dialog_new_with_buttons("Load procedural model", GTK_WINDOW(parent_window),
+			(GtkDialogFlags)NULL, NULL, GTK_RESPONSE_NONE, NULL);
+	content_box = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+
+	// widgets
+	load_lua_model_bttn = gtk_button_new_with_label("Load Lua model");
+	load_cmodel_model_bttn = gtk_button_new_with_label("Load CModel model");
+
+	path_entry = gtk_entry_new();
+	gtk_entry_set_text(GTK_ENTRY(path_entry), "path");
+
+	// signals
+	g_signal_connect(G_OBJECT(load_cmodel_model_bttn), "clicked",
+			G_CALLBACK(load_cmodel_model_bttn_click), path_entry);
+
+	// pack buttons
+	bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	gtk_box_pack_start(GTK_BOX(bttn_box), load_lua_model_bttn, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(bttn_box), load_cmodel_model_bttn, TRUE, TRUE, 5);
+
+	// pack main box
+	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), bttn_box, TRUE, TRUE, 5);
+	gtk_box_pack_start(GTK_BOX(main_box), path_entry, TRUE, TRUE, 5);
+
+	gtk_container_add(GTK_CONTAINER(content_box), main_box);
+	gtk_widget_show_all(dialog);
+}
+
+void load_cmodel_model_bttn_click(GtkWidget *bttn, GtkWidget *path_entry) {
+	void (*init)(list*) = NULL, (*model)() = NULL;
+	char *path = NULL;
+
+	path = (char*)gtk_entry_get_text(GTK_ENTRY(path_entry));
+
+	sl_open_file(path);
+
+	// run init function
+	init = sl_get_function("init");
+	init(pl_get_msg_list());
+
+	// run model function
+	model = sl_get_function("model");
+	model();
+
+	sl_close();
+}
