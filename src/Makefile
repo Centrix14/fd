@@ -31,9 +31,9 @@ endif
 
 dbg_flags = -Wall -O0 -g $(flags)
 
-all: pechkin list build-dbg
+all: pechkin list build-dbg mv-lua-dll
 
-rel: pechkin-rel list-rel build-rel
+rel: pechkin-rel list-rel build-rel mv-lua-dll
 
 build-dbg:
 	$(ct) $(dbg_flags) $(res) main.c $(core) $(additional_libs) $(libs) $(gtk)
@@ -75,3 +75,6 @@ gdb-r:
 	gdb fd -ex="r" -ex="q"
 
 t: build-dbg gdb-r
+
+mv-lua-dll:
+	cp some_bins/lua54.dll lua54.dll
