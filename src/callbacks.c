@@ -2470,3 +2470,7 @@ void load_cmodel_model_bttn_click(GtkWidget *bttn, GtkWidget *path_entry) {
 
 	sl_close();
 }
+
+void load_lua_model_bttn_click(GtkWidget *bttn, GtkWidget *path_entry) {
+	
+}
