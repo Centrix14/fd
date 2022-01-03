@@ -1,0 +1,6 @@
+#ifndef __FLAT_DRAW_CAD_LUA_MODEL_LIBRARY_HEADER_FILE_INCLUDED__
+#define __FLAT_DRAW_CAD_LUA_MODEL_LIBRARY_HEADER_FILE_INCLUDED__
+
+void lml_register(lua_State *L);
+
+#endif
