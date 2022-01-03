@@ -3,6 +3,10 @@
 
 #include <gtk/gtk.h>
 
+#include <lua/lua.h>
+#include <lua/lualib.h>
+#include <lua/lauxlib.h>
+
 // base
 #include "figure/figure.h"
 #include "list/list.h"
@@ -32,5 +36,6 @@
 // additional utils
 #include "pechkin/pl.h"
 #include "st.h/st.h"
+#include "lua_model_lib/lml.h"
 
 #endif
