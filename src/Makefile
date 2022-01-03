@@ -12,7 +12,7 @@ res = fd
 pechkin_lib = pechkin/pl.c
 additional_libs = list.o pl.o
 
-core = callbacks.c figure/figure.c click_handle.c draw/draw.c binding/binding.c geometry/geometry.c color/color.c fd_format/fd_format.c error/error.c help/help.c text/text.c multi_obj/multi_obj.c util/util.c so/so.c plugin/plugin.c flags/flags.c options/opt.c dialog/dialog.c
+core = callbacks.c figure/figure.c click_handle.c draw/draw.c binding/binding.c geometry/geometry.c color/color.c fd_format/fd_format.c error/error.c help/help.c text/text.c multi_obj/multi_obj.c util/util.c so/so.c plugin/plugin.c flags/flags.c options/opt.c dialog/dialog.c lua_model_lib/lml.c
 
 gtk = `pkg-config --static --libs --cflags "gtk+-3.0"`
 
@@ -20,7 +20,7 @@ cairo_full = `pkg-config --static --libs --cflags "cairo-gobject" "cairo-ps" "ca
 
 cairo_short = `pkg-config --static --libs --cflags "cairo"` -lcairo-gobject -lcairo-script-interpreter
 
-libs = -lm -ldl
+libs = -lm -ldl -llua54
 destr = ../destr
 
 ifeq ($(OS),Windows_NT)
