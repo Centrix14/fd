@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+#include <lua/lua.h>
+#include <lua/lualib.h>
+#include <lua/lauxlib.h>
+
 #include "fd_core.h"
 
 st_debug_start(1);
@@ -2436,6 +2440,8 @@ void load_proc_model_bttn_click(GtkWidget *bttn, GtkWidget *parent_window) {
 	// signals
 	g_signal_connect(G_OBJECT(load_cmodel_model_bttn), "clicked",
 			G_CALLBACK(load_cmodel_model_bttn_click), path_entry);
+	g_signal_connect(G_OBJECT(load_lua_model_bttn), "clicked",
+			G_CALLBACK(load_lua_model_bttn_click), path_entry);
 
 	// pack buttons
 	bttn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
@@ -2472,5 +2478,29 @@ void load_cmodel_model_bttn_click(GtkWidget *bttn, GtkWidget *path_entry) {
 }
 
 void load_lua_model_bttn_click(GtkWidget *bttn, GtkWidget *path_entry) {
-	
+	char *path = NULL;
+	lua_State *L;
+	int ret = 0;
+
+	path = (char*)gtk_entry_get_text(GTK_ENTRY(path_entry));
+
+	L = luaL_newstate();
+	if (!L) {
+		fprintf(stderr, "Fail to start Lua");
+
+		return ;
+	}
+
+	luaL_openlibs(L);
+	lml_register(L);
+
+	luaL_loadfile(L, path);
+	ret = lua_pcall(L, 0, 0, 0);
+	if (ret) {
+		fprintf(stderr, "Fail: %s\n", lua_tostring(L, -1));
+
+		return ;
+	}
+
+	lua_close(L);
 }
