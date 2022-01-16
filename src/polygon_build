@@ -1,0 +1,10 @@
+CC = gcc
+COMPILE_FLAGS = -c -pie
+BUILD_FLAGS = -shared -o
+
+GTK = `pkg-config --static --libs --cflags "gtk+-3.0"`
+CORE = cmodel/cmodel.a fd_core.a
+
+all:
+	$(CC) $(COMPILE_FLAGS) polygon.c $(GTK)
+	$(CC) $(BUILD_FLAGS) polygon.so polygon.o $(CORE) $(GTK)
