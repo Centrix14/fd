@@ -119,7 +119,6 @@ int main(int argc, char *argv[]) {
 
 	g_signal_connect(G_OBJECT(help_bttn), "clicked", G_CALLBACK(help_bttn_click), window);
 
-
 	// create icon for buttons
 	line_icon1 = gtk_image_new_from_file("res/line.png");
 	rect_icon1 = gtk_image_new_from_file("res/rectangle.png");
@@ -268,9 +267,9 @@ int main(int argc, char *argv[]) {
 	gtk_box_pack_start(GTK_BOX(right_box), line_la_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), rect_pp_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), rect_wh_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), arc_tp_bttn, TRUE, TRUE, 0);
+	//gtk_box_pack_start(GTK_BOX(right_box), arc_tp_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), circle_rc_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), arc_prm_bttn, TRUE, TRUE, 0);
+	//gtk_box_pack_start(GTK_BOX(right_box), arc_prm_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), circle_prm_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), text_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(right_box), help_bttn, TRUE, TRUE, 0);
