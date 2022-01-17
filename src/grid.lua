@@ -1,8 +1,8 @@
 local width, height, step
 
-width = 800
-height = 600
-step = 50
+width = 1200
+height = 900
+step = 80
 
 local x, y
 x = 0
