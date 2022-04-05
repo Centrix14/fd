@@ -26,14 +26,16 @@ list *figure_list = NULL;
 GtkWidget *window;
 
 int main(int argc, char *argv[]) {
-	GtkWidget *main_box, *right_box, *draw_box, *down_tool_box, *left_box;
+	GtkWidget *main_box, *right_box, *down_tool_box, *left_box, *band_box, *status_box;
+	GtkWidget *free_mode_box, *prm_mode_box, *common_drawing_tools_box;
+	GtkWidget *draw_label, *tools_label, *misc_label;
 
 	GtkWidget *scrolled_window, *draw_area;
 	GtkWidget *point_bttn, *line_pp_bttn, *line_la_bttn, *rect_pp_bttn, *rect_wh_bttn,
 			  *arc_tp_bttn, *circle_rc_bttn, *help_bttn, *curs_bttn, *circle_prm_bttn,
 			  *arc_prm_bttn, *text_bttn;
 	GtkWidget *lay_spin, *set_bttn, *all_bttn, *add_projection_lay_bttn, *crd_label,
-			  *hint_label, *option_bttn, *plugin_bttn;
+			  *hint_label, *option_bttn, *plugin_bttn, *mode_label;
 	GtkWidget *save_file_bttn, *open_file_bttn, *ver_sep, *load_proc_model_bttn;
 	GtkWidget *del_bttn, *copy_paste_bttn, *move_bttn, *rot_bttn, *decouple_bttn,
 			  *size_bttn;
@@ -86,16 +88,16 @@ int main(int argc, char *argv[]) {
 
 	// init buttons
 	point_bttn = gtk_button_new_with_label("Point");
-	line_pp_bttn = gtk_button_new_with_label("Line (free)");
-	line_la_bttn = gtk_button_new_with_label("Line (prmt)");
-	rect_pp_bttn = gtk_button_new_with_label("Rect (free)");
-	rect_wh_bttn = gtk_button_new_with_label("Rect (prmt)");
-	arc_tp_bttn = gtk_button_new_with_label("Arc (free)");
-	circle_rc_bttn = gtk_button_new_with_label("Circle (free)");
+	line_pp_bttn = gtk_button_new_with_label("Line");
+	line_la_bttn = gtk_button_new_with_label("Line");
+	rect_pp_bttn = gtk_button_new_with_label("Rect");
+	rect_wh_bttn = gtk_button_new_with_label("Rect");
+	arc_tp_bttn = gtk_button_new_with_label("Arc");
+	circle_rc_bttn = gtk_button_new_with_label("Circle");
 	help_bttn = gtk_button_new_with_label("Help");
 	curs_bttn = gtk_button_new_with_label("Cursor");
-	circle_prm_bttn = gtk_button_new_with_label("Circle (prmt)");
-	arc_prm_bttn = gtk_button_new_with_label("Arc (prmt)");
+	circle_prm_bttn = gtk_button_new_with_label("Circle");
+	arc_prm_bttn = gtk_button_new_with_label("Arc");
 	text_bttn = gtk_button_new_with_label("Text");
 
 	g_signal_connect(G_OBJECT(point_bttn), "clicked", G_CALLBACK(point_bttn_click), NULL);
@@ -209,22 +211,9 @@ int main(int argc, char *argv[]) {
 	option_bttn = gtk_button_new_with_label("Options");
 	draw_mode_bttn = gtk_button_new_with_label("free");
 
-	crd_label = gtk_label_new("(0; 0)");
-	hint_label = gtk_label_new("Select tool");
+	mode_label = gtk_label_new("free");
 
-	hl_set_widget(hint_label);
-
-	// fills draw bttns
-	draw_bttns[0] = point_bttn;
-	draw_bttns[1] = line_pp_bttn;
-	draw_bttns[2] = line_la_bttn;
-	draw_bttns[3] = rect_pp_bttn;
-	draw_bttns[4] = rect_wh_bttn;
-	draw_bttns[5] = circle_prm_bttn;
-	draw_bttns[6] = arc_prm_bttn;
-	draw_bttns[7] = circle_rc_bttn;
-	draw_bttns[8] = arc_tp_bttn;
-
+	// add signals
 	g_signal_connect(G_OBJECT(set_bttn), "clicked",
 			G_CALLBACK(set_lay_bttn_click), lay_spin);
 	g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), NULL);
@@ -233,7 +222,7 @@ int main(int argc, char *argv[]) {
 	g_signal_connect(G_OBJECT(option_bttn), "clicked",
 			G_CALLBACK(options_bttn_click), window);
 	g_signal_connect(G_OBJECT(draw_mode_bttn), "clicked",
-			G_CALLBACK(prm_bttn_click), draw_bttns);
+			G_CALLBACK(prm_bttn_click), mode_label);
 	g_signal_connect(G_OBJECT(plugin_bttn), "clicked", G_CALLBACK(plugin_bttn_click), NULL);
 
 	// file operations widgets
@@ -258,21 +247,40 @@ int main(int argc, char *argv[]) {
 	g_signal_connect(G_OBJECT(load_proc_model_bttn), "clicked",
 			G_CALLBACK(load_proc_model_bttn_click), window);
 
-	// init right box
-	right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+	// init and pack free mode box
+	free_mode_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
+	gtk_box_pack_start(GTK_BOX(free_mode_box), line_pp_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(free_mode_box), rect_pp_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(free_mode_box), circle_rc_bttn, TRUE, TRUE, 0);
+	//gtk_box_pack_start(GTK_BOX(free_mode_box), arc_prm_bttn, TRUE, TRUE, 0);
+
+	// init prm mode box
+	prm_mode_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 	
-	gtk_box_pack_start(GTK_BOX(right_box), curs_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), point_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), line_pp_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), line_la_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), rect_pp_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), rect_wh_bttn, TRUE, TRUE, 0);
-	//gtk_box_pack_start(GTK_BOX(right_box), arc_tp_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), circle_rc_bttn, TRUE, TRUE, 0);
-	//gtk_box_pack_start(GTK_BOX(right_box), arc_prm_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), circle_prm_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), text_bttn, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(right_box), help_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(prm_mode_box), line_la_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(prm_mode_box), rect_wh_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(prm_mode_box), circle_prm_bttn, TRUE, TRUE, 0);
+	//gtk_box_pack_start(GTK_BOX(prm_mode_box), arc_tp_bttn, TRUE, TRUE, 0);
+
+	// init and pack common drawing tools box
+	common_drawing_tools_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
+	gtk_box_pack_start(GTK_BOX(common_drawing_tools_box), curs_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(common_drawing_tools_box), text_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(common_drawing_tools_box), help_bttn, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(common_drawing_tools_box), point_bttn, TRUE, TRUE, 0);
+
+	// init right_box
+	right_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
+	gtk_box_pack_start(GTK_BOX(right_box), common_drawing_tools_box, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), free_mode_box, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(right_box), prm_mode_box, TRUE, TRUE, 0);
+
+	// send free_ and prm_mode_box to prm_bttn_click
+	pl_send("msg:prm_mode_box", &prm_mode_box, sizeof(GtkWidget*));
+	pl_send("msg:free_mode_box", &free_mode_box, sizeof(GtkWidget*));
 
 	// init tools widgets
 	del_bttn = gtk_button_new_with_label("Delete");
@@ -322,7 +330,7 @@ int main(int argc, char *argv[]) {
 	gtk_button_set_image_position(GTK_BUTTON(size_bttn), GTK_POS_TOP);
 	
 	// init left box
-	left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+	left_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 
 	gtk_box_pack_start(GTK_BOX(left_box), del_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(left_box), copy_paste_bttn, TRUE, TRUE, 0);
@@ -331,16 +339,8 @@ int main(int argc, char *argv[]) {
 	gtk_box_pack_start(GTK_BOX(left_box), decouple_bttn, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(left_box), size_bttn, TRUE, TRUE, 0);
 
-	// init draw box
-	draw_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	gtk_box_pack_start(GTK_BOX(draw_box), left_box, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(draw_box), scrolled_window, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(draw_box), right_box, FALSE, FALSE, 0);
-
 	// init down tool box
 	down_tool_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	gtk_box_pack_start(GTK_BOX(down_tool_box), crd_label, FALSE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(down_tool_box), hint_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), lay_spin, TRUE, TRUE, 3);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), set_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), all_bttn, FALSE, FALSE, 0);
@@ -350,15 +350,42 @@ int main(int argc, char *argv[]) {
 	gtk_box_pack_start(GTK_BOX(down_tool_box), draw_mode_bttn, FALSE, FALSE, 0);
 
 	// file widgets
-	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(down_tool_box), load_proc_model_bttn, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(down_tool_box), load_proc_model_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), save_file_bttn, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(down_tool_box), open_file_bttn, FALSE, FALSE, 0);
 
+	// init status box widgets
+	crd_label = gtk_label_new("(0; 0)");
+	hint_label = gtk_label_new("Select tool");
+
+	hl_set_widget(hint_label);
+
+	// init status box
+	status_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+	// pack status box
+	gtk_box_pack_start(GTK_BOX(status_box), crd_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(status_box), hint_label, FALSE, FALSE, 5);
+	gtk_box_pack_end(GTK_BOX(status_box), mode_label, FALSE, FALSE, 5);
+
+	// init band box
+	band_box = gtk_notebook_new();
+
+	// init tab labels
+	draw_label = gtk_label_new("Draw");
+	tools_label = gtk_label_new("Tools");
+	misc_label = gtk_label_new("Misc");
+
+	gtk_notebook_append_page(GTK_NOTEBOOK(band_box), right_box, draw_label);
+	gtk_notebook_append_page(GTK_NOTEBOOK(band_box), left_box, tools_label);
+	gtk_notebook_append_page(GTK_NOTEBOOK(band_box), down_tool_box, misc_label);
+
 	// init main_box
 	main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-	gtk_box_pack_start(GTK_BOX(main_box), draw_box, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(main_box), down_tool_box, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(main_box), band_box, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(main_box), scrolled_window, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(main_box), status_box, FALSE, FALSE, 0);
 
 	// add events
 	g_signal_connect(G_OBJECT(draw_area), "draw", G_CALLBACK(draw_area_draw), NULL);
@@ -374,10 +401,7 @@ int main(int argc, char *argv[]) {
 	gtk_widget_show_all(window);
 	
 	// hide prm buttons
-	gtk_widget_hide(line_la_bttn);
-	gtk_widget_hide(rect_wh_bttn);
-	gtk_widget_hide(arc_prm_bttn);
-	gtk_widget_hide(circle_prm_bttn);
+	gtk_widget_hide(prm_mode_box);
 
 	// get pechkin message list
 	pechkin_msg_list = pl_get_msg_list();
