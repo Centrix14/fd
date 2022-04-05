@@ -1,6 +1,8 @@
 #ifndef __FLAT_DRAW_COMMON_LIBRARY_FLAT_DRAW_CORE_HEADERS_HEADER_FILE_INCLUDED__
 #define __FLAT_DRAW_COMMON_LIBRARY_FLAT_DRAW_CORE_HEADERS_HEADER_FILE_INCLUDED__
 
+#include <stdint.h>
+
 #include <gtk/gtk.h>
 
 #include <lua/lua.h>
