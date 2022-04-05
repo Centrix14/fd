@@ -1,6 +1,8 @@
 #ifndef __FLAT_DRAW_FIGURE_LIBRARY_HEADER_FILE_INCLUDED__
 #define __FLAT_DRAW_FIGURE_LIBRARY_HEADER_FILE_INCLUDED__
 
+#include <stdint.h>
+
 #include "../list/list.h"
 
 typedef struct {
@@ -15,7 +17,7 @@ typedef struct {
 
 	int visible;
 
-	int lay;
+	uint16_t lay;
 	char pr_mode;
 } figure;
 
