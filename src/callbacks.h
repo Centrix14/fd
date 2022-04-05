@@ -64,7 +64,7 @@ void options_dialog_group_data_box_move_bttn_click(GtkWidget *bttn, GtkWidget *l
 void save_bttn_click(GtkWidget *bttn, gpointer data);
 void open_bttn_click(GtkWidget *bttn, gpointer data);
 
-void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]);
+void prm_bttn_click(GtkWidget *bttn, GtkWidget *mode_label);
 
 void del_bttn_click(GtkWidget *bttn, GtkWidget *da);
 void move_bttn_click(GtkWidget *bttn, gpointer data);
