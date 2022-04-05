@@ -18,7 +18,7 @@ void fdl_write_object_stream(FILE *stream, list *lptr) {
 	if (lptr->dt == OT_FIGURE) {
 		fptr = (figure*)lptr->data;
 
-		fprintf(stream, "%d %d %d ", fptr->type, fptr->visible, fptr->lay);
+		fprintf(stream, "%d %d %hd ", fptr->type, fptr->visible, fptr->lay);
 		fprintf(stream, "%f %f %f %f\n", fptr->x, fptr->y, fptr->a1, fptr->a2);
 	}
 	else if (lptr->dt == OT_TEXT) {
@@ -82,7 +82,7 @@ void fdl_pars_figure(FILE *stream, list *lptr) {
 	fptr = figure_new_point(0, 0);
 
 	// fill it from file
-	fscanf(stream, "%d %d %d", &fptr->type, &fptr->visible, &fptr->lay);
+	fscanf(stream, "%d %d %hd", &fptr->type, &fptr->visible, &fptr->lay);
 	fscanf(stream, "%lf %lf %lf %lf", &fptr->x, &fptr->y, &fptr->a1, &fptr->a2);
 
 	// create new node
