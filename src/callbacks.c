@@ -1144,27 +1144,24 @@ void del_bttn_click(GtkWidget *bttn, GtkWidget *da) {
 	gtk_widget_queue_draw(da);
 }
 
-void prm_bttn_click(GtkWidget *bttn, GtkWidget *elms[]) {
+void prm_bttn_click(GtkWidget *bttn, GtkWidget *mode_label) {
+	GtkWidget *free_mode_box, *prm_mode_box;
 	static int mode = 0;
 
-	if (!mode)
-		gtk_button_set_label(GTK_BUTTON(bttn), "prmt");
-	else
-		gtk_button_set_label(GTK_BUTTON(bttn), "free");
+	free_mode_box = *(GtkWidget**)pl_read("msg:free_mode_box");
+	prm_mode_box = *(GtkWidget**)pl_read("msg:prm_mode_box");
 
-	for (int i = 0; i < DRAW_BUTTONS; i++) {
-		if (!mode) {
-			if (strstr((char*)gtk_button_get_label(GTK_BUTTON(elms[i])), "free"))
-				gtk_widget_hide(elms[i]);
-			else
-				gtk_widget_show(elms[i]);
-		}
-		else {
-			if (strstr((char*)gtk_button_get_label(GTK_BUTTON(elms[i])), "prmt"))
-				gtk_widget_hide(elms[i]);
-			else
-				gtk_widget_show(elms[i]);
-		}
+	if (!mode) {
+		gtk_label_set_text(GTK_LABEL(mode_label), "prmt");
+
+		gtk_widget_hide(free_mode_box);
+		gtk_widget_show(prm_mode_box);
+	}
+	else {
+		gtk_label_set_text(GTK_LABEL(mode_label), "free");
+
+		gtk_widget_hide(prm_mode_box);
+		gtk_widget_show(free_mode_box);
 	}
 
 	mode = !mode;
