@@ -1,3 +1,13 @@
+/**
+ * \file
+ * \brief Contains callbacks for FlatDraw interface
+ *
+ * This file contains callbacks and util functions
+ * for FlatDraw interface.
+ *
+ * \warning Use the functions from this file with great care.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -20,6 +30,17 @@ double curs_x = 0, curs_y = 0,
 int direction_val = 1, type_val = 1;
 
 static GtkWidget *target_window, *dialog;
+
+/**
+ * \brief Callback for the window folding button.
+ * \param[bttn] Button, call source.
+ * \param[window] The main window.
+ */
+
+void hide_bttn_click(GtkWidget *bttn, GtkWidget *window) {
+	if (window)
+		gtk_window_iconify(GTK_WINDOW(window));
+}
 
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	list *geometry_buffer = NULL;
