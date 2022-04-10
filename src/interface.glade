@@ -172,6 +172,7 @@
                     <property name="relief">none</property>
                     <property name="image-position">top</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="curs_bttn_click" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -255,6 +256,7 @@
                         <property name="relief">none</property>
                         <property name="image-position">top</property>
                         <property name="always-show-image">True</property>
+                        <signal name="clicked" handler="rect_pp_bttn_click" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -274,6 +276,7 @@
                         <property name="relief">none</property>
                         <property name="image-position">top</property>
                         <property name="always-show-image">True</property>
+                        <signal name="clicked" handler="circle_bttn_click" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
