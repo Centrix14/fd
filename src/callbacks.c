@@ -46,7 +46,7 @@ gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	list *geometry_buffer = NULL;
 
 	// make bg black
-	cairo_set_source_rgb(cr, 0, 0, 0);
+	cairo_set_source_rgb(cr, 0.764, 0.878, 0.886);
 	cairo_paint(cr);
 
 	// recive message
@@ -137,6 +137,14 @@ gboolean key_press(GtkWidget *widget, GdkEvent *event, gpointer data) {
 
 	return TRUE;
 }
+
+/**
+ * \brief Callback for point button
+ * \param[bttn] Callback source
+ * \param[data] Useless parameter
+ *
+ * Allows to draw points
+ */
 
 void point_bttn_click(GtkWidget *bttn, gpointer data) {
 	ch_set_draw_mode(FG_TYPE_POINT);
