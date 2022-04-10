@@ -5,11 +5,11 @@
 void cl_set_color(cairo_t *cr, int color_set) {
 	switch (color_set) {
 		case CL_DEF_CURS_COLOR:
-			cairo_set_source_rgb(cr, 200, 200, 200);
+			cairo_set_source_rgb(cr, 0, 0, 0);
 		break;
 
 		case CL_DEF_DRAW_COLOR:
-			cairo_set_source_rgb(cr, 0, 200, 200);
+			cairo_set_source_rgb(cr, 0, 0.509, 0.509);
 		break;
 
 		case CL_DEF_PREVIEW_COLOR:
