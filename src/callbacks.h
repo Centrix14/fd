@@ -5,6 +5,8 @@
 
 #define DRAW_BUTTONS 9
 
+void hide_bttn_click(GtkWidget *bttn, GtkWidget *window);
+
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data);
 gboolean mouse_move(GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label);
 gboolean mouse_click(GtkWidget *widget, GdkEvent *event, gpointer data);
