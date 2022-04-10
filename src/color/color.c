@@ -13,15 +13,15 @@ void cl_set_color(cairo_t *cr, int color_set) {
 		break;
 
 		case CL_DEF_PREVIEW_COLOR:
-			cairo_set_source_rgb(cr, 255, 100, 0);
+			cairo_set_source_rgb(cr, 1, 0, 0);
 		break;
 
 		case CL_DEF_PROJECTION_COLOR:
-			cairo_set_source_rgb(cr, 255, 255, 255);
+			cairo_set_source_rgb(cr, 0, 0, 1);
 		break;
 
 		case CL_DEF_SELECTED_COLOR:
-			cairo_set_source_rgb(cr, 210, 210, 0);
+			cairo_set_source_rgb(cr, 0.067, 0.786, 0.091);
 		break;
 	}
 }
