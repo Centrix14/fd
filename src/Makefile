@@ -24,9 +24,9 @@ libs = -lm -ldl -llua54
 destr = ../destr
 
 ifeq ($(OS),Windows_NT)
-	flags = -mwindows -o
+	flags = -Wl,--export-all-symbols -mwindows -o
 else
-	flags = -o
+	flags = -export-dynamic -o
 endif
 
 dbg_flags = -Wall -O0 -g $(flags)
