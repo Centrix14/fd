@@ -21,8 +21,6 @@
 
 #include "pechkin/pl.h"
 
-void hide_bttn_click(GtkWidget *bttn, GtkWidget *window);
-
 /**
  * \brief The main function
  * \param[argc] number of command-line arguments
@@ -95,15 +93,4 @@ int main(int argc, char *argv[]) {
 	pl_free();
 	
 	return 0;
-}
-
-/**
- * \brief Callback for the window folding button.
- * \param[bttn] Button, call source.
- * \param[window] The main window.
- */
-
-void hide_bttn_click(GtkWidget *bttn, GtkWidget *window) {
-	if (window)
-		gtk_window_iconify(GTK_WINDOW(window));
 }
