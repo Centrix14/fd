@@ -33,7 +33,8 @@ int main(int argc, char *argv[]) {
 			  *close_bttn = NULL,
 			  *hide_bttn = NULL,
 			  *drawing_area = NULL,
-			  *hint_label = NULL;
+			  *hint_label = NULL,
+			  *pos_label = NULL;
 
 	list *pechkin_msg_list = NULL;
 	list *geometry_buffer = NULL;
@@ -63,6 +64,7 @@ int main(int argc, char *argv[]) {
 	hide_bttn = GTK_WIDGET(gtk_builder_get_object(builder, "hide_bttn"));
 	drawing_area = GTK_WIDGET(gtk_builder_get_object(builder, "drawing_area"));
 	hint_label = GTK_WIDGET(gtk_builder_get_object(builder, "hint_label"));
+	pos_label = GTK_WIDGET(gtk_builder_get_object(builder, "pos_label"));
 
 	// send widgets
 	pl_send("msg:window", &main_window, sizeof(GtkWidget*));
@@ -77,6 +79,16 @@ int main(int argc, char *argv[]) {
 			G_CALLBACK(gtk_main_quit), NULL);
 	g_signal_connect(G_OBJECT(hide_bttn), "clicked",
 			G_CALLBACK(hide_bttn_click), main_window);
+	g_signal_connect(G_OBJECT(drawing_area), "draw",
+			G_CALLBACK(draw_area_draw), NULL);
+	g_signal_connect(G_OBJECT(drawing_area), "motion-notify-event",
+			G_CALLBACK(mouse_move), pos_label);
+	g_signal_connect(G_OBJECT(drawing_area), "button-press-event",
+			G_CALLBACK(mouse_click), NULL);
+
+	// add events
+	gtk_widget_add_events(drawing_area, GDK_POINTER_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
+	gtk_widget_set_can_focus(drawing_area, TRUE);
 
 	gtk_widget_show_all(main_window);
 
