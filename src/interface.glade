@@ -210,6 +210,7 @@
                     <property name="relief">none</property>
                     <property name="image-position">top</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="point_bttn_click" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -234,6 +235,7 @@
                         <property name="relief">none</property>
                         <property name="image-position">top</property>
                         <property name="always-show-image">True</property>
+                        <signal name="clicked" handler="line_bttn_click" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -657,23 +659,18 @@
           </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow" id="scrolled_window">
-            <property name="name">scrolled_window</property>
+          <object class="GtkViewport" id="view_port">
+            <property name="name">view_port</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="window-placement-set">False</property>
-            <property name="shadow-type">in</property>
+            <property name="can-focus">False</property>
             <child>
-              <object class="GtkViewport" id="view_port">
+              <object class="GtkDrawingArea" id="drawing_area">
+                <property name="name">drawing_area</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <child>
-                  <object class="GtkDrawingArea" id="drawing_area">
-                    <property name="name">drawing_area</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                  </object>
-                </child>
+                <signal name="button-press-event" handler="mouse_click" swapped="no"/>
+                <signal name="draw" handler="draw_area_draw" swapped="no"/>
+                <signal name="motion-notify-event" handler="mouse_move" object="pos_label" swapped="no"/>
               </object>
             </child>
           </object>
@@ -732,7 +729,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
@@ -777,6 +774,7 @@
                 <property name="image">image14</property>
                 <property name="relief">none</property>
                 <property name="always-show-image">True</property>
+                <signal name="clicked" handler="gtk_main_quit" swapped="no"/>
               </object>
               <packing>
                 <property name="pack-type">end</property>
@@ -792,6 +790,7 @@
                 <property name="image">image15</property>
                 <property name="relief">none</property>
                 <property name="always-show-image">True</property>
+                <signal name="clicked" handler="hide_bttn_click" object="main_window" swapped="no"/>
               </object>
               <packing>
                 <property name="pack-type">end</property>
