@@ -308,6 +308,7 @@
                         <property name="relief">none</property>
                         <property name="image-position">top</property>
                         <property name="always-show-image">True</property>
+                        <signal name="clicked" handler="line_la_bttn_click" object="main_window" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -327,6 +328,7 @@
                         <property name="relief">none</property>
                         <property name="image-position">top</property>
                         <property name="always-show-image">True</property>
+                        <signal name="clicked" handler="rect_wh_bttn_click" object="main_window" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -346,6 +348,7 @@
                         <property name="relief">none</property>
                         <property name="image-position">top</property>
                         <property name="always-show-image">True</property>
+                        <signal name="clicked" handler="circle_prm_bttn_click" object="main_window" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -389,6 +392,7 @@
                     <property name="relief">none</property>
                     <property name="image-position">top</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="del_bttn_click" object="drawing_area" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -408,6 +412,7 @@
                     <property name="relief">none</property>
                     <property name="image-position">top</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="cp_bttn_click" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -427,6 +432,7 @@
                     <property name="relief">none</property>
                     <property name="image-position">top</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="move_bttn_click" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -446,6 +452,7 @@
                     <property name="relief">none</property>
                     <property name="image-position">top</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="rot_bttn_click" object="main_window" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -465,6 +472,7 @@
                     <property name="relief">none</property>
                     <property name="image-position">top</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="dc_bttn_click" object="drawing_area" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -484,6 +492,7 @@
                     <property name="relief">none</property>
                     <property name="image-position">top</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="size_bttn_click" object="main_window" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -539,6 +548,7 @@
                     <property name="receives-default">True</property>
                     <property name="tooltip-text" translatable="yes">Show all layers</property>
                     <property name="relief">none</property>
+                    <signal name="clicked" handler="all_bttn_click" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -554,6 +564,7 @@
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="relief">none</property>
+                    <signal name="clicked" handler="add_projection_lay_bttn_click" object="lay_spin_bttn" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -569,6 +580,7 @@
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="relief">none</property>
+                    <signal name="clicked" handler="plugin_bttn_click" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -584,6 +596,7 @@
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="relief">none</property>
+                    <signal name="clicked" handler="options_bttn_click" object="main_window" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -599,6 +612,7 @@
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="relief">none</property>
+                    <signal name="clicked" handler="prm_bttn_click" object="draw_mode_label" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
