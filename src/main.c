@@ -31,7 +31,9 @@ int main(int argc, char *argv[]) {
 	GtkBuilder *builder = NULL;
 	GtkWidget *main_window = NULL,
 			  *drawing_area = NULL,
-			  *hint_label = NULL;
+			  *hint_label = NULL,
+			  *free_mode_box = NULL,
+			  *prm_mode_box = NULL;
 
 	list *pechkin_msg_list = NULL;
 	list *geometry_buffer = NULL;
@@ -59,10 +61,14 @@ int main(int argc, char *argv[]) {
 	main_window = GTK_WIDGET(gtk_builder_get_object(builder, "main_window"));
 	drawing_area = GTK_WIDGET(gtk_builder_get_object(builder, "drawing_area"));
 	hint_label = GTK_WIDGET(gtk_builder_get_object(builder, "hint_label"));
+	free_mode_box = GTK_WIDGET(gtk_builder_get_object(builder, "draw_tab_free_box"));
+	prm_mode_box = GTK_WIDGET(gtk_builder_get_object(builder, "draw_tab_prm_box"));
 
 	// send widgets
 	pl_send("msg:window", &main_window, sizeof(GtkWidget*));
 	pl_send("msg:drawing_area", &drawing_area, sizeof(GtkWidget*));
+	pl_send("msg:free_mode_box", &free_mode_box, sizeof(GtkWidget*));
+	pl_send("msg:prm_mode_box", &prm_mode_box, sizeof(GtkWidget*));
 
 	// widget bindings
 	el_set_par_window(main_window);
