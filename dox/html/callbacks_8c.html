@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>FlawDraw: src/callbacks.c File Reference</title>
+<title>FlatDraw: src/callbacks.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="fd.png"/></td>
   <td id="projectalign">
-   <div id="projectname">FlawDraw<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">FlatDraw<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">A minimalistic CAD system</div>
   </td>
@@ -85,17 +85,16 @@ $(function() {
 <code>#include &lt;lua/lualib.h&gt;</code><br />
 <code>#include &lt;lua/lauxlib.h&gt;</code><br />
 <code>#include &quot;fd_core.h&quot;</code><br />
-</div><table class="memberdecls">
+</div>
+<p><a href="callbacks_8c_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:acc7f62013a9de994e188fed927018fbc"><td class="memItemLeft" align="right" valign="top"><a id="acc7f62013a9de994e188fed927018fbc" name="acc7f62013a9de994e188fed927018fbc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>POS_BOX</b>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:acc7f62013a9de994e188fed927018fbc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#acc7f62013a9de994e188fed927018fbc">POS_BOX</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:acc7f62013a9de994e188fed927018fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a6e93df19c07af74a42de0e62c5bf28"><td class="memItemLeft" align="right" valign="top"><a id="a4a6e93df19c07af74a42de0e62c5bf28" name="a4a6e93df19c07af74a42de0e62c5bf28"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SIZE_BOX</b>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a4a6e93df19c07af74a42de0e62c5bf28"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a4a6e93df19c07af74a42de0e62c5bf28">SIZE_BOX</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a4a6e93df19c07af74a42de0e62c5bf28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a93dbe86b6e60b5f343fdf1e2adad7e"><td class="memItemLeft" align="right" valign="top"><a id="a3a93dbe86b6e60b5f343fdf1e2adad7e" name="a3a93dbe86b6e60b5f343fdf1e2adad7e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RESULTS_MULT</b>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:a3a93dbe86b6e60b5f343fdf1e2adad7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a3a93dbe86b6e60b5f343fdf1e2adad7e">RESULTS_MULT</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:a3a93dbe86b6e60b5f343fdf1e2adad7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -109,309 +108,1264 @@ Functions</h2></td></tr>
 <tr class="memitem:ab78c843f76702a51b5c5246b769ee841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ab78c843f76702a51b5c5246b769ee841">hide_bttn_click</a> (GtkWidget *bttn, GtkWidget *window)</td></tr>
 <tr class="memdesc:ab78c843f76702a51b5c5246b769ee841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for the window folding button.  <a href="callbacks_8c.html#ab78c843f76702a51b5c5246b769ee841">More...</a><br /></td></tr>
 <tr class="separator:ab78c843f76702a51b5c5246b769ee841"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3440fb1348f28e97619320a9c84c0567"><td class="memItemLeft" align="right" valign="top"><a id="a3440fb1348f28e97619320a9c84c0567" name="a3440fb1348f28e97619320a9c84c0567"></a>
-gboolean&#160;</td><td class="memItemRight" valign="bottom"><b>draw_area_draw</b> (GtkWidget *area, cairo_t *cr, gpointer data)</td></tr>
+<tr class="memitem:a3440fb1348f28e97619320a9c84c0567"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a3440fb1348f28e97619320a9c84c0567">draw_area_draw</a> (GtkWidget *area, cairo_t *cr, gpointer data)</td></tr>
+<tr class="memdesc:a3440fb1348f28e97619320a9c84c0567"><td class="mdescLeft">&#160;</td><td class="mdescRight">A callback to rendering graphics in GtkDrawingArea.  <a href="callbacks_8c.html#a3440fb1348f28e97619320a9c84c0567">More...</a><br /></td></tr>
 <tr class="separator:a3440fb1348f28e97619320a9c84c0567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a781731a6d370132a6fce9415a2962d64"><td class="memItemLeft" align="right" valign="top"><a id="a781731a6d370132a6fce9415a2962d64" name="a781731a6d370132a6fce9415a2962d64"></a>
-gboolean&#160;</td><td class="memItemRight" valign="bottom"><b>mouse_move</b> (GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label)</td></tr>
+<tr class="memitem:a781731a6d370132a6fce9415a2962d64"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a781731a6d370132a6fce9415a2962d64">mouse_move</a> (GtkWidget *widget, GdkEvent *event, GtkWidget *crd_label)</td></tr>
 <tr class="separator:a781731a6d370132a6fce9415a2962d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01f539519faa5f9958b6e23f2d354115"><td class="memItemLeft" align="right" valign="top"><a id="a01f539519faa5f9958b6e23f2d354115" name="a01f539519faa5f9958b6e23f2d354115"></a>
-gboolean&#160;</td><td class="memItemRight" valign="bottom"><b>mouse_click</b> (GtkWidget *widget, GdkEvent *event, gpointer data)</td></tr>
+<tr class="memitem:a01f539519faa5f9958b6e23f2d354115"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a01f539519faa5f9958b6e23f2d354115">mouse_click</a> (GtkWidget *widget, GdkEvent *event, gpointer data)</td></tr>
 <tr class="separator:a01f539519faa5f9958b6e23f2d354115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afff2670586aa0b5a0acc1240c59e8d92"><td class="memItemLeft" align="right" valign="top"><a id="afff2670586aa0b5a0acc1240c59e8d92" name="afff2670586aa0b5a0acc1240c59e8d92"></a>
-gboolean&#160;</td><td class="memItemRight" valign="bottom"><b>key_press</b> (GtkWidget *widget, GdkEvent *event, gpointer data)</td></tr>
+<tr class="memitem:afff2670586aa0b5a0acc1240c59e8d92"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#afff2670586aa0b5a0acc1240c59e8d92">key_press</a> (GtkWidget *widget, GdkEvent *event, gpointer data)</td></tr>
 <tr class="separator:afff2670586aa0b5a0acc1240c59e8d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeffa9c1be280cd72f2b5978578c84ebb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#aeffa9c1be280cd72f2b5978578c84ebb">point_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="memdesc:aeffa9c1be280cd72f2b5978578c84ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for point button.  <a href="callbacks_8c.html#aeffa9c1be280cd72f2b5978578c84ebb">More...</a><br /></td></tr>
 <tr class="separator:aeffa9c1be280cd72f2b5978578c84ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86299840d9e6baa6d45c527e3757a35d"><td class="memItemLeft" align="right" valign="top"><a id="a86299840d9e6baa6d45c527e3757a35d" name="a86299840d9e6baa6d45c527e3757a35d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>line_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a86299840d9e6baa6d45c527e3757a35d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a86299840d9e6baa6d45c527e3757a35d">line_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a86299840d9e6baa6d45c527e3757a35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4deff8369fae5be48df0ec432507d660"><td class="memItemLeft" align="right" valign="top"><a id="a4deff8369fae5be48df0ec432507d660" name="a4deff8369fae5be48df0ec432507d660"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>line_la_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a4deff8369fae5be48df0ec432507d660"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a4deff8369fae5be48df0ec432507d660">line_la_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a4deff8369fae5be48df0ec432507d660"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a6b7078de747fa574ccdfdf585adf79"><td class="memItemLeft" align="right" valign="top"><a id="a6a6b7078de747fa574ccdfdf585adf79" name="a6a6b7078de747fa574ccdfdf585adf79"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>line_la_dialog_ok_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a6a6b7078de747fa574ccdfdf585adf79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a6a6b7078de747fa574ccdfdf585adf79">line_la_dialog_ok_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a6a6b7078de747fa574ccdfdf585adf79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f34db87976eeafd317a06d662a2cdbb"><td class="memItemLeft" align="right" valign="top"><a id="a6f34db87976eeafd317a06d662a2cdbb" name="a6f34db87976eeafd317a06d662a2cdbb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rect_pp_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a6f34db87976eeafd317a06d662a2cdbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a6f34db87976eeafd317a06d662a2cdbb">rect_pp_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a6f34db87976eeafd317a06d662a2cdbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91f992a6abbc88ca57d15d73f8a1d6d7"><td class="memItemLeft" align="right" valign="top"><a id="a91f992a6abbc88ca57d15d73f8a1d6d7" name="a91f992a6abbc88ca57d15d73f8a1d6d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_lay_bttn_click</b> (GtkWidget *bttn, GtkWidget *spin)</td></tr>
+<tr class="memitem:a91f992a6abbc88ca57d15d73f8a1d6d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a91f992a6abbc88ca57d15d73f8a1d6d7">set_lay_bttn_click</a> (GtkWidget *bttn, GtkWidget *spin)</td></tr>
 <tr class="separator:a91f992a6abbc88ca57d15d73f8a1d6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f42c5d8603e4181b48023f698c0cea1"><td class="memItemLeft" align="right" valign="top"><a id="a6f42c5d8603e4181b48023f698c0cea1" name="a6f42c5d8603e4181b48023f698c0cea1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>all_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a6f42c5d8603e4181b48023f698c0cea1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a6f42c5d8603e4181b48023f698c0cea1">all_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a6f42c5d8603e4181b48023f698c0cea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a378f87d83b6fa1277b96cde3ace6fe2b"><td class="memItemLeft" align="right" valign="top"><a id="a378f87d83b6fa1277b96cde3ace6fe2b" name="a378f87d83b6fa1277b96cde3ace6fe2b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_window</b> (GtkWidget *new_window)</td></tr>
+<tr class="memitem:a378f87d83b6fa1277b96cde3ace6fe2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a378f87d83b6fa1277b96cde3ace6fe2b">set_window</a> (GtkWidget *new_window)</td></tr>
 <tr class="separator:a378f87d83b6fa1277b96cde3ace6fe2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac22960cde9812261bb0700f7b90eebfd"><td class="memItemLeft" align="right" valign="top"><a id="ac22960cde9812261bb0700f7b90eebfd" name="ac22960cde9812261bb0700f7b90eebfd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>save_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:ac22960cde9812261bb0700f7b90eebfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ac22960cde9812261bb0700f7b90eebfd">save_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:ac22960cde9812261bb0700f7b90eebfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad10fcafa0ae1d270ab9ca97224a20aa3"><td class="memItemLeft" align="right" valign="top"><a id="ad10fcafa0ae1d270ab9ca97224a20aa3" name="ad10fcafa0ae1d270ab9ca97224a20aa3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>open_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:ad10fcafa0ae1d270ab9ca97224a20aa3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ad10fcafa0ae1d270ab9ca97224a20aa3">open_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:ad10fcafa0ae1d270ab9ca97224a20aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48d3cd424635863a0a2b2529332151d6"><td class="memItemLeft" align="right" valign="top"><a id="a48d3cd424635863a0a2b2529332151d6" name="a48d3cd424635863a0a2b2529332151d6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rect_wh_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a48d3cd424635863a0a2b2529332151d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a48d3cd424635863a0a2b2529332151d6">rect_wh_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a48d3cd424635863a0a2b2529332151d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a152333ec617ae03e57a3866cdbd70f41"><td class="memItemLeft" align="right" valign="top"><a id="a152333ec617ae03e57a3866cdbd70f41" name="a152333ec617ae03e57a3866cdbd70f41"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>direction_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a152333ec617ae03e57a3866cdbd70f41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a152333ec617ae03e57a3866cdbd70f41">direction_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a152333ec617ae03e57a3866cdbd70f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0731755446cbc37a99adff8923c81bc8"><td class="memItemLeft" align="right" valign="top"><a id="a0731755446cbc37a99adff8923c81bc8" name="a0731755446cbc37a99adff8923c81bc8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rect_wh_dialog_ok_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a0731755446cbc37a99adff8923c81bc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a0731755446cbc37a99adff8923c81bc8">rect_wh_dialog_ok_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a0731755446cbc37a99adff8923c81bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82ec62e0cce7201d6345635e229587fe"><td class="memItemLeft" align="right" valign="top"><a id="a82ec62e0cce7201d6345635e229587fe" name="a82ec62e0cce7201d6345635e229587fe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add_projection_lay_bttn_click</b> (GtkWidget *bttn, GtkWidget *spin)</td></tr>
+<tr class="memitem:a82ec62e0cce7201d6345635e229587fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a82ec62e0cce7201d6345635e229587fe">add_projection_lay_bttn_click</a> (GtkWidget *bttn, GtkWidget *spin)</td></tr>
 <tr class="separator:a82ec62e0cce7201d6345635e229587fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cc2222220a4df9f9e5ddff139835c6b"><td class="memItemLeft" align="right" valign="top"><a id="a3cc2222220a4df9f9e5ddff139835c6b" name="a3cc2222220a4df9f9e5ddff139835c6b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>help_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a3cc2222220a4df9f9e5ddff139835c6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a3cc2222220a4df9f9e5ddff139835c6b">help_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a3cc2222220a4df9f9e5ddff139835c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae69166d9ddfe4a03406e1ee143d82ef8"><td class="memItemLeft" align="right" valign="top"><a id="ae69166d9ddfe4a03406e1ee143d82ef8" name="ae69166d9ddfe4a03406e1ee143d82ef8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>circle_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:ae69166d9ddfe4a03406e1ee143d82ef8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ae69166d9ddfe4a03406e1ee143d82ef8">circle_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:ae69166d9ddfe4a03406e1ee143d82ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab61da454d3b9e775fc6c4705ee7fb2c1"><td class="memItemLeft" align="right" valign="top"><a id="ab61da454d3b9e775fc6c4705ee7fb2c1" name="ab61da454d3b9e775fc6c4705ee7fb2c1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>arc_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:ab61da454d3b9e775fc6c4705ee7fb2c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ab61da454d3b9e775fc6c4705ee7fb2c1">arc_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:ab61da454d3b9e775fc6c4705ee7fb2c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5256ebbc03c5b7b2aff67c10b83c7438"><td class="memItemLeft" align="right" valign="top"><a id="a5256ebbc03c5b7b2aff67c10b83c7438" name="a5256ebbc03c5b7b2aff67c10b83c7438"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>curs_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a5256ebbc03c5b7b2aff67c10b83c7438"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a5256ebbc03c5b7b2aff67c10b83c7438">curs_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a5256ebbc03c5b7b2aff67c10b83c7438"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad64a293d3366fe9f6c4cd2acca82c89c"><td class="memItemLeft" align="right" valign="top"><a id="ad64a293d3366fe9f6c4cd2acca82c89c" name="ad64a293d3366fe9f6c4cd2acca82c89c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unselect</b> (<a class="el" href="struct____list____.html">list</a> *node)</td></tr>
+<tr class="memitem:ad64a293d3366fe9f6c4cd2acca82c89c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ad64a293d3366fe9f6c4cd2acca82c89c">unselect</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *node)</td></tr>
 <tr class="separator:ad64a293d3366fe9f6c4cd2acca82c89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa4483ba88015b1da73c3d9b88095902"><td class="memItemLeft" align="right" valign="top"><a id="afa4483ba88015b1da73c3d9b88095902" name="afa4483ba88015b1da73c3d9b88095902"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>get_fig_type</b> (<a class="el" href="structfigure.html">figure</a> *fig)</td></tr>
+<tr class="memitem:afa4483ba88015b1da73c3d9b88095902"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#afa4483ba88015b1da73c3d9b88095902">get_fig_type</a> (<a class="el" href="structfigure.html">figure</a> *fig)</td></tr>
 <tr class="separator:afa4483ba88015b1da73c3d9b88095902"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9ca3971acc41851b66a9cc6e68a9e25"><td class="memItemLeft" align="right" valign="top"><a id="ac9ca3971acc41851b66a9cc6e68a9e25" name="ac9ca3971acc41851b66a9cc6e68a9e25"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>extract_type</b> (<a class="el" href="struct____list____.html">list</a> *lptr)</td></tr>
+<tr class="memitem:ac9ca3971acc41851b66a9cc6e68a9e25"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ac9ca3971acc41851b66a9cc6e68a9e25">extract_type</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *lptr)</td></tr>
 <tr class="separator:ac9ca3971acc41851b66a9cc6e68a9e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adda7170eb17746529c702f742058c1b3"><td class="memItemLeft" align="right" valign="top"><a id="adda7170eb17746529c702f742058c1b3" name="adda7170eb17746529c702f742058c1b3"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>get_figure_mnemonic</b> (<a class="el" href="struct____list____.html">list</a> *lptr)</td></tr>
+<tr class="memitem:adda7170eb17746529c702f742058c1b3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#adda7170eb17746529c702f742058c1b3">get_figure_mnemonic</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *lptr)</td></tr>
 <tr class="separator:adda7170eb17746529c702f742058c1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af020fb91614a9034bfae6e747e71ab13"><td class="memItemLeft" align="right" valign="top"><a id="af020fb91614a9034bfae6e747e71ab13" name="af020fb91614a9034bfae6e747e71ab13"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>get_figure_pos</b> (<a class="el" href="struct____list____.html">list</a> *lptr)</td></tr>
+<tr class="memitem:af020fb91614a9034bfae6e747e71ab13"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#af020fb91614a9034bfae6e747e71ab13">get_figure_pos</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *lptr)</td></tr>
 <tr class="separator:af020fb91614a9034bfae6e747e71ab13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45fdb2191913f1601abf12f9f9b477d1"><td class="memItemLeft" align="right" valign="top"><a id="a45fdb2191913f1601abf12f9f9b477d1" name="a45fdb2191913f1601abf12f9f9b477d1"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>get_figure_lay</b> (<a class="el" href="struct____list____.html">list</a> *lptr)</td></tr>
+<tr class="memitem:a45fdb2191913f1601abf12f9f9b477d1"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a45fdb2191913f1601abf12f9f9b477d1">get_figure_lay</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *lptr)</td></tr>
 <tr class="separator:a45fdb2191913f1601abf12f9f9b477d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1504c74601cab8cc31561ffa119a57dd"><td class="memItemLeft" align="right" valign="top"><a id="a1504c74601cab8cc31561ffa119a57dd" name="a1504c74601cab8cc31561ffa119a57dd"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>get_figure_is_pr</b> (<a class="el" href="struct____list____.html">list</a> *lptr)</td></tr>
+<tr class="memitem:a1504c74601cab8cc31561ffa119a57dd"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a1504c74601cab8cc31561ffa119a57dd">get_figure_is_pr</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *lptr)</td></tr>
 <tr class="separator:a1504c74601cab8cc31561ffa119a57dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07a2fd3b6cf81ce7a88383616786dca5"><td class="memItemLeft" align="right" valign="top"><a id="a07a2fd3b6cf81ce7a88383616786dca5" name="a07a2fd3b6cf81ce7a88383616786dca5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_index_of</b> (int *arr, int size, int val)</td></tr>
+<tr class="memitem:a07a2fd3b6cf81ce7a88383616786dca5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a07a2fd3b6cf81ce7a88383616786dca5">get_index_of</a> (int *arr, int size, int val)</td></tr>
 <tr class="separator:a07a2fd3b6cf81ce7a88383616786dca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1e65bd4e911b696a5884aebc71a2b86"><td class="memItemLeft" align="right" valign="top"><a id="ad1e65bd4e911b696a5884aebc71a2b86" name="ad1e65bd4e911b696a5884aebc71a2b86"></a>
-int *&#160;</td><td class="memItemRight" valign="bottom"><b>get_layers_list</b> (<a class="el" href="struct____list____.html">list</a> *buffer)</td></tr>
+<tr class="memitem:ad1e65bd4e911b696a5884aebc71a2b86"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ad1e65bd4e911b696a5884aebc71a2b86">get_layers_list</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *buffer)</td></tr>
 <tr class="separator:ad1e65bd4e911b696a5884aebc71a2b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ac5542d3a30bec685a0a001950aa6aa"><td class="memItemLeft" align="right" valign="top"><a id="a3ac5542d3a30bec685a0a001950aa6aa" name="a3ac5542d3a30bec685a0a001950aa6aa"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_list_length</b> (int *lst, int end)</td></tr>
+<tr class="memitem:a3ac5542d3a30bec685a0a001950aa6aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a3ac5542d3a30bec685a0a001950aa6aa">get_list_length</a> (int *lst, int end)</td></tr>
 <tr class="separator:a3ac5542d3a30bec685a0a001950aa6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0703c4b84f35f6cd4db2e5c5f8c5e0d9"><td class="memItemLeft" align="right" valign="top"><a id="a0703c4b84f35f6cd4db2e5c5f8c5e0d9" name="a0703c4b84f35f6cd4db2e5c5f8c5e0d9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fill_layers_list</b> (GtkWidget *lst, <a class="el" href="struct____list____.html">list</a> *lptr)</td></tr>
+<tr class="memitem:a0703c4b84f35f6cd4db2e5c5f8c5e0d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a0703c4b84f35f6cd4db2e5c5f8c5e0d9">fill_layers_list</a> (GtkWidget *lst, <a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *lptr)</td></tr>
 <tr class="separator:a0703c4b84f35f6cd4db2e5c5f8c5e0d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a178424a6dc2586f62db7c6a2270cc83a"><td class="memItemLeft" align="right" valign="top"><a id="a178424a6dc2586f62db7c6a2270cc83a" name="a178424a6dc2586f62db7c6a2270cc83a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a178424a6dc2586f62db7c6a2270cc83a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a178424a6dc2586f62db7c6a2270cc83a">options_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a178424a6dc2586f62db7c6a2270cc83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e47149527b7c794837febb06f029e26"><td class="memItemLeft" align="right" valign="top"><a id="a9e47149527b7c794837febb06f029e26" name="a9e47149527b7c794837febb06f029e26"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_set_button</b> (GtkWidget *bttn, char *coords)</td></tr>
+<tr class="memitem:a9e47149527b7c794837febb06f029e26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a9e47149527b7c794837febb06f029e26">options_dialog_set_button</a> (GtkWidget *bttn, char *coords)</td></tr>
 <tr class="separator:a9e47149527b7c794837febb06f029e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d2006f812c6c599efaafd47ca5a7bd2"><td class="memItemLeft" align="right" valign="top"><a id="a6d2006f812c6c599efaafd47ca5a7bd2" name="a6d2006f812c6c599efaafd47ca5a7bd2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>del_bttn_click</b> (GtkWidget *bttn, GtkWidget *da)</td></tr>
+<tr class="memitem:a6d2006f812c6c599efaafd47ca5a7bd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a6d2006f812c6c599efaafd47ca5a7bd2">del_bttn_click</a> (GtkWidget *bttn, GtkWidget *da)</td></tr>
 <tr class="separator:a6d2006f812c6c599efaafd47ca5a7bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a606deb26797f3d2820c3cfbc33c99b30"><td class="memItemLeft" align="right" valign="top"><a id="a606deb26797f3d2820c3cfbc33c99b30" name="a606deb26797f3d2820c3cfbc33c99b30"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>prm_bttn_click</b> (GtkWidget *bttn, GtkWidget *mode_label)</td></tr>
+<tr class="memitem:a606deb26797f3d2820c3cfbc33c99b30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a606deb26797f3d2820c3cfbc33c99b30">prm_bttn_click</a> (GtkWidget *bttn, GtkWidget *mode_label)</td></tr>
 <tr class="separator:a606deb26797f3d2820c3cfbc33c99b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80e63914eaade006f8c71bb621381155"><td class="memItemLeft" align="right" valign="top"><a id="a80e63914eaade006f8c71bb621381155" name="a80e63914eaade006f8c71bb621381155"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>move_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a80e63914eaade006f8c71bb621381155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a80e63914eaade006f8c71bb621381155">move_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a80e63914eaade006f8c71bb621381155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f387baea45be9bec59a46c0c83161e0"><td class="memItemLeft" align="right" valign="top"><a id="a1f387baea45be9bec59a46c0c83161e0" name="a1f387baea45be9bec59a46c0c83161e0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>cp_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a1f387baea45be9bec59a46c0c83161e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a1f387baea45be9bec59a46c0c83161e0">cp_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a1f387baea45be9bec59a46c0c83161e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1449a4b804fd3a56e334d44474a19eae"><td class="memItemLeft" align="right" valign="top"><a id="a1449a4b804fd3a56e334d44474a19eae" name="a1449a4b804fd3a56e334d44474a19eae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>dc_bttn_click</b> (GtkWidget *bttn, GtkWidget *draw_area)</td></tr>
+<tr class="memitem:a1449a4b804fd3a56e334d44474a19eae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a1449a4b804fd3a56e334d44474a19eae">dc_bttn_click</a> (GtkWidget *bttn, GtkWidget *draw_area)</td></tr>
 <tr class="separator:a1449a4b804fd3a56e334d44474a19eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb846b4bc7c40cfaaccb226a6129c690"><td class="memItemLeft" align="right" valign="top"><a id="acb846b4bc7c40cfaaccb226a6129c690" name="acb846b4bc7c40cfaaccb226a6129c690"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>cb_dc</b> (<a class="el" href="struct____list____.html">list</a> *lptr)</td></tr>
+<tr class="memitem:acb846b4bc7c40cfaaccb226a6129c690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#acb846b4bc7c40cfaaccb226a6129c690">cb_dc</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *lptr)</td></tr>
 <tr class="separator:acb846b4bc7c40cfaaccb226a6129c690"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b8c41499cc6193201acef016826f66e"><td class="memItemLeft" align="right" valign="top"><a id="a9b8c41499cc6193201acef016826f66e" name="a9b8c41499cc6193201acef016826f66e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rot_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a9b8c41499cc6193201acef016826f66e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a9b8c41499cc6193201acef016826f66e">rot_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a9b8c41499cc6193201acef016826f66e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0330caf913c70c63135faa452cfc80a7"><td class="memItemLeft" align="right" valign="top"><a id="a0330caf913c70c63135faa452cfc80a7" name="a0330caf913c70c63135faa452cfc80a7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rot_dialog_apply_bttn</b> (GtkWidget *bttn, GtkWidget *entry)</td></tr>
+<tr class="memitem:a0330caf913c70c63135faa452cfc80a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a0330caf913c70c63135faa452cfc80a7">rot_dialog_apply_bttn</a> (GtkWidget *bttn, GtkWidget *entry)</td></tr>
 <tr class="separator:a0330caf913c70c63135faa452cfc80a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7918f796d0869fce78ecea68a8893dc1"><td class="memItemLeft" align="right" valign="top"><a id="a7918f796d0869fce78ecea68a8893dc1" name="a7918f796d0869fce78ecea68a8893dc1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>circle_prm_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a7918f796d0869fce78ecea68a8893dc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a7918f796d0869fce78ecea68a8893dc1">circle_prm_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a7918f796d0869fce78ecea68a8893dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e2658592d384d6ca5a1f268a837e5b5"><td class="memItemLeft" align="right" valign="top"><a id="a9e2658592d384d6ca5a1f268a837e5b5" name="a9e2658592d384d6ca5a1f268a837e5b5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>circle_dialog_ok_bttn_click</b> (GtkWidget *bttn, GtkWidget *entry)</td></tr>
+<tr class="memitem:a9e2658592d384d6ca5a1f268a837e5b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a9e2658592d384d6ca5a1f268a837e5b5">circle_dialog_ok_bttn_click</a> (GtkWidget *bttn, GtkWidget *entry)</td></tr>
 <tr class="separator:a9e2658592d384d6ca5a1f268a837e5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b90d8b63dde38080247337d80e35b66"><td class="memItemLeft" align="right" valign="top"><a id="a3b90d8b63dde38080247337d80e35b66" name="a3b90d8b63dde38080247337d80e35b66"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>arc_prm_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a3b90d8b63dde38080247337d80e35b66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a3b90d8b63dde38080247337d80e35b66">arc_prm_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a3b90d8b63dde38080247337d80e35b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c28802f7d5206c2e8883216e9045dd9"><td class="memItemLeft" align="right" valign="top"><a id="a7c28802f7d5206c2e8883216e9045dd9" name="a7c28802f7d5206c2e8883216e9045dd9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>arc_dialog_ok_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a7c28802f7d5206c2e8883216e9045dd9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a7c28802f7d5206c2e8883216e9045dd9">arc_dialog_ok_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a7c28802f7d5206c2e8883216e9045dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a486d3d4825c5627994f0f9d435a4115b"><td class="memItemLeft" align="right" valign="top"><a id="a486d3d4825c5627994f0f9d435a4115b" name="a486d3d4825c5627994f0f9d435a4115b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>text_bttn_click</b> (GtkWidget *bttn, GtkWindow *parent_window)</td></tr>
+<tr class="memitem:a486d3d4825c5627994f0f9d435a4115b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a486d3d4825c5627994f0f9d435a4115b">text_bttn_click</a> (GtkWidget *bttn, GtkWindow *parent_window)</td></tr>
 <tr class="separator:a486d3d4825c5627994f0f9d435a4115b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b3506a02c7a1bd1a96516718174f370"><td class="memItemLeft" align="right" valign="top"><a id="a2b3506a02c7a1bd1a96516718174f370" name="a2b3506a02c7a1bd1a96516718174f370"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>text_dialog_ok_bttn_click</b> (GtkWidget *bttn, GtkTextBuffer *tb)</td></tr>
+<tr class="memitem:a2b3506a02c7a1bd1a96516718174f370"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a2b3506a02c7a1bd1a96516718174f370">text_dialog_ok_bttn_click</a> (GtkWidget *bttn, GtkTextBuffer *tb)</td></tr>
 <tr class="separator:a2b3506a02c7a1bd1a96516718174f370"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8e657d021c13aec11b420858a8da8ee"><td class="memItemLeft" align="right" valign="top"><a id="ac8e657d021c13aec11b420858a8da8ee" name="ac8e657d021c13aec11b420858a8da8ee"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>text_dialog_color_button_set</b> (GtkColorButton *bttn, gpointer data)</td></tr>
+<tr class="memitem:ac8e657d021c13aec11b420858a8da8ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ac8e657d021c13aec11b420858a8da8ee">text_dialog_color_button_set</a> (GtkColorButton *bttn, gpointer data)</td></tr>
 <tr class="separator:ac8e657d021c13aec11b420858a8da8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98cde74d07beae98437ca781a8136661"><td class="memItemLeft" align="right" valign="top"><a id="a98cde74d07beae98437ca781a8136661" name="a98cde74d07beae98437ca781a8136661"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>text_dialog_font_button_set</b> (GtkFontButton *bttn, gpointer data)</td></tr>
+<tr class="memitem:a98cde74d07beae98437ca781a8136661"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a98cde74d07beae98437ca781a8136661">text_dialog_font_button_set</a> (GtkFontButton *bttn, gpointer data)</td></tr>
 <tr class="separator:a98cde74d07beae98437ca781a8136661"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e848a116f3e44abed3c27ddc03a9baa"><td class="memItemLeft" align="right" valign="top"><a id="a7e848a116f3e44abed3c27ddc03a9baa" name="a7e848a116f3e44abed3c27ddc03a9baa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>select_point_cb</b> (<a class="el" href="struct____list____.html">list</a> *node, double x, double y)</td></tr>
+<tr class="memitem:a7e848a116f3e44abed3c27ddc03a9baa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a7e848a116f3e44abed3c27ddc03a9baa">select_point_cb</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *node, double x, double y)</td></tr>
 <tr class="separator:a7e848a116f3e44abed3c27ddc03a9baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25a5dcb6c4dba3b83225c5323210c8ce"><td class="memItemLeft" align="right" valign="top"><a id="a25a5dcb6c4dba3b83225c5323210c8ce" name="a25a5dcb6c4dba3b83225c5323210c8ce"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_select_bttn_click</b> (GtkWidget *bttn, GtkWidget *dialog)</td></tr>
+<tr class="memitem:a25a5dcb6c4dba3b83225c5323210c8ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a25a5dcb6c4dba3b83225c5323210c8ce">options_dialog_select_bttn_click</a> (GtkWidget *bttn, GtkWidget *dialog)</td></tr>
 <tr class="separator:a25a5dcb6c4dba3b83225c5323210c8ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac04f71270678a43b3e6bb2d8fac2765f"><td class="memItemLeft" align="right" valign="top"><a id="ac04f71270678a43b3e6bb2d8fac2765f" name="ac04f71270678a43b3e6bb2d8fac2765f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_ok_bttn_click</b> (GtkWidget *bttn, GtkWidget *dialog)</td></tr>
+<tr class="memitem:ac04f71270678a43b3e6bb2d8fac2765f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ac04f71270678a43b3e6bb2d8fac2765f">options_dialog_ok_bttn_click</a> (GtkWidget *bttn, GtkWidget *dialog)</td></tr>
 <tr class="separator:ac04f71270678a43b3e6bb2d8fac2765f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bd86b3b08b6a61b7b284543284f4441"><td class="memItemLeft" align="right" valign="top"><a id="a1bd86b3b08b6a61b7b284543284f4441" name="a1bd86b3b08b6a61b7b284543284f4441"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_size_box_set_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a1bd86b3b08b6a61b7b284543284f4441"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a1bd86b3b08b6a61b7b284543284f4441">options_dialog_size_box_set_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a1bd86b3b08b6a61b7b284543284f4441"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca0f57293e174ac3ba7c24b1a9a46b19"><td class="memItemLeft" align="right" valign="top"><a id="aca0f57293e174ac3ba7c24b1a9a46b19" name="aca0f57293e174ac3ba7c24b1a9a46b19"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>select_size_cb</b> (<a class="el" href="struct____list____.html">list</a> *node, double x, double y)</td></tr>
+<tr class="memitem:aca0f57293e174ac3ba7c24b1a9a46b19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#aca0f57293e174ac3ba7c24b1a9a46b19">select_size_cb</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *node, double x, double y)</td></tr>
 <tr class="separator:aca0f57293e174ac3ba7c24b1a9a46b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adba6a1e2adc5080cd425af13bc73de59"><td class="memItemLeft" align="right" valign="top"><a id="adba6a1e2adc5080cd425af13bc73de59" name="adba6a1e2adc5080cd425af13bc73de59"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_size_box_select_bttn_click</b> (GtkWidget *bttn, GtkWidget *dialog)</td></tr>
+<tr class="memitem:adba6a1e2adc5080cd425af13bc73de59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#adba6a1e2adc5080cd425af13bc73de59">options_dialog_size_box_select_bttn_click</a> (GtkWidget *bttn, GtkWidget *dialog)</td></tr>
 <tr class="separator:adba6a1e2adc5080cd425af13bc73de59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33f024c99065c6f0739ac14e24f36723"><td class="memItemLeft" align="right" valign="top"><a id="a33f024c99065c6f0739ac14e24f36723" name="a33f024c99065c6f0739ac14e24f36723"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_size_box_set_prm_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a33f024c99065c6f0739ac14e24f36723"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a33f024c99065c6f0739ac14e24f36723">options_dialog_size_box_set_prm_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a33f024c99065c6f0739ac14e24f36723"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8912dffe7657eab09725bf24cb564841"><td class="memItemLeft" align="right" valign="top"><a id="a8912dffe7657eab09725bf24cb564841" name="a8912dffe7657eab09725bf24cb564841"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_size_format_box_prm_bttn_click</b> (GtkWidget *bttn, GtkWidget *select_bttn)</td></tr>
+<tr class="memitem:a8912dffe7657eab09725bf24cb564841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a8912dffe7657eab09725bf24cb564841">options_dialog_size_format_box_prm_bttn_click</a> (GtkWidget *bttn, GtkWidget *select_bttn)</td></tr>
 <tr class="separator:a8912dffe7657eab09725bf24cb564841"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d41331fdeddb0512512392825eacc99"><td class="memItemLeft" align="right" valign="top"><a id="a9d41331fdeddb0512512392825eacc99" name="a9d41331fdeddb0512512392825eacc99"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_size_format_box_pp_bttn_click</b> (GtkWidget *bttn, GtkWidget *select_bttn)</td></tr>
+<tr class="memitem:a9d41331fdeddb0512512392825eacc99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a9d41331fdeddb0512512392825eacc99">options_dialog_size_format_box_pp_bttn_click</a> (GtkWidget *bttn, GtkWidget *select_bttn)</td></tr>
 <tr class="separator:a9d41331fdeddb0512512392825eacc99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70610fb49fd1a26baf94fddc7c6c4193"><td class="memItemLeft" align="right" valign="top"><a id="a70610fb49fd1a26baf94fddc7c6c4193" name="a70610fb49fd1a26baf94fddc7c6c4193"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>line_la_dialog_help_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a70610fb49fd1a26baf94fddc7c6c4193"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a70610fb49fd1a26baf94fddc7c6c4193">line_la_dialog_help_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a70610fb49fd1a26baf94fddc7c6c4193"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa25ffac73900598d5f5b6f5efeaf4e4"><td class="memItemLeft" align="right" valign="top"><a id="afa25ffac73900598d5f5b6f5efeaf4e4" name="afa25ffac73900598d5f5b6f5efeaf4e4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rect_wh_dialog_help_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:afa25ffac73900598d5f5b6f5efeaf4e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#afa25ffac73900598d5f5b6f5efeaf4e4">rect_wh_dialog_help_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:afa25ffac73900598d5f5b6f5efeaf4e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c0c50870d26f9586f90182ecebd5d37"><td class="memItemLeft" align="right" valign="top"><a id="a3c0c50870d26f9586f90182ecebd5d37" name="a3c0c50870d26f9586f90182ecebd5d37"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>text_dialog_help_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:a3c0c50870d26f9586f90182ecebd5d37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a3c0c50870d26f9586f90182ecebd5d37">text_dialog_help_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:a3c0c50870d26f9586f90182ecebd5d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace5fa36d0d2084aae98287131f33f584"><td class="memItemLeft" align="right" valign="top"><a id="ace5fa36d0d2084aae98287131f33f584" name="ace5fa36d0d2084aae98287131f33f584"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_color_data_box_set_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:ace5fa36d0d2084aae98287131f33f584"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ace5fa36d0d2084aae98287131f33f584">options_dialog_color_data_box_set_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:ace5fa36d0d2084aae98287131f33f584"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a326f2b0d9a906bb6038f627c728e38a7"><td class="memItemLeft" align="right" valign="top"><a id="a326f2b0d9a906bb6038f627c728e38a7" name="a326f2b0d9a906bb6038f627c728e38a7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_color_data_box_color_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a326f2b0d9a906bb6038f627c728e38a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a326f2b0d9a906bb6038f627c728e38a7">options_dialog_color_data_box_color_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a326f2b0d9a906bb6038f627c728e38a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a927792fb5aa16ebd52097c64981aec7a"><td class="memItemLeft" align="right" valign="top"><a id="a927792fb5aa16ebd52097c64981aec7a" name="a927792fb5aa16ebd52097c64981aec7a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_layer_obj_bttn_box_to_0</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a927792fb5aa16ebd52097c64981aec7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a927792fb5aa16ebd52097c64981aec7a">options_dialog_layer_obj_bttn_box_to_0</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a927792fb5aa16ebd52097c64981aec7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07e09c34d877c95460567b606f155126"><td class="memItemLeft" align="right" valign="top"><a id="a07e09c34d877c95460567b606f155126" name="a07e09c34d877c95460567b606f155126"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_layer_obj_bttn_box_to_sel</b> (GtkWidget *bttn, GtkWidget *layers_list)</td></tr>
+<tr class="memitem:a07e09c34d877c95460567b606f155126"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a07e09c34d877c95460567b606f155126">options_dialog_layer_obj_bttn_box_to_sel</a> (GtkWidget *bttn, GtkWidget *layers_list)</td></tr>
 <tr class="separator:a07e09c34d877c95460567b606f155126"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4b82f4026c4f0c8d7656b44a3f12149"><td class="memItemLeft" align="right" valign="top"><a id="af4b82f4026c4f0c8d7656b44a3f12149" name="af4b82f4026c4f0c8d7656b44a3f12149"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_get_group_name</b> (GtkWidget *entry)</td></tr>
+<tr class="memitem:af4b82f4026c4f0c8d7656b44a3f12149"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#af4b82f4026c4f0c8d7656b44a3f12149">options_dialog_get_group_name</a> (GtkWidget *entry)</td></tr>
 <tr class="separator:af4b82f4026c4f0c8d7656b44a3f12149"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3de892c7715824c37bf4ca871560067"><td class="memItemLeft" align="right" valign="top"><a id="ae3de892c7715824c37bf4ca871560067" name="ae3de892c7715824c37bf4ca871560067"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_get_tag</b> (GtkWidget *entry)</td></tr>
+<tr class="memitem:ae3de892c7715824c37bf4ca871560067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ae3de892c7715824c37bf4ca871560067">options_dialog_get_tag</a> (GtkWidget *entry)</td></tr>
 <tr class="separator:ae3de892c7715824c37bf4ca871560067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac58041c56d2334d7f47cd3333aa32d75"><td class="memItemLeft" align="right" valign="top"><a id="ac58041c56d2334d7f47cd3333aa32d75" name="ac58041c56d2334d7f47cd3333aa32d75"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_set_group_bttn_click</b> (GtkWidget *bttn, GtkWidget *group_entry)</td></tr>
+<tr class="memitem:ac58041c56d2334d7f47cd3333aa32d75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ac58041c56d2334d7f47cd3333aa32d75">options_dialog_set_group_bttn_click</a> (GtkWidget *bttn, GtkWidget *group_entry)</td></tr>
 <tr class="separator:ac58041c56d2334d7f47cd3333aa32d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2f9134d7fe0ca639b4067c0e1f45976"><td class="memItemLeft" align="right" valign="top"><a id="ae2f9134d7fe0ca639b4067c0e1f45976" name="ae2f9134d7fe0ca639b4067c0e1f45976"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_set_tag_bttn_click</b> (GtkWidget *bttn, GtkWidget *tag_entry)</td></tr>
+<tr class="memitem:ae2f9134d7fe0ca639b4067c0e1f45976"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ae2f9134d7fe0ca639b4067c0e1f45976">options_dialog_set_tag_bttn_click</a> (GtkWidget *bttn, GtkWidget *tag_entry)</td></tr>
 <tr class="separator:ae2f9134d7fe0ca639b4067c0e1f45976"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14037f4734ef0364ea51e7094047939b"><td class="memItemLeft" align="right" valign="top"><a id="a14037f4734ef0364ea51e7094047939b" name="a14037f4734ef0364ea51e7094047939b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_remove_tag_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a14037f4734ef0364ea51e7094047939b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a14037f4734ef0364ea51e7094047939b">options_dialog_remove_tag_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a14037f4734ef0364ea51e7094047939b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1e87f96edbbcb002f0e272640cc5af9"><td class="memItemLeft" align="right" valign="top"><a id="ae1e87f96edbbcb002f0e272640cc5af9" name="ae1e87f96edbbcb002f0e272640cc5af9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_remove_group_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:ae1e87f96edbbcb002f0e272640cc5af9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ae1e87f96edbbcb002f0e272640cc5af9">options_dialog_remove_group_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:ae1e87f96edbbcb002f0e272640cc5af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a066064790a21a9c3460f84f4707465f4"><td class="memItemLeft" align="right" valign="top"><a id="a066064790a21a9c3460f84f4707465f4" name="a066064790a21a9c3460f84f4707465f4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>find_str</b> (char **arr, char *elm, int size)</td></tr>
+<tr class="memitem:a066064790a21a9c3460f84f4707465f4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a066064790a21a9c3460f84f4707465f4">find_str</a> (char **arr, char *elm, int size)</td></tr>
 <tr class="separator:a066064790a21a9c3460f84f4707465f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab890fbb8d827a1237afe68b6622bf334"><td class="memItemLeft" align="right" valign="top"><a id="ab890fbb8d827a1237afe68b6622bf334" name="ab890fbb8d827a1237afe68b6622bf334"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>free_str_arr</b> (char **arr, int size)</td></tr>
+<tr class="memitem:ab890fbb8d827a1237afe68b6622bf334"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ab890fbb8d827a1237afe68b6622bf334">free_str_arr</a> (char **arr, int size)</td></tr>
 <tr class="separator:ab890fbb8d827a1237afe68b6622bf334"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f7d754c12db5c870ca4093111c303c7"><td class="memItemLeft" align="right" valign="top"><a id="a5f7d754c12db5c870ca4093111c303c7" name="a5f7d754c12db5c870ca4093111c303c7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fill_arr</b> (char **arr, int start, int end, char *val)</td></tr>
+<tr class="memitem:a5f7d754c12db5c870ca4093111c303c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a5f7d754c12db5c870ca4093111c303c7">fill_arr</a> (char **arr, int start, int end, char *val)</td></tr>
 <tr class="separator:a5f7d754c12db5c870ca4093111c303c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a650ffc3475f0692821a90151d3e7d68b"><td class="memItemLeft" align="right" valign="top"><a id="a650ffc3475f0692821a90151d3e7d68b" name="a650ffc3475f0692821a90151d3e7d68b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_fill_group_list</b> (GtkWidget *group_list)</td></tr>
+<tr class="memitem:a650ffc3475f0692821a90151d3e7d68b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a650ffc3475f0692821a90151d3e7d68b">options_dialog_fill_group_list</a> (GtkWidget *group_list)</td></tr>
 <tr class="separator:a650ffc3475f0692821a90151d3e7d68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a551d0ef7de0b9c7c00153a954fdd7308"><td class="memItemLeft" align="right" valign="top"><a id="a551d0ef7de0b9c7c00153a954fdd7308" name="a551d0ef7de0b9c7c00153a954fdd7308"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>options_dialog_group_data_box_move_bttn_click</b> (GtkWidget *bttn, GtkWidget *list_box)</td></tr>
+<tr class="memitem:a551d0ef7de0b9c7c00153a954fdd7308"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a551d0ef7de0b9c7c00153a954fdd7308">options_dialog_group_data_box_move_bttn_click</a> (GtkWidget *bttn, GtkWidget *list_box)</td></tr>
 <tr class="separator:a551d0ef7de0b9c7c00153a954fdd7308"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0b86ba16f3665b8b2163cfe969650ff"><td class="memItemLeft" align="right" valign="top"><a id="ac0b86ba16f3665b8b2163cfe969650ff" name="ac0b86ba16f3665b8b2163cfe969650ff"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>__check_f</b> (<a class="el" href="struct____list____.html">list</a> *node)</td></tr>
+<tr class="memitem:ac0b86ba16f3665b8b2163cfe969650ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ac0b86ba16f3665b8b2163cfe969650ff">__check_f</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *node)</td></tr>
 <tr class="separator:ac0b86ba16f3665b8b2163cfe969650ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c53408e156daf852b2dd21738783e15"><td class="memItemLeft" align="right" valign="top"><a id="a9c53408e156daf852b2dd21738783e15" name="a9c53408e156daf852b2dd21738783e15"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>__get_selected_len</b> (<a class="el" href="struct____list____.html">list</a> *results)</td></tr>
+<tr class="memitem:a9c53408e156daf852b2dd21738783e15"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a9c53408e156daf852b2dd21738783e15">__get_selected_len</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *results)</td></tr>
 <tr class="separator:a9c53408e156daf852b2dd21738783e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afed0227b3456928ea0b432ec702010e4"><td class="memItemLeft" align="right" valign="top"><a id="afed0227b3456928ea0b432ec702010e4" name="afed0227b3456928ea0b432ec702010e4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>__show_size_of_figure</b> (char *<a class="el" href="structmsg.html">msg</a>)</td></tr>
+<tr class="memitem:afed0227b3456928ea0b432ec702010e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#afed0227b3456928ea0b432ec702010e4">__show_size_of_figure</a> (char *<a class="el" href="structmsg.html">msg</a>)</td></tr>
 <tr class="separator:afed0227b3456928ea0b432ec702010e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57e336b61643e21f25bb9d67c09cb9ab"><td class="memItemLeft" align="right" valign="top"><a id="a57e336b61643e21f25bb9d67c09cb9ab" name="a57e336b61643e21f25bb9d67c09cb9ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>__get_size_of_1</b> (<a class="el" href="struct____list____.html">list</a> *results)</td></tr>
+<tr class="memitem:a57e336b61643e21f25bb9d67c09cb9ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a57e336b61643e21f25bb9d67c09cb9ab">__get_size_of_1</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *results)</td></tr>
 <tr class="separator:a57e336b61643e21f25bb9d67c09cb9ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07fdc842a1ca950958fa0e650e6fd159"><td class="memItemLeft" align="right" valign="top"><a id="a07fdc842a1ca950958fa0e650e6fd159" name="a07fdc842a1ca950958fa0e650e6fd159"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>__get_size_of_pair</b> (<a class="el" href="structfigure.html">figure</a> *fptr1, <a class="el" href="structfigure.html">figure</a> *fptr2)</td></tr>
+<tr class="memitem:a07fdc842a1ca950958fa0e650e6fd159"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a07fdc842a1ca950958fa0e650e6fd159">__get_size_of_pair</a> (<a class="el" href="structfigure.html">figure</a> *fptr1, <a class="el" href="structfigure.html">figure</a> *fptr2)</td></tr>
 <tr class="separator:a07fdc842a1ca950958fa0e650e6fd159"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab970075df53a4fade957ef6c6c04e8e1"><td class="memItemLeft" align="right" valign="top"><a id="ab970075df53a4fade957ef6c6c04e8e1" name="ab970075df53a4fade957ef6c6c04e8e1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>__get_size_of_2</b> (<a class="el" href="struct____list____.html">list</a> *results)</td></tr>
+<tr class="memitem:ab970075df53a4fade957ef6c6c04e8e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ab970075df53a4fade957ef6c6c04e8e1">__get_size_of_2</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *results)</td></tr>
 <tr class="separator:ab970075df53a4fade957ef6c6c04e8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84593b28519e9eb376acdd08ecea630e"><td class="memItemLeft" align="right" valign="top"><a id="a84593b28519e9eb376acdd08ecea630e" name="a84593b28519e9eb376acdd08ecea630e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>__get_size_of_group</b> (<a class="el" href="struct____list____.html">list</a> *results)</td></tr>
+<tr class="memitem:a84593b28519e9eb376acdd08ecea630e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a84593b28519e9eb376acdd08ecea630e">__get_size_of_group</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *results)</td></tr>
 <tr class="separator:a84593b28519e9eb376acdd08ecea630e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aace0142156147fae46c887aca59a27cb"><td class="memItemLeft" align="right" valign="top"><a id="aace0142156147fae46c887aca59a27cb" name="aace0142156147fae46c887aca59a27cb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>__check_selected</b> (<a class="el" href="struct____list____.html">list</a> *results)</td></tr>
+<tr class="memitem:aace0142156147fae46c887aca59a27cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#aace0142156147fae46c887aca59a27cb">__check_selected</a> (<a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *results)</td></tr>
 <tr class="separator:aace0142156147fae46c887aca59a27cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac88c7eb2ae9495acac26c1979ca08fcb"><td class="memItemLeft" align="right" valign="top"><a id="ac88c7eb2ae9495acac26c1979ca08fcb" name="ac88c7eb2ae9495acac26c1979ca08fcb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>size_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:ac88c7eb2ae9495acac26c1979ca08fcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ac88c7eb2ae9495acac26c1979ca08fcb">size_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:ac88c7eb2ae9495acac26c1979ca08fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64fa8f1d6cd9cfaaf10be6cafe95d529"><td class="memItemLeft" align="right" valign="top"><a id="a64fa8f1d6cd9cfaaf10be6cafe95d529" name="a64fa8f1d6cd9cfaaf10be6cafe95d529"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>plugin_bttn_click</b> (GtkWidget *bttn, gpointer data)</td></tr>
+<tr class="memitem:a64fa8f1d6cd9cfaaf10be6cafe95d529"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a64fa8f1d6cd9cfaaf10be6cafe95d529">plugin_bttn_click</a> (GtkWidget *bttn, gpointer data)</td></tr>
 <tr class="separator:a64fa8f1d6cd9cfaaf10be6cafe95d529"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9de655f9b11dbc3b55381e265a85771"><td class="memItemLeft" align="right" valign="top"><a id="aa9de655f9b11dbc3b55381e265a85771" name="aa9de655f9b11dbc3b55381e265a85771"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>plugin_run_bttn_click</b> (GtkWidget *bttn, GtkWidget *plugin_path_entry)</td></tr>
+<tr class="memitem:aa9de655f9b11dbc3b55381e265a85771"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#aa9de655f9b11dbc3b55381e265a85771">plugin_run_bttn_click</a> (GtkWidget *bttn, GtkWidget *plugin_path_entry)</td></tr>
 <tr class="separator:aa9de655f9b11dbc3b55381e265a85771"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa96ed1a5b12bf5e2b9c74fd6dc0e14f7"><td class="memItemLeft" align="right" valign="top"><a id="aa96ed1a5b12bf5e2b9c74fd6dc0e14f7" name="aa96ed1a5b12bf5e2b9c74fd6dc0e14f7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>load_proc_model_bttn_click</b> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
+<tr class="memitem:aa96ed1a5b12bf5e2b9c74fd6dc0e14f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#aa96ed1a5b12bf5e2b9c74fd6dc0e14f7">load_proc_model_bttn_click</a> (GtkWidget *bttn, GtkWidget *parent_window)</td></tr>
 <tr class="separator:aa96ed1a5b12bf5e2b9c74fd6dc0e14f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33a19b96bfb5723f2e2014a9a1f38bf6"><td class="memItemLeft" align="right" valign="top"><a id="a33a19b96bfb5723f2e2014a9a1f38bf6" name="a33a19b96bfb5723f2e2014a9a1f38bf6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>load_cmodel_model_bttn_click</b> (GtkWidget *bttn, GtkWidget *path_entry)</td></tr>
+<tr class="memitem:a33a19b96bfb5723f2e2014a9a1f38bf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a33a19b96bfb5723f2e2014a9a1f38bf6">load_cmodel_model_bttn_click</a> (GtkWidget *bttn, GtkWidget *path_entry)</td></tr>
 <tr class="separator:a33a19b96bfb5723f2e2014a9a1f38bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdb686edc170ff5c11c0a616fded454f"><td class="memItemLeft" align="right" valign="top"><a id="acdb686edc170ff5c11c0a616fded454f" name="acdb686edc170ff5c11c0a616fded454f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>load_lua_model_bttn_click</b> (GtkWidget *bttn, GtkWidget *path_entry)</td></tr>
+<tr class="memitem:acdb686edc170ff5c11c0a616fded454f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#acdb686edc170ff5c11c0a616fded454f">load_lua_model_bttn_click</a> (GtkWidget *bttn, GtkWidget *path_entry)</td></tr>
 <tr class="separator:acdb686edc170ff5c11c0a616fded454f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a1d2ca0690712c36b10a07881b330659e"><td class="memItemLeft" align="right" valign="top"><a id="a1d2ca0690712c36b10a07881b330659e" name="a1d2ca0690712c36b10a07881b330659e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>curs_x</b> = 0</td></tr>
+<tr class="memitem:a1d2ca0690712c36b10a07881b330659e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a1d2ca0690712c36b10a07881b330659e">curs_x</a> = 0</td></tr>
 <tr class="separator:a1d2ca0690712c36b10a07881b330659e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46fa020686698872d9b7e63c817ff118"><td class="memItemLeft" align="right" valign="top"><a id="a46fa020686698872d9b7e63c817ff118" name="a46fa020686698872d9b7e63c817ff118"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>curs_y</b> = 0</td></tr>
+<tr class="memitem:a46fa020686698872d9b7e63c817ff118"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a46fa020686698872d9b7e63c817ff118">curs_y</a> = 0</td></tr>
 <tr class="separator:a46fa020686698872d9b7e63c817ff118"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49a0f74fc7cb65d2a8ba39006d9e5056"><td class="memItemLeft" align="right" valign="top"><a id="a49a0f74fc7cb65d2a8ba39006d9e5056" name="a49a0f74fc7cb65d2a8ba39006d9e5056"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>click_x</b> = 0</td></tr>
+<tr class="memitem:a49a0f74fc7cb65d2a8ba39006d9e5056"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#a49a0f74fc7cb65d2a8ba39006d9e5056">click_x</a> = 0</td></tr>
 <tr class="separator:a49a0f74fc7cb65d2a8ba39006d9e5056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad50bebb00d8beaa505e312f9597a41a5"><td class="memItemLeft" align="right" valign="top"><a id="ad50bebb00d8beaa505e312f9597a41a5" name="ad50bebb00d8beaa505e312f9597a41a5"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>click_y</b> = 0</td></tr>
+<tr class="memitem:ad50bebb00d8beaa505e312f9597a41a5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#ad50bebb00d8beaa505e312f9597a41a5">click_y</a> = 0</td></tr>
 <tr class="separator:ad50bebb00d8beaa505e312f9597a41a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4451eaf68c5a7bc772752e8a0b19f00"><td class="memItemLeft" align="right" valign="top"><a id="aa4451eaf68c5a7bc772752e8a0b19f00" name="aa4451eaf68c5a7bc772752e8a0b19f00"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>direction_val</b> = 1</td></tr>
+<tr class="memitem:aa4451eaf68c5a7bc772752e8a0b19f00"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#aa4451eaf68c5a7bc772752e8a0b19f00">direction_val</a> = 1</td></tr>
 <tr class="separator:aa4451eaf68c5a7bc772752e8a0b19f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb073ac57d83b1e5fbc48af1de92713f"><td class="memItemLeft" align="right" valign="top"><a id="abb073ac57d83b1e5fbc48af1de92713f" name="abb073ac57d83b1e5fbc48af1de92713f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>type_val</b> = 1</td></tr>
+<tr class="memitem:abb073ac57d83b1e5fbc48af1de92713f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="callbacks_8c.html#abb073ac57d83b1e5fbc48af1de92713f">type_val</a> = 1</td></tr>
 <tr class="separator:abb073ac57d83b1e5fbc48af1de92713f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Contains callbacks for FlatDraw interface. </p>
 <p >This file contains callbacks and util functions for FlatDraw interface.</p>
 <dl class="section warning"><dt>Warning</dt><dd>Use the functions from this file with great care. </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
+
+<p class="definition">Definition in file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="acc7f62013a9de994e188fed927018fbc" name="acc7f62013a9de994e188fed927018fbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc7f62013a9de994e188fed927018fbc">&#9670;&nbsp;</a></span>POS_BOX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define POS_BOX&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00024">24</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a3a93dbe86b6e60b5f343fdf1e2adad7e" name="a3a93dbe86b6e60b5f343fdf1e2adad7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a93dbe86b6e60b5f343fdf1e2adad7e">&#9670;&nbsp;</a></span>RESULTS_MULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RESULTS_MULT&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00026">26</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a4a6e93df19c07af74a42de0e62c5bf28" name="a4a6e93df19c07af74a42de0e62c5bf28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a6e93df19c07af74a42de0e62c5bf28">&#9670;&nbsp;</a></span>SIZE_BOX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIZE_BOX&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00025">25</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ac0b86ba16f3665b8b2163cfe969650ff" name="ac0b86ba16f3665b8b2163cfe969650ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0b86ba16f3665b8b2163cfe969650ff">&#9670;&nbsp;</a></span>__check_f()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int __check_f </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02279">2279</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="aace0142156147fae46c887aca59a27cb" name="aace0142156147fae46c887aca59a27cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aace0142156147fae46c887aca59a27cb">&#9670;&nbsp;</a></span>__check_selected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void __check_selected </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>results</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02374">2374</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a9c53408e156daf852b2dd21738783e15" name="a9c53408e156daf852b2dd21738783e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c53408e156daf852b2dd21738783e15">&#9670;&nbsp;</a></span>__get_selected_len()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int __get_selected_len </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>results</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02288">2288</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a57e336b61643e21f25bb9d67c09cb9ab" name="a57e336b61643e21f25bb9d67c09cb9ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57e336b61643e21f25bb9d67c09cb9ab">&#9670;&nbsp;</a></span>__get_size_of_1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void __get_size_of_1 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>results</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02311">2311</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ab970075df53a4fade957ef6c6c04e8e1" name="ab970075df53a4fade957ef6c6c04e8e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab970075df53a4fade957ef6c6c04e8e1">&#9670;&nbsp;</a></span>__get_size_of_2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void __get_size_of_2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>results</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02346">2346</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a84593b28519e9eb376acdd08ecea630e" name="a84593b28519e9eb376acdd08ecea630e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84593b28519e9eb376acdd08ecea630e">&#9670;&nbsp;</a></span>__get_size_of_group()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void __get_size_of_group </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>results</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02370">2370</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a07fdc842a1ca950958fa0e650e6fd159" name="a07fdc842a1ca950958fa0e650e6fd159"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07fdc842a1ca950958fa0e650e6fd159">&#9670;&nbsp;</a></span>__get_size_of_pair()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * __get_size_of_pair </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfigure.html">figure</a> *&#160;</td>
+          <td class="paramname"><em>fptr1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structfigure.html">figure</a> *&#160;</td>
+          <td class="paramname"><em>fptr2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02332">2332</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="afed0227b3456928ea0b432ec702010e4" name="afed0227b3456928ea0b432ec702010e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afed0227b3456928ea0b432ec702010e4">&#9670;&nbsp;</a></span>__show_size_of_figure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void __show_size_of_figure </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02301">2301</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a82ec62e0cce7201d6345635e229587fe" name="a82ec62e0cce7201d6345635e229587fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82ec62e0cce7201d6345635e229587fe">&#9670;&nbsp;</a></span>add_projection_lay_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_projection_lay_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>spin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00431">431</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a6f42c5d8603e4181b48023f698c0cea1" name="a6f42c5d8603e4181b48023f698c0cea1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f42c5d8603e4181b48023f698c0cea1">&#9670;&nbsp;</a></span>all_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void all_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00281">281</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ab61da454d3b9e775fc6c4705ee7fb2c1" name="ab61da454d3b9e775fc6c4705ee7fb2c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab61da454d3b9e775fc6c4705ee7fb2c1">&#9670;&nbsp;</a></span>arc_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void arc_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00497">497</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a7c28802f7d5206c2e8883216e9045dd9" name="a7c28802f7d5206c2e8883216e9045dd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c28802f7d5206c2e8883216e9045dd9">&#9670;&nbsp;</a></span>arc_dialog_ok_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void arc_dialog_ok_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01440">1440</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a3b90d8b63dde38080247337d80e35b66" name="a3b90d8b63dde38080247337d80e35b66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b90d8b63dde38080247337d80e35b66">&#9670;&nbsp;</a></span>arc_prm_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void arc_prm_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01364">1364</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="acb846b4bc7c40cfaaccb226a6129c690" name="acb846b4bc7c40cfaaccb226a6129c690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb846b4bc7c40cfaaccb226a6129c690">&#9670;&nbsp;</a></span>cb_dc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cb_dc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>lptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01226">1226</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ae69166d9ddfe4a03406e1ee143d82ef8" name="ae69166d9ddfe4a03406e1ee143d82ef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae69166d9ddfe4a03406e1ee143d82ef8">&#9670;&nbsp;</a></span>circle_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void circle_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00491">491</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a9e2658592d384d6ca5a1f268a837e5b5" name="a9e2658592d384d6ca5a1f268a837e5b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e2658592d384d6ca5a1f268a837e5b5">&#9670;&nbsp;</a></span>circle_dialog_ok_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void circle_dialog_ok_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>entry</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01349">1349</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a7918f796d0869fce78ecea68a8893dc1" name="a7918f796d0869fce78ecea68a8893dc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7918f796d0869fce78ecea68a8893dc1">&#9670;&nbsp;</a></span>circle_prm_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void circle_prm_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01303">1303</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a1f387baea45be9bec59a46c0c83161e0" name="a1f387baea45be9bec59a46c0c83161e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f387baea45be9bec59a46c0c83161e0">&#9670;&nbsp;</a></span>cp_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cp_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01211">1211</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a5256ebbc03c5b7b2aff67c10b83c7438" name="a5256ebbc03c5b7b2aff67c10b83c7438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5256ebbc03c5b7b2aff67c10b83c7438">&#9670;&nbsp;</a></span>curs_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void curs_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00501">501</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a1449a4b804fd3a56e334d44474a19eae" name="a1449a4b804fd3a56e334d44474a19eae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1449a4b804fd3a56e334d44474a19eae">&#9670;&nbsp;</a></span>dc_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dc_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>draw_area</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01216">1216</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a6d2006f812c6c599efaafd47ca5a7bd2" name="a6d2006f812c6c599efaafd47ca5a7bd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d2006f812c6c599efaafd47ca5a7bd2">&#9670;&nbsp;</a></span>del_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void del_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>da</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01147">1147</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a152333ec617ae03e57a3866cdbd70f41" name="a152333ec617ae03e57a3866cdbd70f41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152333ec617ae03e57a3866cdbd70f41">&#9670;&nbsp;</a></span>direction_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void direction_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00397">397</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a3440fb1348f28e97619320a9c84c0567" name="a3440fb1348f28e97619320a9c84c0567"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3440fb1348f28e97619320a9c84c0567">&#9670;&nbsp;</a></span>draw_area_draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean draw_area_draw </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>area</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cairo_t *&#160;</td>
+          <td class="paramname"><em>cr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A callback to rendering graphics in GtkDrawingArea. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">[area]</td><td>Target drawing area </td></tr>
+    <tr><td class="paramname">[cr]</td><td>Cairo context for area </td></tr>
+    <tr><td class="paramname">[data]</td><td>Unused </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00052">52</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ac9ca3971acc41851b66a9cc6e68a9e25" name="ac9ca3971acc41851b66a9cc6e68a9e25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9ca3971acc41851b66a9cc6e68a9e25">&#9670;&nbsp;</a></span>extract_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * extract_type </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>lptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00523">523</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a5f7d754c12db5c870ca4093111c303c7" name="a5f7d754c12db5c870ca4093111c303c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f7d754c12db5c870ca4093111c303c7">&#9670;&nbsp;</a></span>fill_arr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fill_arr </td>
+          <td>(</td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02195">2195</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a0703c4b84f35f6cd4db2e5c5f8c5e0d9" name="a0703c4b84f35f6cd4db2e5c5f8c5e0d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0703c4b84f35f6cd4db2e5c5f8c5e0d9">&#9670;&nbsp;</a></span>fill_layers_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fill_layers_list </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>lst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>lptr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00653">653</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a066064790a21a9c3460f84f4707465f4" name="a066064790a21a9c3460f84f4707465f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a066064790a21a9c3460f84f4707465f4">&#9670;&nbsp;</a></span>find_str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int find_str </td>
+          <td>(</td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>elm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02181">2181</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ab890fbb8d827a1237afe68b6622bf334" name="ab890fbb8d827a1237afe68b6622bf334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab890fbb8d827a1237afe68b6622bf334">&#9670;&nbsp;</a></span>free_str_arr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_str_arr </td>
+          <td>(</td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02188">2188</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="afa4483ba88015b1da73c3d9b88095902" name="afa4483ba88015b1da73c3d9b88095902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa4483ba88015b1da73c3d9b88095902">&#9670;&nbsp;</a></span>get_fig_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * get_fig_type </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfigure.html">figure</a> *&#160;</td>
+          <td class="paramname"><em>fig</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00517">517</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a1504c74601cab8cc31561ffa119a57dd" name="a1504c74601cab8cc31561ffa119a57dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1504c74601cab8cc31561ffa119a57dd">&#9670;&nbsp;</a></span>get_figure_is_pr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * get_figure_is_pr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>lptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00591">591</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a45fdb2191913f1601abf12f9f9b477d1" name="a45fdb2191913f1601abf12f9f9b477d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45fdb2191913f1601abf12f9f9b477d1">&#9670;&nbsp;</a></span>get_figure_lay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * get_figure_lay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>lptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00577">577</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="adda7170eb17746529c702f742058c1b3" name="adda7170eb17746529c702f742058c1b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adda7170eb17746529c702f742058c1b3">&#9670;&nbsp;</a></span>get_figure_mnemonic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * get_figure_mnemonic </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>lptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00530">530</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="af020fb91614a9034bfae6e747e71ab13" name="af020fb91614a9034bfae6e747e71ab13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af020fb91614a9034bfae6e747e71ab13">&#9670;&nbsp;</a></span>get_figure_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * get_figure_pos </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>lptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00555">555</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a07a2fd3b6cf81ce7a88383616786dca5" name="a07a2fd3b6cf81ce7a88383616786dca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07a2fd3b6cf81ce7a88383616786dca5">&#9670;&nbsp;</a></span>get_index_of()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_index_of </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>arr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00605">605</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ad1e65bd4e911b696a5884aebc71a2b86" name="ad1e65bd4e911b696a5884aebc71a2b86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1e65bd4e911b696a5884aebc71a2b86">&#9670;&nbsp;</a></span>get_layers_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * get_layers_list </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00612">612</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a3ac5542d3a30bec685a0a001950aa6aa" name="a3ac5542d3a30bec685a0a001950aa6aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ac5542d3a30bec685a0a001950aa6aa">&#9670;&nbsp;</a></span>get_list_length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_list_length </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>lst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00646">646</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a3cc2222220a4df9f9e5ddff139835c6b" name="a3cc2222220a4df9f9e5ddff139835c6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cc2222220a4df9f9e5ddff139835c6b">&#9670;&nbsp;</a></span>help_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void help_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00441">441</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
 <a id="ab78c843f76702a51b5c5246b769ee841" name="ab78c843f76702a51b5c5246b769ee841"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab78c843f76702a51b5c5246b769ee841">&#9670;&nbsp;</a></span>hide_bttn_click()</h2>
 
@@ -446,6 +1400,1046 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>type_val</b> = 1</td><
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00040">40</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="afff2670586aa0b5a0acc1240c59e8d92" name="afff2670586aa0b5a0acc1240c59e8d92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afff2670586aa0b5a0acc1240c59e8d92">&#9670;&nbsp;</a></span>key_press()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean key_press </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEvent *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00136">136</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a86299840d9e6baa6d45c527e3757a35d" name="a86299840d9e6baa6d45c527e3757a35d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86299840d9e6baa6d45c527e3757a35d">&#9670;&nbsp;</a></span>line_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void line_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00161">161</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a4deff8369fae5be48df0ec432507d660" name="a4deff8369fae5be48df0ec432507d660"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4deff8369fae5be48df0ec432507d660">&#9670;&nbsp;</a></span>line_la_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void line_la_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00166">166</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a70610fb49fd1a26baf94fddc7c6c4193" name="a70610fb49fd1a26baf94fddc7c6c4193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70610fb49fd1a26baf94fddc7c6c4193">&#9670;&nbsp;</a></span>line_la_dialog_help_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void line_la_dialog_help_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01898">1898</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a6a6b7078de747fa574ccdfdf585adf79" name="a6a6b7078de747fa574ccdfdf585adf79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a6b7078de747fa574ccdfdf585adf79">&#9670;&nbsp;</a></span>line_la_dialog_ok_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void line_la_dialog_ok_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00248">248</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a33a19b96bfb5723f2e2014a9a1f38bf6" name="a33a19b96bfb5723f2e2014a9a1f38bf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33a19b96bfb5723f2e2014a9a1f38bf6">&#9670;&nbsp;</a></span>load_cmodel_model_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_cmodel_model_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>path_entry</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02494">2494</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="acdb686edc170ff5c11c0a616fded454f" name="acdb686edc170ff5c11c0a616fded454f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdb686edc170ff5c11c0a616fded454f">&#9670;&nbsp;</a></span>load_lua_model_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_lua_model_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>path_entry</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02513">2513</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="aa96ed1a5b12bf5e2b9c74fd6dc0e14f7" name="aa96ed1a5b12bf5e2b9c74fd6dc0e14f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa96ed1a5b12bf5e2b9c74fd6dc0e14f7">&#9670;&nbsp;</a></span>load_proc_model_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_proc_model_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02457">2457</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a01f539519faa5f9958b6e23f2d354115" name="a01f539519faa5f9958b6e23f2d354115"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01f539519faa5f9958b6e23f2d354115">&#9670;&nbsp;</a></span>mouse_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean mouse_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEvent *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00104">104</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a781731a6d370132a6fce9415a2962d64" name="a781731a6d370132a6fce9415a2962d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a781731a6d370132a6fce9415a2962d64">&#9670;&nbsp;</a></span>mouse_move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean mouse_move </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEvent *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>crd_label</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00081">81</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a80e63914eaade006f8c71bb621381155" name="a80e63914eaade006f8c71bb621381155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e63914eaade006f8c71bb621381155">&#9670;&nbsp;</a></span>move_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void move_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01206">1206</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ad10fcafa0ae1d270ab9ca97224a20aa3" name="ad10fcafa0ae1d270ab9ca97224a20aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad10fcafa0ae1d270ab9ca97224a20aa3">&#9670;&nbsp;</a></span>open_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void open_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00299">299</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a178424a6dc2586f62db7c6a2270cc83a" name="a178424a6dc2586f62db7c6a2270cc83a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a178424a6dc2586f62db7c6a2270cc83a">&#9670;&nbsp;</a></span>options_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00674">674</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a326f2b0d9a906bb6038f627c728e38a7" name="a326f2b0d9a906bb6038f627c728e38a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a326f2b0d9a906bb6038f627c728e38a7">&#9670;&nbsp;</a></span>options_dialog_color_data_box_color_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_color_data_box_color_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01940">1940</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ace5fa36d0d2084aae98287131f33f584" name="ace5fa36d0d2084aae98287131f33f584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace5fa36d0d2084aae98287131f33f584">&#9670;&nbsp;</a></span>options_dialog_color_data_box_set_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_color_data_box_set_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01910">1910</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a650ffc3475f0692821a90151d3e7d68b" name="a650ffc3475f0692821a90151d3e7d68b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a650ffc3475f0692821a90151d3e7d68b">&#9670;&nbsp;</a></span>options_dialog_fill_group_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_fill_group_list </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>group_list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02200">2200</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="af4b82f4026c4f0c8d7656b44a3f12149" name="af4b82f4026c4f0c8d7656b44a3f12149"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4b82f4026c4f0c8d7656b44a3f12149">&#9670;&nbsp;</a></span>options_dialog_get_group_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_get_group_name </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>entry</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02017">2017</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ae3de892c7715824c37bf4ca871560067" name="ae3de892c7715824c37bf4ca871560067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3de892c7715824c37bf4ca871560067">&#9670;&nbsp;</a></span>options_dialog_get_tag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_get_tag </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>entry</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02039">2039</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a551d0ef7de0b9c7c00153a954fdd7308" name="a551d0ef7de0b9c7c00153a954fdd7308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551d0ef7de0b9c7c00153a954fdd7308">&#9670;&nbsp;</a></span>options_dialog_group_data_box_move_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_group_data_box_move_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>list_box</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02247">2247</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a927792fb5aa16ebd52097c64981aec7a" name="a927792fb5aa16ebd52097c64981aec7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a927792fb5aa16ebd52097c64981aec7a">&#9670;&nbsp;</a></span>options_dialog_layer_obj_bttn_box_to_0()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_layer_obj_bttn_box_to_0 </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01969">1969</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a07e09c34d877c95460567b606f155126" name="a07e09c34d877c95460567b606f155126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07e09c34d877c95460567b606f155126">&#9670;&nbsp;</a></span>options_dialog_layer_obj_bttn_box_to_sel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_layer_obj_bttn_box_to_sel </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>layers_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01990">1990</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ac04f71270678a43b3e6bb2d8fac2765f" name="ac04f71270678a43b3e6bb2d8fac2765f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac04f71270678a43b3e6bb2d8fac2765f">&#9670;&nbsp;</a></span>options_dialog_ok_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_ok_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>dialog</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01712">1712</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ae1e87f96edbbcb002f0e272640cc5af9" name="ae1e87f96edbbcb002f0e272640cc5af9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1e87f96edbbcb002f0e272640cc5af9">&#9670;&nbsp;</a></span>options_dialog_remove_group_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_remove_group_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02160">2160</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a14037f4734ef0364ea51e7094047939b" name="a14037f4734ef0364ea51e7094047939b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14037f4734ef0364ea51e7094047939b">&#9670;&nbsp;</a></span>options_dialog_remove_tag_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_remove_tag_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02139">2139</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a25a5dcb6c4dba3b83225c5323210c8ce" name="a25a5dcb6c4dba3b83225c5323210c8ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25a5dcb6c4dba3b83225c5323210c8ce">&#9670;&nbsp;</a></span>options_dialog_select_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_select_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>dialog</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01705">1705</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a9e47149527b7c794837febb06f029e26" name="a9e47149527b7c794837febb06f029e26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e47149527b7c794837febb06f029e26">&#9670;&nbsp;</a></span>options_dialog_set_button()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_set_button </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>coords</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01125">1125</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ac58041c56d2334d7f47cd3333aa32d75" name="ac58041c56d2334d7f47cd3333aa32d75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac58041c56d2334d7f47cd3333aa32d75">&#9670;&nbsp;</a></span>options_dialog_set_group_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_set_group_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>group_entry</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02061">2061</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ae2f9134d7fe0ca639b4067c0e1f45976" name="ae2f9134d7fe0ca639b4067c0e1f45976"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2f9134d7fe0ca639b4067c0e1f45976">&#9670;&nbsp;</a></span>options_dialog_set_tag_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_set_tag_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>tag_entry</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02099">2099</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="adba6a1e2adc5080cd425af13bc73de59" name="adba6a1e2adc5080cd425af13bc73de59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adba6a1e2adc5080cd425af13bc73de59">&#9670;&nbsp;</a></span>options_dialog_size_box_select_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_size_box_select_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>dialog</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01792">1792</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a1bd86b3b08b6a61b7b284543284f4441" name="a1bd86b3b08b6a61b7b284543284f4441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bd86b3b08b6a61b7b284543284f4441">&#9670;&nbsp;</a></span>options_dialog_size_box_set_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_size_box_set_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01716">1716</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a33f024c99065c6f0739ac14e24f36723" name="a33f024c99065c6f0739ac14e24f36723"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33f024c99065c6f0739ac14e24f36723">&#9670;&nbsp;</a></span>options_dialog_size_box_set_prm_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_size_box_set_prm_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01800">1800</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a9d41331fdeddb0512512392825eacc99" name="a9d41331fdeddb0512512392825eacc99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d41331fdeddb0512512392825eacc99">&#9670;&nbsp;</a></span>options_dialog_size_format_box_pp_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_size_format_box_pp_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>select_bttn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01873">1873</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a8912dffe7657eab09725bf24cb564841" name="a8912dffe7657eab09725bf24cb564841"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8912dffe7657eab09725bf24cb564841">&#9670;&nbsp;</a></span>options_dialog_size_format_box_prm_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void options_dialog_size_format_box_prm_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>select_bttn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01849">1849</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a64fa8f1d6cd9cfaaf10be6cafe95d529" name="a64fa8f1d6cd9cfaaf10be6cafe95d529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64fa8f1d6cd9cfaaf10be6cafe95d529">&#9670;&nbsp;</a></span>plugin_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void plugin_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02408">2408</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="aa9de655f9b11dbc3b55381e265a85771" name="aa9de655f9b11dbc3b55381e265a85771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9de655f9b11dbc3b55381e265a85771">&#9670;&nbsp;</a></span>plugin_run_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void plugin_run_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>plugin_path_entry</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02435">2435</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
 
 </div>
 </div>
@@ -484,6 +2478,667 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>type_val</b> = 1</td><
   </dd>
 </dl>
 <p>Allows to draw points </p>
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00156">156</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a606deb26797f3d2820c3cfbc33c99b30" name="a606deb26797f3d2820c3cfbc33c99b30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a606deb26797f3d2820c3cfbc33c99b30">&#9670;&nbsp;</a></span>prm_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void prm_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>mode_label</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01183">1183</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a6f34db87976eeafd317a06d662a2cdbb" name="a6f34db87976eeafd317a06d662a2cdbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f34db87976eeafd317a06d662a2cdbb">&#9670;&nbsp;</a></span>rect_pp_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rect_pp_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00270">270</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a48d3cd424635863a0a2b2529332151d6" name="a48d3cd424635863a0a2b2529332151d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48d3cd424635863a0a2b2529332151d6">&#9670;&nbsp;</a></span>rect_wh_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rect_wh_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00313">313</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="afa25ffac73900598d5f5b6f5efeaf4e4" name="afa25ffac73900598d5f5b6f5efeaf4e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa25ffac73900598d5f5b6f5efeaf4e4">&#9670;&nbsp;</a></span>rect_wh_dialog_help_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rect_wh_dialog_help_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01902">1902</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a0731755446cbc37a99adff8923c81bc8" name="a0731755446cbc37a99adff8923c81bc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0731755446cbc37a99adff8923c81bc8">&#9670;&nbsp;</a></span>rect_wh_dialog_ok_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rect_wh_dialog_ok_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00411">411</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a9b8c41499cc6193201acef016826f66e" name="a9b8c41499cc6193201acef016826f66e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b8c41499cc6193201acef016826f66e">&#9670;&nbsp;</a></span>rot_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rot_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01259">1259</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a0330caf913c70c63135faa452cfc80a7" name="a0330caf913c70c63135faa452cfc80a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0330caf913c70c63135faa452cfc80a7">&#9670;&nbsp;</a></span>rot_dialog_apply_bttn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rot_dialog_apply_bttn </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>entry</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01288">1288</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ac22960cde9812261bb0700f7b90eebfd" name="ac22960cde9812261bb0700f7b90eebfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac22960cde9812261bb0700f7b90eebfd">&#9670;&nbsp;</a></span>save_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void save_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00289">289</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a7e848a116f3e44abed3c27ddc03a9baa" name="a7e848a116f3e44abed3c27ddc03a9baa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e848a116f3e44abed3c27ddc03a9baa">&#9670;&nbsp;</a></span>select_point_cb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void select_point_cb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01689">1689</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="aca0f57293e174ac3ba7c24b1a9a46b19" name="aca0f57293e174ac3ba7c24b1a9a46b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca0f57293e174ac3ba7c24b1a9a46b19">&#9670;&nbsp;</a></span>select_size_cb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void select_size_cb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01765">1765</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a91f992a6abbc88ca57d15d73f8a1d6d7" name="a91f992a6abbc88ca57d15d73f8a1d6d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91f992a6abbc88ca57d15d73f8a1d6d7">&#9670;&nbsp;</a></span>set_lay_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_lay_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>spin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00275">275</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a378f87d83b6fa1277b96cde3ace6fe2b" name="a378f87d83b6fa1277b96cde3ace6fe2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a378f87d83b6fa1277b96cde3ace6fe2b">&#9670;&nbsp;</a></span>set_window()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_window </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>new_window</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00285">285</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ac88c7eb2ae9495acac26c1979ca08fcb" name="ac88c7eb2ae9495acac26c1979ca08fcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac88c7eb2ae9495acac26c1979ca08fcb">&#9670;&nbsp;</a></span>size_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void size_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l02397">2397</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a486d3d4825c5627994f0f9d435a4115b" name="a486d3d4825c5627994f0f9d435a4115b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a486d3d4825c5627994f0f9d435a4115b">&#9670;&nbsp;</a></span>text_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void text_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWindow *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01466">1466</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ac8e657d021c13aec11b420858a8da8ee" name="ac8e657d021c13aec11b420858a8da8ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e657d021c13aec11b420858a8da8ee">&#9670;&nbsp;</a></span>text_dialog_color_button_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void text_dialog_color_button_set </td>
+          <td>(</td>
+          <td class="paramtype">GtkColorButton *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01655">1655</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a98cde74d07beae98437ca781a8136661" name="a98cde74d07beae98437ca781a8136661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98cde74d07beae98437ca781a8136661">&#9670;&nbsp;</a></span>text_dialog_font_button_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void text_dialog_font_button_set </td>
+          <td>(</td>
+          <td class="paramtype">GtkFontButton *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01670">1670</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a3c0c50870d26f9586f90182ecebd5d37" name="a3c0c50870d26f9586f90182ecebd5d37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c0c50870d26f9586f90182ecebd5d37">&#9670;&nbsp;</a></span>text_dialog_help_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void text_dialog_help_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>parent_window</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01906">1906</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a2b3506a02c7a1bd1a96516718174f370" name="a2b3506a02c7a1bd1a96516718174f370"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3506a02c7a1bd1a96516718174f370">&#9670;&nbsp;</a></span>text_dialog_ok_bttn_click()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void text_dialog_ok_bttn_click </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>bttn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkTextBuffer *&#160;</td>
+          <td class="paramname"><em>tb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l01598">1598</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ad64a293d3366fe9f6c4cd2acca82c89c" name="ad64a293d3366fe9f6c4cd2acca82c89c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64a293d3366fe9f6c4cd2acca82c89c">&#9670;&nbsp;</a></span>unselect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void unselect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="list_2list_8h.html#af74425403c31782faf30c6c8d08a0a8e">list</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00506">506</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a49a0f74fc7cb65d2a8ba39006d9e5056" name="a49a0f74fc7cb65d2a8ba39006d9e5056"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49a0f74fc7cb65d2a8ba39006d9e5056">&#9670;&nbsp;</a></span>click_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double click_x = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00029">29</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="ad50bebb00d8beaa505e312f9597a41a5" name="ad50bebb00d8beaa505e312f9597a41a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad50bebb00d8beaa505e312f9597a41a5">&#9670;&nbsp;</a></span>click_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double click_y = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00029">29</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a1d2ca0690712c36b10a07881b330659e" name="a1d2ca0690712c36b10a07881b330659e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d2ca0690712c36b10a07881b330659e">&#9670;&nbsp;</a></span>curs_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double curs_x = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00028">28</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="a46fa020686698872d9b7e63c817ff118" name="a46fa020686698872d9b7e63c817ff118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46fa020686698872d9b7e63c817ff118">&#9670;&nbsp;</a></span>curs_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double curs_y = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00028">28</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="aa4451eaf68c5a7bc772752e8a0b19f00" name="aa4451eaf68c5a7bc772752e8a0b19f00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4451eaf68c5a7bc772752e8a0b19f00">&#9670;&nbsp;</a></span>direction_val</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int direction_val = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00030">30</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
+
+</div>
+</div>
+<a id="abb073ac57d83b1e5fbc48af1de92713f" name="abb073ac57d83b1e5fbc48af1de92713f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb073ac57d83b1e5fbc48af1de92713f">&#9670;&nbsp;</a></span>type_val</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int type_val = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callbacks_8c_source.html#l00030">30</a> of file <a class="el" href="callbacks_8c_source.html">callbacks.c</a>.</p>
 
 </div>
 </div>

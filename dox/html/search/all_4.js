@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.c']]],
-  ['main_2ec_1',['main.c',['../main_8c.html',1,'']]],
-  ['msg_2',['msg',['../structmsg.html',1,'']]],
-  ['multi_5fobj_3',['multi_obj',['../structmulti__obj.html',1,'']]]
+  ['hide_5fbttn_5fclick_0',['hide_bttn_click',['../callbacks_8c.html#ab78c843f76702a51b5c5246b769ee841',1,'callbacks.c']]]
 ];
