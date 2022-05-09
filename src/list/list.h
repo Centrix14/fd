@@ -1,19 +1,28 @@
+/**
+ * \file
+ * \brief The header file of the library of doubly linked lists.
+ */
+
 #ifndef __FLAT_DRAW_DINAMIC_LIST_LIBRARY_HEADER_FILE_INCLUDED__
 #define __FLAT_DRAW_DINAMIC_LIST_LIBRARY_HEADER_FILE_INCLUDED__
 
+/// Enumeration of object types.
+
 typedef enum {
-	OT_FIGURE = 0,
-	OT_TEXT
+	OT_FIGURE = 0, ///< figure object
+	OT_TEXT ///< text object
 } OBJ_TYPE;
 
+/// The structure of the list item.
+
 typedef struct __list__ {
-	struct __list__ *prev;
-	struct __list__ *next;
+	struct __list__ *prev; ///< pointer to previous node
+	struct __list__ *next; ///< pointer to next node
 
-	void *data;
-	void *opt;
+	void *data; ///< node data
+	void *opt; ///< node options
 
-	OBJ_TYPE dt; // data type
+	OBJ_TYPE dt; ///< data type
 } list;
 
 list *list_init_node(list *parent);
