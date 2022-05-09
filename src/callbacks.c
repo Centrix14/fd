@@ -42,6 +42,13 @@ void hide_bttn_click(GtkWidget *bttn, GtkWidget *window) {
 		gtk_window_iconify(GTK_WINDOW(window));
 }
 
+/**
+ * \brief A callback to rendering graphics in GtkDrawingArea.
+ * \param[area] Target drawing area
+ * \param[cr] Cairo context for area
+ * \param[data] Unused
+ */
+
 gboolean draw_area_draw(GtkWidget *area, cairo_t *cr, gpointer data) {
 	list *geometry_buffer = NULL;
 
