@@ -1,0 +1,1940 @@
+src\binding\binding.c:127:33: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ if (bl_get_coords_dif(line->x, *x) < BINDING_AREA
+                                ^
+src\binding\binding.c:106:24: note: Calling bl_make_binding_line
+   bl_make_binding_line(fptr, x, y);
+                       ^
+src\binding\binding.c:127:33: note: Cannot determine that '*x' is initialized
+ if (bl_get_coords_dif(line->x, *x) < BINDING_AREA
+                                ^
+src\binding\binding.c:149:39: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+  if (bl_is_create_binding(&lines[i], *x, *y))
+                                      ^
+src\binding\binding.c:110:24: note: Calling bl_make_binding_rect
+   bl_make_binding_rect(fptr, x, y);
+                       ^
+src\binding\binding.c:149:39: note: Cannot determine that '*x' is initialized
+  if (bl_is_create_binding(&lines[i], *x, *y))
+                                      ^
+src\binding\binding.c:149:43: error: Cannot determine that '*y' is initialized [bughuntingUninit]
+  if (bl_is_create_binding(&lines[i], *x, *y))
+                                          ^
+src\binding\binding.c:110:24: note: Calling bl_make_binding_rect
+   bl_make_binding_rect(fptr, x, y);
+                       ^
+src\binding\binding.c:149:43: note: Cannot determine that '*y' is initialized
+  if (bl_is_create_binding(&lines[i], *x, *y))
+                                          ^
+src\binding\binding.c:306:9: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ l.a1 = *x;
+        ^
+src\binding\binding.c:114:26: note: Calling bl_make_binding_circle
+   bl_make_binding_circle(fptr, x, y);
+                         ^
+src\binding\binding.c:306:9: note: Cannot determine that '*x' is initialized
+ l.a1 = *x;
+        ^
+src\binding\binding.c:307:9: error: Cannot determine that '*y' is initialized [bughuntingUninit]
+ l.a2 = *y;
+        ^
+src\binding\binding.c:114:26: note: Calling bl_make_binding_circle
+   bl_make_binding_circle(fptr, x, y);
+                         ^
+src\binding\binding.c:307:9: note: Cannot determine that '*y' is initialized
+ l.a2 = *y;
+        ^
+src\binding\binding.c:310:19: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ if (circle->x == *x || circle->y == *y)
+                  ^
+src\binding\binding.c:114:26: note: Calling bl_make_binding_circle
+   bl_make_binding_circle(fptr, x, y);
+                         ^
+src\binding\binding.c:310:19: note: Cannot determine that '*x' is initialized
+ if (circle->x == *x || circle->y == *y)
+                  ^
+src\binding\binding.c:310:38: error: Cannot determine that '*y' is initialized [bughuntingUninit]
+ if (circle->x == *x || circle->y == *y)
+                                     ^
+src\binding\binding.c:272:19: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ if (circle->x == *x) {
+                  ^
+src\binding\binding.c:114:26: note: Calling bl_make_binding_circle
+   bl_make_binding_circle(fptr, x, y);
+                         ^
+src\binding\binding.c:311:35: note: Calling __bl_make_trivial_circle_binding
+  __bl_make_trivial_circle_binding(circle, x, y);
+                                  ^
+src\binding\binding.c:272:19: note: Cannot determine that '*x' is initialized
+ if (circle->x == *x) {
+                  ^
+src\binding\binding.c:273:19: error: Cannot determine that '*y' is initialized [bughuntingUninit]
+  if (circle->y < *y)
+                  ^
+src\binding\binding.c:114:26: note: Calling bl_make_binding_circle
+   bl_make_binding_circle(fptr, x, y);
+                         ^
+src\binding\binding.c:311:35: note: Calling __bl_make_trivial_circle_binding
+  __bl_make_trivial_circle_binding(circle, x, y);
+                                  ^
+src\binding\binding.c:273:19: note: Cannot determine that '*y' is initialized
+  if (circle->y < *y)
+                  ^
+src\binding\binding.c:279:19: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+  if (circle->x < *x)
+                  ^
+src\binding\binding.c:127:33: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ if (bl_get_coords_dif(line->x, *x) < BINDING_AREA
+                                ^
+src\binding\binding.c:149:39: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+  if (bl_is_create_binding(&lines[i], *x, *y))
+                                      ^
+src\binding\binding.c:149:43: error: Cannot determine that '*y' is initialized [bughuntingUninit]
+  if (bl_is_create_binding(&lines[i], *x, *y))
+                                          ^
+src\binding\binding.c:272:19: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ if (circle->x == *x) {
+                  ^
+src\binding\binding.c:273:19: error: Cannot determine that '*y' is initialized [bughuntingUninit]
+  if (circle->y < *y)
+                  ^
+src\binding\binding.c:306:9: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ l.a1 = *x;
+        ^
+src\binding\binding.c:307:9: error: Cannot determine that '*y' is initialized [bughuntingUninit]
+ l.a2 = *y;
+        ^
+src\binding\binding.c:310:19: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ if (circle->x == *x || circle->y == *y)
+                  ^
+src\binding\binding.c:272:19: error: Cannot determine that '*x' is initialized [bughuntingUninit]
+ if (circle->x == *x) {
+                  ^
+src\binding\binding.c:311:35: note: Calling __bl_make_trivial_circle_binding
+  __bl_make_trivial_circle_binding(circle, x, y);
+                                  ^
+src\binding\binding.c:272:19: note: Cannot determine that '*x' is initialized
+ if (circle->x == *x) {
+                  ^
+src\binding\binding.c:273:19: error: Cannot determine that '*y' is initialized [bughuntingUninit]
+  if (circle->y < *y)
+                  ^
+src\binding\binding.c:311:35: note: Calling __bl_make_trivial_circle_binding
+  __bl_make_trivial_circle_binding(circle, x, y);
+                                  ^
+src\binding\binding.c:273:19: note: Cannot determine that '*y' is initialized
+  if (circle->y < *y)
+                  ^
+src\callbacks.c:95:10: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+  sprintf(crd, "(%g;%g)", curs_x, curs_y);
+         ^
+src\callbacks.c:175:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\callbacks.c:198:28: error: Cannot determine that 'direction_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(direction_bttn), "clicked", G_CALLBACK(direction_bttn_click), NULL);
+                           ^
+src\callbacks.c:205:28: error: Cannot determine that 'ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked",
+                           ^
+src\callbacks.c:207:28: error: Cannot determine that 'help_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(help_bttn), "clicked",
+                           ^
+src\callbacks.c:215:29: error: Cannot determine that 'lenght_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(lenght_box), lenght_label, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:215:42: error: Cannot determine that 'lenght_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(lenght_box), lenght_label, TRUE, TRUE, 5);
+                                         ^
+src\callbacks.c:216:42: error: Cannot determine that 'lenght_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(lenght_box), lenght_entry, FALSE, FALSE, 5);
+                                         ^
+src\callbacks.c:218:29: error: Cannot determine that 'angle_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(angle_box), angle_label, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:218:41: error: Cannot determine that 'angle_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(angle_box), angle_label, TRUE, TRUE, 5);
+                                        ^
+src\callbacks.c:219:41: error: Cannot determine that 'angle_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(angle_box), angle_entry, FALSE, FALSE, 5);
+                                        ^
+src\callbacks.c:225:29: error: Cannot determine that 'direction_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(direction_box), direction_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:225:45: error: Cannot determine that 'direction_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(direction_box), direction_label, FALSE, FALSE, 5);
+                                            ^
+src\callbacks.c:232:29: error: Cannot determine that 'bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:239:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), lenght_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:244:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\callbacks.c:257:51: error: Cannot determine that 'lenght_entry[0]' is initialized [bughuntingUninit]
+ line_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(lenght_entry)));
+                                                  ^
+src\callbacks.c:258:51: error: Cannot determine that 'angle_entry[0]' is initialized [bughuntingUninit]
+ line_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(angle_entry))) * direction_val;
+                                                  ^
+src\callbacks.c:310:24: error: Cannot determine that 'drawing_area[0]' is initialized [bughuntingUninit]
+ gtk_widget_queue_draw(drawing_area);
+                       ^
+src\callbacks.c:322:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\callbacks.c:345:28: error: Cannot determine that 'direction_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(direction_bttn), "clicked", G_CALLBACK(direction_bttn_click), NULL);
+                           ^
+src\callbacks.c:354:28: error: Cannot determine that 'ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked",
+                           ^
+src\callbacks.c:356:28: error: Cannot determine that 'help_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(help_bttn), "clicked",
+                           ^
+src\callbacks.c:364:29: error: Cannot determine that 'width_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(width_box), width_label, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:364:41: error: Cannot determine that 'width_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(width_box), width_label, TRUE, TRUE, 5);
+                                        ^
+src\callbacks.c:365:41: error: Cannot determine that 'width_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(width_box), width_entry, FALSE, FALSE, 5);
+                                        ^
+src\callbacks.c:367:29: error: Cannot determine that 'height_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(height_box), height_label, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:367:42: error: Cannot determine that 'height_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(height_box), height_label, TRUE, TRUE, 5);
+                                         ^
+src\callbacks.c:368:42: error: Cannot determine that 'height_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(height_box), height_entry, FALSE, FALSE, 5);
+                                         ^
+src\callbacks.c:374:29: error: Cannot determine that 'direction_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(direction_box), direction_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:374:45: error: Cannot determine that 'direction_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(direction_box), direction_label, FALSE, FALSE, 5);
+                                            ^
+src\callbacks.c:381:29: error: Cannot determine that 'bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:388:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), width_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:393:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\callbacks.c:401:14: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ if (!strcmp(text, "¢Å'")) {
+             ^
+src\callbacks.c:419:51: error: Cannot determine that 'width_entry[0]' is initialized [bughuntingUninit]
+ rect_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(width_entry)));
+                                                  ^
+src\callbacks.c:420:51: error: Cannot determine that 'height_entry[0]' is initialized [bughuntingUninit]
+ rect_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(height_entry))) * direction_val;
+                                                  ^
+src\callbacks.c:452:58: error: Cannot determine that 'help_dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(help_dialog));
+                                                         ^
+src\callbacks.c:458:33: error: Cannot determine that 'help_label[0]' is initialized [bughuntingUninit]
+ gtk_label_set_markup(GTK_LABEL(help_label), hl_get_help(HC_MAIN));
+                                ^
+src\callbacks.c:458:57: error: Cannot determine that 'hl_get_help(HC_MAIN)[0]' is initialized [bughuntingUninit]
+ gtk_label_set_markup(GTK_LABEL(help_label), hl_get_help(HC_MAIN));
+                                                        ^
+src\callbacks.c:472:25: error: Cannot determine that 'attrs[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(attrs, text_size);
+                        ^
+src\callbacks.c:472:32: error: Cannot determine that 'text_size[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(attrs, text_size);
+                               ^
+src\callbacks.c:473:32: error: Cannot determine that 'text_font[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(attrs, text_font);
+                               ^
+src\callbacks.c:474:32: error: Cannot determine that 'text_letter_spacing[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(attrs, text_letter_spacing);
+                               ^
+src\callbacks.c:475:32: error: Cannot determine that 'text_label_fallback[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(attrs, text_label_fallback);
+                               ^
+src\callbacks.c:476:32: error: Cannot determine that 'text_stretch[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(attrs, text_stretch);
+                               ^
+src\callbacks.c:477:32: error: Cannot determine that 'text_font_variant[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(attrs, text_font_variant);
+                               ^
+src\callbacks.c:478:32: error: Cannot determine that 'text_font_weight[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(attrs, text_font_weight);
+                               ^
+src\callbacks.c:484:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), logo, TRUE, TRUE, 10);
+                            ^
+src\callbacks.c:484:40: error: Cannot determine that 'logo[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), logo, TRUE, TRUE, 10);
+                                       ^
+src\callbacks.c:487:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\callbacks.c:520:18: error: Array index out of bounds, cannot determine that fig->type is less than 9 [bughuntingArrayIndexOutOfBounds]
+ return types[fig->type];
+                 ^
+src\callbacks.c:520:18: error: Array index out of bounds, cannot determine that fig->type is not negative [bughuntingArrayIndexNegative]
+ return types[fig->type];
+                 ^
+src\callbacks.c:571:10: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+  sprintf(out, "%g %g", mo->x, mo->y);
+         ^
+src\callbacks.c:607:10: error: Cannot determine that 'arr[i]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+  if (arr[i] == val)
+         ^
+src\callbacks.c:649:17: error: Cannot determine that 'lst[i]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ for (i = 0; lst[i] != end; i++) ;
+                ^
+src\callbacks.c:665:10: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+  sprintf(label_str, "Layer: %d", layers_list[i]);
+         ^
+src\callbacks.c:668:49: error: Cannot determine that 'labels[i][0]' is initialized [bughuntingUninit]
+  gtk_list_box_prepend(GTK_LIST_BOX(lst), labels[i]);
+                                                ^
+src\callbacks.c:725:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\callbacks.c:743:31: error: Cannot determine that 'position_box_entry[0]' is initialized [bughuntingUninit]
+ gtk_entry_set_text(GTK_ENTRY(position_box_entry), get_figure_pos(geometry_buffer));
+                              ^
+src\callbacks.c:571:10: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+  sprintf(out, "%g %g", mo->x, mo->y);
+         ^
+src\callbacks.c:743:66: note: Calling get_figure_pos
+ gtk_entry_set_text(GTK_ENTRY(position_box_entry), get_figure_pos(geometry_buffer));
+                                                                 ^
+src\callbacks.c:571:10: note: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed
+  sprintf(out, "%g %g", mo->x, mo->y);
+         ^
+src\callbacks.c:743:66: error: Cannot determine that 'get_figure_pos(geometry_buffer)[0]' is initialized [bughuntingUninit]
+ gtk_entry_set_text(GTK_ENTRY(position_box_entry), get_figure_pos(geometry_buffer));
+                                                                 ^
+src\callbacks.c:744:31: error: Cannot determine that 'position_box_figure_type_label[0]' is initialized [bughuntingUninit]
+ gtk_label_set_text(GTK_LABEL(position_box_figure_type_label),
+                              ^
+src\callbacks.c:745:23: error: Cannot determine that 'get_figure_mnemonic(geometry_buffer)[0]' is initialized [bughuntingUninit]
+   get_figure_mnemonic(geometry_buffer));
+                      ^
+src\callbacks.c:750:29: error: Cannot determine that 'position_data_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(position_data_box), position_box_entry, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:751:49: error: Cannot determine that 'position_box_set_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(position_data_box), position_box_set_bttn, TRUE, TRUE, 5);
+                                                ^
+src\callbacks.c:752:49: error: Cannot determine that 'position_box_select[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(position_data_box), position_box_select, TRUE, TRUE, 5);
+                                                ^
+src\callbacks.c:757:29: error: Cannot determine that 'position_bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_ok_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:757:49: error: Cannot determine that 'position_box_ok_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_ok_bttn, TRUE, TRUE, 5);
+                                                ^
+src\callbacks.c:758:49: error: Cannot determine that 'position_box_help_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(position_bttn_box), position_box_help_bttn,
+                                                ^
+src\callbacks.c:764:29: error: Cannot determine that 'position_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(position_box),
+                            ^
+src\callbacks.c:772:4: error: Cannot determine that '(char*)gtk_entry_get_text(GTK_ENTRY(position_box_entry))[0]' is initialized [bughuntingUninit]
+   (char*)gtk_entry_get_text(GTK_ENTRY(position_box_entry)));
+   ^
+src\callbacks.c:810:28: error: Cannot determine that 'size_data_box_set_bttn1[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(size_data_box_set_bttn1), "clicked",
+                           ^
+src\callbacks.c:812:28: error: Cannot determine that 'size_data_box_set_bttn2[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(size_data_box_set_bttn2), "clicked",
+                           ^
+src\callbacks.c:814:28: error: Cannot determine that 'size_data_box_select_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(size_data_box_select_bttn), "clicked",
+                           ^
+src\callbacks.c:816:28: error: Cannot determine that 'size_format_box_prm_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(size_format_box_prm_bttn), "clicked",
+                           ^
+src\callbacks.c:819:28: error: Cannot determine that 'size_format_box_pp_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(size_format_box_pp_bttn), "clicked",
+                           ^
+src\callbacks.c:826:29: error: Cannot determine that 'size_format_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(size_format_box), size_format_box_pp_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:833:29: error: Cannot determine that 'size_data_line_box1[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(size_data_line_box1),
+                            ^
+src\callbacks.c:834:4: error: Cannot determine that 'size_data_entry_box_label1[0]' is initialized [bughuntingUninit]
+   size_data_entry_box_label1, FALSE, FALSE, 5);
+   ^
+src\callbacks.c:836:4: error: Cannot determine that 'size_data_entry_box_entr1[0]' is initialized [bughuntingUninit]
+   size_data_entry_box_entr1, TRUE, TRUE, 5);
+   ^
+src\callbacks.c:847:29: error: Cannot determine that 'size_data_line_box2[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(size_data_line_box2),
+                            ^
+src\callbacks.c:848:4: error: Cannot determine that 'size_data_entry_box_label2[0]' is initialized [bughuntingUninit]
+   size_data_entry_box_label2, FALSE, FALSE, 5);
+   ^
+src\callbacks.c:850:4: error: Cannot determine that 'size_data_entry_box_entr2[0]' is initialized [bughuntingUninit]
+   size_data_entry_box_entr2, TRUE, TRUE, 5);
+   ^
+src\callbacks.c:855:29: error: Cannot determine that 'size_data_entry_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(size_data_entry_box), size_data_line_box1, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:861:29: error: Cannot determine that 'size_data_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(size_data_box), size_data_entry_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:867:28: error: Cannot determine that 'size_bttn_box_ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(size_bttn_box_ok_bttn), "clicked",
+                           ^
+src\callbacks.c:873:29: error: Cannot determine that 'size_bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(size_bttn_box), size_bttn_box_ok_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:874:45: error: Cannot determine that 'size_bttn_box_help_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(size_bttn_box), size_bttn_box_help_bttn, TRUE, TRUE, 5);
+                                            ^
+src\callbacks.c:879:29: error: Cannot determine that 'size_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(size_box), size_format_box, TRUE, FALSE, 5);
+                            ^
+src\callbacks.c:891:29: error: Cannot determine that 'color_red_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_red_box), color_red_box_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:891:45: error: Cannot determine that 'color_red_box_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_red_box), color_red_box_label, FALSE, FALSE, 5);
+                                            ^
+src\callbacks.c:892:45: error: Cannot determine that 'color_red_box_spin[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_red_box), color_red_box_spin, TRUE, TRUE, 5);
+                                            ^
+src\callbacks.c:893:45: error: Cannot determine that 'color_data_box_color_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_red_box), color_data_box_color_bttn,
+                                            ^
+src\callbacks.c:895:45: error: Cannot determine that 'color_data_box_set_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_red_box), color_data_box_set_bttn, TRUE, FALSE, 5);
+                                            ^
+src\callbacks.c:915:29: error: Cannot determine that 'color_green_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_green_box), color_green_box_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:915:47: error: Cannot determine that 'color_green_box_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_green_box), color_green_box_label, FALSE, FALSE, 5);
+                                              ^
+src\callbacks.c:916:47: error: Cannot determine that 'color_green_box_spin[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_green_box), color_green_box_spin, TRUE, TRUE, 5);
+                                              ^
+src\callbacks.c:924:29: error: Cannot determine that 'color_blue_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_blue_box), color_blue_box_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:924:46: error: Cannot determine that 'color_blue_box_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_blue_box), color_blue_box_label, FALSE, FALSE, 5);
+                                             ^
+src\callbacks.c:925:46: error: Cannot determine that 'color_blue_box_spin[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_blue_box), color_blue_box_spin, TRUE, TRUE, 5);
+                                             ^
+src\callbacks.c:930:29: error: Cannot determine that 'color_rgb_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_rgb_box), color_red_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:938:28: error: Cannot determine that 'color_bttn_box_ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(color_bttn_box_ok_bttn), "clicked",
+                           ^
+src\callbacks.c:944:29: error: Cannot determine that 'color_bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_bttn_box), color_bttn_box_ok_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:945:46: error: Cannot determine that 'color_bttn_box_help_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_bttn_box), color_bttn_box_help_bttn, TRUE, TRUE, 5);
+                                             ^
+src\callbacks.c:950:29: error: Cannot determine that 'color_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(color_box), color_rgb_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:967:29: error: Cannot determine that 'layer_obj_bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(layer_obj_bttn_box), layer_obj_bttn_box_to_0,
+                            ^
+src\callbacks.c:967:50: error: Cannot determine that 'layer_obj_bttn_box_to_0[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(layer_obj_bttn_box), layer_obj_bttn_box_to_0,
+                                                 ^
+src\callbacks.c:969:50: error: Cannot determine that 'layer_obj_bttn_box_to_sel[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(layer_obj_bttn_box), layer_obj_bttn_box_to_sel,
+                                                 ^
+src\callbacks.c:983:34: error: Cannot determine that 'layer_obj_box_type_label[0]' is initialized [bughuntingUninit]
+ gtk_label_set_justify(GTK_LABEL(layer_obj_box_type_label), GTK_JUSTIFY_LEFT);
+                                 ^
+src\callbacks.c:984:34: error: Cannot determine that 'layer_obj_box_lay_label[0]' is initialized [bughuntingUninit]
+ gtk_label_set_justify(GTK_LABEL(layer_obj_box_lay_label), GTK_JUSTIFY_LEFT);
+                                 ^
+src\callbacks.c:985:34: error: Cannot determine that 'layer_obj_box_pr_label[0]' is initialized [bughuntingUninit]
+ gtk_label_set_justify(GTK_LABEL(layer_obj_box_pr_label), GTK_JUSTIFY_LEFT);
+                                 ^
+src\callbacks.c:987:29: error: Cannot determine that 'layer_obj_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(layer_obj_box), layer_obj_box_type_label,
+                            ^
+src\callbacks.c:998:23: error: Cannot determine that 'get_figure_mnemonic(geometry_buffer)[0]' is initialized [bughuntingUninit]
+   get_figure_mnemonic(geometry_buffer));
+                      ^
+src\callbacks.c:1000:18: error: Cannot determine that 'get_figure_lay(geometry_buffer)[0]' is initialized [bughuntingUninit]
+   get_figure_lay(geometry_buffer));
+                 ^
+src\callbacks.c:1002:19: error: Cannot determine that 'get_figure_is_pr(geometry_buffer)[0]' is initialized [bughuntingUninit]
+  get_figure_is_pr(geometry_buffer));
+                  ^
+src\callbacks.c:1007:47: error: Cannot determine that 'layer_box_list[0]' is initialized [bughuntingUninit]
+ gtk_list_box_set_selection_mode(GTK_LIST_BOX(layer_box_list), GTK_SELECTION_SINGLE);
+                                              ^
+src\callbacks.c:665:10: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+  sprintf(label_str, "Layer: %d", layers_list[i]);
+         ^
+src\callbacks.c:1013:18: note: Calling fill_layers_list
+ fill_layers_list(layer_box_list, geometry_buffer);
+                 ^
+src\callbacks.c:665:10: note: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed
+  sprintf(label_str, "Layer: %d", layers_list[i]);
+         ^
+src\callbacks.c:668:49: error: Cannot determine that 'labels[i][0]' is initialized [bughuntingUninit]
+  gtk_list_box_prepend(GTK_LIST_BOX(lst), labels[i]);
+                                                ^
+src\callbacks.c:1013:18: note: Calling fill_layers_list
+ fill_layers_list(layer_box_list, geometry_buffer);
+                 ^
+src\callbacks.c:668:49: note: Cannot determine that 'labels[i][0]' is initialized
+  gtk_list_box_prepend(GTK_LIST_BOX(lst), labels[i]);
+                                                ^
+src\callbacks.c:1018:53: error: Cannot determine that 'layer_box_scroll[0]' is initialized [bughuntingUninit]
+ gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(layer_box_scroll),
+                                                    ^
+src\callbacks.c:1025:29: error: Cannot determine that 'layer_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(layer_box), layer_obj_box,
+                            ^
+src\callbacks.c:1035:29: error: Cannot determine that 'group_set_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_set_box), group_set_box_tag_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1035:45: error: Cannot determine that 'group_set_box_tag_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_set_box), group_set_box_tag_bttn, TRUE, TRUE, 5);
+                                            ^
+src\callbacks.c:1036:45: error: Cannot determine that 'group_set_box_group_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_set_box), group_set_box_group_bttn, TRUE, TRUE, 5);
+                                            ^
+src\callbacks.c:1046:29: error: Cannot determine that 'group_remove_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_tag_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1046:48: error: Cannot determine that 'group_remove_box_tag_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_tag_bttn, TRUE, TRUE, 5);
+                                               ^
+src\callbacks.c:1047:48: error: Cannot determine that 'group_remove_box_group_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_remove_box), group_remove_box_group_bttn,
+                                               ^
+src\callbacks.c:1061:29: error: Cannot determine that 'group_data_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_tag_entry, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1061:46: error: Cannot determine that 'group_data_box_tag_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_tag_entry, TRUE, TRUE, 5);
+                                             ^
+src\callbacks.c:1062:46: error: Cannot determine that 'group_data_box_group_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_group_entry, TRUE, TRUE, 5);
+                                             ^
+src\callbacks.c:1065:46: error: Cannot determine that 'group_data_box_move_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_data_box), group_data_box_move_bttn, TRUE, TRUE, 5);
+                                             ^
+src\callbacks.c:1082:34: error: Cannot determine that 'group_box_scroll[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(group_box_scroll), group_list_box);
+                                 ^
+src\callbacks.c:1082:53: error: Cannot determine that 'group_list_box[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(group_box_scroll), group_list_box);
+                                                    ^
+src\callbacks.c:1086:29: error: Cannot determine that 'group_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(group_box), group_data_box, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:2213:8: error: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ memset(group_names_list, 0, sz * sizeof(char**));
+       ^
+src\callbacks.c:1097:32: note: Calling options_dialog_fill_group_list
+ options_dialog_fill_group_list(group_list_box);
+                               ^
+src\callbacks.c:2213:8: note: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed
+ memset(group_names_list, 0, sz * sizeof(char**));
+       ^
+src\callbacks.c:2183:33: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+  if (arr[i] && !strcmp(arr[i], elm))
+                                ^
+src\callbacks.c:1110:40: error: Cannot determine that 'mode_notebook[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), position_box,
+                                       ^
+src\callbacks.c:1111:4: error: Cannot determine that 'position_page_label[0]' is initialized [bughuntingUninit]
+   position_page_label);
+   ^
+src\callbacks.c:1112:66: error: Cannot determine that 'size_page_label[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), size_box, size_page_label);
+                                                                 ^
+src\callbacks.c:1113:67: error: Cannot determine that 'color_page_label[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), color_box, color_page_label);
+                                                                  ^
+src\callbacks.c:1114:67: error: Cannot determine that 'lay_page_label[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), layer_box, lay_page_label);
+                                                                  ^
+src\callbacks.c:1115:67: error: Cannot determine that 'group_page_label[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(mode_notebook), group_box, group_page_label);
+                                                                  ^
+src\callbacks.c:1118:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), mode_notebook);
+                                 ^
+src\callbacks.c:1266:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\callbacks.c:1274:28: error: Cannot determine that 'apply_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(apply_bttn), "clicked", G_CALLBACK(rot_dialog_apply_bttn),
+                           ^
+src\callbacks.c:1275:4: error: Cannot determine that 'angle_entry[0]' is initialized [bughuntingUninit]
+   angle_entry);
+   ^
+src\callbacks.c:1280:29: error: Cannot determine that 'dialog_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(dialog_box), info_label, FALSE, FALSE, 10);
+                            ^
+src\callbacks.c:1280:42: error: Cannot determine that 'info_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(dialog_box), info_label, FALSE, FALSE, 10);
+                                         ^
+src\callbacks.c:1284:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), dialog_box);
+                                 ^
+src\callbacks.c:1310:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\callbacks.c:1322:28: error: Cannot determine that 'ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked",
+                           ^
+src\callbacks.c:1323:45: error: Cannot determine that 'radii_entry[0]' is initialized [bughuntingUninit]
+   G_CALLBACK(circle_dialog_ok_bttn_click), radii_entry);
+                                            ^
+src\callbacks.c:1329:29: error: Cannot determine that 'radii_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(radii_box), radii_label, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1329:41: error: Cannot determine that 'radii_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(radii_box), radii_label, TRUE, TRUE, 5);
+                                        ^
+src\callbacks.c:1336:29: error: Cannot determine that 'bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1342:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), radii_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1345:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\callbacks.c:1369:19: error: Cannot determine that 'entrys[3]' is initialized [bughuntingUninit]
+ GtkWidget *entrys[3];
+                  ^
+src\callbacks.c:1375:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\callbacks.c:1404:28: error: Cannot determine that 'ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(arc_dialog_ok_bttn_click), entrys);
+                           ^
+src\callbacks.c:1404:87: error: Cannot determine that 'entrys[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(arc_dialog_ok_bttn_click), entrys);
+                                                                                      ^
+src\callbacks.c:1412:29: error: Cannot determine that 'ang1_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(ang1_box), ang1_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:1412:40: error: Cannot determine that 'ang1_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(ang1_box), ang1_label, FALSE, FALSE, 5);
+                                       ^
+src\callbacks.c:1413:40: error: Cannot determine that 'ang1_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(ang1_box), ang1_entry, TRUE, TRUE, 5);
+                                       ^
+src\callbacks.c:1415:29: error: Cannot determine that 'ang2_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(ang2_box), ang2_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:1415:40: error: Cannot determine that 'ang2_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(ang2_box), ang2_label, FALSE, FALSE, 5);
+                                       ^
+src\callbacks.c:1416:40: error: Cannot determine that 'ang2_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(ang2_box), ang2_entry, TRUE, TRUE, 5);
+                                       ^
+src\callbacks.c:1418:29: error: Cannot determine that 'radii_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(radii_box), radii_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:1418:41: error: Cannot determine that 'radii_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(radii_box), radii_label, FALSE, FALSE, 5);
+                                        ^
+src\callbacks.c:1419:41: error: Cannot determine that 'radii_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(radii_box), radii_entry, TRUE, TRUE, 5);
+                                        ^
+src\callbacks.c:1425:29: error: Cannot determine that 'bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1431:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), ang1_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1436:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\callbacks.c:1450:50: error: Cannot determine that 'radii_entry[0]' is initialized [bughuntingUninit]
+ arc_data.a1 = atof(gtk_entry_get_text(GTK_ENTRY(radii_entry)));
+                                                 ^
+src\callbacks.c:1453:50: error: Cannot determine that 'ang1_entry[0]' is initialized [bughuntingUninit]
+ arc_data.a2 = atof(gtk_entry_get_text(GTK_ENTRY(ang1_entry)));
+                                                 ^
+src\callbacks.c:1454:50: error: Cannot determine that 'ang2_entry[0]' is initialized [bughuntingUninit]
+ arc_data.a3 = atof(gtk_entry_get_text(GTK_ENTRY(ang2_entry)));
+                                                 ^
+src\callbacks.c:1482:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\callbacks.c:1505:44: error: Cannot determine that 'text_buffer[0]' is initialized [bughuntingUninit]
+ text_view = gtk_text_view_new_with_buffer(text_buffer);
+                                           ^
+src\callbacks.c:1507:44: error: Cannot determine that 'text_view[0]' is initialized [bughuntingUninit]
+ gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(text_view), GTK_WRAP_WORD_CHAR);
+                                           ^
+src\callbacks.c:1513:28: error: Cannot determine that 'ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked",
+                           ^
+src\callbacks.c:1515:28: error: Cannot determine that 'help_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(help_bttn), "clicked",
+                           ^
+src\callbacks.c:1523:24: error: Cannot determine that 'ch_color_bttn[0]' is initialized [bughuntingUninit]
+ g_object_set(G_OBJECT(ch_color_bttn), "show-editor", FALSE, NULL);
+                       ^
+src\callbacks.c:1531:28: error: Cannot determine that 'ch_font_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ch_font_bttn), "font-set",
+                           ^
+src\callbacks.c:1537:29: error: Cannot determine that 'label_size_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_size_box), text_size_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:1537:46: error: Cannot determine that 'text_size_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_size_box), text_size_label, FALSE, FALSE, 5);
+                                             ^
+src\callbacks.c:1538:46: error: Cannot determine that 'text_size_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_size_box), text_size_entry, TRUE, TRUE, 5);
+                                             ^
+src\callbacks.c:1543:29: error: Cannot determine that 'label_font_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_font_box), text_font_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:1543:46: error: Cannot determine that 'text_font_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_font_box), text_font_label, FALSE, FALSE, 5);
+                                             ^
+src\callbacks.c:1544:46: error: Cannot determine that 'text_font_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_font_box), text_font_entry, TRUE, TRUE, 5);
+                                             ^
+src\callbacks.c:1549:29: error: Cannot determine that 'label_style_entrys_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_style_entrys_box), label_size_box, TRUE, FALSE, 5);
+                            ^
+src\callbacks.c:1555:29: error: Cannot determine that 'label_style_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_style_box), label_style_entrys_box, TRUE, FALSE, 5);
+                            ^
+src\callbacks.c:1561:29: error: Cannot determine that 'label_color_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_color_box), text_color_label, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:1561:47: error: Cannot determine that 'text_color_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_color_box), text_color_label, FALSE, FALSE, 5);
+                                              ^
+src\callbacks.c:1562:47: error: Cannot determine that 'text_color_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_color_box), text_color_entry, TRUE, TRUE, 5);
+                                              ^
+src\callbacks.c:1568:29: error: Cannot determine that 'label_opt_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(label_opt_box), label_style_box, FALSE, FALSE, 5);
+                            ^
+src\callbacks.c:1574:29: error: Cannot determine that 'bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(bttn_box), ok_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1580:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), label_opt_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:1584:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\callbacks.c:1612:14: error: Cannot determine that '*(int*)pl_read("msg:font_size_int")' is initialized [bughuntingUninit]
+ font_size = *(int*)pl_read("msg:font_size_int");
+             ^
+src\callbacks.c:1625:14: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ if (!strlen(font_name))
+             ^
+src\callbacks.c:1702:24: error: Cannot determine that 'drawing_area[0]' is initialized [bughuntingUninit]
+ gtk_widget_queue_draw(drawing_area);
+                       ^
+src\callbacks.c:1729:51: error: Cannot determine that 'entry1[0]' is initialized [bughuntingUninit]
+ strcpy(buf1, (char*)gtk_entry_get_text(GTK_ENTRY(entry1)));
+                                                  ^
+src\callbacks.c:1729:15: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+ strcpy(buf1, (char*)gtk_entry_get_text(GTK_ENTRY(entry1)));
+              ^
+src\callbacks.c:1730:51: error: Cannot determine that 'entry2[0]' is initialized [bughuntingUninit]
+ strcpy(buf2, (char*)gtk_entry_get_text(GTK_ENTRY(entry2)));
+                                                  ^
+src\callbacks.c:1730:15: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+ strcpy(buf2, (char*)gtk_entry_get_text(GTK_ENTRY(entry2)));
+              ^
+src\callbacks.c:1814:45: error: Cannot determine that 'entry1[0]' is initialized [bughuntingUninit]
+ buf1 = (char*)gtk_entry_get_text(GTK_ENTRY(entry1));
+                                            ^
+src\callbacks.c:1815:45: error: Cannot determine that 'entry2[0]' is initialized [bughuntingUninit]
+ buf2 = (char*)gtk_entry_get_text(GTK_ENTRY(entry2));
+                                            ^
+src\callbacks.c:1818:15: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ width = atof(buf1);
+              ^
+src\callbacks.c:1819:16: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ height = atof(buf2);
+               ^
+src\callbacks.c:1863:18: error: Cannot determine that 'size_data_box_set_bttn1[0]' is initialized [bughuntingUninit]
+ gtk_widget_hide(size_data_box_set_bttn1);
+                 ^
+src\callbacks.c:1866:18: error: Cannot determine that 'size_data_box_set_bttn2[0]' is initialized [bughuntingUninit]
+ gtk_widget_show(size_data_box_set_bttn2);
+                 ^
+src\callbacks.c:1869:31: error: Cannot determine that 'label1[0]' is initialized [bughuntingUninit]
+ gtk_label_set_text(GTK_LABEL(label1), "Width");
+                              ^
+src\callbacks.c:1870:31: error: Cannot determine that 'label2[0]' is initialized [bughuntingUninit]
+ gtk_label_set_text(GTK_LABEL(label2), "Height");
+                              ^
+src\callbacks.c:1888:18: error: Cannot determine that 'size_data_box_set_bttn1[0]' is initialized [bughuntingUninit]
+ gtk_widget_hide(size_data_box_set_bttn1);
+                 ^
+src\callbacks.c:1891:18: error: Cannot determine that 'size_data_box_set_bttn2[0]' is initialized [bughuntingUninit]
+ gtk_widget_show(size_data_box_set_bttn2);
+                 ^
+src\callbacks.c:1894:31: error: Cannot determine that 'label1[0]' is initialized [bughuntingUninit]
+ gtk_label_set_text(GTK_LABEL(label1), "Inital point (x y)");
+                              ^
+src\callbacks.c:1895:31: error: Cannot determine that 'label2[0]' is initialized [bughuntingUninit]
+ gtk_label_set_text(GTK_LABEL(label2), "End point (x y)");
+                              ^
+src\callbacks.c:1921:58: error: Cannot determine that 'red_spin[0]' is initialized [bughuntingUninit]
+ red = (double)gtk_spin_button_get_value(GTK_SPIN_BUTTON(red_spin));
+                                                         ^
+src\callbacks.c:1922:60: error: Cannot determine that 'green_spin[0]' is initialized [bughuntingUninit]
+ green = (double)gtk_spin_button_get_value(GTK_SPIN_BUTTON(green_spin));
+                                                           ^
+src\callbacks.c:1923:59: error: Cannot determine that 'blue_spin[0]' is initialized [bughuntingUninit]
+ blue = (double)gtk_spin_button_get_value(GTK_SPIN_BUTTON(blue_spin));
+                                                          ^
+src\callbacks.c:1999:46: error: Cannot determine that 'selected_row[0]' is initialized [bughuntingUninit]
+ selected_widget = gtk_bin_get_child(GTK_BIN(selected_row));
+                                             ^
+src\callbacks.c:2183:10: error: Cannot determine that 'arr[i]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+  if (arr[i] && !strcmp(arr[i], elm))
+         ^
+src\callbacks.c:2190:10: error: Cannot determine that 'arr[i]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+  if (arr[i])
+         ^
+src\callbacks.c:2213:9: error: Cannot determine that 'group_names_list' is initialized [bughuntingUninit]
+ memset(group_names_list, 0, sz * sizeof(char**));
+        ^
+src\callbacks.c:2213:8: error: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ memset(group_names_list, 0, sz * sizeof(char**));
+       ^
+src\callbacks.c:2244:15: error: Cannot determine that 'group_names_list' is initialized [bughuntingUninit]
+ free_str_arr(group_names_list, sz);
+              ^
+src\callbacks.c:2190:7: error: Cannot determine that 'arr' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+  if (arr[i])
+      ^
+src\callbacks.c:2244:14: note: Calling free_str_arr
+ free_str_arr(group_names_list, sz);
+             ^
+src\callbacks.c:2190:7: note: Cannot determine that 'arr' is initialized (you can use 'const' to say data must be initialized)
+  if (arr[i])
+      ^
+src\callbacks.c:2191:9: error: Cannot determine that 'arr' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+   free(arr[i]);
+        ^
+src\callbacks.c:2244:14: note: Calling free_str_arr
+ free_str_arr(group_names_list, sz);
+             ^
+src\callbacks.c:2191:9: note: Cannot determine that 'arr' is initialized (you can use 'const' to say data must be initialized)
+   free(arr[i]);
+        ^
+src\callbacks.c:2192:7: error: Cannot determine that 'arr' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ free(arr);
+      ^
+src\callbacks.c:2244:14: note: Calling free_str_arr
+ free_str_arr(group_names_list, sz);
+             ^
+src\callbacks.c:2192:7: note: Cannot determine that 'arr' is initialized (you can use 'const' to say data must be initialized)
+ free(arr);
+      ^
+src\callbacks.c:2192:7: error: Cannot determine that 'arr' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ free(arr);
+      ^
+src\callbacks.c:2256:45: error: Cannot determine that 'row[0]' is initialized [bughuntingUninit]
+ selected_label = gtk_bin_get_child(GTK_BIN(row));
+                                            ^
+src\callbacks.c:2267:46: error: Cannot determine that 'selected_label[0]' is initialized [bughuntingUninit]
+ group = (char*)gtk_label_get_text(GTK_LABEL(selected_label));
+                                             ^
+src\callbacks.c:2305:20: error: Cannot determine that 'msg[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+   GTK_BUTTONS_OK, msg);
+                   ^
+src\callbacks.c:2306:27: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+                          ^
+src\callbacks.c:2341:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "%g", d);
+        ^
+src\callbacks.c:2306:27: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+                          ^
+src\callbacks.c:2371:23: note: Calling __show_size_of_figure
+ __show_size_of_figure("Measuring the size of the group is not yet available.");
+                      ^
+src\callbacks.c:2306:27: note: Cannot determine that 'dialog[0]' is initialized
+ g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+                          ^
+src\callbacks.c:2306:27: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+                          ^
+src\callbacks.c:2392:23: note: Calling __get_size_of_group
+   __get_size_of_group(results);
+                      ^
+src\callbacks.c:2371:23: note: Calling __show_size_of_figure
+ __show_size_of_figure("Measuring the size of the group is not yet available.");
+                      ^
+src\callbacks.c:2306:27: note: Cannot determine that 'dialog[0]' is initialized
+ g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
+                          ^
+src\callbacks.c:2418:55: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ content_box = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                      ^
+src\callbacks.c:2425:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), plugin_path_entry, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:2425:40: error: Cannot determine that 'plugin_path_entry[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), plugin_path_entry, TRUE, TRUE, 5);
+                                       ^
+src\callbacks.c:2426:40: error: Cannot determine that 'plugin_run_bttn[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), plugin_run_bttn, FALSE, FALSE, 5);
+                                       ^
+src\callbacks.c:2431:34: error: Cannot determine that 'content_box[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(content_box), main_box);
+                                 ^
+src\callbacks.c:2441:34: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ path_buf = (char*)malloc(strlen(path) + 1);
+                                 ^
+src\callbacks.c:2464:55: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ content_box = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                      ^
+src\callbacks.c:2471:31: error: Cannot determine that 'path_entry[0]' is initialized [bughuntingUninit]
+ gtk_entry_set_text(GTK_ENTRY(path_entry), "path");
+                              ^
+src\callbacks.c:2474:28: error: Cannot determine that 'load_cmodel_model_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(load_cmodel_model_bttn), "clicked",
+                           ^
+src\callbacks.c:2476:28: error: Cannot determine that 'load_lua_model_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(load_lua_model_bttn), "clicked",
+                           ^
+src\callbacks.c:2482:29: error: Cannot determine that 'bttn_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(bttn_box), load_lua_model_bttn, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:2487:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), bttn_box, TRUE, TRUE, 5);
+                            ^
+src\callbacks.c:2490:34: error: Cannot determine that 'content_box[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(content_box), main_box);
+                                 ^
+src\callbacks.c:2504:22: error: Cannot determine that 'pl_get_msg_list()[0]' is initialized [bughuntingUninit]
+ init(pl_get_msg_list());
+                     ^
+src\ccVector\test.c:5:1: error: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_VEC(6);
+^
+src\ccVector\test.c:5:1: error: Cannot determine that 'v.v' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+CCV_DEFINE_VEC(6);
+^
+src\ccVector\test.c:5:1: error: Cannot determine that 'v.v' is initialized [bughuntingUninitStructMember]
+CCV_DEFINE_VEC(6);
+^
+src\ccVector\test.c:5:1: error: Cannot determine that 'v.v' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+CCV_DEFINE_VEC(6);
+^
+src\ccVector\test.c:5:1: note: Calling vec6Length
+CCV_DEFINE_VEC(6);
+^
+src\ccVector\test.c:5:1: note: Cannot determine that 'v.v' is initialized (you can use 'const' to say data must be initialized)
+CCV_DEFINE_VEC(6);
+^
+src\ccVector\test.c:5:1: error: There is division, cannot determine that there can't be a division by zero. [bughuntingDivByZeroFloat]
+CCV_DEFINE_VEC(6);
+^
+src\ccVector\test.c:13:21: error: Cannot determine that 'v.v' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+  printf("%.2f\n", v.v[i]);
+                    ^
+src\ccVector\test.c:23:25: error: Cannot determine that 'm[r][c]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+   printf("%.2f\t", m[r][c]);
+                        ^
+src\ccVector\test.c:13:21: error: Cannot determine that 'v.v' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+  printf("%.2f\n", v.v[i]);
+                    ^
+src\ccVector\test.c:42:11: note: Calling printVec3
+ printVec3(vector);
+          ^
+src\ccVector\test.c:13:21: note: Cannot determine that 'v.v' is initialized (you can use 'const' to say data must be initialized)
+  printf("%.2f\n", v.v[i]);
+                    ^
+src\ccVector\test.c:44:21: error: Cannot determine that 'vector._x' is initialized [bughuntingUninitStructMember]
+ vectorMultiplied = vector;
+                    ^
+src\ccVector\ccVector.h:457:1: error: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:45:16: note: Calling mat3x3Identity
+ mat3x3Identity(transform);
+               ^
+src\ccVector\ccVector.h:457:1: note: Calling mat3x3Zero
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: note: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: error: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:46:16: note: Calling mat3x3Rotate2D
+ mat3x3Rotate2D(transform, PI / 4);
+               ^
+src\ccVector\ccVector.h:641:86: note: Calling mat2x2SetRotation2D
+static inline void CCV_FUNC_MAT_ROTATE_2D(3)(CCV_MAT_TYPENAME(3) m, const ccvType r) CCV_APPLY_MATRIX(3, CCV_FUNC_MAT_SET_ROTATION_2D(2)(multiply, r));
+                                                                                     ^
+src\ccVector\ccVector.h:635:22: note: Calling mat3x3Zero
+ CCV_FUNC_MAT_ZERO(3)(m);
+                     ^
+src\ccVector\ccVector.h:457:1: note: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: error: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:46:16: note: Calling mat3x3Rotate2D
+ mat3x3Rotate2D(transform, PI / 4);
+               ^
+src\ccVector\ccVector.h:641:86: note: Calling mat3x3Copy
+static inline void CCV_FUNC_MAT_ROTATE_2D(3)(CCV_MAT_TYPENAME(3) m, const ccvType r) CCV_APPLY_MATRIX(3, CCV_FUNC_MAT_SET_ROTATION_2D(2)(multiply, r));
+                                                                                     ^
+src\ccVector\ccVector.h:457:1: note: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: error: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:47:15: note: Calling mat3x3Scale2D
+ mat3x3Scale2D(transform, 2);
+              ^
+src\ccVector\ccVector.h:768:89: note: Calling mat3x3SetScale2D
+static inline void CCV_FUNC_MAT_SCALE_2D(3)(CCV_MAT_TYPENAME(3) m, const ccvType scale) CCV_APPLY_MATRIX(3, CCV_FUNC_MAT_SET_SCALE_2D(3)(multiply, scale))
+                                                                                        ^
+src\ccVector\ccVector.h:762:22: note: Calling mat3x3Zero
+ CCV_FUNC_MAT_ZERO(3)(m);
+                     ^
+src\ccVector\ccVector.h:457:1: note: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: error: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:47:15: note: Calling mat3x3Scale2D
+ mat3x3Scale2D(transform, 2);
+              ^
+src\ccVector\ccVector.h:768:89: note: Calling mat3x3Copy
+static inline void CCV_FUNC_MAT_SCALE_2D(3)(CCV_MAT_TYPENAME(3) m, const ccvType scale) CCV_APPLY_MATRIX(3, CCV_FUNC_MAT_SET_SCALE_2D(3)(multiply, scale))
+                                                                                        ^
+src\ccVector\ccVector.h:457:1: note: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:48:29: error: Cannot determine that 'add.v' is initialized [bughuntingUninitStructMember]
+ mat3x3Translate(transform, add);
+                            ^
+src\ccVector\ccVector.h:737:98: error: Cannot determine that 'v.v' is initialized [bughuntingUninitStructMember]
+static inline void CCV_FUNC_MAT_TRANSLATE(3)(CCV_MAT_TYPENAME(3) m, const CCV_VEC_TYPENAME(2) v) CCV_APPLY_MATRIX(3, CCV_FUNC_MAT_SET_TRANSLATION(3)(multiply, v))
+                                                                                                 ^
+src\ccVector\test.c:48:17: note: Calling mat3x3Translate
+ mat3x3Translate(transform, add);
+                ^
+src\ccVector\ccVector.h:737:98: note: Cannot determine that 'v.v' is initialized
+static inline void CCV_FUNC_MAT_TRANSLATE(3)(CCV_MAT_TYPENAME(3) m, const CCV_VEC_TYPENAME(2) v) CCV_APPLY_MATRIX(3, CCV_FUNC_MAT_SET_TRANSLATION(3)(multiply, v))
+                                                                                                 ^
+src\ccVector\ccVector.h:457:1: error: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:48:17: note: Calling mat3x3Translate
+ mat3x3Translate(transform, add);
+                ^
+src\ccVector\ccVector.h:737:98: note: Calling mat3x3SetTranslation
+static inline void CCV_FUNC_MAT_TRANSLATE(3)(CCV_MAT_TYPENAME(3) m, const CCV_VEC_TYPENAME(2) v) CCV_APPLY_MATRIX(3, CCV_FUNC_MAT_SET_TRANSLATION(3)(multiply, v))
+                                                                                                 ^
+src\ccVector\ccVector.h:731:26: note: Calling mat3x3Identity
+ CCV_FUNC_MAT_IDENTITY(3)(m);
+                         ^
+src\ccVector\ccVector.h:457:1: note: Calling mat3x3Zero
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: note: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: error: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:48:17: note: Calling mat3x3Translate
+ mat3x3Translate(transform, add);
+                ^
+src\ccVector\ccVector.h:737:98: note: Calling mat3x3Copy
+static inline void CCV_FUNC_MAT_TRANSLATE(3)(CCV_MAT_TYPENAME(3) m, const CCV_VEC_TYPENAME(2) v) CCV_APPLY_MATRIX(3, CCV_FUNC_MAT_SET_TRANSLATION(3)(multiply, v))
+                                                                                                 ^
+src\ccVector\ccVector.h:457:1: note: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: error: Cannot determine that 'v.v' is initialized [bughuntingUninit]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:52:24: note: Calling mat3x3GetCol
+ printVec3(mat3x3GetCol(transform, 1));
+                       ^
+src\ccVector\ccVector.h:457:1: note: Cannot determine that 'v.v' is initialized
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: error: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:52:24: note: Calling mat3x3GetCol
+ printVec3(mat3x3GetCol(transform, 1));
+                       ^
+src\ccVector\ccVector.h:457:1: note: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:56:53: error: Cannot determine that 'vector._x' is initialized [bughuntingUninitStructMember]
+ vectorMultiplied = mat3x3MultiplyVector(transform, vector);
+                                                    ^
+src\ccVector\ccVector.h:457:1: error: Cannot determine that 'b.v' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:56:41: note: Calling mat3x3MultiplyVector
+ vectorMultiplied = mat3x3MultiplyVector(transform, vector);
+                                        ^
+src\ccVector\ccVector.h:457:1: note: Cannot determine that 'b.v' is initialized (you can use 'const' to say data must be initialized)
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\ccVector.h:457:1: error: Cannot determine that 'v.v' is initialized [bughuntingUninit]
+CCV_DEFINE_MAT(3)
+^
+src\ccVector\test.c:56:41: note: Calling mat3x3MultiplyVector
+ vectorMultiplied = mat3x3MultiplyVector(transform, vector);
+                                        ^
+src\ccVector\ccVector.h:457:1: note: Cannot determine that 'v.v' is initialized
+CCV_DEFINE_MAT(3)
+^
+src\cmodel\cmodel.c:240:14: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+ strcpy(buf, ptr);
+             ^
+src\cmodel\cmodel.c:252:34: error: Cannot determine that 'window[0]' is initialized [bughuntingUninit]
+ gtk_window_set_title(GTK_WINDOW(window), "Get parameter");
+                                 ^
+src\cmodel\cmodel.c:257:28: error: Cannot determine that 'msg[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ msg_label = gtk_label_new(msg);
+                           ^
+src\cmodel\cmodel.c:261:28: error: Cannot determine that 'ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                           ^
+src\cmodel\cmodel.c:261:78: error: Cannot determine that 'param_entry[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                                                                             ^
+src\cmodel\cmodel.c:264:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                            ^
+src\cmodel\cmodel.c:264:40: error: Cannot determine that 'msg_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                                       ^
+src\cmodel\cmodel.c:252:34: error: Cannot determine that 'window[0]' is initialized [bughuntingUninit]
+ gtk_window_set_title(GTK_WINDOW(window), "Get parameter");
+                                 ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:252:34: note: Cannot determine that 'window[0]' is initialized
+ gtk_window_set_title(GTK_WINDOW(window), "Get parameter");
+                                 ^
+src\cmodel\cmodel.c:257:28: error: Cannot determine that 'msg[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ msg_label = gtk_label_new(msg);
+                           ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:257:28: note: Cannot determine that 'msg[0]' is initialized (you can use 'const' to say data must be initialized)
+ msg_label = gtk_label_new(msg);
+                           ^
+src\cmodel\cmodel.c:261:28: error: Cannot determine that 'ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                           ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:261:28: note: Cannot determine that 'ok_bttn[0]' is initialized
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                           ^
+src\cmodel\cmodel.c:261:78: error: Cannot determine that 'param_entry[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                                                                             ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:261:78: note: Cannot determine that 'param_entry[0]' is initialized
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                                                                             ^
+src\cmodel\cmodel.c:264:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                            ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:264:29: note: Cannot determine that 'main_box[0]' is initialized
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                            ^
+src\cmodel\cmodel.c:264:40: error: Cannot determine that 'msg_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                                       ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:264:40: note: Cannot determine that 'msg_label[0]' is initialized
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                                       ^
+src\dialog\dialog.c:112:38: error: Cannot determine that 'font[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ font_family = pango_attr_family_new(font);
+                                     ^
+src\dialog\dialog.c:118:25: error: Cannot determine that 'list[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(list, font_family);
+                        ^
+src\dialog\dialog.c:118:31: error: Cannot determine that 'font_family[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(list, font_family);
+                              ^
+src\dialog\dialog.c:119:31: error: Cannot determine that 'letter_spacing[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(list, letter_spacing);
+                              ^
+src\dialog\dialog.c:120:31: error: Cannot determine that 'rise[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(list, rise);
+                              ^
+src\dialog\dialog.c:121:31: error: Cannot determine that 'fallback[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(list, fallback);
+                              ^
+src\dialog\dialog.c:122:31: error: Cannot determine that 'scale[0]' is initialized [bughuntingUninit]
+ pango_attr_list_insert(list, scale);
+                              ^
+src\dialog\dialog.c:136:19: error: Cannot determine that 'path[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ dirptr = opendir(path);
+                  ^
+src\dialog\dialog.c:183:60: error: Cannot determine that 'list_box[0]' is initialized [bughuntingUninit]
+ selected_row = gtk_list_box_get_selected_row(GTK_LIST_BOX(list_box));
+                                                           ^
+src\dialog\dialog.c:184:43: error: Cannot determine that 'selected_row[0]' is initialized [bughuntingUninit]
+ selected_box = gtk_bin_get_child(GTK_BIN(selected_row));
+                                          ^
+src\dialog\dialog.c:185:69: error: Cannot determine that 'selected_box[0]' is initialized [bughuntingUninit]
+ selected_box_child_list = gtk_container_get_children(GTK_CONTAINER(selected_box));
+                                                                    ^
+src\dialog\dialog.c:186:30: error: Cannot determine that 'selected_box_child_list[0]' is initialized [bughuntingUninit]
+ second_element = g_list_nth(selected_box_child_list, 1);
+                             ^
+src\dialog\dialog.c:190:45: error: Cannot determine that 'addr_entry[0]' is initialized [bughuntingUninit]
+ addr = (char*)gtk_entry_get_text(GTK_ENTRY(addr_entry));
+                                            ^
+src\dialog\dialog.c:191:48: error: Cannot determine that 'selected_button[0]' is initialized [bughuntingUninit]
+ file = (char*)gtk_button_get_label(GTK_BUTTON(selected_button));
+                                               ^
+src\dialog\dialog.c:194:7: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ puts(full_path);
+      ^
+src\dialog\dialog.c:202:45: error: Cannot determine that 'addr_entry[0]' is initialized [bughuntingUninit]
+ path = (char*)gtk_entry_get_text(GTK_ENTRY(addr_entry));
+                                            ^
+src\dialog\dialog.c:216:56: error: Cannot determine that 'list_box[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ child_list = gtk_container_get_children(GTK_CONTAINER(list_box));
+                                                       ^
+src\dialog\dialog.c:205:23: note: Calling __dial_list_box_clear
+ __dial_list_box_clear(list_box);
+                      ^
+src\dialog\dialog.c:216:56: note: Cannot determine that 'list_box[0]' is initialized (you can use 'const' to say data must be initialized)
+ child_list = gtk_container_get_children(GTK_CONTAINER(list_box));
+                                                       ^
+src\dialog\dialog.c:217:17: error: Cannot determine that 'child_list[0]' is initialized [bughuntingUninit]
+ g_list_foreach(child_list, (GFunc)__dial_remove_widget_glib_func, list_box);
+                ^
+src\dialog\dialog.c:205:23: note: Calling __dial_list_box_clear
+ __dial_list_box_clear(list_box);
+                      ^
+src\dialog\dialog.c:217:17: note: Cannot determine that 'child_list[0]' is initialized
+ g_list_foreach(child_list, (GFunc)__dial_remove_widget_glib_func, list_box);
+                ^
+src\dialog\dialog.c:136:19: error: Cannot determine that 'path[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ dirptr = opendir(path);
+                  ^
+src\dialog\dialog.c:206:22: note: Calling __dial_fill_dir_list
+ __dial_fill_dir_list(list_box, path);
+                     ^
+src\dialog\dialog.c:136:19: note: Cannot determine that 'path[0]' is initialized (you can use 'const' to say data must be initialized)
+ dirptr = opendir(path);
+                  ^
+src\dialog\dialog.c:217:17: error: Cannot determine that 'child_list[0]' is initialized [bughuntingUninit]
+ g_list_foreach(child_list, (GFunc)__dial_remove_widget_glib_func, list_box);
+                ^
+src\dialog\dialog.c:226:13: error: Cannot determine that 'full_filename[0]' is initialized [bughuntingUninit]
+ err = stat(full_filename, &f_stat);
+            ^
+src\dialog\dialog.c:256:13: error: Cannot determine that 'full_path[0]' is initialized [bughuntingUninit]
+ res = stat(full_path, &dirent_stat);
+            ^
+src\dialog\dialog.c:136:19: error: Cannot determine that 'path[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ dirptr = opendir(path);
+                  ^
+src\dialog\dialog.c:278:22: note: Calling __dial_fill_dir_list
+ __dial_fill_dir_list(list_box, dirname);
+                     ^
+src\dialog\dialog.c:136:19: note: Cannot determine that 'path[0]' is initialized (you can use 'const' to say data must be initialized)
+ dirptr = opendir(path);
+                  ^
+src\draw\draw.c:172:7: error: Cannot determine that 'cr_ptr' is initialized [bughuntingUninit]
+ if (!cr_ptr)
+      ^
+src\error\error.c:23:25: error: Array index out of bounds, cannot determine that err_type is less than 10 [bughuntingArrayIndexOutOfBounds]
+ el_call_dialog(err_msg[err_type]);
+                        ^
+src\error\error.c:23:25: error: Array index out of bounds, cannot determine that err_type is not negative [bughuntingArrayIndexNegative]
+ el_call_dialog(err_msg[err_type]);
+                        ^
+src\error\error.c:34:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\error\error.c:23:16: note: Calling el_call_dialog
+ el_call_dialog(err_msg[err_type]);
+               ^
+src\error\error.c:34:58: note: Cannot determine that 'dialog[0]' is initialized
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\error\error.c:43:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), err_label, TRUE, TRUE, 10);
+                            ^
+src\error\error.c:23:16: note: Calling el_call_dialog
+ el_call_dialog(err_msg[err_type]);
+               ^
+src\error\error.c:43:29: note: Cannot determine that 'main_box[0]' is initialized
+ gtk_box_pack_start(GTK_BOX(main_box), err_label, TRUE, TRUE, 10);
+                            ^
+src\error\error.c:43:40: error: Cannot determine that 'err_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), err_label, TRUE, TRUE, 10);
+                                       ^
+src\error\error.c:23:16: note: Calling el_call_dialog
+ el_call_dialog(err_msg[err_type]);
+               ^
+src\error\error.c:43:40: note: Cannot determine that 'err_label[0]' is initialized
+ gtk_box_pack_start(GTK_BOX(main_box), err_label, TRUE, TRUE, 10);
+                                       ^
+src\error\error.c:45:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\error\error.c:23:16: note: Calling el_call_dialog
+ el_call_dialog(err_msg[err_type]);
+               ^
+src\error\error.c:45:34: note: Cannot determine that 'dialog_content[0]' is initialized
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\error\error.c:34:58: error: Cannot determine that 'dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+                                                         ^
+src\error\error.c:38:28: error: Cannot determine that '(const gchar*)msg[0]' is initialized [bughuntingUninit]
+ err_label = gtk_label_new((const gchar *)msg);
+                           ^
+src\error\error.c:43:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), err_label, TRUE, TRUE, 10);
+                            ^
+src\error\error.c:43:40: error: Cannot determine that 'err_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), err_label, TRUE, TRUE, 10);
+                                       ^
+src\error\error.c:45:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\fd_format\fd_format.c:10:22: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+ strcpy(target_file, name);
+                     ^
+src\fd_format\fd_format.c:10:8: error: Buffer read/write, when calling 'strcpy' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ strcpy(target_file, name);
+       ^
+src\figure\figure.c:271:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "P(%g; %g)\n", p->x, p->y);
+        ^
+src\figure\figure.c:279:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "l = %g\n", gel_calculate_lenght(l));
+        ^
+src\figure\figure.c:293:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "d = %g\nh = %g\nw = %g\nS = %g\n", d, h, w, S);
+        ^
+src\figure\figure.c:306:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "R = %g\nD = %g\nl = %g\n", R, D, l);
+        ^
+src\figure\figure.c:271:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "P(%g; %g)\n", p->x, p->y);
+        ^
+src\figure\figure.c:314:27: note: Calling __get_point_info
+   return __get_point_info(fptr);
+                          ^
+src\figure\figure.c:271:9: note: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed
+ sprintf(buf, "P(%g; %g)\n", p->x, p->y);
+        ^
+src\figure\figure.c:279:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "l = %g\n", gel_calculate_lenght(l));
+        ^
+src\figure\figure.c:318:26: note: Calling __get_line_info
+   return __get_line_info(fptr);
+                         ^
+src\figure\figure.c:279:9: note: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed
+ sprintf(buf, "l = %g\n", gel_calculate_lenght(l));
+        ^
+src\figure\figure.c:293:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "d = %g\nh = %g\nw = %g\nS = %g\n", d, h, w, S);
+        ^
+src\figure\figure.c:322:26: note: Calling __get_rect_info
+   return __get_rect_info(fptr);
+                         ^
+src\figure\figure.c:293:9: note: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed
+ sprintf(buf, "d = %g\nh = %g\nw = %g\nS = %g\n", d, h, w, S);
+        ^
+src\figure\figure.c:306:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "R = %g\nD = %g\nl = %g\n", R, D, l);
+        ^
+src\figure\figure.c:326:28: note: Calling __get_circle_info
+   return __get_circle_info(fptr);
+                           ^
+src\figure\figure.c:306:9: note: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed
+ sprintf(buf, "R = %g\nD = %g\nl = %g\n", R, D, l);
+        ^
+src\flags\flags.c:23:15: error: Array index out of bounds, cannot determine that i is not negative [bughuntingArrayIndexNegative]
+  flag = argv[i];
+              ^
+src\flags\flags.c:23:14: error: Cannot determine that 'argv[i]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+  flag = argv[i];
+             ^
+src\flags\flags.c:24:12: error: Cannot determine that 'flag' is initialized [bughuntingUninit]
+  first = *flag;
+           ^
+src\flags\flags.c:25:12: error: Cannot determine that 'flag' is initialized [bughuntingUninit]
+  second = flag[1];
+           ^
+src\flags\flags.c:41:20: error: Array index out of bounds, cannot determine that i is less than 4 [bughuntingArrayIndexOutOfBounds]
+  if (single_flags[i] == lett) {
+                   ^
+src\flags\flags.c:41:20: error: Array index out of bounds, cannot determine that i is not negative [bughuntingArrayIndexNegative]
+  if (single_flags[i] == lett) {
+                   ^
+src\flags\flags.c:56:21: error: Array index out of bounds, cannot determine that i is less than 3 [bughuntingArrayIndexOutOfBounds]
+  if (!strcmp(flags[i], str)) {
+                    ^
+src\flags\flags.c:56:21: error: Array index out of bounds, cannot determine that i is not negative [bughuntingArrayIndexNegative]
+  if (!strcmp(flags[i], str)) {
+                    ^
+src\flags\flags.c:56:25: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+  if (!strcmp(flags[i], str)) {
+                        ^
+src\geometry\geometry.c:30:25: error: There is division, cannot determine that there can't be a division by zero. [bughuntingDivByZeroFloat]
+  return (line->a2 - b) / line->a1;
+                        ^
+src\geometry\geometry.c:43:24: note: Calling gel_lf_calculate_k
+ k = gel_lf_calculate_k(line);
+                       ^
+src\geometry\geometry.c:30:25: note: There is division, cannot determine that there can't be a division by zero.
+  return (line->a2 - b) / line->a1;
+                        ^
+src\geometry\geometry.c:166:31: error: There is division, cannot determine that there can't be a division by zero. [bughuntingDivByZeroFloat]
+ a1 = atan(fabs(l->a2 - l->y) / fabs(l->a1 - l->x));
+                              ^
+src\geometry\geometry.c:167:30: error: There is division, cannot determine that there can't be a division by zero. [bughuntingDivByZeroFloat]
+ a2 = atan(fabs(p->y - l->y) / fabs(p->x - l->x));
+                             ^
+src\geometry\geometry.c:166:31: error: There is division, cannot determine that there can't be a division by zero. [bughuntingDivByZeroFloat]
+ a1 = atan(fabs(l->a2 - l->y) / fabs(l->a1 - l->x));
+                              ^
+src\geometry\geometry.c:183:30: note: Calling gel_is_point_in_line
+  res += gel_is_point_in_line(&lines[i], p) - !gel_is_point_in_area(r, p);
+                             ^
+src\geometry\geometry.c:166:31: note: There is division, cannot determine that there can't be a division by zero.
+ a1 = atan(fabs(l->a2 - l->y) / fabs(l->a1 - l->x));
+                              ^
+src\geometry\geometry.c:167:30: error: There is division, cannot determine that there can't be a division by zero. [bughuntingDivByZeroFloat]
+ a2 = atan(fabs(p->y - l->y) / fabs(p->x - l->x));
+                             ^
+src\geometry\geometry.c:183:30: note: Calling gel_is_point_in_line
+  res += gel_is_point_in_line(&lines[i], p) - !gel_is_point_in_area(r, p);
+                             ^
+src\geometry\geometry.c:167:30: note: There is division, cannot determine that there can't be a division by zero.
+ a2 = atan(fabs(p->y - l->y) / fabs(p->x - l->x));
+                             ^
+src\geometry\geometry.c:218:20: error: There is division, cannot determine that there can't be a division by zero. [bughuntingDivByZeroFloat]
+ A = asin(fabs(dy) / R);
+                   ^
+src\ccVector\ccVector.h:456:1: error: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(2)
+^
+src\geometry\geometry.c:312:16: note: Calling mat2x2Identity
+ mat2x2Identity(transform);
+               ^
+src\ccVector\ccVector.h:456:1: note: Calling mat2x2Zero
+CCV_DEFINE_MAT(2)
+^
+src\ccVector\ccVector.h:456:1: note: Buffer read/write, when calling 'memset' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(2)
+^
+src\ccVector\ccVector.h:456:1: error: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+CCV_DEFINE_MAT(2)
+^
+src\geometry\geometry.c:313:14: note: Calling mat2x2Rotate
+ mat2x2Rotate(transform, angle);
+             ^
+src\ccVector\ccVector.h:631:83: note: Calling mat2x2Copy
+static inline void CCV_FUNC_MAT_ROTATE(2)(CCV_MAT_TYPENAME(2) m, const ccvType r) CCV_APPLY_MATRIX(2, CCV_FUNC_MAT_SET_ROTATION(2)(multiply, r));
+                                                                                  ^
+src\ccVector\ccVector.h:456:1: note: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed
+CCV_DEFINE_MAT(2)
+^
+src\ccVector\ccVector.h:631:83: error: Cannot determine that 'multiply[0]' is initialized [bughuntingUninit]
+static inline void CCV_FUNC_MAT_ROTATE(2)(CCV_MAT_TYPENAME(2) m, const ccvType r) CCV_APPLY_MATRIX(2, CCV_FUNC_MAT_SET_ROTATION(2)(multiply, r));
+                                                                                  ^
+src\geometry\geometry.c:313:14: note: Calling mat2x2Rotate
+ mat2x2Rotate(transform, angle);
+             ^
+src\ccVector\ccVector.h:631:83: note: Cannot determine that 'multiply[0]' is initialized
+static inline void CCV_FUNC_MAT_ROTATE(2)(CCV_MAT_TYPENAME(2) m, const ccvType r) CCV_APPLY_MATRIX(2, CCV_FUNC_MAT_SET_ROTATION(2)(multiply, r));
+                                                                                  ^
+src\ccVector\ccVector.h:456:1: error: Cannot determine that 'v.v' is initialized [bughuntingUninit]
+CCV_DEFINE_MAT(2)
+^
+src\geometry\geometry.c:314:31: note: Calling mat2x2MultiplyVector
+ result = mat2x2MultiplyVector(transform, point);
+                              ^
+src\ccVector\ccVector.h:456:1: note: Cannot determine that 'v.v' is initialized
+CCV_DEFINE_MAT(2)
+^
+src\help\help.c:40:18: error: Array index out of bounds, cannot determine that code is less than 13 [bughuntingArrayIndexOutOfBounds]
+ return help_msg[code];
+                 ^
+src\help\help.c:40:18: error: Array index out of bounds, cannot determine that code is not negative [bughuntingArrayIndexNegative]
+ return help_msg[code];
+                 ^
+src\help\help.c:40:18: error: Array index out of bounds, cannot determine that code is less than 13 [bughuntingArrayIndexOutOfBounds]
+ return help_msg[code];
+                 ^
+src\help\help.c:48:55: note: Calling hl_get_help
+ gtk_label_set_text(GTK_LABEL(help_label), hl_get_help(code));
+                                                      ^
+src\help\help.c:40:18: note: Array index out of bounds, cannot determine that code is less than 13
+ return help_msg[code];
+                 ^
+src\help\help.c:40:18: error: Array index out of bounds, cannot determine that code is not negative [bughuntingArrayIndexNegative]
+ return help_msg[code];
+                 ^
+src\help\help.c:48:55: note: Calling hl_get_help
+ gtk_label_set_text(GTK_LABEL(help_label), hl_get_help(code));
+                                                      ^
+src\help\help.c:40:18: note: Array index out of bounds, cannot determine that code is not negative
+ return help_msg[code];
+                 ^
+src\help\help.c:48:55: error: Cannot determine that 'hl_get_help(code)[0]' is initialized [bughuntingUninit]
+ gtk_label_set_text(GTK_LABEL(help_label), hl_get_help(code));
+                                                      ^
+src\help\help.c:57:58: error: Cannot determine that 'help_dialog[0]' is initialized [bughuntingUninit]
+ dialog_content = gtk_dialog_get_content_area(GTK_DIALOG(help_dialog));
+                                                         ^
+src\help\help.c:40:18: error: Array index out of bounds, cannot determine that code is less than 13 [bughuntingArrayIndexOutOfBounds]
+ return help_msg[code];
+                 ^
+src\help\help.c:63:40: note: Calling hl_get_help
+ help_label = gtk_label_new(hl_get_help(code));
+                                       ^
+src\help\help.c:40:18: note: Array index out of bounds, cannot determine that code is less than 13
+ return help_msg[code];
+                 ^
+src\help\help.c:40:18: error: Array index out of bounds, cannot determine that code is not negative [bughuntingArrayIndexNegative]
+ return help_msg[code];
+                 ^
+src\help\help.c:63:40: note: Calling hl_get_help
+ help_label = gtk_label_new(hl_get_help(code));
+                                       ^
+src\help\help.c:40:18: note: Array index out of bounds, cannot determine that code is not negative
+ return help_msg[code];
+                 ^
+src\help\help.c:63:40: error: Cannot determine that 'hl_get_help(code)[0]' is initialized [bughuntingUninit]
+ help_label = gtk_label_new(hl_get_help(code));
+                                       ^
+src\help\help.c:67:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), help_label, FALSE, FALSE, 0);
+                            ^
+src\help\help.c:67:40: error: Cannot determine that 'help_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), help_label, FALSE, FALSE, 0);
+                                       ^
+src\help\help.c:70:34: error: Cannot determine that 'dialog_content[0]' is initialized [bughuntingUninit]
+ gtk_container_add(GTK_CONTAINER(dialog_content), main_box);
+                                 ^
+src\legacy_main.c:43:23: error: Cannot determine that 'draw_bttns[9]' is initialized [bughuntingUninit]
+ GtkWidget *draw_bttns[DRAW_BUTTONS];
+                      ^
+src\legacy_main.c:64:34: error: Cannot determine that 'window[0]' is initialized [bughuntingUninit]
+ gtk_window_set_title(GTK_WINDOW(window), "FlatDraw");
+                                 ^
+src\legacy_main.c:78:30: error: Cannot determine that 'draw_area[0]' is initialized [bughuntingUninit]
+ gtk_widget_set_size_request(draw_area, WIDTH, LENGTH);
+                             ^
+src\legacy_main.c:85:53: error: Cannot determine that 'scrolled_window[0]' is initialized [bughuntingUninit]
+ gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
+                                                    ^
+src\legacy_main.c:103:28: error: Cannot determine that 'point_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(point_bttn), "clicked", G_CALLBACK(point_bttn_click), NULL);
+                           ^
+src\legacy_main.c:104:28: error: Cannot determine that 'line_pp_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(line_pp_bttn), "clicked", G_CALLBACK(line_bttn_click), NULL);
+                           ^
+src\legacy_main.c:105:28: error: Cannot determine that 'line_la_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(line_la_bttn), "clicked",
+                           ^
+src\legacy_main.c:107:28: error: Cannot determine that 'rect_pp_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(rect_pp_bttn), "clicked",
+                           ^
+src\legacy_main.c:109:28: error: Cannot determine that 'rect_wh_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(rect_wh_bttn), "clicked",
+                           ^
+src\legacy_main.c:111:28: error: Cannot determine that 'circle_rc_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(circle_rc_bttn), "clicked",
+                           ^
+src\legacy_main.c:113:28: error: Cannot determine that 'arc_tp_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(arc_tp_bttn), "clicked",
+                           ^
+src\legacy_main.c:115:28: error: Cannot determine that 'circle_prm_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(circle_prm_bttn), "clicked",
+                           ^
+src\legacy_main.c:117:28: error: Cannot determine that 'arc_prm_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(arc_prm_bttn), "clicked",
+                           ^
+src\legacy_main.c:119:28: error: Cannot determine that 'curs_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(curs_bttn), "clicked", G_CALLBACK(curs_bttn_click), NULL);
+                           ^
+src\legacy_main.c:120:28: error: Cannot determine that 'text_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(text_bttn), "clicked", G_CALLBACK(text_bttn_click), window);
+                           ^
+src\legacy_main.c:122:28: error: Cannot determine that 'help_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(help_bttn), "clicked", G_CALLBACK(help_bttn_click), window);
+                           ^
+src\legacy_main.c:146:49: error: Cannot determine that 'line_icon1[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(line_pp_bttn), line_icon1);
+                                                ^
+src\legacy_main.c:151:49: error: Cannot determine that 'line_icon2[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(line_la_bttn), line_icon2);
+                                                ^
+src\legacy_main.c:156:49: error: Cannot determine that 'rect_icon1[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(rect_pp_bttn), rect_icon1);
+                                                ^
+src\legacy_main.c:161:49: error: Cannot determine that 'rect_icon2[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(rect_wh_bttn), rect_icon2);
+                                                ^
+src\legacy_main.c:166:48: error: Cannot determine that 'arc_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(arc_tp_bttn), arc_icon);
+                                               ^
+src\legacy_main.c:171:51: error: Cannot determine that 'circle_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(circle_rc_bttn), circle_icon);
+                                                  ^
+src\legacy_main.c:176:46: error: Cannot determine that 'cursor_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(curs_bttn), cursor_icon);
+                                             ^
+src\legacy_main.c:181:47: error: Cannot determine that 'point_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(point_bttn), point_icon);
+                                              ^
+src\legacy_main.c:186:46: error: Cannot determine that 'help_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(help_bttn), help_icon);
+                                             ^
+src\legacy_main.c:191:52: error: Cannot determine that 'circle_prm_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(circle_prm_bttn), circle_prm_icon);
+                                                   ^
+src\legacy_main.c:196:49: error: Cannot determine that 'arc_prm_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(arc_prm_bttn), arc_prm_icon);
+                                                ^
+src\legacy_main.c:201:46: error: Cannot determine that 'text_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(text_bttn), text_icon);
+                                             ^
+src\legacy_main.c:217:28: error: Cannot determine that 'set_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(set_bttn), "clicked",
+                           ^
+src\legacy_main.c:218:36: error: Cannot determine that 'lay_spin[0]' is initialized [bughuntingUninit]
+   G_CALLBACK(set_lay_bttn_click), lay_spin);
+                                   ^
+src\legacy_main.c:219:28: error: Cannot determine that 'all_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(all_bttn), "clicked", G_CALLBACK(all_bttn_click), NULL);
+                           ^
+src\legacy_main.c:220:28: error: Cannot determine that 'add_projection_lay_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(add_projection_lay_bttn), "clicked",
+                           ^
+src\legacy_main.c:222:28: error: Cannot determine that 'option_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(option_bttn), "clicked",
+                           ^
+src\legacy_main.c:224:28: error: Cannot determine that 'draw_mode_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(draw_mode_bttn), "clicked",
+                           ^
+src\legacy_main.c:225:32: error: Cannot determine that 'mode_label[0]' is initialized [bughuntingUninit]
+   G_CALLBACK(prm_bttn_click), mode_label);
+                               ^
+src\legacy_main.c:226:28: error: Cannot determine that 'plugin_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(plugin_bttn), "clicked", G_CALLBACK(plugin_bttn_click), NULL);
+                           ^
+src\legacy_main.c:237:55: error: Cannot determine that 'save_file_bttn[0]' is initialized [bughuntingUninit]
+ gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(save_file_bttn), ".");
+                                                      ^
+src\legacy_main.c:238:55: error: Cannot determine that 'open_file_bttn[0]' is initialized [bughuntingUninit]
+ gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(open_file_bttn), ".");
+                                                      ^
+src\legacy_main.c:247:28: error: Cannot determine that 'load_proc_model_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(load_proc_model_bttn), "clicked",
+                           ^
+src\legacy_main.c:253:29: error: Cannot determine that 'free_mode_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(free_mode_box), line_pp_bttn, TRUE, TRUE, 0);
+                            ^
+src\legacy_main.c:261:29: error: Cannot determine that 'prm_mode_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(prm_mode_box), line_la_bttn, TRUE, TRUE, 0);
+                            ^
+src\legacy_main.c:269:29: error: Cannot determine that 'common_drawing_tools_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(common_drawing_tools_box), curs_bttn, TRUE, TRUE, 0);
+                            ^
+src\legacy_main.c:277:29: error: Cannot determine that 'right_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(right_box), common_drawing_tools_box, TRUE, TRUE, 0);
+                            ^
+src\legacy_main.c:293:28: error: Cannot determine that 'del_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(del_bttn), "clicked", G_CALLBACK(del_bttn_click), draw_area);
+                           ^
+src\legacy_main.c:294:28: error: Cannot determine that 'move_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(move_bttn), "clicked", G_CALLBACK(move_bttn_click), NULL);
+                           ^
+src\legacy_main.c:295:28: error: Cannot determine that 'copy_paste_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(copy_paste_bttn), "clicked",
+                           ^
+src\legacy_main.c:297:28: error: Cannot determine that 'decouple_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(decouple_bttn), "clicked",
+                           ^
+src\legacy_main.c:299:28: error: Cannot determine that 'rot_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(rot_bttn), "clicked", G_CALLBACK(rot_bttn_click), window);
+                           ^
+src\legacy_main.c:300:28: error: Cannot determine that 'size_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(size_bttn), "clicked", G_CALLBACK(size_bttn_click), window);
+                           ^
+src\legacy_main.c:303:45: error: Cannot determine that 'del_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(del_bttn), del_icon);
+                                            ^
+src\legacy_main.c:308:52: error: Cannot determine that 'cp_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(copy_paste_bttn), cp_icon);
+                                                   ^
+src\legacy_main.c:313:46: error: Cannot determine that 'move_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(move_bttn), move_icon);
+                                             ^
+src\legacy_main.c:318:45: error: Cannot determine that 'rot_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(rot_bttn), rot_icon);
+                                            ^
+src\legacy_main.c:323:50: error: Cannot determine that 'decouple_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(decouple_bttn), decouple_icon);
+                                                 ^
+src\legacy_main.c:328:46: error: Cannot determine that 'size_icon[0]' is initialized [bughuntingUninit]
+ gtk_button_set_image(GTK_BUTTON(size_bttn), size_icon);
+                                             ^
+src\legacy_main.c:335:29: error: Cannot determine that 'left_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(left_box), del_bttn, TRUE, TRUE, 0);
+                            ^
+src\legacy_main.c:344:29: error: Cannot determine that 'down_tool_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(down_tool_box), lay_spin, TRUE, TRUE, 3);
+                            ^
+src\legacy_main.c:353:45: error: Cannot determine that 'ver_sep[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(down_tool_box), ver_sep, FALSE, FALSE, 0);
+                                            ^
+src\legacy_main.c:368:29: error: Cannot determine that 'status_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(status_box), crd_label, FALSE, FALSE, 5);
+                            ^
+src\legacy_main.c:368:42: error: Cannot determine that 'crd_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(status_box), crd_label, FALSE, FALSE, 5);
+                                         ^
+src\legacy_main.c:380:40: error: Cannot determine that 'band_box[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(band_box), right_box, draw_label);
+                                       ^
+src\legacy_main.c:380:62: error: Cannot determine that 'draw_label[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(band_box), right_box, draw_label);
+                                                             ^
+src\legacy_main.c:381:61: error: Cannot determine that 'tools_label[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(band_box), left_box, tools_label);
+                                                            ^
+src\legacy_main.c:382:66: error: Cannot determine that 'misc_label[0]' is initialized [bughuntingUninit]
+ gtk_notebook_append_page(GTK_NOTEBOOK(band_box), down_tool_box, misc_label);
+                                                                 ^
+src\legacy_main.c:386:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), band_box, FALSE, FALSE, 0);
+                            ^
+src\lua_model_lib\lml.c:261:8: error: Array index out of bounds, cannot determine that j++ is less than 3 [bughuntingArrayIndexOutOfBounds]
+  rgb[j++] = lua_tonumber(L, i);
+       ^
+src\lua_model_lib\lml.c:261:8: error: Array index out of bounds, cannot determine that j++ is not negative [bughuntingArrayIndexNegative]
+  rgb[j++] = lua_tonumber(L, i);
+       ^
+src\lua_model_lib\lml.c:286:31: error: Cannot determine that 'rgb[0]' is initialized [bughuntingUninit]
+ tptr = tl_new(font, size, rgb[0], rgb[1], rgb[2]);
+                              ^
+src\lua_model_lib\lml.c:286:39: error: Cannot determine that 'rgb[1]' is initialized [bughuntingUninit]
+ tptr = tl_new(font, size, rgb[0], rgb[1], rgb[2]);
+                                      ^
+src\lua_model_lib\lml.c:286:47: error: Cannot determine that 'rgb[2]' is initialized [bughuntingUninit]
+ tptr = tl_new(font, size, rgb[0], rgb[1], rgb[2]);
+                                              ^
+src\lua_model_lib\lml.c:326:25: error: Array index out of bounds, cannot determine that i is less than 9 [bughuntingArrayIndexOutOfBounds]
+  lua_register(L, names[i], funcs[i]);
+                        ^
+src\lua_model_lib\lml.c:326:25: error: Array index out of bounds, cannot determine that i is not negative [bughuntingArrayIndexNegative]
+  lua_register(L, names[i], funcs[i]);
+                        ^
+src\pechkin\t4.c:14:23: error: Cannot determine that '*(int*)pl_read("send-arg-msg")' is initialized [bughuntingUninit]
+ printf("arg = %d\n", *(int*)pl_read("send-arg-msg"));
+                      ^
+src\pechkin\t4.c:14:23: error: Cannot determine that '*(int*)pl_read("send-arg-msg")' is initialized [bughuntingUninit]
+ printf("arg = %d\n", *(int*)pl_read("send-arg-msg"));
+                      ^
+src\pechkin\t4.c:21:10: note: Calling read_arg
+ read_arg();
+         ^
+src\pechkin\t4.c:14:23: note: Cannot determine that '*(int*)pl_read("send-arg-msg")' is initialized
+ printf("arg = %d\n", *(int*)pl_read("send-arg-msg"));
+                      ^
+src\plugin\plugin.c:30:20: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ plug_list = fopen(filename, "r");
+                   ^
+src\plugin\plugin.c:31:18: error: There is function call, cannot determine that 3rd argument is initialized. [bughuntingUninitArg]
+ fgets(str, 256, plug_list);
+                 ^
+src\cmodel\cmodel.c:252:34: error: Cannot determine that 'window[0]' is initialized [bughuntingUninit]
+ gtk_window_set_title(GTK_WINDOW(window), "Get parameter");
+                                 ^
+src\polygon.c:17:17: note: Calling get_param
+ prm = get_param("Enter the number of sides and coordinates of the rectangle (n x y)");
+                ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:252:34: note: Cannot determine that 'window[0]' is initialized
+ gtk_window_set_title(GTK_WINDOW(window), "Get parameter");
+                                 ^
+src\cmodel\cmodel.c:261:28: error: Cannot determine that 'ok_bttn[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                           ^
+src\polygon.c:17:17: note: Calling get_param
+ prm = get_param("Enter the number of sides and coordinates of the rectangle (n x y)");
+                ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:261:28: note: Cannot determine that 'ok_bttn[0]' is initialized
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                           ^
+src\cmodel\cmodel.c:261:78: error: Cannot determine that 'param_entry[0]' is initialized [bughuntingUninit]
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                                                                             ^
+src\polygon.c:17:17: note: Calling get_param
+ prm = get_param("Enter the number of sides and coordinates of the rectangle (n x y)");
+                ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:261:78: note: Cannot determine that 'param_entry[0]' is initialized
+ g_signal_connect(G_OBJECT(ok_bttn), "clicked", G_CALLBACK(__ok_bttn_click), param_entry);
+                                                                             ^
+src\cmodel\cmodel.c:264:29: error: Cannot determine that 'main_box[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                            ^
+src\polygon.c:17:17: note: Calling get_param
+ prm = get_param("Enter the number of sides and coordinates of the rectangle (n x y)");
+                ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:264:29: note: Cannot determine that 'main_box[0]' is initialized
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                            ^
+src\cmodel\cmodel.c:264:40: error: Cannot determine that 'msg_label[0]' is initialized [bughuntingUninit]
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                                       ^
+src\polygon.c:17:17: note: Calling get_param
+ prm = get_param("Enter the number of sides and coordinates of the rectangle (n x y)");
+                ^
+src\cmodel\cmodel.c:275:15: note: Calling __make_window
+ __make_window(msg);
+              ^
+src\cmodel\cmodel.c:264:40: note: Cannot determine that 'msg_label[0]' is initialized
+ gtk_box_pack_start(GTK_BOX(main_box), msg_label, FALSE, FALSE, 5);
+                                       ^
+src\polygon.c:20:14: error: There is division, cannot determine that there can't be a division by zero. [bughuntingDivByZero]
+ angle = 360 / n;
+             ^
+src\so\so.c:12:15: error: Cannot determine that 'name[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ lib = dlopen(name, RTLD_LAZY);
+              ^
+src\so\so.c:23:18: error: Cannot determine that 'name[0]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ fn = dlsym(lib, name);
+                 ^
+src\text\text.c:35:31: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ tptr->buffer = malloc(strlen(buf)+1);
+                              ^
+src\text\text.c:61:9: error: Buffer read/write, when calling 'sprintf' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+ sprintf(buf, "T(%g; %g)\nh = %d\n", tptr->x, tptr->y, tptr->size);
+        ^
+src\util\util.c:25:18: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+ strcpy(col_str, (char*)gtk_entry_get_text(GTK_ENTRY(color_entry)));
+                 ^
+src\util\util.c:28:19: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+  arr[i++] = atoi(col_token);
+                  ^
+src\util\util.c:81:14: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ if (!strcmp(sys, UL_WINDOWS))
+             ^
+src\util\util.c:61:27: note: Calling ul_get_path_delim
+ delim = ul_get_path_delim();
+                          ^
+src\util\util.c:81:14: note: There is function call, cannot determine that 1st argument is initialized.
+ if (!strcmp(sys, UL_WINDOWS))
+             ^
+src\util\util.c:64:10: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+  strcat(home, delim);
+         ^
+src\util\util.c:64:16: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+  strcat(home, delim);
+               ^
+src\util\util.c:81:14: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ if (!strcmp(sys, UL_WINDOWS))
+             ^
+src\util\util.c:87:21: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ FILE *fptr = fopen(filename, "r");
+                    ^
+src\util\util.c:92:9: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ fclose(fptr);
+        ^
+src\util\util.c:101:21: error: Cannot determine that 'str[i]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+ for (int i = 0; str[i]; i++)
+                    ^
+src\util\util.c:102:10: error: Cannot determine that 'str[i]' is initialized (you can use 'const' to say data must be initialized) [bughuntingUninitNonConstArg]
+  if (str[i] != c)
+         ^
+src\util\util.c:113:17: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+  arr[i] = atof(token);
+                ^
+src\util\util.c:141:14: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ return atoi(tok);
+             ^
+src\util\util.c:169:9: error: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+  memcpy(last->opt, src->opt, sizeof(options));
+        ^
+src\util\util.c:174:25: error: There is function call, cannot determine that 2nd argument is initialized. [bughuntingUninitArg]
+  memcpy(last->data, src->data, size);
+                        ^
+src\util\util.c:174:9: error: Buffer read/write, when calling 'memcpy' it cannot be determined that 1st argument is not overflowed [bughuntingBufferOverflow]
+  memcpy(last->data, src->data, size);
+        ^
+src\util\util.c:204:13: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ i = strlen(name) - 1;
+            ^
+src\util\util.c:219:15: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ len = strlen(str);
+              ^
+src\util\util.c:233:15: error: There is function call, cannot determine that 1st argument is initialized. [bughuntingUninitArg]
+ len = strlen(path);
+              ^
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
+
